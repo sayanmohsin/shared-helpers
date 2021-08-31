@@ -1,0 +1,276 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model basket_daily_totals {
+  id            Int       @id @default(autoincrement())
+  delivery_date DateTime  @db.Date
+  daily_totals  Json
+  daily_indexes Json
+  created_at    DateTime  @default(now()) @db.Timestamp(0)
+  updated_at    DateTime? @default(now()) @db.DateTime(0)
+  baskets       baskets[]
+}
+
+model basket_line_item_competitor_equivalents {
+  id                  Int               @id @default(autoincrement())
+  competitor_price    Float?            @db.Float
+  basket_line_item_id Int
+  competitor_id       Int
+  created_at          DateTime          @default(now()) @db.Timestamp(0)
+  updated_at          DateTime?         @default(now()) @db.DateTime(0)
+  basket_line_items   basket_line_items @relation(fields: [basket_line_item_id], references: [id])
+  competitors         competitors       @relation(fields: [competitor_id], references: [id])
+
+  @@index([basket_line_item_id], name: "fk_basket_line_item_basket_line_item_equivalent")
+  @@index([competitor_id], name: "fk_basket_line_item_competitor")
+}
+
+model basket_line_item_recommended_prices {
+  id                      Int               @id @default(autoincrement())
+  recommended_price       Float
+  basket_line_item_id     Int
+  price_recommendation_id Int?
+  basket_line_items       basket_line_items @relation(fields: [basket_line_item_id], references: [id])
+
+  @@index([basket_line_item_id], name: "fk_blirp_bli")
+  @@index([price_recommendation_id], name: "fk_blirp_rp")
+}
+
+model basket_line_items {
+  id                                      Int                                       @id @default(autoincrement())
+  quantity                                Int
+  basket_id                               Int
+  product_sku                             String                                    @db.VarChar(50)
+  created_at                              DateTime                                  @default(now()) @db.Timestamp(0)
+  updated_at                              DateTime?                                 @default(now()) @db.DateTime(0)
+  competitor_indexes                      Json?
+  competitor_prices                       Json?
+  goodfood_price                          Float                                     @db.Float
+  basket_line_item_competitor_equivalents basket_line_item_competitor_equivalents[]
+  basket_line_item_recommended_prices     basket_line_item_recommended_prices[]
+
+  @@index([product_sku], name: "fk_basket_line_item_product")
+}
+
+model baskets {
+  id                    Int                 @id @default(autoincrement())
+  goodfood_id           Int
+  delivery_date         DateTime            @db.Date
+  basket_totals         Json?
+  basket_indexes        Json?
+  created_at            DateTime            @default(now()) @db.Timestamp(0)
+  updated_at            DateTime?           @default(now()) @db.DateTime(0)
+  region_id             Int
+  basket_daily_total_id Int
+  basket_daily_totals   basket_daily_totals @relation(fields: [basket_daily_total_id], references: [id])
+  regions               regions             @relation(fields: [region_id], references: [id])
+
+  @@index([basket_daily_total_id], name: "fk_basket_basket_daily_total")
+  @@index([region_id], name: "fk_basket_region")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model competitor_region_data {
+  competitor_id                                Int
+  region_id                                    Int
+  should_scrape                                Boolean     @default(true)
+  should_include_in_recommendation_calculation Int?        @db.TinyInt
+  competitors                                  competitors @relation(fields: [competitor_id], references: [id])
+  regions                                      regions     @relation(fields: [region_id], references: [id])
+
+  @@index([competitor_id], name: "fk_crd_competitor")
+  @@index([region_id], name: "fk_crd_region")
+  @@ignore
+}
+
+model competitors {
+  id                                      Int                                       @id @default(autoincrement())
+  slug                                    String                                    @db.VarChar(25)
+  display_text                            String                                    @db.VarChar(50)
+  basket_line_item_competitor_equivalents basket_line_item_competitor_equivalents[]
+  competitor_region_data                  competitor_region_data[]                  @ignore
+  product_region_competitor_urls          product_region_competitor_urls[]
+  scaled_prices                           scaled_prices[]
+}
+
+model migrations {
+  id        Int    @id @default(autoincrement())
+  timestamp BigInt
+  name      String @db.VarChar(255)
+}
+
+model price_recommendations {
+  id         Int       @id @default(autoincrement())
+  product_id Int
+  region_id  Int
+  sale_price Float
+  list_price Float
+  created_at DateTime  @default(now()) @db.Timestamp(0)
+  updated_at DateTime? @default(now()) @db.DateTime(0)
+  products   products  @relation(fields: [product_id], references: [id])
+  regions    regions   @relation(fields: [region_id], references: [id])
+
+  @@index([product_id], name: "fk_pr_product")
+  @@index([region_id], name: "fk_pr_region")
+}
+
+model product_region_competitor_urls {
+  id                                          Int                                           @id @default(autoincrement())
+  product_id                                  Int
+  region_id                                   Int
+  competitor_id                               Int
+  url                                         String                                        @db.VarChar(255)
+  created_at                                  DateTime                                      @default(now()) @db.Timestamp(0)
+  updated_at                                  DateTime?                                     @default(now()) @db.DateTime(0)
+  deleted_at                                  DateTime?                                     @db.DateTime(0)
+  competitors                                 competitors                                   @relation(fields: [competitor_id], references: [id])
+  products                                    products                                      @relation(fields: [product_id], references: [id])
+  regions                                     regions                                       @relation(fields: [region_id], references: [id])
+  product_region_competitor_urls_former_urls  product_region_competitor_urls_former_urls[]
+  scrape_result_product_region_competitor_url scrape_result_product_region_competitor_url[] @ignore
+
+  @@unique([product_id, competitor_id, region_id], name: "competitor_product_region_unique")
+  @@index([competitor_id], name: "fk_prcu_competitor")
+  @@index([region_id], name: "fk_prcu_region")
+}
+
+model product_region_competitor_urls_former_urls {
+  product_region_competitor_url_id Int
+  old_url                          String                         @db.VarChar(255)
+  created_at                       DateTime                       @default(now()) @db.Timestamp(0)
+  updated_at                       DateTime?                      @default(now()) @db.DateTime(0)
+  id                               Int                            @id @default(autoincrement())
+  product_region_competitor_urls   product_region_competitor_urls @relation(fields: [product_region_competitor_url_id], references: [id])
+
+  @@index([product_region_competitor_url_id], name: "fk_old_url_url")
+}
+
+model product_region_price_data {
+  id              Int       @id @default(autoincrement())
+  product_id      Int
+  region_id       Int
+  price           Float
+  discount        Float
+  threshold_price Float?
+  created_at      DateTime  @default(now()) @db.Timestamp(0)
+  updated_at      DateTime? @default(now()) @db.DateTime(0)
+  deleted_at      DateTime? @db.DateTime(0)
+  products        products  @relation(fields: [product_id], references: [id])
+  regions         regions   @relation(fields: [region_id], references: [id])
+
+  @@unique([product_id, region_id], name: "price_date_product_region_unique")
+  @@index([region_id], name: "fk_prpd_region")
+}
+
+model products {
+  id                             Int                              @id @default(autoincrement())
+  sku                            String?                          @unique @db.VarChar(50)
+  name                           String?                          @db.Text
+  package_quantity               Int?
+  package_units                  String?                          @db.Text
+  package_weight                 Float?
+  weight_unit_id                 Int
+  created_at                     DateTime                         @default(now()) @db.Timestamp(0)
+  updated_at                     DateTime?                        @default(now()) @db.DateTime(0)
+  deleted_at                     DateTime?                        @db.DateTime(0)
+  units                          units                            @relation(fields: [weight_unit_id], references: [id])
+  price_recommendations          price_recommendations[]
+  product_region_competitor_urls product_region_competitor_urls[]
+  product_region_price_data      product_region_price_data[]
+  scaled_prices                  scaled_prices[]
+
+  @@index([weight_unit_id], name: "fk_p_weight_unit")
+  @@index([sku], name: "product_sku_idx")
+}
+
+model regions {
+  id                             Int                              @id @default(autoincrement())
+  name                           String?                          @db.VarChar(100)
+  facility                       String?                          @db.VarChar(100)
+  city                           String?                          @db.VarChar(50)
+  province                       String?                          @db.VarChar(20)
+  postal_code                    String?                          @db.VarChar(10)
+  is_active                      Boolean?
+  created_at                     DateTime                         @default(now()) @db.Timestamp(0)
+  updated_at                     DateTime?                        @default(now()) @db.DateTime(0)
+  deleted_at                     DateTime?                        @db.DateTime(0)
+  baskets                        baskets[]
+  competitor_region_data         competitor_region_data[]         @ignore
+  price_recommendations          price_recommendations[]
+  product_region_competitor_urls product_region_competitor_urls[]
+  product_region_price_data      product_region_price_data[]
+  scaled_prices                  scaled_prices[]
+}
+
+model scaled_prices {
+  id                      Int            @id @default(autoincrement())
+  product_id              Int
+  competitor_id           Int
+  region_id               Int
+  scrape_result_id        Int
+  competitor_scaled_price Float?
+  created_at              DateTime       @default(now()) @db.Timestamp(0)
+  updated_at              DateTime?      @default(now()) @db.Timestamp(0)
+  deleted_at              DateTime?      @db.DateTime(0)
+  competitors             competitors    @relation(fields: [competitor_id], references: [id])
+  products                products       @relation(fields: [product_id], references: [id])
+  regions                 regions        @relation(fields: [region_id], references: [id])
+  scrape_results          scrape_results @relation(fields: [scrape_result_id], references: [id])
+
+  @@index([competitor_id], name: "fk_sp_competitor")
+  @@index([product_id], name: "fk_sp_product")
+  @@index([region_id], name: "fk_sp_region")
+  @@index([scrape_result_id], name: "fk_sp_scrape_result")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model scrape_result_product_region_competitor_url {
+  scrape_result_id                 Int
+  product_region_competitor_url_id Int
+  product_region_competitor_urls   product_region_competitor_urls @relation(fields: [product_region_competitor_url_id], references: [id])
+  scrape_results                   scrape_results                 @relation(fields: [scrape_result_id], references: [id])
+
+  @@index([scrape_result_id], name: "fk_srpcu_scrape_result")
+  @@index([product_region_competitor_url_id], name: "fk_srpcu_url")
+  @@ignore
+}
+
+model scrape_results {
+  id                                          Int                                           @id @default(autoincrement())
+  competitor_sale_price                       Float?
+  competitor_list_price                       Float?
+  competitor_sold_by_volume                   Float?
+  competitor_sold_by_unit_id                  Int
+  promotional_info                            String?                                       @db.VarChar(255)
+  data_source                                 String?                                       @db.VarChar(100)
+  scrape_time                                 DateTime?                                     @default(now()) @db.DateTime(0)
+  created_at                                  DateTime                                      @default(now()) @db.Timestamp(0)
+  updated_at                                  DateTime?                                     @default(now()) @db.DateTime(0)
+  deleted_at                                  DateTime?                                     @db.DateTime(0)
+  units                                       units                                         @relation(fields: [competitor_sold_by_unit_id], references: [id])
+  scaled_prices                               scaled_prices[]
+  scrape_result_product_region_competitor_url scrape_result_product_region_competitor_url[] @ignore
+
+  @@index([competitor_sold_by_unit_id], name: "fk_sr_competitor_sold_by_unit")
+}
+
+model units {
+  id                 Int              @id @default(autoincrement())
+  slug               String           @db.VarChar(25)
+  display_text       String           @db.VarChar(50)
+  base_unit_id       Int
+  scale_of_base_unit Float
+  units              units            @relation("unitsTounits_base_unit_id", fields: [base_unit_id], references: [id])
+  products           products[]
+  scrape_results     scrape_results[]
+  other_units        units[]          @relation("unitsTounits_base_unit_id")
+
+  @@index([base_unit_id], name: "fk_u_base_unit")
+}
