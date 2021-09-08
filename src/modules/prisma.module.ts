@@ -1,6 +1,8 @@
-import { PrismaClient } from '../../prisma/client';
+/**
+ * Module for Prisma
+ */
 
-export * from '../../prisma/client';
+import { PrismaClient } from '../../prisma/client';
 
 /**
  * function to get prisma 
@@ -22,3 +24,4 @@ export const connectAndGetClient = async () => {
     }
 }
 
+export * from '../../prisma/client';
