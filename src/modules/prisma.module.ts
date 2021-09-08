@@ -12,9 +12,15 @@ export { PrismaClient };
 /**
  * function to connect and get prisma client
  */
-export const connectAndGetClient = async () => {
+export const connectAndGetClient = async (db_url: string) => {
     try {
-        const prisma = new PrismaClient;
+        const prisma = new PrismaClient({
+            datasources: {
+                db: {
+                    url: db_url
+                },
+            },
+        })
         await prisma.$connect();
         console.log('connected to database');
         return prisma;

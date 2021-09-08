@@ -9,6 +9,12 @@ export { PrismaClient };
 /**
  * function to connect and get prisma client
  */
-export declare const connectAndGetClient: () => Promise<PrismaClient<import("../../prisma/client").Prisma.PrismaClientOptions, never, import("../../prisma/client").Prisma.RejectOnNotFound | import("../../prisma/client").Prisma.RejectPerOperation | undefined>>;
+export declare const connectAndGetClient: (db_url: string) => Promise<PrismaClient<{
+    datasources: {
+        db: {
+            url: string;
+        };
+    };
+}, never, false>>;
 export * from '../../prisma/client';
 //# sourceMappingURL=prisma.module.d.ts.map

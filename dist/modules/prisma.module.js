@@ -28,9 +28,15 @@ Object.defineProperty(exports, "PrismaClient", { enumerable: true, get: function
 /**
  * function to connect and get prisma client
  */
-const connectAndGetClient = () => __awaiter(void 0, void 0, void 0, function* () {
+const connectAndGetClient = (db_url) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const prisma = new client_1.PrismaClient;
+        const prisma = new client_1.PrismaClient({
+            datasources: {
+                db: {
+                    url: db_url
+                },
+            },
+        });
         yield prisma.$connect();
         console.log('connected to database');
         return prisma;
