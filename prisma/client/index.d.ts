@@ -319,32 +319,50 @@ export class PrismaClient<
   $use(cb: Prisma.Middleware): void
 
   /**
-   * Executes a raw query and returns the number of affected rows
+   * Executes a prepared raw query and returns the number of affected rows.
    * @example
    * ```
-   * // With parameters use prisma.$executeRaw``, values will be escaped automatically
-   * const result = await prisma.$executeRaw`UPDATE User SET cool = ${true} WHERE id = ${1};`
-   * // Or
-   * const result = await prisma.$executeRaw('UPDATE User SET cool = $1 WHERE id = $2 ;', true, 1)
-  * ```
-  * 
-  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
-  */
-  $executeRaw < T = any > (query: string | TemplateStringsArray | Prisma.Sql, ...values: any[]): PrismaPromise<number>;
+   * const result = await prisma.$executeRaw`UPDATE User SET cool = ${true} WHERE email = ${'user@email.com'};`
+   * ```
+   * 
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): PrismaPromise<number>;
 
   /**
-   * Performs a raw query and returns the SELECT data
+   * Executes a raw query and returns the number of affected rows.
+   * Susceptible to SQL injections, see documentation.
    * @example
    * ```
-   * // With parameters use prisma.$queryRaw``, values will be escaped automatically
-   * const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'ema.il'};`
-   * // Or
-   * const result = await prisma.$queryRaw('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'ema.il')
-  * ```
-  * 
-  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
-  */
-  $queryRaw < T = any > (query: string | TemplateStringsArray | Prisma.Sql, ...values: any[]): PrismaPromise<T>;
+   * const result = await prisma.$executeRawUnsafe('UPDATE User SET cool = $1 WHERE email = $2 ;', true, 'user@email.com')
+   * ```
+   * 
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): PrismaPromise<number>;
+
+  /**
+   * Performs a prepared raw query and returns the `SELECT` data.
+   * @example
+   * ```
+   * const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'user@email.com'};`
+   * ```
+   * 
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): PrismaPromise<T>;
+
+  /**
+   * Performs a raw query and returns the `SELECT` data.
+   * Susceptible to SQL injections, see documentation.
+   * @example
+   * ```
+   * const result = await prisma.$queryRawUnsafe('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'user@email.com')
+   * ```
+   * 
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): PrismaPromise<T>;
 
   /**
    * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
@@ -359,7 +377,8 @@ export class PrismaClient<
    * 
    * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
    */
-  $transaction<P extends PrismaPromise<any>[]>(arg: [...P]): Promise<UnwrapTuple<P>>
+  $transaction<P extends PrismaPromise<any>[]>(arg: [...P]): Promise<UnwrapTuple<P>>;
+
 
       /**
    * `prisma.basket_daily_totals`: Exposes CRUD operations for the **basket_daily_totals** model.
@@ -549,8 +568,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 2.30.2
-   * Query Engine version: b8c35d44de987a9691890b3ddf3e2e7effb9bf20
+   * Prisma Client JS version: 3.0.1
+   * Query Engine version: 2452cc6313d52b8b9a96999ac0e974d0aedf88db
    */
   export type PrismaVersion = {
     client: string
@@ -579,7 +598,7 @@ export namespace Prisma {
    * From https://github.com/sindresorhus/type-fest/
    * Matches any valid JSON value.
    */
-  export type JsonValue = string | number | boolean | null | JsonObject | JsonArray
+  export type JsonValue = string | number | boolean | JsonObject | JsonArray | null
 
   /**
    * Same as JsonObject, but allows undefined
@@ -588,8 +607,30 @@ export namespace Prisma {
  
   export interface InputJsonArray extends Array<JsonValue> {}
  
-  export type InputJsonValue = undefined |  string | number | boolean | null | InputJsonObject | InputJsonArray
-   type SelectAndInclude = {
+  export type InputJsonValue = string | number | boolean | InputJsonObject | InputJsonArray
+
+  /**
+   * Helper for filtering JSON entries that have `null` on the database (empty on the db)
+   * 
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  export const DbNull: 'DbNull'
+
+  /**
+   * Helper for filtering JSON entries that have JSON `null` values (not empty on the db)
+   * 
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  export const JsonNull: 'JsonNull'
+
+  /**
+   * Helper for filtering JSON entries that are `Prisma.DbNull` or `Prisma.JsonNull`
+   * 
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  export const AnyNull: 'AnyNull'
+
+  type SelectAndInclude = {
     select: any
     include: any
   }
@@ -1060,6 +1101,429 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type Basket_daily_totalsCountOutputType
+   */
+
+
+  export type Basket_daily_totalsCountOutputType = {
+    baskets: number
+  }
+
+  export type Basket_daily_totalsCountOutputTypeSelect = {
+    baskets?: boolean
+  }
+
+  export type Basket_daily_totalsCountOutputTypeGetPayload<
+    S extends boolean | null | undefined | Basket_daily_totalsCountOutputTypeArgs,
+    U = keyof S
+      > = S extends true
+        ? Basket_daily_totalsCountOutputType
+    : S extends undefined
+    ? never
+    : S extends Basket_daily_totalsCountOutputTypeArgs
+    ?'include' extends U
+    ? Basket_daily_totalsCountOutputType 
+    : 'select' extends U
+    ? {
+    [P in TrueKeys<S['select']>]: P extends keyof Basket_daily_totalsCountOutputType ?Basket_daily_totalsCountOutputType [P]
+  : 
+     never
+  } 
+    : Basket_daily_totalsCountOutputType
+  : Basket_daily_totalsCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Basket_daily_totalsCountOutputType without action
+   */
+  export type Basket_daily_totalsCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the Basket_daily_totalsCountOutputType
+     * 
+    **/
+    select?: Basket_daily_totalsCountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type Basket_line_itemsCountOutputType
+   */
+
+
+  export type Basket_line_itemsCountOutputType = {
+    basket_line_item_competitor_equivalents: number
+    basket_line_item_recommended_prices: number
+  }
+
+  export type Basket_line_itemsCountOutputTypeSelect = {
+    basket_line_item_competitor_equivalents?: boolean
+    basket_line_item_recommended_prices?: boolean
+  }
+
+  export type Basket_line_itemsCountOutputTypeGetPayload<
+    S extends boolean | null | undefined | Basket_line_itemsCountOutputTypeArgs,
+    U = keyof S
+      > = S extends true
+        ? Basket_line_itemsCountOutputType
+    : S extends undefined
+    ? never
+    : S extends Basket_line_itemsCountOutputTypeArgs
+    ?'include' extends U
+    ? Basket_line_itemsCountOutputType 
+    : 'select' extends U
+    ? {
+    [P in TrueKeys<S['select']>]: P extends keyof Basket_line_itemsCountOutputType ?Basket_line_itemsCountOutputType [P]
+  : 
+     never
+  } 
+    : Basket_line_itemsCountOutputType
+  : Basket_line_itemsCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Basket_line_itemsCountOutputType without action
+   */
+  export type Basket_line_itemsCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the Basket_line_itemsCountOutputType
+     * 
+    **/
+    select?: Basket_line_itemsCountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type CompetitorsCountOutputType
+   */
+
+
+  export type CompetitorsCountOutputType = {
+    basket_line_item_competitor_equivalents: number
+    product_region_competitor_urls: number
+    scaled_prices: number
+  }
+
+  export type CompetitorsCountOutputTypeSelect = {
+    basket_line_item_competitor_equivalents?: boolean
+    product_region_competitor_urls?: boolean
+    scaled_prices?: boolean
+  }
+
+  export type CompetitorsCountOutputTypeGetPayload<
+    S extends boolean | null | undefined | CompetitorsCountOutputTypeArgs,
+    U = keyof S
+      > = S extends true
+        ? CompetitorsCountOutputType
+    : S extends undefined
+    ? never
+    : S extends CompetitorsCountOutputTypeArgs
+    ?'include' extends U
+    ? CompetitorsCountOutputType 
+    : 'select' extends U
+    ? {
+    [P in TrueKeys<S['select']>]: P extends keyof CompetitorsCountOutputType ?CompetitorsCountOutputType [P]
+  : 
+     never
+  } 
+    : CompetitorsCountOutputType
+  : CompetitorsCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * CompetitorsCountOutputType without action
+   */
+  export type CompetitorsCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the CompetitorsCountOutputType
+     * 
+    **/
+    select?: CompetitorsCountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type Product_region_competitor_urlsCountOutputType
+   */
+
+
+  export type Product_region_competitor_urlsCountOutputType = {
+    product_region_competitor_urls_former_urls: number
+  }
+
+  export type Product_region_competitor_urlsCountOutputTypeSelect = {
+    product_region_competitor_urls_former_urls?: boolean
+  }
+
+  export type Product_region_competitor_urlsCountOutputTypeGetPayload<
+    S extends boolean | null | undefined | Product_region_competitor_urlsCountOutputTypeArgs,
+    U = keyof S
+      > = S extends true
+        ? Product_region_competitor_urlsCountOutputType
+    : S extends undefined
+    ? never
+    : S extends Product_region_competitor_urlsCountOutputTypeArgs
+    ?'include' extends U
+    ? Product_region_competitor_urlsCountOutputType 
+    : 'select' extends U
+    ? {
+    [P in TrueKeys<S['select']>]: P extends keyof Product_region_competitor_urlsCountOutputType ?Product_region_competitor_urlsCountOutputType [P]
+  : 
+     never
+  } 
+    : Product_region_competitor_urlsCountOutputType
+  : Product_region_competitor_urlsCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Product_region_competitor_urlsCountOutputType without action
+   */
+  export type Product_region_competitor_urlsCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the Product_region_competitor_urlsCountOutputType
+     * 
+    **/
+    select?: Product_region_competitor_urlsCountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type ProductsCountOutputType
+   */
+
+
+  export type ProductsCountOutputType = {
+    price_recommendations: number
+    product_region_competitor_urls: number
+    product_region_price_data: number
+    scaled_prices: number
+  }
+
+  export type ProductsCountOutputTypeSelect = {
+    price_recommendations?: boolean
+    product_region_competitor_urls?: boolean
+    product_region_price_data?: boolean
+    scaled_prices?: boolean
+  }
+
+  export type ProductsCountOutputTypeGetPayload<
+    S extends boolean | null | undefined | ProductsCountOutputTypeArgs,
+    U = keyof S
+      > = S extends true
+        ? ProductsCountOutputType
+    : S extends undefined
+    ? never
+    : S extends ProductsCountOutputTypeArgs
+    ?'include' extends U
+    ? ProductsCountOutputType 
+    : 'select' extends U
+    ? {
+    [P in TrueKeys<S['select']>]: P extends keyof ProductsCountOutputType ?ProductsCountOutputType [P]
+  : 
+     never
+  } 
+    : ProductsCountOutputType
+  : ProductsCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * ProductsCountOutputType without action
+   */
+  export type ProductsCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the ProductsCountOutputType
+     * 
+    **/
+    select?: ProductsCountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type RegionsCountOutputType
+   */
+
+
+  export type RegionsCountOutputType = {
+    baskets: number
+    price_recommendations: number
+    product_region_competitor_urls: number
+    product_region_price_data: number
+    scaled_prices: number
+  }
+
+  export type RegionsCountOutputTypeSelect = {
+    baskets?: boolean
+    price_recommendations?: boolean
+    product_region_competitor_urls?: boolean
+    product_region_price_data?: boolean
+    scaled_prices?: boolean
+  }
+
+  export type RegionsCountOutputTypeGetPayload<
+    S extends boolean | null | undefined | RegionsCountOutputTypeArgs,
+    U = keyof S
+      > = S extends true
+        ? RegionsCountOutputType
+    : S extends undefined
+    ? never
+    : S extends RegionsCountOutputTypeArgs
+    ?'include' extends U
+    ? RegionsCountOutputType 
+    : 'select' extends U
+    ? {
+    [P in TrueKeys<S['select']>]: P extends keyof RegionsCountOutputType ?RegionsCountOutputType [P]
+  : 
+     never
+  } 
+    : RegionsCountOutputType
+  : RegionsCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * RegionsCountOutputType without action
+   */
+  export type RegionsCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the RegionsCountOutputType
+     * 
+    **/
+    select?: RegionsCountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type Scrape_resultsCountOutputType
+   */
+
+
+  export type Scrape_resultsCountOutputType = {
+    scaled_prices: number
+  }
+
+  export type Scrape_resultsCountOutputTypeSelect = {
+    scaled_prices?: boolean
+  }
+
+  export type Scrape_resultsCountOutputTypeGetPayload<
+    S extends boolean | null | undefined | Scrape_resultsCountOutputTypeArgs,
+    U = keyof S
+      > = S extends true
+        ? Scrape_resultsCountOutputType
+    : S extends undefined
+    ? never
+    : S extends Scrape_resultsCountOutputTypeArgs
+    ?'include' extends U
+    ? Scrape_resultsCountOutputType 
+    : 'select' extends U
+    ? {
+    [P in TrueKeys<S['select']>]: P extends keyof Scrape_resultsCountOutputType ?Scrape_resultsCountOutputType [P]
+  : 
+     never
+  } 
+    : Scrape_resultsCountOutputType
+  : Scrape_resultsCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Scrape_resultsCountOutputType without action
+   */
+  export type Scrape_resultsCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the Scrape_resultsCountOutputType
+     * 
+    **/
+    select?: Scrape_resultsCountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type UnitsCountOutputType
+   */
+
+
+  export type UnitsCountOutputType = {
+    products: number
+    scrape_results: number
+    other_units: number
+  }
+
+  export type UnitsCountOutputTypeSelect = {
+    products?: boolean
+    scrape_results?: boolean
+    other_units?: boolean
+  }
+
+  export type UnitsCountOutputTypeGetPayload<
+    S extends boolean | null | undefined | UnitsCountOutputTypeArgs,
+    U = keyof S
+      > = S extends true
+        ? UnitsCountOutputType
+    : S extends undefined
+    ? never
+    : S extends UnitsCountOutputTypeArgs
+    ?'include' extends U
+    ? UnitsCountOutputType 
+    : 'select' extends U
+    ? {
+    [P in TrueKeys<S['select']>]: P extends keyof UnitsCountOutputType ?UnitsCountOutputType [P]
+  : 
+     never
+  } 
+    : UnitsCountOutputType
+  : UnitsCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * UnitsCountOutputType without action
+   */
+  export type UnitsCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the UnitsCountOutputType
+     * 
+    **/
+    select?: UnitsCountOutputTypeSelect | null
+  }
+
+
 
   /**
    * Models
@@ -1072,15 +1536,10 @@ export namespace Prisma {
 
   export type AggregateBasket_daily_totals = {
     _count: Basket_daily_totalsCountAggregateOutputType | null
-    count: Basket_daily_totalsCountAggregateOutputType | null
     _avg: Basket_daily_totalsAvgAggregateOutputType | null
-    avg: Basket_daily_totalsAvgAggregateOutputType | null
     _sum: Basket_daily_totalsSumAggregateOutputType | null
-    sum: Basket_daily_totalsSumAggregateOutputType | null
     _min: Basket_daily_totalsMinAggregateOutputType | null
-    min: Basket_daily_totalsMinAggregateOutputType | null
     _max: Basket_daily_totalsMaxAggregateOutputType | null
-    max: Basket_daily_totalsMaxAggregateOutputType | null
   }
 
   export type Basket_daily_totalsAvgAggregateOutputType = {
@@ -1160,7 +1619,7 @@ export namespace Prisma {
      * Determine the order of basket_daily_totals to fetch.
      * 
     **/
-    orderBy?: Enumerable<basket_daily_totalsOrderByInput>
+    orderBy?: Enumerable<basket_daily_totalsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -1189,19 +1648,11 @@ export namespace Prisma {
     **/
     _count?: true | Basket_daily_totalsCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | Basket_daily_totalsCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: Basket_daily_totalsAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: Basket_daily_totalsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -1209,29 +1660,17 @@ export namespace Prisma {
     **/
     _sum?: Basket_daily_totalsSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: Basket_daily_totalsSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: Basket_daily_totalsMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: Basket_daily_totalsMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: Basket_daily_totalsMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: Basket_daily_totalsMaxAggregateInputType
   }
 
   export type GetBasket_daily_totalsAggregateType<T extends Basket_daily_totalsAggregateArgs> = {
@@ -1247,7 +1686,7 @@ export namespace Prisma {
     
   export type Basket_daily_totalsGroupByArgs = {
     where?: basket_daily_totalsWhereInput
-    orderBy?: Enumerable<basket_daily_totalsOrderByInput>
+    orderBy?: Enumerable<basket_daily_totalsOrderByWithAggregationInput>
     by: Array<Basket_daily_totalsScalarFieldEnum>
     having?: basket_daily_totalsScalarWhereWithAggregatesInput
     take?: number
@@ -1296,10 +1735,12 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     baskets?: boolean | basketsFindManyArgs
+    _count?: boolean | Basket_daily_totalsCountOutputTypeArgs
   }
 
   export type basket_daily_totalsInclude = {
     baskets?: boolean | basketsFindManyArgs
+    _count?: boolean | Basket_daily_totalsCountOutputTypeArgs
   }
 
   export type basket_daily_totalsGetPayload<
@@ -1314,14 +1755,18 @@ export namespace Prisma {
     ? basket_daily_totals  & {
     [P in TrueKeys<S['include']>]: 
           P extends 'baskets'
-        ? Array < basketsGetPayload<S['include'][P]>>  : never
+        ? Array < basketsGetPayload<S['include'][P]>>  :
+        P extends '_count'
+        ? Basket_daily_totalsCountOutputTypeGetPayload<S['include'][P]> | null : never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]: P extends keyof basket_daily_totals ?basket_daily_totals [P]
   : 
           P extends 'baskets'
-        ? Array < basketsGetPayload<S['select'][P]>>  : never
+        ? Array < basketsGetPayload<S['select'][P]>>  :
+        P extends '_count'
+        ? Basket_daily_totalsCountOutputTypeGetPayload<S['select'][P]> | null : never
   } 
     : basket_daily_totals
   : basket_daily_totals
@@ -1745,7 +2190,7 @@ export namespace Prisma {
      * Determine the order of basket_daily_totals to fetch.
      * 
     **/
-    orderBy?: Enumerable<basket_daily_totalsOrderByInput>
+    orderBy?: Enumerable<basket_daily_totalsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -1802,7 +2247,7 @@ export namespace Prisma {
      * Determine the order of basket_daily_totals to fetch.
      * 
     **/
-    orderBy?: Enumerable<basket_daily_totalsOrderByInput>
+    orderBy?: Enumerable<basket_daily_totalsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -1982,15 +2427,10 @@ export namespace Prisma {
 
   export type AggregateBasket_line_item_competitor_equivalents = {
     _count: Basket_line_item_competitor_equivalentsCountAggregateOutputType | null
-    count: Basket_line_item_competitor_equivalentsCountAggregateOutputType | null
     _avg: Basket_line_item_competitor_equivalentsAvgAggregateOutputType | null
-    avg: Basket_line_item_competitor_equivalentsAvgAggregateOutputType | null
     _sum: Basket_line_item_competitor_equivalentsSumAggregateOutputType | null
-    sum: Basket_line_item_competitor_equivalentsSumAggregateOutputType | null
     _min: Basket_line_item_competitor_equivalentsMinAggregateOutputType | null
-    min: Basket_line_item_competitor_equivalentsMinAggregateOutputType | null
     _max: Basket_line_item_competitor_equivalentsMaxAggregateOutputType | null
-    max: Basket_line_item_competitor_equivalentsMaxAggregateOutputType | null
   }
 
   export type Basket_line_item_competitor_equivalentsAvgAggregateOutputType = {
@@ -2090,7 +2530,7 @@ export namespace Prisma {
      * Determine the order of basket_line_item_competitor_equivalents to fetch.
      * 
     **/
-    orderBy?: Enumerable<basket_line_item_competitor_equivalentsOrderByInput>
+    orderBy?: Enumerable<basket_line_item_competitor_equivalentsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -2119,19 +2559,11 @@ export namespace Prisma {
     **/
     _count?: true | Basket_line_item_competitor_equivalentsCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | Basket_line_item_competitor_equivalentsCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: Basket_line_item_competitor_equivalentsAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: Basket_line_item_competitor_equivalentsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -2139,29 +2571,17 @@ export namespace Prisma {
     **/
     _sum?: Basket_line_item_competitor_equivalentsSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: Basket_line_item_competitor_equivalentsSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: Basket_line_item_competitor_equivalentsMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: Basket_line_item_competitor_equivalentsMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: Basket_line_item_competitor_equivalentsMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: Basket_line_item_competitor_equivalentsMaxAggregateInputType
   }
 
   export type GetBasket_line_item_competitor_equivalentsAggregateType<T extends Basket_line_item_competitor_equivalentsAggregateArgs> = {
@@ -2177,7 +2597,7 @@ export namespace Prisma {
     
   export type Basket_line_item_competitor_equivalentsGroupByArgs = {
     where?: basket_line_item_competitor_equivalentsWhereInput
-    orderBy?: Enumerable<basket_line_item_competitor_equivalentsOrderByInput>
+    orderBy?: Enumerable<basket_line_item_competitor_equivalentsOrderByWithAggregationInput>
     by: Array<Basket_line_item_competitor_equivalentsScalarFieldEnum>
     having?: basket_line_item_competitor_equivalentsScalarWhereWithAggregatesInput
     take?: number
@@ -2683,7 +3103,7 @@ export namespace Prisma {
      * Determine the order of basket_line_item_competitor_equivalents to fetch.
      * 
     **/
-    orderBy?: Enumerable<basket_line_item_competitor_equivalentsOrderByInput>
+    orderBy?: Enumerable<basket_line_item_competitor_equivalentsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -2740,7 +3160,7 @@ export namespace Prisma {
      * Determine the order of basket_line_item_competitor_equivalents to fetch.
      * 
     **/
-    orderBy?: Enumerable<basket_line_item_competitor_equivalentsOrderByInput>
+    orderBy?: Enumerable<basket_line_item_competitor_equivalentsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -2920,15 +3340,10 @@ export namespace Prisma {
 
   export type AggregateBasket_line_item_recommended_prices = {
     _count: Basket_line_item_recommended_pricesCountAggregateOutputType | null
-    count: Basket_line_item_recommended_pricesCountAggregateOutputType | null
     _avg: Basket_line_item_recommended_pricesAvgAggregateOutputType | null
-    avg: Basket_line_item_recommended_pricesAvgAggregateOutputType | null
     _sum: Basket_line_item_recommended_pricesSumAggregateOutputType | null
-    sum: Basket_line_item_recommended_pricesSumAggregateOutputType | null
     _min: Basket_line_item_recommended_pricesMinAggregateOutputType | null
-    min: Basket_line_item_recommended_pricesMinAggregateOutputType | null
     _max: Basket_line_item_recommended_pricesMaxAggregateOutputType | null
-    max: Basket_line_item_recommended_pricesMaxAggregateOutputType | null
   }
 
   export type Basket_line_item_recommended_pricesAvgAggregateOutputType = {
@@ -3016,7 +3431,7 @@ export namespace Prisma {
      * Determine the order of basket_line_item_recommended_prices to fetch.
      * 
     **/
-    orderBy?: Enumerable<basket_line_item_recommended_pricesOrderByInput>
+    orderBy?: Enumerable<basket_line_item_recommended_pricesOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -3045,19 +3460,11 @@ export namespace Prisma {
     **/
     _count?: true | Basket_line_item_recommended_pricesCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | Basket_line_item_recommended_pricesCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: Basket_line_item_recommended_pricesAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: Basket_line_item_recommended_pricesAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -3065,29 +3472,17 @@ export namespace Prisma {
     **/
     _sum?: Basket_line_item_recommended_pricesSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: Basket_line_item_recommended_pricesSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: Basket_line_item_recommended_pricesMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: Basket_line_item_recommended_pricesMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: Basket_line_item_recommended_pricesMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: Basket_line_item_recommended_pricesMaxAggregateInputType
   }
 
   export type GetBasket_line_item_recommended_pricesAggregateType<T extends Basket_line_item_recommended_pricesAggregateArgs> = {
@@ -3103,7 +3498,7 @@ export namespace Prisma {
     
   export type Basket_line_item_recommended_pricesGroupByArgs = {
     where?: basket_line_item_recommended_pricesWhereInput
-    orderBy?: Enumerable<basket_line_item_recommended_pricesOrderByInput>
+    orderBy?: Enumerable<basket_line_item_recommended_pricesOrderByWithAggregationInput>
     by: Array<Basket_line_item_recommended_pricesScalarFieldEnum>
     having?: basket_line_item_recommended_pricesScalarWhereWithAggregatesInput
     take?: number
@@ -3597,7 +3992,7 @@ export namespace Prisma {
      * Determine the order of basket_line_item_recommended_prices to fetch.
      * 
     **/
-    orderBy?: Enumerable<basket_line_item_recommended_pricesOrderByInput>
+    orderBy?: Enumerable<basket_line_item_recommended_pricesOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -3654,7 +4049,7 @@ export namespace Prisma {
      * Determine the order of basket_line_item_recommended_prices to fetch.
      * 
     **/
-    orderBy?: Enumerable<basket_line_item_recommended_pricesOrderByInput>
+    orderBy?: Enumerable<basket_line_item_recommended_pricesOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -3834,15 +4229,10 @@ export namespace Prisma {
 
   export type AggregateBasket_line_items = {
     _count: Basket_line_itemsCountAggregateOutputType | null
-    count: Basket_line_itemsCountAggregateOutputType | null
     _avg: Basket_line_itemsAvgAggregateOutputType | null
-    avg: Basket_line_itemsAvgAggregateOutputType | null
     _sum: Basket_line_itemsSumAggregateOutputType | null
-    sum: Basket_line_itemsSumAggregateOutputType | null
     _min: Basket_line_itemsMinAggregateOutputType | null
-    min: Basket_line_itemsMinAggregateOutputType | null
     _max: Basket_line_itemsMaxAggregateOutputType | null
-    max: Basket_line_itemsMaxAggregateOutputType | null
   }
 
   export type Basket_line_itemsAvgAggregateOutputType = {
@@ -3952,7 +4342,7 @@ export namespace Prisma {
      * Determine the order of basket_line_items to fetch.
      * 
     **/
-    orderBy?: Enumerable<basket_line_itemsOrderByInput>
+    orderBy?: Enumerable<basket_line_itemsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -3981,19 +4371,11 @@ export namespace Prisma {
     **/
     _count?: true | Basket_line_itemsCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | Basket_line_itemsCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: Basket_line_itemsAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: Basket_line_itemsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -4001,29 +4383,17 @@ export namespace Prisma {
     **/
     _sum?: Basket_line_itemsSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: Basket_line_itemsSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: Basket_line_itemsMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: Basket_line_itemsMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: Basket_line_itemsMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: Basket_line_itemsMaxAggregateInputType
   }
 
   export type GetBasket_line_itemsAggregateType<T extends Basket_line_itemsAggregateArgs> = {
@@ -4039,7 +4409,7 @@ export namespace Prisma {
     
   export type Basket_line_itemsGroupByArgs = {
     where?: basket_line_itemsWhereInput
-    orderBy?: Enumerable<basket_line_itemsOrderByInput>
+    orderBy?: Enumerable<basket_line_itemsOrderByWithAggregationInput>
     by: Array<Basket_line_itemsScalarFieldEnum>
     having?: basket_line_itemsScalarWhereWithAggregatesInput
     take?: number
@@ -4095,11 +4465,13 @@ export namespace Prisma {
     goodfood_price?: boolean
     basket_line_item_competitor_equivalents?: boolean | basket_line_item_competitor_equivalentsFindManyArgs
     basket_line_item_recommended_prices?: boolean | basket_line_item_recommended_pricesFindManyArgs
+    _count?: boolean | Basket_line_itemsCountOutputTypeArgs
   }
 
   export type basket_line_itemsInclude = {
     basket_line_item_competitor_equivalents?: boolean | basket_line_item_competitor_equivalentsFindManyArgs
     basket_line_item_recommended_prices?: boolean | basket_line_item_recommended_pricesFindManyArgs
+    _count?: boolean | Basket_line_itemsCountOutputTypeArgs
   }
 
   export type basket_line_itemsGetPayload<
@@ -4116,7 +4488,9 @@ export namespace Prisma {
           P extends 'basket_line_item_competitor_equivalents'
         ? Array < basket_line_item_competitor_equivalentsGetPayload<S['include'][P]>>  :
         P extends 'basket_line_item_recommended_prices'
-        ? Array < basket_line_item_recommended_pricesGetPayload<S['include'][P]>>  : never
+        ? Array < basket_line_item_recommended_pricesGetPayload<S['include'][P]>>  :
+        P extends '_count'
+        ? Basket_line_itemsCountOutputTypeGetPayload<S['include'][P]> | null : never
   } 
     : 'select' extends U
     ? {
@@ -4125,7 +4499,9 @@ export namespace Prisma {
           P extends 'basket_line_item_competitor_equivalents'
         ? Array < basket_line_item_competitor_equivalentsGetPayload<S['select'][P]>>  :
         P extends 'basket_line_item_recommended_prices'
-        ? Array < basket_line_item_recommended_pricesGetPayload<S['select'][P]>>  : never
+        ? Array < basket_line_item_recommended_pricesGetPayload<S['select'][P]>>  :
+        P extends '_count'
+        ? Basket_line_itemsCountOutputTypeGetPayload<S['select'][P]> | null : never
   } 
     : basket_line_items
   : basket_line_items
@@ -4551,7 +4927,7 @@ export namespace Prisma {
      * Determine the order of basket_line_items to fetch.
      * 
     **/
-    orderBy?: Enumerable<basket_line_itemsOrderByInput>
+    orderBy?: Enumerable<basket_line_itemsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -4608,7 +4984,7 @@ export namespace Prisma {
      * Determine the order of basket_line_items to fetch.
      * 
     **/
-    orderBy?: Enumerable<basket_line_itemsOrderByInput>
+    orderBy?: Enumerable<basket_line_itemsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -4788,15 +5164,10 @@ export namespace Prisma {
 
   export type AggregateBaskets = {
     _count: BasketsCountAggregateOutputType | null
-    count: BasketsCountAggregateOutputType | null
     _avg: BasketsAvgAggregateOutputType | null
-    avg: BasketsAvgAggregateOutputType | null
     _sum: BasketsSumAggregateOutputType | null
-    sum: BasketsSumAggregateOutputType | null
     _min: BasketsMinAggregateOutputType | null
-    min: BasketsMinAggregateOutputType | null
     _max: BasketsMaxAggregateOutputType | null
-    max: BasketsMaxAggregateOutputType | null
   }
 
   export type BasketsAvgAggregateOutputType = {
@@ -4906,7 +5277,7 @@ export namespace Prisma {
      * Determine the order of baskets to fetch.
      * 
     **/
-    orderBy?: Enumerable<basketsOrderByInput>
+    orderBy?: Enumerable<basketsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -4935,19 +5306,11 @@ export namespace Prisma {
     **/
     _count?: true | BasketsCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | BasketsCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: BasketsAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: BasketsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -4955,29 +5318,17 @@ export namespace Prisma {
     **/
     _sum?: BasketsSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: BasketsSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: BasketsMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: BasketsMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: BasketsMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: BasketsMaxAggregateInputType
   }
 
   export type GetBasketsAggregateType<T extends BasketsAggregateArgs> = {
@@ -4993,7 +5344,7 @@ export namespace Prisma {
     
   export type BasketsGroupByArgs = {
     where?: basketsWhereInput
-    orderBy?: Enumerable<basketsOrderByInput>
+    orderBy?: Enumerable<basketsOrderByWithAggregationInput>
     by: Array<BasketsScalarFieldEnum>
     having?: basketsScalarWhereWithAggregatesInput
     take?: number
@@ -5505,7 +5856,7 @@ export namespace Prisma {
      * Determine the order of baskets to fetch.
      * 
     **/
-    orderBy?: Enumerable<basketsOrderByInput>
+    orderBy?: Enumerable<basketsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -5562,7 +5913,7 @@ export namespace Prisma {
      * Determine the order of baskets to fetch.
      * 
     **/
-    orderBy?: Enumerable<basketsOrderByInput>
+    orderBy?: Enumerable<basketsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -5742,15 +6093,10 @@ export namespace Prisma {
 
   export type AggregateCompetitors = {
     _count: CompetitorsCountAggregateOutputType | null
-    count: CompetitorsCountAggregateOutputType | null
     _avg: CompetitorsAvgAggregateOutputType | null
-    avg: CompetitorsAvgAggregateOutputType | null
     _sum: CompetitorsSumAggregateOutputType | null
-    sum: CompetitorsSumAggregateOutputType | null
     _min: CompetitorsMinAggregateOutputType | null
-    min: CompetitorsMinAggregateOutputType | null
     _max: CompetitorsMaxAggregateOutputType | null
-    max: CompetitorsMaxAggregateOutputType | null
   }
 
   export type CompetitorsAvgAggregateOutputType = {
@@ -5820,7 +6166,7 @@ export namespace Prisma {
      * Determine the order of competitors to fetch.
      * 
     **/
-    orderBy?: Enumerable<competitorsOrderByInput>
+    orderBy?: Enumerable<competitorsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -5849,19 +6195,11 @@ export namespace Prisma {
     **/
     _count?: true | CompetitorsCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | CompetitorsCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: CompetitorsAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: CompetitorsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -5869,29 +6207,17 @@ export namespace Prisma {
     **/
     _sum?: CompetitorsSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: CompetitorsSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: CompetitorsMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: CompetitorsMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: CompetitorsMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: CompetitorsMaxAggregateInputType
   }
 
   export type GetCompetitorsAggregateType<T extends CompetitorsAggregateArgs> = {
@@ -5907,7 +6233,7 @@ export namespace Prisma {
     
   export type CompetitorsGroupByArgs = {
     where?: competitorsWhereInput
-    orderBy?: Enumerable<competitorsOrderByInput>
+    orderBy?: Enumerable<competitorsOrderByWithAggregationInput>
     by: Array<CompetitorsScalarFieldEnum>
     having?: competitorsScalarWhereWithAggregatesInput
     take?: number
@@ -5952,12 +6278,14 @@ export namespace Prisma {
     basket_line_item_competitor_equivalents?: boolean | basket_line_item_competitor_equivalentsFindManyArgs
     product_region_competitor_urls?: boolean | product_region_competitor_urlsFindManyArgs
     scaled_prices?: boolean | scaled_pricesFindManyArgs
+    _count?: boolean | CompetitorsCountOutputTypeArgs
   }
 
   export type competitorsInclude = {
     basket_line_item_competitor_equivalents?: boolean | basket_line_item_competitor_equivalentsFindManyArgs
     product_region_competitor_urls?: boolean | product_region_competitor_urlsFindManyArgs
     scaled_prices?: boolean | scaled_pricesFindManyArgs
+    _count?: boolean | CompetitorsCountOutputTypeArgs
   }
 
   export type competitorsGetPayload<
@@ -5976,7 +6304,9 @@ export namespace Prisma {
         P extends 'product_region_competitor_urls'
         ? Array < product_region_competitor_urlsGetPayload<S['include'][P]>>  :
         P extends 'scaled_prices'
-        ? Array < scaled_pricesGetPayload<S['include'][P]>>  : never
+        ? Array < scaled_pricesGetPayload<S['include'][P]>>  :
+        P extends '_count'
+        ? CompetitorsCountOutputTypeGetPayload<S['include'][P]> | null : never
   } 
     : 'select' extends U
     ? {
@@ -5987,7 +6317,9 @@ export namespace Prisma {
         P extends 'product_region_competitor_urls'
         ? Array < product_region_competitor_urlsGetPayload<S['select'][P]>>  :
         P extends 'scaled_prices'
-        ? Array < scaled_pricesGetPayload<S['select'][P]>>  : never
+        ? Array < scaled_pricesGetPayload<S['select'][P]>>  :
+        P extends '_count'
+        ? CompetitorsCountOutputTypeGetPayload<S['select'][P]> | null : never
   } 
     : competitors
   : competitors
@@ -6415,7 +6747,7 @@ export namespace Prisma {
      * Determine the order of competitors to fetch.
      * 
     **/
-    orderBy?: Enumerable<competitorsOrderByInput>
+    orderBy?: Enumerable<competitorsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -6472,7 +6804,7 @@ export namespace Prisma {
      * Determine the order of competitors to fetch.
      * 
     **/
-    orderBy?: Enumerable<competitorsOrderByInput>
+    orderBy?: Enumerable<competitorsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -6652,15 +6984,10 @@ export namespace Prisma {
 
   export type AggregateMigrations = {
     _count: MigrationsCountAggregateOutputType | null
-    count: MigrationsCountAggregateOutputType | null
     _avg: MigrationsAvgAggregateOutputType | null
-    avg: MigrationsAvgAggregateOutputType | null
     _sum: MigrationsSumAggregateOutputType | null
-    sum: MigrationsSumAggregateOutputType | null
     _min: MigrationsMinAggregateOutputType | null
-    min: MigrationsMinAggregateOutputType | null
     _max: MigrationsMaxAggregateOutputType | null
-    max: MigrationsMaxAggregateOutputType | null
   }
 
   export type MigrationsAvgAggregateOutputType = {
@@ -6734,7 +7061,7 @@ export namespace Prisma {
      * Determine the order of migrations to fetch.
      * 
     **/
-    orderBy?: Enumerable<migrationsOrderByInput>
+    orderBy?: Enumerable<migrationsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -6763,19 +7090,11 @@ export namespace Prisma {
     **/
     _count?: true | MigrationsCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | MigrationsCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: MigrationsAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: MigrationsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -6783,29 +7102,17 @@ export namespace Prisma {
     **/
     _sum?: MigrationsSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: MigrationsSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: MigrationsMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: MigrationsMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: MigrationsMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: MigrationsMaxAggregateInputType
   }
 
   export type GetMigrationsAggregateType<T extends MigrationsAggregateArgs> = {
@@ -6821,7 +7128,7 @@ export namespace Prisma {
     
   export type MigrationsGroupByArgs = {
     where?: migrationsWhereInput
-    orderBy?: Enumerable<migrationsOrderByInput>
+    orderBy?: Enumerable<migrationsOrderByWithAggregationInput>
     by: Array<MigrationsScalarFieldEnum>
     having?: migrationsScalarWhereWithAggregatesInput
     take?: number
@@ -7292,7 +7599,7 @@ export namespace Prisma {
      * Determine the order of migrations to fetch.
      * 
     **/
-    orderBy?: Enumerable<migrationsOrderByInput>
+    orderBy?: Enumerable<migrationsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -7344,7 +7651,7 @@ export namespace Prisma {
      * Determine the order of migrations to fetch.
      * 
     **/
-    orderBy?: Enumerable<migrationsOrderByInput>
+    orderBy?: Enumerable<migrationsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -7499,15 +7806,10 @@ export namespace Prisma {
 
   export type AggregatePrice_recommendations = {
     _count: Price_recommendationsCountAggregateOutputType | null
-    count: Price_recommendationsCountAggregateOutputType | null
     _avg: Price_recommendationsAvgAggregateOutputType | null
-    avg: Price_recommendationsAvgAggregateOutputType | null
     _sum: Price_recommendationsSumAggregateOutputType | null
-    sum: Price_recommendationsSumAggregateOutputType | null
     _min: Price_recommendationsMinAggregateOutputType | null
-    min: Price_recommendationsMinAggregateOutputType | null
     _max: Price_recommendationsMaxAggregateOutputType | null
-    max: Price_recommendationsMaxAggregateOutputType | null
   }
 
   export type Price_recommendationsAvgAggregateOutputType = {
@@ -7617,7 +7919,7 @@ export namespace Prisma {
      * Determine the order of price_recommendations to fetch.
      * 
     **/
-    orderBy?: Enumerable<price_recommendationsOrderByInput>
+    orderBy?: Enumerable<price_recommendationsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -7646,19 +7948,11 @@ export namespace Prisma {
     **/
     _count?: true | Price_recommendationsCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | Price_recommendationsCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: Price_recommendationsAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: Price_recommendationsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -7666,29 +7960,17 @@ export namespace Prisma {
     **/
     _sum?: Price_recommendationsSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: Price_recommendationsSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: Price_recommendationsMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: Price_recommendationsMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: Price_recommendationsMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: Price_recommendationsMaxAggregateInputType
   }
 
   export type GetPrice_recommendationsAggregateType<T extends Price_recommendationsAggregateArgs> = {
@@ -7704,7 +7986,7 @@ export namespace Prisma {
     
   export type Price_recommendationsGroupByArgs = {
     where?: price_recommendationsWhereInput
-    orderBy?: Enumerable<price_recommendationsOrderByInput>
+    orderBy?: Enumerable<price_recommendationsOrderByWithAggregationInput>
     by: Array<Price_recommendationsScalarFieldEnum>
     having?: price_recommendationsScalarWhereWithAggregatesInput
     take?: number
@@ -8212,7 +8494,7 @@ export namespace Prisma {
      * Determine the order of price_recommendations to fetch.
      * 
     **/
-    orderBy?: Enumerable<price_recommendationsOrderByInput>
+    orderBy?: Enumerable<price_recommendationsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -8269,7 +8551,7 @@ export namespace Prisma {
      * Determine the order of price_recommendations to fetch.
      * 
     **/
-    orderBy?: Enumerable<price_recommendationsOrderByInput>
+    orderBy?: Enumerable<price_recommendationsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -8449,15 +8731,10 @@ export namespace Prisma {
 
   export type AggregateProduct_region_competitor_urls = {
     _count: Product_region_competitor_urlsCountAggregateOutputType | null
-    count: Product_region_competitor_urlsCountAggregateOutputType | null
     _avg: Product_region_competitor_urlsAvgAggregateOutputType | null
-    avg: Product_region_competitor_urlsAvgAggregateOutputType | null
     _sum: Product_region_competitor_urlsSumAggregateOutputType | null
-    sum: Product_region_competitor_urlsSumAggregateOutputType | null
     _min: Product_region_competitor_urlsMinAggregateOutputType | null
-    min: Product_region_competitor_urlsMinAggregateOutputType | null
     _max: Product_region_competitor_urlsMaxAggregateOutputType | null
-    max: Product_region_competitor_urlsMaxAggregateOutputType | null
   }
 
   export type Product_region_competitor_urlsAvgAggregateOutputType = {
@@ -8569,7 +8846,7 @@ export namespace Prisma {
      * Determine the order of product_region_competitor_urls to fetch.
      * 
     **/
-    orderBy?: Enumerable<product_region_competitor_urlsOrderByInput>
+    orderBy?: Enumerable<product_region_competitor_urlsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -8598,19 +8875,11 @@ export namespace Prisma {
     **/
     _count?: true | Product_region_competitor_urlsCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | Product_region_competitor_urlsCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: Product_region_competitor_urlsAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: Product_region_competitor_urlsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -8618,29 +8887,17 @@ export namespace Prisma {
     **/
     _sum?: Product_region_competitor_urlsSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: Product_region_competitor_urlsSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: Product_region_competitor_urlsMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: Product_region_competitor_urlsMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: Product_region_competitor_urlsMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: Product_region_competitor_urlsMaxAggregateInputType
   }
 
   export type GetProduct_region_competitor_urlsAggregateType<T extends Product_region_competitor_urlsAggregateArgs> = {
@@ -8656,7 +8913,7 @@ export namespace Prisma {
     
   export type Product_region_competitor_urlsGroupByArgs = {
     where?: product_region_competitor_urlsWhereInput
-    orderBy?: Enumerable<product_region_competitor_urlsOrderByInput>
+    orderBy?: Enumerable<product_region_competitor_urlsOrderByWithAggregationInput>
     by: Array<Product_region_competitor_urlsScalarFieldEnum>
     having?: product_region_competitor_urlsScalarWhereWithAggregatesInput
     take?: number
@@ -8712,6 +8969,7 @@ export namespace Prisma {
     products?: boolean | productsArgs
     regions?: boolean | regionsArgs
     product_region_competitor_urls_former_urls?: boolean | product_region_competitor_urls_former_urlsFindManyArgs
+    _count?: boolean | Product_region_competitor_urlsCountOutputTypeArgs
   }
 
   export type product_region_competitor_urlsInclude = {
@@ -8719,6 +8977,7 @@ export namespace Prisma {
     products?: boolean | productsArgs
     regions?: boolean | regionsArgs
     product_region_competitor_urls_former_urls?: boolean | product_region_competitor_urls_former_urlsFindManyArgs
+    _count?: boolean | Product_region_competitor_urlsCountOutputTypeArgs
   }
 
   export type product_region_competitor_urlsGetPayload<
@@ -8739,7 +8998,9 @@ export namespace Prisma {
         P extends 'regions'
         ? regionsGetPayload<S['include'][P]> :
         P extends 'product_region_competitor_urls_former_urls'
-        ? Array < product_region_competitor_urls_former_urlsGetPayload<S['include'][P]>>  : never
+        ? Array < product_region_competitor_urls_former_urlsGetPayload<S['include'][P]>>  :
+        P extends '_count'
+        ? Product_region_competitor_urlsCountOutputTypeGetPayload<S['include'][P]> | null : never
   } 
     : 'select' extends U
     ? {
@@ -8752,7 +9013,9 @@ export namespace Prisma {
         P extends 'regions'
         ? regionsGetPayload<S['select'][P]> :
         P extends 'product_region_competitor_urls_former_urls'
-        ? Array < product_region_competitor_urls_former_urlsGetPayload<S['select'][P]>>  : never
+        ? Array < product_region_competitor_urls_former_urlsGetPayload<S['select'][P]>>  :
+        P extends '_count'
+        ? Product_region_competitor_urlsCountOutputTypeGetPayload<S['select'][P]> | null : never
   } 
     : product_region_competitor_urls
   : product_region_competitor_urls
@@ -9182,7 +9445,7 @@ export namespace Prisma {
      * Determine the order of product_region_competitor_urls to fetch.
      * 
     **/
-    orderBy?: Enumerable<product_region_competitor_urlsOrderByInput>
+    orderBy?: Enumerable<product_region_competitor_urlsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -9239,7 +9502,7 @@ export namespace Prisma {
      * Determine the order of product_region_competitor_urls to fetch.
      * 
     **/
-    orderBy?: Enumerable<product_region_competitor_urlsOrderByInput>
+    orderBy?: Enumerable<product_region_competitor_urlsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -9419,15 +9682,10 @@ export namespace Prisma {
 
   export type AggregateProduct_region_competitor_urls_former_urls = {
     _count: Product_region_competitor_urls_former_urlsCountAggregateOutputType | null
-    count: Product_region_competitor_urls_former_urlsCountAggregateOutputType | null
     _avg: Product_region_competitor_urls_former_urlsAvgAggregateOutputType | null
-    avg: Product_region_competitor_urls_former_urlsAvgAggregateOutputType | null
     _sum: Product_region_competitor_urls_former_urlsSumAggregateOutputType | null
-    sum: Product_region_competitor_urls_former_urlsSumAggregateOutputType | null
     _min: Product_region_competitor_urls_former_urlsMinAggregateOutputType | null
-    min: Product_region_competitor_urls_former_urlsMinAggregateOutputType | null
     _max: Product_region_competitor_urls_former_urlsMaxAggregateOutputType | null
-    max: Product_region_competitor_urls_former_urlsMaxAggregateOutputType | null
   }
 
   export type Product_region_competitor_urls_former_urlsAvgAggregateOutputType = {
@@ -9513,7 +9771,7 @@ export namespace Prisma {
      * Determine the order of product_region_competitor_urls_former_urls to fetch.
      * 
     **/
-    orderBy?: Enumerable<product_region_competitor_urls_former_urlsOrderByInput>
+    orderBy?: Enumerable<product_region_competitor_urls_former_urlsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -9542,19 +9800,11 @@ export namespace Prisma {
     **/
     _count?: true | Product_region_competitor_urls_former_urlsCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | Product_region_competitor_urls_former_urlsCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: Product_region_competitor_urls_former_urlsAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: Product_region_competitor_urls_former_urlsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -9562,29 +9812,17 @@ export namespace Prisma {
     **/
     _sum?: Product_region_competitor_urls_former_urlsSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: Product_region_competitor_urls_former_urlsSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: Product_region_competitor_urls_former_urlsMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: Product_region_competitor_urls_former_urlsMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: Product_region_competitor_urls_former_urlsMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: Product_region_competitor_urls_former_urlsMaxAggregateInputType
   }
 
   export type GetProduct_region_competitor_urls_former_urlsAggregateType<T extends Product_region_competitor_urls_former_urlsAggregateArgs> = {
@@ -9600,7 +9838,7 @@ export namespace Prisma {
     
   export type Product_region_competitor_urls_former_urlsGroupByArgs = {
     where?: product_region_competitor_urls_former_urlsWhereInput
-    orderBy?: Enumerable<product_region_competitor_urls_former_urlsOrderByInput>
+    orderBy?: Enumerable<product_region_competitor_urls_former_urlsOrderByWithAggregationInput>
     by: Array<Product_region_competitor_urls_former_urlsScalarFieldEnum>
     having?: product_region_competitor_urls_former_urlsScalarWhereWithAggregatesInput
     take?: number
@@ -10096,7 +10334,7 @@ export namespace Prisma {
      * Determine the order of product_region_competitor_urls_former_urls to fetch.
      * 
     **/
-    orderBy?: Enumerable<product_region_competitor_urls_former_urlsOrderByInput>
+    orderBy?: Enumerable<product_region_competitor_urls_former_urlsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -10153,7 +10391,7 @@ export namespace Prisma {
      * Determine the order of product_region_competitor_urls_former_urls to fetch.
      * 
     **/
-    orderBy?: Enumerable<product_region_competitor_urls_former_urlsOrderByInput>
+    orderBy?: Enumerable<product_region_competitor_urls_former_urlsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -10333,15 +10571,10 @@ export namespace Prisma {
 
   export type AggregateProduct_region_price_data = {
     _count: Product_region_price_dataCountAggregateOutputType | null
-    count: Product_region_price_dataCountAggregateOutputType | null
     _avg: Product_region_price_dataAvgAggregateOutputType | null
-    avg: Product_region_price_dataAvgAggregateOutputType | null
     _sum: Product_region_price_dataSumAggregateOutputType | null
-    sum: Product_region_price_dataSumAggregateOutputType | null
     _min: Product_region_price_dataMinAggregateOutputType | null
-    min: Product_region_price_dataMinAggregateOutputType | null
     _max: Product_region_price_dataMaxAggregateOutputType | null
-    max: Product_region_price_dataMaxAggregateOutputType | null
   }
 
   export type Product_region_price_dataAvgAggregateOutputType = {
@@ -10467,7 +10700,7 @@ export namespace Prisma {
      * Determine the order of product_region_price_data to fetch.
      * 
     **/
-    orderBy?: Enumerable<product_region_price_dataOrderByInput>
+    orderBy?: Enumerable<product_region_price_dataOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -10496,19 +10729,11 @@ export namespace Prisma {
     **/
     _count?: true | Product_region_price_dataCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | Product_region_price_dataCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: Product_region_price_dataAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: Product_region_price_dataAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -10516,29 +10741,17 @@ export namespace Prisma {
     **/
     _sum?: Product_region_price_dataSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: Product_region_price_dataSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: Product_region_price_dataMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: Product_region_price_dataMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: Product_region_price_dataMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: Product_region_price_dataMaxAggregateInputType
   }
 
   export type GetProduct_region_price_dataAggregateType<T extends Product_region_price_dataAggregateArgs> = {
@@ -10554,7 +10767,7 @@ export namespace Prisma {
     
   export type Product_region_price_dataGroupByArgs = {
     where?: product_region_price_dataWhereInput
-    orderBy?: Enumerable<product_region_price_dataOrderByInput>
+    orderBy?: Enumerable<product_region_price_dataOrderByWithAggregationInput>
     by: Array<Product_region_price_dataScalarFieldEnum>
     having?: product_region_price_dataScalarWhereWithAggregatesInput
     take?: number
@@ -11066,7 +11279,7 @@ export namespace Prisma {
      * Determine the order of product_region_price_data to fetch.
      * 
     **/
-    orderBy?: Enumerable<product_region_price_dataOrderByInput>
+    orderBy?: Enumerable<product_region_price_dataOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -11123,7 +11336,7 @@ export namespace Prisma {
      * Determine the order of product_region_price_data to fetch.
      * 
     **/
-    orderBy?: Enumerable<product_region_price_dataOrderByInput>
+    orderBy?: Enumerable<product_region_price_dataOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -11303,15 +11516,10 @@ export namespace Prisma {
 
   export type AggregateProducts = {
     _count: ProductsCountAggregateOutputType | null
-    count: ProductsCountAggregateOutputType | null
     _avg: ProductsAvgAggregateOutputType | null
-    avg: ProductsAvgAggregateOutputType | null
     _sum: ProductsSumAggregateOutputType | null
-    sum: ProductsSumAggregateOutputType | null
     _min: ProductsMinAggregateOutputType | null
-    min: ProductsMinAggregateOutputType | null
     _max: ProductsMaxAggregateOutputType | null
-    max: ProductsMaxAggregateOutputType | null
   }
 
   export type ProductsAvgAggregateOutputType = {
@@ -11435,7 +11643,7 @@ export namespace Prisma {
      * Determine the order of products to fetch.
      * 
     **/
-    orderBy?: Enumerable<productsOrderByInput>
+    orderBy?: Enumerable<productsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -11464,19 +11672,11 @@ export namespace Prisma {
     **/
     _count?: true | ProductsCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | ProductsCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: ProductsAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: ProductsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -11484,29 +11684,17 @@ export namespace Prisma {
     **/
     _sum?: ProductsSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: ProductsSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: ProductsMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: ProductsMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: ProductsMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: ProductsMaxAggregateInputType
   }
 
   export type GetProductsAggregateType<T extends ProductsAggregateArgs> = {
@@ -11522,7 +11710,7 @@ export namespace Prisma {
     
   export type ProductsGroupByArgs = {
     where?: productsWhereInput
-    orderBy?: Enumerable<productsOrderByInput>
+    orderBy?: Enumerable<productsOrderByWithAggregationInput>
     by: Array<ProductsScalarFieldEnum>
     having?: productsScalarWhereWithAggregatesInput
     take?: number
@@ -11583,6 +11771,7 @@ export namespace Prisma {
     product_region_competitor_urls?: boolean | product_region_competitor_urlsFindManyArgs
     product_region_price_data?: boolean | product_region_price_dataFindManyArgs
     scaled_prices?: boolean | scaled_pricesFindManyArgs
+    _count?: boolean | ProductsCountOutputTypeArgs
   }
 
   export type productsInclude = {
@@ -11591,6 +11780,7 @@ export namespace Prisma {
     product_region_competitor_urls?: boolean | product_region_competitor_urlsFindManyArgs
     product_region_price_data?: boolean | product_region_price_dataFindManyArgs
     scaled_prices?: boolean | scaled_pricesFindManyArgs
+    _count?: boolean | ProductsCountOutputTypeArgs
   }
 
   export type productsGetPayload<
@@ -11613,7 +11803,9 @@ export namespace Prisma {
         P extends 'product_region_price_data'
         ? Array < product_region_price_dataGetPayload<S['include'][P]>>  :
         P extends 'scaled_prices'
-        ? Array < scaled_pricesGetPayload<S['include'][P]>>  : never
+        ? Array < scaled_pricesGetPayload<S['include'][P]>>  :
+        P extends '_count'
+        ? ProductsCountOutputTypeGetPayload<S['include'][P]> | null : never
   } 
     : 'select' extends U
     ? {
@@ -11628,7 +11820,9 @@ export namespace Prisma {
         P extends 'product_region_price_data'
         ? Array < product_region_price_dataGetPayload<S['select'][P]>>  :
         P extends 'scaled_prices'
-        ? Array < scaled_pricesGetPayload<S['select'][P]>>  : never
+        ? Array < scaled_pricesGetPayload<S['select'][P]>>  :
+        P extends '_count'
+        ? ProductsCountOutputTypeGetPayload<S['select'][P]> | null : never
   } 
     : products
   : products
@@ -12060,7 +12254,7 @@ export namespace Prisma {
      * Determine the order of products to fetch.
      * 
     **/
-    orderBy?: Enumerable<productsOrderByInput>
+    orderBy?: Enumerable<productsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -12117,7 +12311,7 @@ export namespace Prisma {
      * Determine the order of products to fetch.
      * 
     **/
-    orderBy?: Enumerable<productsOrderByInput>
+    orderBy?: Enumerable<productsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -12297,15 +12491,10 @@ export namespace Prisma {
 
   export type AggregateRegions = {
     _count: RegionsCountAggregateOutputType | null
-    count: RegionsCountAggregateOutputType | null
     _avg: RegionsAvgAggregateOutputType | null
-    avg: RegionsAvgAggregateOutputType | null
     _sum: RegionsSumAggregateOutputType | null
-    sum: RegionsSumAggregateOutputType | null
     _min: RegionsMinAggregateOutputType | null
-    min: RegionsMinAggregateOutputType | null
     _max: RegionsMaxAggregateOutputType | null
-    max: RegionsMaxAggregateOutputType | null
   }
 
   export type RegionsAvgAggregateOutputType = {
@@ -12417,7 +12606,7 @@ export namespace Prisma {
      * Determine the order of regions to fetch.
      * 
     **/
-    orderBy?: Enumerable<regionsOrderByInput>
+    orderBy?: Enumerable<regionsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -12446,19 +12635,11 @@ export namespace Prisma {
     **/
     _count?: true | RegionsCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | RegionsCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: RegionsAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: RegionsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -12466,29 +12647,17 @@ export namespace Prisma {
     **/
     _sum?: RegionsSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: RegionsSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: RegionsMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: RegionsMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: RegionsMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: RegionsMaxAggregateInputType
   }
 
   export type GetRegionsAggregateType<T extends RegionsAggregateArgs> = {
@@ -12504,7 +12673,7 @@ export namespace Prisma {
     
   export type RegionsGroupByArgs = {
     where?: regionsWhereInput
-    orderBy?: Enumerable<regionsOrderByInput>
+    orderBy?: Enumerable<regionsOrderByWithAggregationInput>
     by: Array<RegionsScalarFieldEnum>
     having?: regionsScalarWhereWithAggregatesInput
     take?: number
@@ -12565,6 +12734,7 @@ export namespace Prisma {
     product_region_competitor_urls?: boolean | product_region_competitor_urlsFindManyArgs
     product_region_price_data?: boolean | product_region_price_dataFindManyArgs
     scaled_prices?: boolean | scaled_pricesFindManyArgs
+    _count?: boolean | RegionsCountOutputTypeArgs
   }
 
   export type regionsInclude = {
@@ -12573,6 +12743,7 @@ export namespace Prisma {
     product_region_competitor_urls?: boolean | product_region_competitor_urlsFindManyArgs
     product_region_price_data?: boolean | product_region_price_dataFindManyArgs
     scaled_prices?: boolean | scaled_pricesFindManyArgs
+    _count?: boolean | RegionsCountOutputTypeArgs
   }
 
   export type regionsGetPayload<
@@ -12595,7 +12766,9 @@ export namespace Prisma {
         P extends 'product_region_price_data'
         ? Array < product_region_price_dataGetPayload<S['include'][P]>>  :
         P extends 'scaled_prices'
-        ? Array < scaled_pricesGetPayload<S['include'][P]>>  : never
+        ? Array < scaled_pricesGetPayload<S['include'][P]>>  :
+        P extends '_count'
+        ? RegionsCountOutputTypeGetPayload<S['include'][P]> | null : never
   } 
     : 'select' extends U
     ? {
@@ -12610,7 +12783,9 @@ export namespace Prisma {
         P extends 'product_region_price_data'
         ? Array < product_region_price_dataGetPayload<S['select'][P]>>  :
         P extends 'scaled_prices'
-        ? Array < scaled_pricesGetPayload<S['select'][P]>>  : never
+        ? Array < scaled_pricesGetPayload<S['select'][P]>>  :
+        P extends '_count'
+        ? RegionsCountOutputTypeGetPayload<S['select'][P]> | null : never
   } 
     : regions
   : regions
@@ -13042,7 +13217,7 @@ export namespace Prisma {
      * Determine the order of regions to fetch.
      * 
     **/
-    orderBy?: Enumerable<regionsOrderByInput>
+    orderBy?: Enumerable<regionsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -13099,7 +13274,7 @@ export namespace Prisma {
      * Determine the order of regions to fetch.
      * 
     **/
-    orderBy?: Enumerable<regionsOrderByInput>
+    orderBy?: Enumerable<regionsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -13279,15 +13454,10 @@ export namespace Prisma {
 
   export type AggregateScaled_prices = {
     _count: Scaled_pricesCountAggregateOutputType | null
-    count: Scaled_pricesCountAggregateOutputType | null
     _avg: Scaled_pricesAvgAggregateOutputType | null
-    avg: Scaled_pricesAvgAggregateOutputType | null
     _sum: Scaled_pricesSumAggregateOutputType | null
-    sum: Scaled_pricesSumAggregateOutputType | null
     _min: Scaled_pricesMinAggregateOutputType | null
-    min: Scaled_pricesMinAggregateOutputType | null
     _max: Scaled_pricesMaxAggregateOutputType | null
-    max: Scaled_pricesMaxAggregateOutputType | null
   }
 
   export type Scaled_pricesAvgAggregateOutputType = {
@@ -13413,7 +13583,7 @@ export namespace Prisma {
      * Determine the order of scaled_prices to fetch.
      * 
     **/
-    orderBy?: Enumerable<scaled_pricesOrderByInput>
+    orderBy?: Enumerable<scaled_pricesOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -13442,19 +13612,11 @@ export namespace Prisma {
     **/
     _count?: true | Scaled_pricesCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | Scaled_pricesCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: Scaled_pricesAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: Scaled_pricesAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -13462,29 +13624,17 @@ export namespace Prisma {
     **/
     _sum?: Scaled_pricesSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: Scaled_pricesSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: Scaled_pricesMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: Scaled_pricesMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: Scaled_pricesMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: Scaled_pricesMaxAggregateInputType
   }
 
   export type GetScaled_pricesAggregateType<T extends Scaled_pricesAggregateArgs> = {
@@ -13500,7 +13650,7 @@ export namespace Prisma {
     
   export type Scaled_pricesGroupByArgs = {
     where?: scaled_pricesWhereInput
-    orderBy?: Enumerable<scaled_pricesOrderByInput>
+    orderBy?: Enumerable<scaled_pricesOrderByWithAggregationInput>
     by: Array<Scaled_pricesScalarFieldEnum>
     having?: scaled_pricesScalarWhereWithAggregatesInput
     take?: number
@@ -14028,7 +14178,7 @@ export namespace Prisma {
      * Determine the order of scaled_prices to fetch.
      * 
     **/
-    orderBy?: Enumerable<scaled_pricesOrderByInput>
+    orderBy?: Enumerable<scaled_pricesOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -14085,7 +14235,7 @@ export namespace Prisma {
      * Determine the order of scaled_prices to fetch.
      * 
     **/
-    orderBy?: Enumerable<scaled_pricesOrderByInput>
+    orderBy?: Enumerable<scaled_pricesOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -14265,15 +14415,10 @@ export namespace Prisma {
 
   export type AggregateScrape_results = {
     _count: Scrape_resultsCountAggregateOutputType | null
-    count: Scrape_resultsCountAggregateOutputType | null
     _avg: Scrape_resultsAvgAggregateOutputType | null
-    avg: Scrape_resultsAvgAggregateOutputType | null
     _sum: Scrape_resultsSumAggregateOutputType | null
-    sum: Scrape_resultsSumAggregateOutputType | null
     _min: Scrape_resultsMinAggregateOutputType | null
-    min: Scrape_resultsMinAggregateOutputType | null
     _max: Scrape_resultsMaxAggregateOutputType | null
-    max: Scrape_resultsMaxAggregateOutputType | null
   }
 
   export type Scrape_resultsAvgAggregateOutputType = {
@@ -14407,7 +14552,7 @@ export namespace Prisma {
      * Determine the order of scrape_results to fetch.
      * 
     **/
-    orderBy?: Enumerable<scrape_resultsOrderByInput>
+    orderBy?: Enumerable<scrape_resultsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -14436,19 +14581,11 @@ export namespace Prisma {
     **/
     _count?: true | Scrape_resultsCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | Scrape_resultsCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: Scrape_resultsAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: Scrape_resultsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -14456,29 +14593,17 @@ export namespace Prisma {
     **/
     _sum?: Scrape_resultsSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: Scrape_resultsSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: Scrape_resultsMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: Scrape_resultsMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: Scrape_resultsMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: Scrape_resultsMaxAggregateInputType
   }
 
   export type GetScrape_resultsAggregateType<T extends Scrape_resultsAggregateArgs> = {
@@ -14494,7 +14619,7 @@ export namespace Prisma {
     
   export type Scrape_resultsGroupByArgs = {
     where?: scrape_resultsWhereInput
-    orderBy?: Enumerable<scrape_resultsOrderByInput>
+    orderBy?: Enumerable<scrape_resultsOrderByWithAggregationInput>
     by: Array<Scrape_resultsScalarFieldEnum>
     having?: scrape_resultsScalarWhereWithAggregatesInput
     take?: number
@@ -14554,11 +14679,13 @@ export namespace Prisma {
     deleted_at?: boolean
     units?: boolean | unitsArgs
     scaled_prices?: boolean | scaled_pricesFindManyArgs
+    _count?: boolean | Scrape_resultsCountOutputTypeArgs
   }
 
   export type scrape_resultsInclude = {
     units?: boolean | unitsArgs
     scaled_prices?: boolean | scaled_pricesFindManyArgs
+    _count?: boolean | Scrape_resultsCountOutputTypeArgs
   }
 
   export type scrape_resultsGetPayload<
@@ -14575,7 +14702,9 @@ export namespace Prisma {
           P extends 'units'
         ? unitsGetPayload<S['include'][P]> :
         P extends 'scaled_prices'
-        ? Array < scaled_pricesGetPayload<S['include'][P]>>  : never
+        ? Array < scaled_pricesGetPayload<S['include'][P]>>  :
+        P extends '_count'
+        ? Scrape_resultsCountOutputTypeGetPayload<S['include'][P]> | null : never
   } 
     : 'select' extends U
     ? {
@@ -14584,7 +14713,9 @@ export namespace Prisma {
           P extends 'units'
         ? unitsGetPayload<S['select'][P]> :
         P extends 'scaled_prices'
-        ? Array < scaled_pricesGetPayload<S['select'][P]>>  : never
+        ? Array < scaled_pricesGetPayload<S['select'][P]>>  :
+        P extends '_count'
+        ? Scrape_resultsCountOutputTypeGetPayload<S['select'][P]> | null : never
   } 
     : scrape_results
   : scrape_results
@@ -15010,7 +15141,7 @@ export namespace Prisma {
      * Determine the order of scrape_results to fetch.
      * 
     **/
-    orderBy?: Enumerable<scrape_resultsOrderByInput>
+    orderBy?: Enumerable<scrape_resultsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -15067,7 +15198,7 @@ export namespace Prisma {
      * Determine the order of scrape_results to fetch.
      * 
     **/
-    orderBy?: Enumerable<scrape_resultsOrderByInput>
+    orderBy?: Enumerable<scrape_resultsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -15247,15 +15378,10 @@ export namespace Prisma {
 
   export type AggregateUnits = {
     _count: UnitsCountAggregateOutputType | null
-    count: UnitsCountAggregateOutputType | null
     _avg: UnitsAvgAggregateOutputType | null
-    avg: UnitsAvgAggregateOutputType | null
     _sum: UnitsSumAggregateOutputType | null
-    sum: UnitsSumAggregateOutputType | null
     _min: UnitsMinAggregateOutputType | null
-    min: UnitsMinAggregateOutputType | null
     _max: UnitsMaxAggregateOutputType | null
-    max: UnitsMaxAggregateOutputType | null
   }
 
   export type UnitsAvgAggregateOutputType = {
@@ -15345,7 +15471,7 @@ export namespace Prisma {
      * Determine the order of units to fetch.
      * 
     **/
-    orderBy?: Enumerable<unitsOrderByInput>
+    orderBy?: Enumerable<unitsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -15374,19 +15500,11 @@ export namespace Prisma {
     **/
     _count?: true | UnitsCountAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_count`
-    **/
-    count?: true | UnitsCountAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
     _avg?: UnitsAvgAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_avg`
-    **/
-    avg?: UnitsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
@@ -15394,29 +15512,17 @@ export namespace Prisma {
     **/
     _sum?: UnitsSumAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_sum`
-    **/
-    sum?: UnitsSumAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
     _min?: UnitsMinAggregateInputType
     /**
-     * @deprecated since 2.23.0 please use `_min`
-    **/
-    min?: UnitsMinAggregateInputType
-    /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
     _max?: UnitsMaxAggregateInputType
-    /**
-     * @deprecated since 2.23.0 please use `_max`
-    **/
-    max?: UnitsMaxAggregateInputType
   }
 
   export type GetUnitsAggregateType<T extends UnitsAggregateArgs> = {
@@ -15432,7 +15538,7 @@ export namespace Prisma {
     
   export type UnitsGroupByArgs = {
     where?: unitsWhereInput
-    orderBy?: Enumerable<unitsOrderByInput>
+    orderBy?: Enumerable<unitsOrderByWithAggregationInput>
     by: Array<UnitsScalarFieldEnum>
     having?: unitsScalarWhereWithAggregatesInput
     take?: number
@@ -15482,6 +15588,7 @@ export namespace Prisma {
     products?: boolean | productsFindManyArgs
     scrape_results?: boolean | scrape_resultsFindManyArgs
     other_units?: boolean | unitsFindManyArgs
+    _count?: boolean | UnitsCountOutputTypeArgs
   }
 
   export type unitsInclude = {
@@ -15489,6 +15596,7 @@ export namespace Prisma {
     products?: boolean | productsFindManyArgs
     scrape_results?: boolean | scrape_resultsFindManyArgs
     other_units?: boolean | unitsFindManyArgs
+    _count?: boolean | UnitsCountOutputTypeArgs
   }
 
   export type unitsGetPayload<
@@ -15509,7 +15617,9 @@ export namespace Prisma {
         P extends 'scrape_results'
         ? Array < scrape_resultsGetPayload<S['include'][P]>>  :
         P extends 'other_units'
-        ? Array < unitsGetPayload<S['include'][P]>>  : never
+        ? Array < unitsGetPayload<S['include'][P]>>  :
+        P extends '_count'
+        ? UnitsCountOutputTypeGetPayload<S['include'][P]> | null : never
   } 
     : 'select' extends U
     ? {
@@ -15522,7 +15632,9 @@ export namespace Prisma {
         P extends 'scrape_results'
         ? Array < scrape_resultsGetPayload<S['select'][P]>>  :
         P extends 'other_units'
-        ? Array < unitsGetPayload<S['select'][P]>>  : never
+        ? Array < unitsGetPayload<S['select'][P]>>  :
+        P extends '_count'
+        ? UnitsCountOutputTypeGetPayload<S['select'][P]> | null : never
   } 
     : units
   : units
@@ -15952,7 +16064,7 @@ export namespace Prisma {
      * Determine the order of units to fetch.
      * 
     **/
-    orderBy?: Enumerable<unitsOrderByInput>
+    orderBy?: Enumerable<unitsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -16009,7 +16121,7 @@ export namespace Prisma {
      * Determine the order of units to fetch.
      * 
     **/
-    orderBy?: Enumerable<unitsOrderByInput>
+    orderBy?: Enumerable<unitsOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
@@ -16407,6 +16519,30 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const JsonNullValueInput: {
+    JsonNull: 'JsonNull'
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+  export const NullableJsonNullValueInput: {
+    DbNull: 'DbNull',
+    JsonNull: 'JsonNull'
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: 'DbNull',
+    JsonNull: 'JsonNull',
+    AnyNull: 'AnyNull'
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
   /**
    * Deep Input Types
    */
@@ -16425,17 +16561,32 @@ export namespace Prisma {
     baskets?: BasketsListRelationFilter
   }
 
-  export type basket_daily_totalsOrderByInput = {
+  export type basket_daily_totalsOrderByWithRelationInput = {
     id?: SortOrder
     delivery_date?: SortOrder
     daily_totals?: SortOrder
     daily_indexes?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    baskets?: basketsOrderByRelationAggregateInput
   }
 
   export type basket_daily_totalsWhereUniqueInput = {
     id?: number
+  }
+
+  export type basket_daily_totalsOrderByWithAggregationInput = {
+    id?: SortOrder
+    delivery_date?: SortOrder
+    daily_totals?: SortOrder
+    daily_indexes?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: basket_daily_totalsCountOrderByAggregateInput
+    _avg?: basket_daily_totalsAvgOrderByAggregateInput
+    _max?: basket_daily_totalsMaxOrderByAggregateInput
+    _min?: basket_daily_totalsMinOrderByAggregateInput
+    _sum?: basket_daily_totalsSumOrderByAggregateInput
   }
 
   export type basket_daily_totalsScalarWhereWithAggregatesInput = {
@@ -16464,17 +16615,33 @@ export namespace Prisma {
     competitors?: XOR<CompetitorsRelationFilter, competitorsWhereInput>
   }
 
-  export type basket_line_item_competitor_equivalentsOrderByInput = {
+  export type basket_line_item_competitor_equivalentsOrderByWithRelationInput = {
     id?: SortOrder
     competitor_price?: SortOrder
     basket_line_item_id?: SortOrder
     competitor_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    basket_line_items?: basket_line_itemsOrderByWithRelationInput
+    competitors?: competitorsOrderByWithRelationInput
   }
 
   export type basket_line_item_competitor_equivalentsWhereUniqueInput = {
     id?: number
+  }
+
+  export type basket_line_item_competitor_equivalentsOrderByWithAggregationInput = {
+    id?: SortOrder
+    competitor_price?: SortOrder
+    basket_line_item_id?: SortOrder
+    competitor_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: basket_line_item_competitor_equivalentsCountOrderByAggregateInput
+    _avg?: basket_line_item_competitor_equivalentsAvgOrderByAggregateInput
+    _max?: basket_line_item_competitor_equivalentsMaxOrderByAggregateInput
+    _min?: basket_line_item_competitor_equivalentsMinOrderByAggregateInput
+    _sum?: basket_line_item_competitor_equivalentsSumOrderByAggregateInput
   }
 
   export type basket_line_item_competitor_equivalentsScalarWhereWithAggregatesInput = {
@@ -16500,15 +16667,28 @@ export namespace Prisma {
     basket_line_items?: XOR<Basket_line_itemsRelationFilter, basket_line_itemsWhereInput>
   }
 
-  export type basket_line_item_recommended_pricesOrderByInput = {
+  export type basket_line_item_recommended_pricesOrderByWithRelationInput = {
     id?: SortOrder
     recommended_price?: SortOrder
     basket_line_item_id?: SortOrder
     price_recommendation_id?: SortOrder
+    basket_line_items?: basket_line_itemsOrderByWithRelationInput
   }
 
   export type basket_line_item_recommended_pricesWhereUniqueInput = {
     id?: number
+  }
+
+  export type basket_line_item_recommended_pricesOrderByWithAggregationInput = {
+    id?: SortOrder
+    recommended_price?: SortOrder
+    basket_line_item_id?: SortOrder
+    price_recommendation_id?: SortOrder
+    _count?: basket_line_item_recommended_pricesCountOrderByAggregateInput
+    _avg?: basket_line_item_recommended_pricesAvgOrderByAggregateInput
+    _max?: basket_line_item_recommended_pricesMaxOrderByAggregateInput
+    _min?: basket_line_item_recommended_pricesMinOrderByAggregateInput
+    _sum?: basket_line_item_recommended_pricesSumOrderByAggregateInput
   }
 
   export type basket_line_item_recommended_pricesScalarWhereWithAggregatesInput = {
@@ -16538,7 +16718,7 @@ export namespace Prisma {
     basket_line_item_recommended_prices?: Basket_line_item_recommended_pricesListRelationFilter
   }
 
-  export type basket_line_itemsOrderByInput = {
+  export type basket_line_itemsOrderByWithRelationInput = {
     id?: SortOrder
     quantity?: SortOrder
     basket_id?: SortOrder
@@ -16548,10 +16728,29 @@ export namespace Prisma {
     competitor_indexes?: SortOrder
     competitor_prices?: SortOrder
     goodfood_price?: SortOrder
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsOrderByRelationAggregateInput
+    basket_line_item_recommended_prices?: basket_line_item_recommended_pricesOrderByRelationAggregateInput
   }
 
   export type basket_line_itemsWhereUniqueInput = {
     id?: number
+  }
+
+  export type basket_line_itemsOrderByWithAggregationInput = {
+    id?: SortOrder
+    quantity?: SortOrder
+    basket_id?: SortOrder
+    product_sku?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    competitor_indexes?: SortOrder
+    competitor_prices?: SortOrder
+    goodfood_price?: SortOrder
+    _count?: basket_line_itemsCountOrderByAggregateInput
+    _avg?: basket_line_itemsAvgOrderByAggregateInput
+    _max?: basket_line_itemsMaxOrderByAggregateInput
+    _min?: basket_line_itemsMinOrderByAggregateInput
+    _sum?: basket_line_itemsSumOrderByAggregateInput
   }
 
   export type basket_line_itemsScalarWhereWithAggregatesInput = {
@@ -16586,7 +16785,7 @@ export namespace Prisma {
     regions?: XOR<RegionsRelationFilter, regionsWhereInput>
   }
 
-  export type basketsOrderByInput = {
+  export type basketsOrderByWithRelationInput = {
     id?: SortOrder
     goodfood_id?: SortOrder
     delivery_date?: SortOrder
@@ -16596,10 +16795,29 @@ export namespace Prisma {
     updated_at?: SortOrder
     region_id?: SortOrder
     basket_daily_total_id?: SortOrder
+    basket_daily_totals?: basket_daily_totalsOrderByWithRelationInput
+    regions?: regionsOrderByWithRelationInput
   }
 
   export type basketsWhereUniqueInput = {
     id?: number
+  }
+
+  export type basketsOrderByWithAggregationInput = {
+    id?: SortOrder
+    goodfood_id?: SortOrder
+    delivery_date?: SortOrder
+    basket_totals?: SortOrder
+    basket_indexes?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    region_id?: SortOrder
+    basket_daily_total_id?: SortOrder
+    _count?: basketsCountOrderByAggregateInput
+    _avg?: basketsAvgOrderByAggregateInput
+    _max?: basketsMaxOrderByAggregateInput
+    _min?: basketsMinOrderByAggregateInput
+    _sum?: basketsSumOrderByAggregateInput
   }
 
   export type basketsScalarWhereWithAggregatesInput = {
@@ -16629,14 +16847,28 @@ export namespace Prisma {
     scaled_prices?: Scaled_pricesListRelationFilter
   }
 
-  export type competitorsOrderByInput = {
+  export type competitorsOrderByWithRelationInput = {
     id?: SortOrder
     slug?: SortOrder
     display_text?: SortOrder
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsOrderByRelationAggregateInput
+    product_region_competitor_urls?: product_region_competitor_urlsOrderByRelationAggregateInput
+    scaled_prices?: scaled_pricesOrderByRelationAggregateInput
   }
 
   export type competitorsWhereUniqueInput = {
     id?: number
+  }
+
+  export type competitorsOrderByWithAggregationInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    display_text?: SortOrder
+    _count?: competitorsCountOrderByAggregateInput
+    _avg?: competitorsAvgOrderByAggregateInput
+    _max?: competitorsMaxOrderByAggregateInput
+    _min?: competitorsMinOrderByAggregateInput
+    _sum?: competitorsSumOrderByAggregateInput
   }
 
   export type competitorsScalarWhereWithAggregatesInput = {
@@ -16657,7 +16889,7 @@ export namespace Prisma {
     name?: StringFilter | string
   }
 
-  export type migrationsOrderByInput = {
+  export type migrationsOrderByWithRelationInput = {
     id?: SortOrder
     timestamp?: SortOrder
     name?: SortOrder
@@ -16665,6 +16897,17 @@ export namespace Prisma {
 
   export type migrationsWhereUniqueInput = {
     id?: number
+  }
+
+  export type migrationsOrderByWithAggregationInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    name?: SortOrder
+    _count?: migrationsCountOrderByAggregateInput
+    _avg?: migrationsAvgOrderByAggregateInput
+    _max?: migrationsMaxOrderByAggregateInput
+    _min?: migrationsMinOrderByAggregateInput
+    _sum?: migrationsSumOrderByAggregateInput
   }
 
   export type migrationsScalarWhereWithAggregatesInput = {
@@ -16691,7 +16934,7 @@ export namespace Prisma {
     regions?: XOR<RegionsRelationFilter, regionsWhereInput>
   }
 
-  export type price_recommendationsOrderByInput = {
+  export type price_recommendationsOrderByWithRelationInput = {
     id?: SortOrder
     product_id?: SortOrder
     region_id?: SortOrder
@@ -16699,10 +16942,27 @@ export namespace Prisma {
     list_price?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    products?: productsOrderByWithRelationInput
+    regions?: regionsOrderByWithRelationInput
   }
 
   export type price_recommendationsWhereUniqueInput = {
     id?: number
+  }
+
+  export type price_recommendationsOrderByWithAggregationInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    region_id?: SortOrder
+    sale_price?: SortOrder
+    list_price?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: price_recommendationsCountOrderByAggregateInput
+    _avg?: price_recommendationsAvgOrderByAggregateInput
+    _max?: price_recommendationsMaxOrderByAggregateInput
+    _min?: price_recommendationsMinOrderByAggregateInput
+    _sum?: price_recommendationsSumOrderByAggregateInput
   }
 
   export type price_recommendationsScalarWhereWithAggregatesInput = {
@@ -16736,7 +16996,7 @@ export namespace Prisma {
     product_region_competitor_urls_former_urls?: Product_region_competitor_urls_former_urlsListRelationFilter
   }
 
-  export type product_region_competitor_urlsOrderByInput = {
+  export type product_region_competitor_urlsOrderByWithRelationInput = {
     id?: SortOrder
     product_id?: SortOrder
     region_id?: SortOrder
@@ -16745,11 +17005,31 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     deleted_at?: SortOrder
+    competitors?: competitorsOrderByWithRelationInput
+    products?: productsOrderByWithRelationInput
+    regions?: regionsOrderByWithRelationInput
+    product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsOrderByRelationAggregateInput
   }
 
   export type product_region_competitor_urlsWhereUniqueInput = {
     id?: number
     competitor_product_region_unique?: product_region_competitor_urlsCompetitor_product_region_uniqueCompoundUniqueInput
+  }
+
+  export type product_region_competitor_urlsOrderByWithAggregationInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    region_id?: SortOrder
+    competitor_id?: SortOrder
+    url?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+    _count?: product_region_competitor_urlsCountOrderByAggregateInput
+    _avg?: product_region_competitor_urlsAvgOrderByAggregateInput
+    _max?: product_region_competitor_urlsMaxOrderByAggregateInput
+    _min?: product_region_competitor_urlsMinOrderByAggregateInput
+    _sum?: product_region_competitor_urlsSumOrderByAggregateInput
   }
 
   export type product_region_competitor_urlsScalarWhereWithAggregatesInput = {
@@ -16778,16 +17058,30 @@ export namespace Prisma {
     product_region_competitor_urls?: XOR<Product_region_competitor_urlsRelationFilter, product_region_competitor_urlsWhereInput>
   }
 
-  export type product_region_competitor_urls_former_urlsOrderByInput = {
+  export type product_region_competitor_urls_former_urlsOrderByWithRelationInput = {
     product_region_competitor_url_id?: SortOrder
     old_url?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     id?: SortOrder
+    product_region_competitor_urls?: product_region_competitor_urlsOrderByWithRelationInput
   }
 
   export type product_region_competitor_urls_former_urlsWhereUniqueInput = {
     id?: number
+  }
+
+  export type product_region_competitor_urls_former_urlsOrderByWithAggregationInput = {
+    product_region_competitor_url_id?: SortOrder
+    old_url?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    id?: SortOrder
+    _count?: product_region_competitor_urls_former_urlsCountOrderByAggregateInput
+    _avg?: product_region_competitor_urls_former_urlsAvgOrderByAggregateInput
+    _max?: product_region_competitor_urls_former_urlsMaxOrderByAggregateInput
+    _min?: product_region_competitor_urls_former_urlsMinOrderByAggregateInput
+    _sum?: product_region_competitor_urls_former_urlsSumOrderByAggregateInput
   }
 
   export type product_region_competitor_urls_former_urlsScalarWhereWithAggregatesInput = {
@@ -16818,7 +17112,7 @@ export namespace Prisma {
     regions?: XOR<RegionsRelationFilter, regionsWhereInput>
   }
 
-  export type product_region_price_dataOrderByInput = {
+  export type product_region_price_dataOrderByWithRelationInput = {
     id?: SortOrder
     product_id?: SortOrder
     region_id?: SortOrder
@@ -16828,11 +17122,30 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     deleted_at?: SortOrder
+    products?: productsOrderByWithRelationInput
+    regions?: regionsOrderByWithRelationInput
   }
 
   export type product_region_price_dataWhereUniqueInput = {
     id?: number
     price_date_product_region_unique?: product_region_price_dataPrice_date_product_region_uniqueCompoundUniqueInput
+  }
+
+  export type product_region_price_dataOrderByWithAggregationInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    region_id?: SortOrder
+    price?: SortOrder
+    discount?: SortOrder
+    threshold_price?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+    _count?: product_region_price_dataCountOrderByAggregateInput
+    _avg?: product_region_price_dataAvgOrderByAggregateInput
+    _max?: product_region_price_dataMaxOrderByAggregateInput
+    _min?: product_region_price_dataMinOrderByAggregateInput
+    _sum?: product_region_price_dataSumOrderByAggregateInput
   }
 
   export type product_region_price_dataScalarWhereWithAggregatesInput = {
@@ -16871,7 +17184,7 @@ export namespace Prisma {
     scaled_prices?: Scaled_pricesListRelationFilter
   }
 
-  export type productsOrderByInput = {
+  export type productsOrderByWithRelationInput = {
     id?: SortOrder
     sku?: SortOrder
     name?: SortOrder
@@ -16882,11 +17195,34 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     deleted_at?: SortOrder
+    units?: unitsOrderByWithRelationInput
+    price_recommendations?: price_recommendationsOrderByRelationAggregateInput
+    product_region_competitor_urls?: product_region_competitor_urlsOrderByRelationAggregateInput
+    product_region_price_data?: product_region_price_dataOrderByRelationAggregateInput
+    scaled_prices?: scaled_pricesOrderByRelationAggregateInput
   }
 
   export type productsWhereUniqueInput = {
     id?: number
     sku?: string
+  }
+
+  export type productsOrderByWithAggregationInput = {
+    id?: SortOrder
+    sku?: SortOrder
+    name?: SortOrder
+    package_quantity?: SortOrder
+    package_units?: SortOrder
+    package_weight?: SortOrder
+    weight_unit_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+    _count?: productsCountOrderByAggregateInput
+    _avg?: productsAvgOrderByAggregateInput
+    _max?: productsMaxOrderByAggregateInput
+    _min?: productsMinOrderByAggregateInput
+    _sum?: productsSumOrderByAggregateInput
   }
 
   export type productsScalarWhereWithAggregatesInput = {
@@ -16926,7 +17262,7 @@ export namespace Prisma {
     scaled_prices?: Scaled_pricesListRelationFilter
   }
 
-  export type regionsOrderByInput = {
+  export type regionsOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     facility?: SortOrder
@@ -16937,10 +17273,33 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     deleted_at?: SortOrder
+    baskets?: basketsOrderByRelationAggregateInput
+    price_recommendations?: price_recommendationsOrderByRelationAggregateInput
+    product_region_competitor_urls?: product_region_competitor_urlsOrderByRelationAggregateInput
+    product_region_price_data?: product_region_price_dataOrderByRelationAggregateInput
+    scaled_prices?: scaled_pricesOrderByRelationAggregateInput
   }
 
   export type regionsWhereUniqueInput = {
     id?: number
+  }
+
+  export type regionsOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    facility?: SortOrder
+    city?: SortOrder
+    province?: SortOrder
+    postal_code?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+    _count?: regionsCountOrderByAggregateInput
+    _avg?: regionsAvgOrderByAggregateInput
+    _max?: regionsMaxOrderByAggregateInput
+    _min?: regionsMinOrderByAggregateInput
+    _sum?: regionsSumOrderByAggregateInput
   }
 
   export type regionsScalarWhereWithAggregatesInput = {
@@ -16978,7 +17337,7 @@ export namespace Prisma {
     scrape_results?: XOR<Scrape_resultsRelationFilter, scrape_resultsWhereInput>
   }
 
-  export type scaled_pricesOrderByInput = {
+  export type scaled_pricesOrderByWithRelationInput = {
     id?: SortOrder
     product_id?: SortOrder
     competitor_id?: SortOrder
@@ -16988,10 +17347,31 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     deleted_at?: SortOrder
+    competitors?: competitorsOrderByWithRelationInput
+    products?: productsOrderByWithRelationInput
+    regions?: regionsOrderByWithRelationInput
+    scrape_results?: scrape_resultsOrderByWithRelationInput
   }
 
   export type scaled_pricesWhereUniqueInput = {
     id?: number
+  }
+
+  export type scaled_pricesOrderByWithAggregationInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    competitor_id?: SortOrder
+    region_id?: SortOrder
+    scrape_result_id?: SortOrder
+    competitor_scaled_price?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+    _count?: scaled_pricesCountOrderByAggregateInput
+    _avg?: scaled_pricesAvgOrderByAggregateInput
+    _max?: scaled_pricesMaxOrderByAggregateInput
+    _min?: scaled_pricesMinOrderByAggregateInput
+    _sum?: scaled_pricesSumOrderByAggregateInput
   }
 
   export type scaled_pricesScalarWhereWithAggregatesInput = {
@@ -17028,7 +17408,7 @@ export namespace Prisma {
     scaled_prices?: Scaled_pricesListRelationFilter
   }
 
-  export type scrape_resultsOrderByInput = {
+  export type scrape_resultsOrderByWithRelationInput = {
     id?: SortOrder
     competitor_sale_price?: SortOrder
     competitor_list_price?: SortOrder
@@ -17040,10 +17420,31 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     deleted_at?: SortOrder
+    units?: unitsOrderByWithRelationInput
+    scaled_prices?: scaled_pricesOrderByRelationAggregateInput
   }
 
   export type scrape_resultsWhereUniqueInput = {
     id?: number
+  }
+
+  export type scrape_resultsOrderByWithAggregationInput = {
+    id?: SortOrder
+    competitor_sale_price?: SortOrder
+    competitor_list_price?: SortOrder
+    competitor_sold_by_volume?: SortOrder
+    competitor_sold_by_unit_id?: SortOrder
+    promotional_info?: SortOrder
+    data_source?: SortOrder
+    scrape_time?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+    _count?: scrape_resultsCountOrderByAggregateInput
+    _avg?: scrape_resultsAvgOrderByAggregateInput
+    _max?: scrape_resultsMaxOrderByAggregateInput
+    _min?: scrape_resultsMinOrderByAggregateInput
+    _sum?: scrape_resultsSumOrderByAggregateInput
   }
 
   export type scrape_resultsScalarWhereWithAggregatesInput = {
@@ -17078,16 +17479,33 @@ export namespace Prisma {
     other_units?: UnitsListRelationFilter
   }
 
-  export type unitsOrderByInput = {
+  export type unitsOrderByWithRelationInput = {
     id?: SortOrder
     slug?: SortOrder
     display_text?: SortOrder
     base_unit_id?: SortOrder
     scale_of_base_unit?: SortOrder
+    units?: unitsOrderByWithRelationInput
+    products?: productsOrderByRelationAggregateInput
+    scrape_results?: scrape_resultsOrderByRelationAggregateInput
+    other_units?: unitsOrderByRelationAggregateInput
   }
 
   export type unitsWhereUniqueInput = {
     id?: number
+  }
+
+  export type unitsOrderByWithAggregationInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    display_text?: SortOrder
+    base_unit_id?: SortOrder
+    scale_of_base_unit?: SortOrder
+    _count?: unitsCountOrderByAggregateInput
+    _avg?: unitsAvgOrderByAggregateInput
+    _max?: unitsMaxOrderByAggregateInput
+    _min?: unitsMinOrderByAggregateInput
+    _sum?: unitsSumOrderByAggregateInput
   }
 
   export type unitsScalarWhereWithAggregatesInput = {
@@ -17103,8 +17521,8 @@ export namespace Prisma {
 
   export type basket_daily_totalsCreateInput = {
     delivery_date: Date | string
-    daily_totals: InputJsonValue
-    daily_indexes: InputJsonValue
+    daily_totals: JsonNullValueInput | InputJsonValue
+    daily_indexes: JsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
     baskets?: basketsCreateNestedManyWithoutBasket_daily_totalsInput
@@ -17113,8 +17531,8 @@ export namespace Prisma {
   export type basket_daily_totalsUncheckedCreateInput = {
     id?: number
     delivery_date: Date | string
-    daily_totals: InputJsonValue
-    daily_indexes: InputJsonValue
+    daily_totals: JsonNullValueInput | InputJsonValue
+    daily_indexes: JsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
     baskets?: basketsUncheckedCreateNestedManyWithoutBasket_daily_totalsInput
@@ -17122,8 +17540,8 @@ export namespace Prisma {
 
   export type basket_daily_totalsUpdateInput = {
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    daily_totals?: InputJsonValue
-    daily_indexes?: InputJsonValue
+    daily_totals?: JsonNullValueInput | InputJsonValue
+    daily_indexes?: JsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     baskets?: basketsUpdateManyWithoutBasket_daily_totalsInput
@@ -17132,8 +17550,8 @@ export namespace Prisma {
   export type basket_daily_totalsUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    daily_totals?: InputJsonValue
-    daily_indexes?: InputJsonValue
+    daily_totals?: JsonNullValueInput | InputJsonValue
+    daily_indexes?: JsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     baskets?: basketsUncheckedUpdateManyWithoutBasket_daily_totalsInput
@@ -17142,16 +17560,16 @@ export namespace Prisma {
   export type basket_daily_totalsCreateManyInput = {
     id?: number
     delivery_date: Date | string
-    daily_totals: InputJsonValue
-    daily_indexes: InputJsonValue
+    daily_totals: JsonNullValueInput | InputJsonValue
+    daily_indexes: JsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
   }
 
   export type basket_daily_totalsUpdateManyMutationInput = {
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    daily_totals?: InputJsonValue
-    daily_indexes?: InputJsonValue
+    daily_totals?: JsonNullValueInput | InputJsonValue
+    daily_indexes?: JsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -17159,8 +17577,8 @@ export namespace Prisma {
   export type basket_daily_totalsUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    daily_totals?: InputJsonValue
-    daily_indexes?: InputJsonValue
+    daily_totals?: JsonNullValueInput | InputJsonValue
+    daily_indexes?: JsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -17274,8 +17692,8 @@ export namespace Prisma {
     product_sku: string
     created_at?: Date | string
     updated_at?: Date | string | null
-    competitor_indexes?: InputJsonValue | null
-    competitor_prices?: InputJsonValue | null
+    competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
+    competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price: number
     basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsCreateNestedManyWithoutBasket_line_itemsInput
     basket_line_item_recommended_prices?: basket_line_item_recommended_pricesCreateNestedManyWithoutBasket_line_itemsInput
@@ -17288,8 +17706,8 @@ export namespace Prisma {
     product_sku: string
     created_at?: Date | string
     updated_at?: Date | string | null
-    competitor_indexes?: InputJsonValue | null
-    competitor_prices?: InputJsonValue | null
+    competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
+    competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price: number
     basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedCreateNestedManyWithoutBasket_line_itemsInput
     basket_line_item_recommended_prices?: basket_line_item_recommended_pricesUncheckedCreateNestedManyWithoutBasket_line_itemsInput
@@ -17301,8 +17719,8 @@ export namespace Prisma {
     product_sku?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitor_indexes?: InputJsonValue | null
-    competitor_prices?: InputJsonValue | null
+    competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
+    competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price?: FloatFieldUpdateOperationsInput | number
     basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUpdateManyWithoutBasket_line_itemsInput
     basket_line_item_recommended_prices?: basket_line_item_recommended_pricesUpdateManyWithoutBasket_line_itemsInput
@@ -17315,8 +17733,8 @@ export namespace Prisma {
     product_sku?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitor_indexes?: InputJsonValue | null
-    competitor_prices?: InputJsonValue | null
+    competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
+    competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price?: FloatFieldUpdateOperationsInput | number
     basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutBasket_line_itemsInput
     basket_line_item_recommended_prices?: basket_line_item_recommended_pricesUncheckedUpdateManyWithoutBasket_line_itemsInput
@@ -17329,8 +17747,8 @@ export namespace Prisma {
     product_sku: string
     created_at?: Date | string
     updated_at?: Date | string | null
-    competitor_indexes?: InputJsonValue | null
-    competitor_prices?: InputJsonValue | null
+    competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
+    competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price: number
   }
 
@@ -17340,8 +17758,8 @@ export namespace Prisma {
     product_sku?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitor_indexes?: InputJsonValue | null
-    competitor_prices?: InputJsonValue | null
+    competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
+    competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price?: FloatFieldUpdateOperationsInput | number
   }
 
@@ -17352,16 +17770,16 @@ export namespace Prisma {
     product_sku?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitor_indexes?: InputJsonValue | null
-    competitor_prices?: InputJsonValue | null
+    competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
+    competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price?: FloatFieldUpdateOperationsInput | number
   }
 
   export type basketsCreateInput = {
     goodfood_id: number
     delivery_date: Date | string
-    basket_totals?: InputJsonValue | null
-    basket_indexes?: InputJsonValue | null
+    basket_totals?: NullableJsonNullValueInput | InputJsonValue
+    basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
     basket_daily_totals: basket_daily_totalsCreateNestedOneWithoutBasketsInput
@@ -17372,8 +17790,8 @@ export namespace Prisma {
     id?: number
     goodfood_id: number
     delivery_date: Date | string
-    basket_totals?: InputJsonValue | null
-    basket_indexes?: InputJsonValue | null
+    basket_totals?: NullableJsonNullValueInput | InputJsonValue
+    basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
     region_id: number
@@ -17383,8 +17801,8 @@ export namespace Prisma {
   export type basketsUpdateInput = {
     goodfood_id?: IntFieldUpdateOperationsInput | number
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    basket_totals?: InputJsonValue | null
-    basket_indexes?: InputJsonValue | null
+    basket_totals?: NullableJsonNullValueInput | InputJsonValue
+    basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     basket_daily_totals?: basket_daily_totalsUpdateOneRequiredWithoutBasketsInput
@@ -17395,8 +17813,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     goodfood_id?: IntFieldUpdateOperationsInput | number
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    basket_totals?: InputJsonValue | null
-    basket_indexes?: InputJsonValue | null
+    basket_totals?: NullableJsonNullValueInput | InputJsonValue
+    basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     region_id?: IntFieldUpdateOperationsInput | number
@@ -17407,8 +17825,8 @@ export namespace Prisma {
     id?: number
     goodfood_id: number
     delivery_date: Date | string
-    basket_totals?: InputJsonValue | null
-    basket_indexes?: InputJsonValue | null
+    basket_totals?: NullableJsonNullValueInput | InputJsonValue
+    basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
     region_id: number
@@ -17418,8 +17836,8 @@ export namespace Prisma {
   export type basketsUpdateManyMutationInput = {
     goodfood_id?: IntFieldUpdateOperationsInput | number
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    basket_totals?: InputJsonValue | null
-    basket_indexes?: InputJsonValue | null
+    basket_totals?: NullableJsonNullValueInput | InputJsonValue
+    basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -17428,8 +17846,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     goodfood_id?: IntFieldUpdateOperationsInput | number
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    basket_totals?: InputJsonValue | null
-    basket_indexes?: InputJsonValue | null
+    basket_totals?: NullableJsonNullValueInput | InputJsonValue
+    basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     region_id?: IntFieldUpdateOperationsInput | number
@@ -18276,8 +18694,8 @@ export namespace Prisma {
     | OptionalFlat<Omit<Required<JsonFilterBase>, 'path'>>
 
   export type JsonFilterBase = {
-    equals?: InputJsonValue
-    not?: InputJsonValue
+    equals?: JsonNullValueFilter | InputJsonValue
+    not?: JsonNullValueFilter | InputJsonValue
   }
 
   export type DateTimeNullableFilter = {
@@ -18297,6 +18715,41 @@ export namespace Prisma {
     none?: basketsWhereInput
   }
 
+  export type basketsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type basket_daily_totalsCountOrderByAggregateInput = {
+    id?: SortOrder
+    delivery_date?: SortOrder
+    daily_totals?: SortOrder
+    daily_indexes?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type basket_daily_totalsAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type basket_daily_totalsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    delivery_date?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type basket_daily_totalsMinOrderByAggregateInput = {
+    id?: SortOrder
+    delivery_date?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type basket_daily_totalsSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
   export type IntWithAggregatesFilter = {
     equals?: number
     in?: Enumerable<number>
@@ -18307,35 +18760,10 @@ export namespace Prisma {
     gte?: number
     not?: NestedIntWithAggregatesFilter | number
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _avg?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedFloatFilter
     _sum?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedIntFilter
     _min?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedIntFilter
     _max?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedIntFilter
   }
 
   export type DateTimeWithAggregatesFilter = {
@@ -18348,23 +18776,8 @@ export namespace Prisma {
     gte?: Date | string
     not?: NestedDateTimeWithAggregatesFilter | Date | string
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _min?: NestedDateTimeFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedDateTimeFilter
     _max?: NestedDateTimeFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedDateTimeFilter
   }
   export type JsonWithAggregatesFilter = 
     | PatchUndefined<
@@ -18374,26 +18787,11 @@ export namespace Prisma {
     | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase>, 'path'>>
 
   export type JsonWithAggregatesFilterBase = {
-    equals?: InputJsonValue
-    not?: InputJsonValue
+    equals?: JsonNullValueFilter | InputJsonValue
+    not?: JsonNullValueFilter | InputJsonValue
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _min?: NestedJsonFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedJsonFilter
     _max?: NestedJsonFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedJsonFilter
   }
 
   export type DateTimeNullableWithAggregatesFilter = {
@@ -18406,23 +18804,8 @@ export namespace Prisma {
     gte?: Date | string
     not?: NestedDateTimeNullableWithAggregatesFilter | Date | string | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _min?: NestedDateTimeNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedDateTimeNullableFilter
     _max?: NestedDateTimeNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedDateTimeNullableFilter
   }
 
   export type FloatNullableFilter = {
@@ -18446,6 +18829,47 @@ export namespace Prisma {
     isNot?: competitorsWhereInput
   }
 
+  export type basket_line_item_competitor_equivalentsCountOrderByAggregateInput = {
+    id?: SortOrder
+    competitor_price?: SortOrder
+    basket_line_item_id?: SortOrder
+    competitor_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type basket_line_item_competitor_equivalentsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    competitor_price?: SortOrder
+    basket_line_item_id?: SortOrder
+    competitor_id?: SortOrder
+  }
+
+  export type basket_line_item_competitor_equivalentsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    competitor_price?: SortOrder
+    basket_line_item_id?: SortOrder
+    competitor_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type basket_line_item_competitor_equivalentsMinOrderByAggregateInput = {
+    id?: SortOrder
+    competitor_price?: SortOrder
+    basket_line_item_id?: SortOrder
+    competitor_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type basket_line_item_competitor_equivalentsSumOrderByAggregateInput = {
+    id?: SortOrder
+    competitor_price?: SortOrder
+    basket_line_item_id?: SortOrder
+    competitor_id?: SortOrder
+  }
+
   export type FloatNullableWithAggregatesFilter = {
     equals?: number | null
     in?: Enumerable<number> | null
@@ -18456,35 +18880,10 @@ export namespace Prisma {
     gte?: number
     not?: NestedFloatNullableWithAggregatesFilter | number | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _avg?: NestedFloatNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedFloatNullableFilter
     _sum?: NestedFloatNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedFloatNullableFilter
     _min?: NestedFloatNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedFloatNullableFilter
     _max?: NestedFloatNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedFloatNullableFilter
   }
 
   export type FloatFilter = {
@@ -18509,6 +18908,41 @@ export namespace Prisma {
     not?: NestedIntNullableFilter | number | null
   }
 
+  export type basket_line_item_recommended_pricesCountOrderByAggregateInput = {
+    id?: SortOrder
+    recommended_price?: SortOrder
+    basket_line_item_id?: SortOrder
+    price_recommendation_id?: SortOrder
+  }
+
+  export type basket_line_item_recommended_pricesAvgOrderByAggregateInput = {
+    id?: SortOrder
+    recommended_price?: SortOrder
+    basket_line_item_id?: SortOrder
+    price_recommendation_id?: SortOrder
+  }
+
+  export type basket_line_item_recommended_pricesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    recommended_price?: SortOrder
+    basket_line_item_id?: SortOrder
+    price_recommendation_id?: SortOrder
+  }
+
+  export type basket_line_item_recommended_pricesMinOrderByAggregateInput = {
+    id?: SortOrder
+    recommended_price?: SortOrder
+    basket_line_item_id?: SortOrder
+    price_recommendation_id?: SortOrder
+  }
+
+  export type basket_line_item_recommended_pricesSumOrderByAggregateInput = {
+    id?: SortOrder
+    recommended_price?: SortOrder
+    basket_line_item_id?: SortOrder
+    price_recommendation_id?: SortOrder
+  }
+
   export type FloatWithAggregatesFilter = {
     equals?: number
     in?: Enumerable<number>
@@ -18519,35 +18953,10 @@ export namespace Prisma {
     gte?: number
     not?: NestedFloatWithAggregatesFilter | number
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _avg?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedFloatFilter
     _sum?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedFloatFilter
     _min?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedFloatFilter
     _max?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedFloatFilter
   }
 
   export type IntNullableWithAggregatesFilter = {
@@ -18560,35 +18969,10 @@ export namespace Prisma {
     gte?: number
     not?: NestedIntNullableWithAggregatesFilter | number | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _avg?: NestedFloatNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedFloatNullableFilter
     _sum?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedIntNullableFilter
     _min?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedIntNullableFilter
     _max?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedIntNullableFilter
   }
 
   export type StringFilter = {
@@ -18612,8 +18996,8 @@ export namespace Prisma {
     | OptionalFlat<Omit<Required<JsonNullableFilterBase>, 'path'>>
 
   export type JsonNullableFilterBase = {
-    equals?: InputJsonValue | null
-    not?: InputJsonValue | null
+    equals?: JsonNullValueFilter | InputJsonValue
+    not?: JsonNullValueFilter | InputJsonValue
   }
 
   export type Basket_line_item_competitor_equivalentsListRelationFilter = {
@@ -18626,6 +19010,60 @@ export namespace Prisma {
     every?: basket_line_item_recommended_pricesWhereInput
     some?: basket_line_item_recommended_pricesWhereInput
     none?: basket_line_item_recommended_pricesWhereInput
+  }
+
+  export type basket_line_item_competitor_equivalentsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type basket_line_item_recommended_pricesOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type basket_line_itemsCountOrderByAggregateInput = {
+    id?: SortOrder
+    quantity?: SortOrder
+    basket_id?: SortOrder
+    product_sku?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    competitor_indexes?: SortOrder
+    competitor_prices?: SortOrder
+    goodfood_price?: SortOrder
+  }
+
+  export type basket_line_itemsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    quantity?: SortOrder
+    basket_id?: SortOrder
+    goodfood_price?: SortOrder
+  }
+
+  export type basket_line_itemsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    quantity?: SortOrder
+    basket_id?: SortOrder
+    product_sku?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    goodfood_price?: SortOrder
+  }
+
+  export type basket_line_itemsMinOrderByAggregateInput = {
+    id?: SortOrder
+    quantity?: SortOrder
+    basket_id?: SortOrder
+    product_sku?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    goodfood_price?: SortOrder
+  }
+
+  export type basket_line_itemsSumOrderByAggregateInput = {
+    id?: SortOrder
+    quantity?: SortOrder
+    basket_id?: SortOrder
+    goodfood_price?: SortOrder
   }
 
   export type StringWithAggregatesFilter = {
@@ -18641,23 +19079,8 @@ export namespace Prisma {
     endsWith?: string
     not?: NestedStringWithAggregatesFilter | string
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _min?: NestedStringFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedStringFilter
     _max?: NestedStringFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedStringFilter
   }
   export type JsonNullableWithAggregatesFilter = 
     | PatchUndefined<
@@ -18667,26 +19090,11 @@ export namespace Prisma {
     | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase>, 'path'>>
 
   export type JsonNullableWithAggregatesFilterBase = {
-    equals?: InputJsonValue | null
-    not?: InputJsonValue | null
+    equals?: JsonNullValueFilter | InputJsonValue
+    not?: JsonNullValueFilter | InputJsonValue
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _min?: NestedJsonNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedJsonNullableFilter
     _max?: NestedJsonNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedJsonNullableFilter
   }
 
   export type Basket_daily_totalsRelationFilter = {
@@ -18697,6 +19105,52 @@ export namespace Prisma {
   export type RegionsRelationFilter = {
     is?: regionsWhereInput
     isNot?: regionsWhereInput
+  }
+
+  export type basketsCountOrderByAggregateInput = {
+    id?: SortOrder
+    goodfood_id?: SortOrder
+    delivery_date?: SortOrder
+    basket_totals?: SortOrder
+    basket_indexes?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    region_id?: SortOrder
+    basket_daily_total_id?: SortOrder
+  }
+
+  export type basketsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    goodfood_id?: SortOrder
+    region_id?: SortOrder
+    basket_daily_total_id?: SortOrder
+  }
+
+  export type basketsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    goodfood_id?: SortOrder
+    delivery_date?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    region_id?: SortOrder
+    basket_daily_total_id?: SortOrder
+  }
+
+  export type basketsMinOrderByAggregateInput = {
+    id?: SortOrder
+    goodfood_id?: SortOrder
+    delivery_date?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    region_id?: SortOrder
+    basket_daily_total_id?: SortOrder
+  }
+
+  export type basketsSumOrderByAggregateInput = {
+    id?: SortOrder
+    goodfood_id?: SortOrder
+    region_id?: SortOrder
+    basket_daily_total_id?: SortOrder
   }
 
   export type Product_region_competitor_urlsListRelationFilter = {
@@ -18711,6 +19165,40 @@ export namespace Prisma {
     none?: scaled_pricesWhereInput
   }
 
+  export type product_region_competitor_urlsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type scaled_pricesOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type competitorsCountOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    display_text?: SortOrder
+  }
+
+  export type competitorsAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type competitorsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    display_text?: SortOrder
+  }
+
+  export type competitorsMinOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    display_text?: SortOrder
+  }
+
+  export type competitorsSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
   export type BigIntFilter = {
     equals?: bigint | number
     in?: Enumerable<bigint> | Enumerable<number>
@@ -18720,6 +19208,34 @@ export namespace Prisma {
     gt?: bigint | number
     gte?: bigint | number
     not?: NestedBigIntFilter | bigint | number
+  }
+
+  export type migrationsCountOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    name?: SortOrder
+  }
+
+  export type migrationsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type migrationsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    name?: SortOrder
+  }
+
+  export type migrationsMinOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    name?: SortOrder
+  }
+
+  export type migrationsSumOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
   }
 
   export type BigIntWithAggregatesFilter = {
@@ -18732,40 +19248,61 @@ export namespace Prisma {
     gte?: bigint | number
     not?: NestedBigIntWithAggregatesFilter | bigint | number
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _avg?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedFloatFilter
     _sum?: NestedBigIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedBigIntFilter
     _min?: NestedBigIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedBigIntFilter
     _max?: NestedBigIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedBigIntFilter
   }
 
   export type ProductsRelationFilter = {
     is?: productsWhereInput
     isNot?: productsWhereInput
+  }
+
+  export type price_recommendationsCountOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    region_id?: SortOrder
+    sale_price?: SortOrder
+    list_price?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type price_recommendationsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    region_id?: SortOrder
+    sale_price?: SortOrder
+    list_price?: SortOrder
+  }
+
+  export type price_recommendationsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    region_id?: SortOrder
+    sale_price?: SortOrder
+    list_price?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type price_recommendationsMinOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    region_id?: SortOrder
+    sale_price?: SortOrder
+    list_price?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type price_recommendationsSumOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    region_id?: SortOrder
+    sale_price?: SortOrder
+    list_price?: SortOrder
   }
 
   export type Product_region_competitor_urls_former_urlsListRelationFilter = {
@@ -18774,10 +19311,61 @@ export namespace Prisma {
     none?: product_region_competitor_urls_former_urlsWhereInput
   }
 
+  export type product_region_competitor_urls_former_urlsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type product_region_competitor_urlsCompetitor_product_region_uniqueCompoundUniqueInput = {
     product_id: number
     competitor_id: number
     region_id: number
+  }
+
+  export type product_region_competitor_urlsCountOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    region_id?: SortOrder
+    competitor_id?: SortOrder
+    url?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type product_region_competitor_urlsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    region_id?: SortOrder
+    competitor_id?: SortOrder
+  }
+
+  export type product_region_competitor_urlsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    region_id?: SortOrder
+    competitor_id?: SortOrder
+    url?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type product_region_competitor_urlsMinOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    region_id?: SortOrder
+    competitor_id?: SortOrder
+    url?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type product_region_competitor_urlsSumOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    region_id?: SortOrder
+    competitor_id?: SortOrder
   }
 
   export type Product_region_competitor_urlsRelationFilter = {
@@ -18785,9 +19373,97 @@ export namespace Prisma {
     isNot?: product_region_competitor_urlsWhereInput
   }
 
+  export type product_region_competitor_urls_former_urlsCountOrderByAggregateInput = {
+    product_region_competitor_url_id?: SortOrder
+    old_url?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    id?: SortOrder
+  }
+
+  export type product_region_competitor_urls_former_urlsAvgOrderByAggregateInput = {
+    product_region_competitor_url_id?: SortOrder
+    id?: SortOrder
+  }
+
+  export type product_region_competitor_urls_former_urlsMaxOrderByAggregateInput = {
+    product_region_competitor_url_id?: SortOrder
+    old_url?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    id?: SortOrder
+  }
+
+  export type product_region_competitor_urls_former_urlsMinOrderByAggregateInput = {
+    product_region_competitor_url_id?: SortOrder
+    old_url?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    id?: SortOrder
+  }
+
+  export type product_region_competitor_urls_former_urlsSumOrderByAggregateInput = {
+    product_region_competitor_url_id?: SortOrder
+    id?: SortOrder
+  }
+
   export type product_region_price_dataPrice_date_product_region_uniqueCompoundUniqueInput = {
     product_id: number
     region_id: number
+  }
+
+  export type product_region_price_dataCountOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    region_id?: SortOrder
+    price?: SortOrder
+    discount?: SortOrder
+    threshold_price?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type product_region_price_dataAvgOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    region_id?: SortOrder
+    price?: SortOrder
+    discount?: SortOrder
+    threshold_price?: SortOrder
+  }
+
+  export type product_region_price_dataMaxOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    region_id?: SortOrder
+    price?: SortOrder
+    discount?: SortOrder
+    threshold_price?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type product_region_price_dataMinOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    region_id?: SortOrder
+    price?: SortOrder
+    discount?: SortOrder
+    threshold_price?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type product_region_price_dataSumOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    region_id?: SortOrder
+    price?: SortOrder
+    discount?: SortOrder
+    threshold_price?: SortOrder
   }
 
   export type StringNullableFilter = {
@@ -18821,6 +19497,67 @@ export namespace Prisma {
     none?: product_region_price_dataWhereInput
   }
 
+  export type price_recommendationsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type product_region_price_dataOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type productsCountOrderByAggregateInput = {
+    id?: SortOrder
+    sku?: SortOrder
+    name?: SortOrder
+    package_quantity?: SortOrder
+    package_units?: SortOrder
+    package_weight?: SortOrder
+    weight_unit_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type productsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    package_quantity?: SortOrder
+    package_weight?: SortOrder
+    weight_unit_id?: SortOrder
+  }
+
+  export type productsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    sku?: SortOrder
+    name?: SortOrder
+    package_quantity?: SortOrder
+    package_units?: SortOrder
+    package_weight?: SortOrder
+    weight_unit_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type productsMinOrderByAggregateInput = {
+    id?: SortOrder
+    sku?: SortOrder
+    name?: SortOrder
+    package_quantity?: SortOrder
+    package_units?: SortOrder
+    package_weight?: SortOrder
+    weight_unit_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type productsSumOrderByAggregateInput = {
+    id?: SortOrder
+    package_quantity?: SortOrder
+    package_weight?: SortOrder
+    weight_unit_id?: SortOrder
+  }
+
   export type StringNullableWithAggregatesFilter = {
     equals?: string | null
     in?: Enumerable<string> | null
@@ -18834,23 +19571,8 @@ export namespace Prisma {
     endsWith?: string
     not?: NestedStringNullableWithAggregatesFilter | string | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _min?: NestedStringNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedStringNullableFilter
     _max?: NestedStringNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedStringNullableFilter
   }
 
   export type BoolNullableFilter = {
@@ -18858,32 +19580,176 @@ export namespace Prisma {
     not?: NestedBoolNullableFilter | boolean | null
   }
 
+  export type regionsCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    facility?: SortOrder
+    city?: SortOrder
+    province?: SortOrder
+    postal_code?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type regionsAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type regionsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    facility?: SortOrder
+    city?: SortOrder
+    province?: SortOrder
+    postal_code?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type regionsMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    facility?: SortOrder
+    city?: SortOrder
+    province?: SortOrder
+    postal_code?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type regionsSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
   export type BoolNullableWithAggregatesFilter = {
     equals?: boolean | null
     not?: NestedBoolNullableWithAggregatesFilter | boolean | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _min?: NestedBoolNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedBoolNullableFilter
     _max?: NestedBoolNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedBoolNullableFilter
   }
 
   export type Scrape_resultsRelationFilter = {
     is?: scrape_resultsWhereInput
     isNot?: scrape_resultsWhereInput
+  }
+
+  export type scaled_pricesCountOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    competitor_id?: SortOrder
+    region_id?: SortOrder
+    scrape_result_id?: SortOrder
+    competitor_scaled_price?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type scaled_pricesAvgOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    competitor_id?: SortOrder
+    region_id?: SortOrder
+    scrape_result_id?: SortOrder
+    competitor_scaled_price?: SortOrder
+  }
+
+  export type scaled_pricesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    competitor_id?: SortOrder
+    region_id?: SortOrder
+    scrape_result_id?: SortOrder
+    competitor_scaled_price?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type scaled_pricesMinOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    competitor_id?: SortOrder
+    region_id?: SortOrder
+    scrape_result_id?: SortOrder
+    competitor_scaled_price?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type scaled_pricesSumOrderByAggregateInput = {
+    id?: SortOrder
+    product_id?: SortOrder
+    competitor_id?: SortOrder
+    region_id?: SortOrder
+    scrape_result_id?: SortOrder
+    competitor_scaled_price?: SortOrder
+  }
+
+  export type scrape_resultsCountOrderByAggregateInput = {
+    id?: SortOrder
+    competitor_sale_price?: SortOrder
+    competitor_list_price?: SortOrder
+    competitor_sold_by_volume?: SortOrder
+    competitor_sold_by_unit_id?: SortOrder
+    promotional_info?: SortOrder
+    data_source?: SortOrder
+    scrape_time?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type scrape_resultsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    competitor_sale_price?: SortOrder
+    competitor_list_price?: SortOrder
+    competitor_sold_by_volume?: SortOrder
+    competitor_sold_by_unit_id?: SortOrder
+  }
+
+  export type scrape_resultsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    competitor_sale_price?: SortOrder
+    competitor_list_price?: SortOrder
+    competitor_sold_by_volume?: SortOrder
+    competitor_sold_by_unit_id?: SortOrder
+    promotional_info?: SortOrder
+    data_source?: SortOrder
+    scrape_time?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type scrape_resultsMinOrderByAggregateInput = {
+    id?: SortOrder
+    competitor_sale_price?: SortOrder
+    competitor_list_price?: SortOrder
+    competitor_sold_by_volume?: SortOrder
+    competitor_sold_by_unit_id?: SortOrder
+    promotional_info?: SortOrder
+    data_source?: SortOrder
+    scrape_time?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type scrape_resultsSumOrderByAggregateInput = {
+    id?: SortOrder
+    competitor_sale_price?: SortOrder
+    competitor_list_price?: SortOrder
+    competitor_sold_by_volume?: SortOrder
+    competitor_sold_by_unit_id?: SortOrder
   }
 
   export type ProductsListRelationFilter = {
@@ -18902,6 +19768,54 @@ export namespace Prisma {
     every?: unitsWhereInput
     some?: unitsWhereInput
     none?: unitsWhereInput
+  }
+
+  export type productsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type scrape_resultsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type unitsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type unitsCountOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    display_text?: SortOrder
+    base_unit_id?: SortOrder
+    scale_of_base_unit?: SortOrder
+  }
+
+  export type unitsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    base_unit_id?: SortOrder
+    scale_of_base_unit?: SortOrder
+  }
+
+  export type unitsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    display_text?: SortOrder
+    base_unit_id?: SortOrder
+    scale_of_base_unit?: SortOrder
+  }
+
+  export type unitsMinOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    display_text?: SortOrder
+    base_unit_id?: SortOrder
+    scale_of_base_unit?: SortOrder
+  }
+
+  export type unitsSumOrderByAggregateInput = {
+    id?: SortOrder
+    base_unit_id?: SortOrder
+    scale_of_base_unit?: SortOrder
   }
 
   export type basketsCreateNestedManyWithoutBasket_daily_totalsInput = {
@@ -20127,35 +21041,10 @@ export namespace Prisma {
     gte?: number
     not?: NestedIntWithAggregatesFilter | number
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _avg?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedFloatFilter
     _sum?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedIntFilter
     _min?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedIntFilter
     _max?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedIntFilter
   }
 
   export type NestedFloatFilter = {
@@ -20179,23 +21068,8 @@ export namespace Prisma {
     gte?: Date | string
     not?: NestedDateTimeWithAggregatesFilter | Date | string
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _min?: NestedDateTimeFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedDateTimeFilter
     _max?: NestedDateTimeFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedDateTimeFilter
   }
   export type NestedJsonFilter = 
     | PatchUndefined<
@@ -20205,8 +21079,8 @@ export namespace Prisma {
     | OptionalFlat<Omit<Required<NestedJsonFilterBase>, 'path'>>
 
   export type NestedJsonFilterBase = {
-    equals?: InputJsonValue
-    not?: InputJsonValue
+    equals?: JsonNullValueFilter | InputJsonValue
+    not?: JsonNullValueFilter | InputJsonValue
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter = {
@@ -20219,23 +21093,8 @@ export namespace Prisma {
     gte?: Date | string
     not?: NestedDateTimeNullableWithAggregatesFilter | Date | string | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _min?: NestedDateTimeNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedDateTimeNullableFilter
     _max?: NestedDateTimeNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedDateTimeNullableFilter
   }
 
   export type NestedIntNullableFilter = {
@@ -20270,35 +21129,10 @@ export namespace Prisma {
     gte?: number
     not?: NestedFloatNullableWithAggregatesFilter | number | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _avg?: NestedFloatNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedFloatNullableFilter
     _sum?: NestedFloatNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedFloatNullableFilter
     _min?: NestedFloatNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedFloatNullableFilter
     _max?: NestedFloatNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedFloatNullableFilter
   }
 
   export type NestedFloatWithAggregatesFilter = {
@@ -20311,35 +21145,10 @@ export namespace Prisma {
     gte?: number
     not?: NestedFloatWithAggregatesFilter | number
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _avg?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedFloatFilter
     _sum?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedFloatFilter
     _min?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedFloatFilter
     _max?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedFloatFilter
   }
 
   export type NestedIntNullableWithAggregatesFilter = {
@@ -20352,35 +21161,10 @@ export namespace Prisma {
     gte?: number
     not?: NestedIntNullableWithAggregatesFilter | number | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _avg?: NestedFloatNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedFloatNullableFilter
     _sum?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedIntNullableFilter
     _min?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedIntNullableFilter
     _max?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedIntNullableFilter
   }
 
   export type NestedStringFilter = {
@@ -20410,23 +21194,8 @@ export namespace Prisma {
     endsWith?: string
     not?: NestedStringWithAggregatesFilter | string
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _min?: NestedStringFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedStringFilter
     _max?: NestedStringFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedStringFilter
   }
   export type NestedJsonNullableFilter = 
     | PatchUndefined<
@@ -20436,8 +21205,8 @@ export namespace Prisma {
     | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase>, 'path'>>
 
   export type NestedJsonNullableFilterBase = {
-    equals?: InputJsonValue | null
-    not?: InputJsonValue | null
+    equals?: JsonNullValueFilter | InputJsonValue
+    not?: JsonNullValueFilter | InputJsonValue
   }
 
   export type NestedBigIntFilter = {
@@ -20461,35 +21230,10 @@ export namespace Prisma {
     gte?: bigint | number
     not?: NestedBigIntWithAggregatesFilter | bigint | number
     _count?: NestedIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntFilter
     _avg?: NestedFloatFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    avg?: NestedFloatFilter
     _sum?: NestedBigIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    sum?: NestedBigIntFilter
     _min?: NestedBigIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedBigIntFilter
     _max?: NestedBigIntFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedBigIntFilter
   }
 
   export type NestedStringNullableFilter = {
@@ -20519,23 +21263,8 @@ export namespace Prisma {
     endsWith?: string
     not?: NestedStringNullableWithAggregatesFilter | string | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _min?: NestedStringNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedStringNullableFilter
     _max?: NestedStringNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedStringNullableFilter
   }
 
   export type NestedBoolNullableFilter = {
@@ -20547,30 +21276,15 @@ export namespace Prisma {
     equals?: boolean | null
     not?: NestedBoolNullableWithAggregatesFilter | boolean | null
     _count?: NestedIntNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    count?: NestedIntNullableFilter
     _min?: NestedBoolNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    min?: NestedBoolNullableFilter
     _max?: NestedBoolNullableFilter
-    /**
-     * @deprecated since 2.23 because Aggregation keywords got unified to use underscore as prefix to prevent field clashes.
-     * 
-    **/
-    max?: NestedBoolNullableFilter
   }
 
   export type basketsCreateWithoutBasket_daily_totalsInput = {
     goodfood_id: number
     delivery_date: Date | string
-    basket_totals?: InputJsonValue | null
-    basket_indexes?: InputJsonValue | null
+    basket_totals?: NullableJsonNullValueInput | InputJsonValue
+    basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
     regions: regionsCreateNestedOneWithoutBasketsInput
@@ -20580,8 +21294,8 @@ export namespace Prisma {
     id?: number
     goodfood_id: number
     delivery_date: Date | string
-    basket_totals?: InputJsonValue | null
-    basket_indexes?: InputJsonValue | null
+    basket_totals?: NullableJsonNullValueInput | InputJsonValue
+    basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
     region_id: number
@@ -20634,8 +21348,8 @@ export namespace Prisma {
     product_sku: string
     created_at?: Date | string
     updated_at?: Date | string | null
-    competitor_indexes?: InputJsonValue | null
-    competitor_prices?: InputJsonValue | null
+    competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
+    competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price: number
     basket_line_item_recommended_prices?: basket_line_item_recommended_pricesCreateNestedManyWithoutBasket_line_itemsInput
   }
@@ -20647,8 +21361,8 @@ export namespace Prisma {
     product_sku: string
     created_at?: Date | string
     updated_at?: Date | string | null
-    competitor_indexes?: InputJsonValue | null
-    competitor_prices?: InputJsonValue | null
+    competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
+    competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price: number
     basket_line_item_recommended_prices?: basket_line_item_recommended_pricesUncheckedCreateNestedManyWithoutBasket_line_itemsInput
   }
@@ -20689,8 +21403,8 @@ export namespace Prisma {
     product_sku?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitor_indexes?: InputJsonValue | null
-    competitor_prices?: InputJsonValue | null
+    competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
+    competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price?: FloatFieldUpdateOperationsInput | number
     basket_line_item_recommended_prices?: basket_line_item_recommended_pricesUpdateManyWithoutBasket_line_itemsInput
   }
@@ -20702,8 +21416,8 @@ export namespace Prisma {
     product_sku?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitor_indexes?: InputJsonValue | null
-    competitor_prices?: InputJsonValue | null
+    competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
+    competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price?: FloatFieldUpdateOperationsInput | number
     basket_line_item_recommended_prices?: basket_line_item_recommended_pricesUncheckedUpdateManyWithoutBasket_line_itemsInput
   }
@@ -20734,8 +21448,8 @@ export namespace Prisma {
     product_sku: string
     created_at?: Date | string
     updated_at?: Date | string | null
-    competitor_indexes?: InputJsonValue | null
-    competitor_prices?: InputJsonValue | null
+    competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
+    competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price: number
     basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsCreateNestedManyWithoutBasket_line_itemsInput
   }
@@ -20747,8 +21461,8 @@ export namespace Prisma {
     product_sku: string
     created_at?: Date | string
     updated_at?: Date | string | null
-    competitor_indexes?: InputJsonValue | null
-    competitor_prices?: InputJsonValue | null
+    competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
+    competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price: number
     basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedCreateNestedManyWithoutBasket_line_itemsInput
   }
@@ -20769,8 +21483,8 @@ export namespace Prisma {
     product_sku?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitor_indexes?: InputJsonValue | null
-    competitor_prices?: InputJsonValue | null
+    competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
+    competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price?: FloatFieldUpdateOperationsInput | number
     basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUpdateManyWithoutBasket_line_itemsInput
   }
@@ -20782,8 +21496,8 @@ export namespace Prisma {
     product_sku?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitor_indexes?: InputJsonValue | null
-    competitor_prices?: InputJsonValue | null
+    competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
+    competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price?: FloatFieldUpdateOperationsInput | number
     basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutBasket_line_itemsInput
   }
@@ -20890,8 +21604,8 @@ export namespace Prisma {
 
   export type basket_daily_totalsCreateWithoutBasketsInput = {
     delivery_date: Date | string
-    daily_totals: InputJsonValue
-    daily_indexes: InputJsonValue
+    daily_totals: JsonNullValueInput | InputJsonValue
+    daily_indexes: JsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -20899,8 +21613,8 @@ export namespace Prisma {
   export type basket_daily_totalsUncheckedCreateWithoutBasketsInput = {
     id?: number
     delivery_date: Date | string
-    daily_totals: InputJsonValue
-    daily_indexes: InputJsonValue
+    daily_totals: JsonNullValueInput | InputJsonValue
+    daily_indexes: JsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -20955,8 +21669,8 @@ export namespace Prisma {
 
   export type basket_daily_totalsUpdateWithoutBasketsInput = {
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    daily_totals?: InputJsonValue
-    daily_indexes?: InputJsonValue
+    daily_totals?: JsonNullValueInput | InputJsonValue
+    daily_indexes?: JsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -20964,8 +21678,8 @@ export namespace Prisma {
   export type basket_daily_totalsUncheckedUpdateWithoutBasketsInput = {
     id?: IntFieldUpdateOperationsInput | number
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    daily_totals?: InputJsonValue
-    daily_indexes?: InputJsonValue
+    daily_totals?: JsonNullValueInput | InputJsonValue
+    daily_indexes?: JsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -22021,8 +22735,8 @@ export namespace Prisma {
   export type basketsCreateWithoutRegionsInput = {
     goodfood_id: number
     delivery_date: Date | string
-    basket_totals?: InputJsonValue | null
-    basket_indexes?: InputJsonValue | null
+    basket_totals?: NullableJsonNullValueInput | InputJsonValue
+    basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
     basket_daily_totals: basket_daily_totalsCreateNestedOneWithoutBasketsInput
@@ -22032,8 +22746,8 @@ export namespace Prisma {
     id?: number
     goodfood_id: number
     delivery_date: Date | string
-    basket_totals?: InputJsonValue | null
-    basket_indexes?: InputJsonValue | null
+    basket_totals?: NullableJsonNullValueInput | InputJsonValue
+    basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
     basket_daily_total_id: number
@@ -22847,8 +23561,8 @@ export namespace Prisma {
     id?: number
     goodfood_id: number
     delivery_date: Date | string
-    basket_totals?: InputJsonValue | null
-    basket_indexes?: InputJsonValue | null
+    basket_totals?: NullableJsonNullValueInput | InputJsonValue
+    basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
     region_id: number
@@ -22857,8 +23571,8 @@ export namespace Prisma {
   export type basketsUpdateWithoutBasket_daily_totalsInput = {
     goodfood_id?: IntFieldUpdateOperationsInput | number
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    basket_totals?: InputJsonValue | null
-    basket_indexes?: InputJsonValue | null
+    basket_totals?: NullableJsonNullValueInput | InputJsonValue
+    basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     regions?: regionsUpdateOneRequiredWithoutBasketsInput
@@ -22868,8 +23582,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     goodfood_id?: IntFieldUpdateOperationsInput | number
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    basket_totals?: InputJsonValue | null
-    basket_indexes?: InputJsonValue | null
+    basket_totals?: NullableJsonNullValueInput | InputJsonValue
+    basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     region_id?: IntFieldUpdateOperationsInput | number
@@ -22879,8 +23593,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     goodfood_id?: IntFieldUpdateOperationsInput | number
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    basket_totals?: InputJsonValue | null
-    basket_indexes?: InputJsonValue | null
+    basket_totals?: NullableJsonNullValueInput | InputJsonValue
+    basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     region_id?: IntFieldUpdateOperationsInput | number
@@ -23219,8 +23933,8 @@ export namespace Prisma {
     id?: number
     goodfood_id: number
     delivery_date: Date | string
-    basket_totals?: InputJsonValue | null
-    basket_indexes?: InputJsonValue | null
+    basket_totals?: NullableJsonNullValueInput | InputJsonValue
+    basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
     basket_daily_total_id: number
@@ -23270,8 +23984,8 @@ export namespace Prisma {
   export type basketsUpdateWithoutRegionsInput = {
     goodfood_id?: IntFieldUpdateOperationsInput | number
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    basket_totals?: InputJsonValue | null
-    basket_indexes?: InputJsonValue | null
+    basket_totals?: NullableJsonNullValueInput | InputJsonValue
+    basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     basket_daily_totals?: basket_daily_totalsUpdateOneRequiredWithoutBasketsInput
@@ -23281,8 +23995,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     goodfood_id?: IntFieldUpdateOperationsInput | number
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    basket_totals?: InputJsonValue | null
-    basket_indexes?: InputJsonValue | null
+    basket_totals?: NullableJsonNullValueInput | InputJsonValue
+    basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     basket_daily_total_id?: IntFieldUpdateOperationsInput | number
