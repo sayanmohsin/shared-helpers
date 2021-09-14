@@ -9,8 +9,17 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
 }));
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -22,24 +31,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connectAndGetClient = exports.PrismaClient = void 0;
-const client_1 = require("../../prisma/client");
-Object.defineProperty(exports, "PrismaClient", { enumerable: true, get: function () { return client_1.PrismaClient; } });
+exports.connectAndGetClient = exports.prisma = void 0;
+const prisma = __importStar(require("../../prisma/client"));
+exports.prisma = prisma;
 /**
  * function to connect and get prisma client
  */
 const connectAndGetClient = (db_url) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const prisma = new client_1.PrismaClient({
+        const prismaConnection = new prisma.PrismaClient({
             datasources: {
                 db: {
                     url: db_url
                 },
             },
         });
-        yield prisma.$connect();
+        yield prismaConnection.$connect();
         console.log('connected to database');
-        return prisma;
+        return prismaConnection;
     }
     catch (e) {
         console.log('error connecting to database');
@@ -47,5 +56,4 @@ const connectAndGetClient = (db_url) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 exports.connectAndGetClient = connectAndGetClient;
-__exportStar(require("../../prisma/client"), exports);
 //# sourceMappingURL=prisma.js.map

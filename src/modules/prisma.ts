@@ -2,32 +2,31 @@
  * Module for Prisma
  */
 
-import { PrismaClient } from '../../prisma/client';
+import * as prisma from '../../prisma/client';
 
 /**
  * function to get prisma 
  */
-export { PrismaClient };
+export { prisma };
 
 /**
  * function to connect and get prisma client
  */
 export const connectAndGetClient = async (db_url: string) => {
     try {
-        const prisma = new PrismaClient({
+        const prismaConnection = new prisma.PrismaClient({
             datasources: {
                 db: {
                     url: db_url
                 },
             },
         })
-        await prisma.$connect();
+        await prismaConnection.$connect();
         console.log('connected to database');
-        return prisma;
+        return prismaConnection;
     } catch (e: any) {
         console.log('error connecting to database');
         throw new Error(e.message);
     }
 }
 
-export * from '../../prisma/client';

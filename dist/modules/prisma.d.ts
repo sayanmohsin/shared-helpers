@@ -1,20 +1,19 @@
 /**
  * Module for Prisma
  */
-import { PrismaClient } from '../../prisma/client';
+import * as prisma from '../../prisma/client';
 /**
  * function to get prisma
  */
-export { PrismaClient };
+export { prisma };
 /**
  * function to connect and get prisma client
  */
-export declare const connectAndGetClient: (db_url: string) => Promise<PrismaClient<{
+export declare const connectAndGetClient: (db_url: string) => Promise<prisma.PrismaClient<{
     datasources: {
         db: {
             url: string;
         };
     };
 }, never, false>>;
-export * from '../../prisma/client';
 //# sourceMappingURL=prisma.d.ts.map
