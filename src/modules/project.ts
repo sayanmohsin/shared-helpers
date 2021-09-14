@@ -1,6 +1,4 @@
-import { getCloudFunction } from "../modules/cloud.module";
-import { functionServiceAccounts, projectFunctionNames } from "../modules/project.module";
-import { CloudFunctions, Region, ServiceAccount } from "./cloud";
+import { Region, CloudFunctions, ServiceAccount, getCloudFunction, CloudFunctionName } from "..";
 
 export enum ProjectId {
     analytics = "makegoodfood-analytics",
@@ -33,3 +31,20 @@ export class Project implements IProject {
             functionServiceAccounts[projectId];
     }
 }
+
+export const functionServiceAccounts: { [projectId in ProjectId]: ServiceAccount } = {
+    [ProjectId.analytics]: ServiceAccount.cloudExecutor,
+    [ProjectId.ha]: ServiceAccount.analyticsHa,
+};
+
+export const allFunctionNames = Object.values(CloudFunctionName);
+
+export const getProject = (projectId: ProjectId): Project =>
+    new Project(projectId);
+
+export const projectFunctionNames: {
+    [projectId in ProjectId]: CloudFunctionName[];
+} = {
+    [ProjectId.analytics]: allFunctionNames,
+    [ProjectId.ha]: allFunctionNames,
+};
