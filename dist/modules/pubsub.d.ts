@@ -1,3 +1,4 @@
+import { Topic } from "@google-cloud/pubsub";
 import { ProjectId } from "./project";
 export declare enum PubSubTopicName {
     calculatePriceRecommendations = "calculate_price_recommendations",
@@ -45,4 +46,8 @@ export declare class PubSubTopic implements IPubSubTopic {
     constructor(topicName: PubSubTopicName);
     getResourceStringForProject(projectId: ProjectId): string;
 }
+export declare const parseEvent: (event: PubSubEvent) => ParsedMessage;
+export declare const getTopicForProject: (projectId: ProjectId, topicName: PubSubTopicName) => Topic;
+export declare const getPubSubTopics: () => PubSubTopics;
+export declare const getPubSubTopic: (topicName: PubSubTopicName) => PubSubTopic;
 //# sourceMappingURL=pubsub.d.ts.map

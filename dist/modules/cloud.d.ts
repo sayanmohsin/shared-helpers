@@ -1,7 +1,7 @@
 /// <reference types="node" />
 import { PathLike } from "fs";
 import { ProjectId } from "./project";
-import { PubSubTopic } from "./pubsub";
+import { PubSubTopic, PubSubTopicName } from "./pubsub";
 export declare enum VPCConnector {
     vpcAccessConnector = "vpc-access-connector"
 }
@@ -89,7 +89,7 @@ export interface VPCConnectorOptions {
     vpcConnector: VPCConnector;
     egressSettings: "private-ranges-only" | "all";
 }
-interface ICloudFunction {
+export interface ICloudFunction {
     name: CloudFunctionName;
     trigger: PubSubTopic | "http";
     sourceDirRelativeToRepoRoot: PathLike;
@@ -98,12 +98,12 @@ interface ICloudFunction {
     setEnvVars(envVars: Record<string, string>): void;
     setVpcConnectorOptions(vpcOptions: VPCConnectorOptions): void;
 }
-interface ICloudSecret {
+export interface ICloudSecret {
     name: CloudSecretName;
     relativeResourceString: string;
     getResourceStringForProject(projectId: ProjectId): string;
 }
-interface ICloudTask {
+export interface ICloudTask {
     name: CloudTaskName;
     relativeResourceString: string;
     getResourceStringForProjectAndRegion(projectId: ProjectId, region: Region): string;
@@ -130,5 +130,20 @@ export declare class CloudTask implements ICloudTask {
     constructor(taskName: CloudTaskName);
     getResourceStringForProjectAndRegion(projectId: ProjectId, region: Region): string;
 }
-export {};
+export declare const cloudSecrets: CloudSecrets;
+export declare const cloudTasks: CloudTasks;
+export declare const functionTriggerTopicNames: Partial<{
+    [functionName in CloudFunctionName]: PubSubTopicName;
+}>;
+export declare const functionDirNames: Partial<{
+    [functionName in CloudFunctionName]: string;
+}>;
+export declare const functionEnvVars: Partial<{
+    [functionName in CloudFunctionName]: Record<string, string>;
+}>;
+export declare const functionVpcConnectorOptions: Partial<{
+    [functionName in CloudFunctionName]: VPCConnectorOptions;
+}>;
+export declare const getCloudFunctions: () => CloudFunctions;
+export declare const getCloudFunction: (functionName: CloudFunctionName) => CloudFunction;
 //# sourceMappingURL=cloud.d.ts.map

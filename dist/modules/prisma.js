@@ -48,4 +48,4 @@ const connectAndGetClient = (db_url) => __awaiter(void 0, void 0, void 0, functi
 });
 exports.connectAndGetClient = connectAndGetClient;
 __exportStar(require("../../prisma/client"), exports);
-//# sourceMappingURL=prisma.module.js.map
+//# sourceMappingURL=prisma.js.map

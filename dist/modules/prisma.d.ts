@@ -17,4 +17,4 @@ export declare const connectAndGetClient: (db_url: string) => Promise<PrismaClie
     };
 }, never, false>>;
 export * from '../../prisma/client';
-//# sourceMappingURL=prisma.module.d.ts.map
+//# sourceMappingURL=prisma.d.ts.map
