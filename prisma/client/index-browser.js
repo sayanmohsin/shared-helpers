@@ -125,6 +125,14 @@ exports.Prisma.BasketsScalarFieldEnum = makeEnum({
   basket_daily_total_id: 'basket_daily_total_id'
 });
 
+exports.Prisma.Competitor_region_dataScalarFieldEnum = makeEnum({
+  id: 'id',
+  competitor_id: 'competitor_id',
+  region_id: 'region_id',
+  should_scrape: 'should_scrape',
+  should_include_in_recommendation_calculation: 'should_include_in_recommendation_calculation'
+});
+
 exports.Prisma.CompetitorsScalarFieldEnum = makeEnum({
   id: 'id',
   slug: 'slug',
@@ -216,6 +224,12 @@ exports.Prisma.Scaled_pricesScalarFieldEnum = makeEnum({
   deleted_at: 'deleted_at'
 });
 
+exports.Prisma.Scrape_result_product_region_competitor_urlScalarFieldEnum = makeEnum({
+  id: 'id',
+  scrape_result_id: 'scrape_result_id',
+  product_region_competitor_url_id: 'product_region_competitor_url_id'
+});
+
 exports.Prisma.Scrape_resultsScalarFieldEnum = makeEnum({
   id: 'id',
   competitor_sale_price: 'competitor_sale_price',
@@ -265,6 +279,7 @@ exports.Prisma.ModelName = makeEnum({
   basket_line_item_recommended_prices: 'basket_line_item_recommended_prices',
   basket_line_items: 'basket_line_items',
   baskets: 'baskets',
+  competitor_region_data: 'competitor_region_data',
   competitors: 'competitors',
   migrations: 'migrations',
   price_recommendations: 'price_recommendations',
@@ -274,6 +289,7 @@ exports.Prisma.ModelName = makeEnum({
   products: 'products',
   regions: 'regions',
   scaled_prices: 'scaled_prices',
+  scrape_result_product_region_competitor_url: 'scrape_result_product_region_competitor_url',
   scrape_results: 'scrape_results',
   units: 'units'
 });

@@ -25,11 +25,11 @@ model basket_line_item_competitor_equivalents {
   competitor_id       Int
   created_at          DateTime          @default(now()) @db.Timestamp(0)
   updated_at          DateTime?         @default(now()) @db.DateTime(0)
-  basket_line_items   basket_line_items @relation(fields: [basket_line_item_id], references: [id])
-  competitors         competitors       @relation(fields: [competitor_id], references: [id])
+  basket_line_items   basket_line_items @relation(fields: [basket_line_item_id], references: [id], onDelete: Cascade, map: "basket_line_item_competitor_equivalents_ibfk_1")
+  competitors         competitors       @relation(fields: [competitor_id], references: [id], onDelete: Cascade, map: "basket_line_item_competitor_equivalents_ibfk_2")
 
-  @@index([basket_line_item_id], name: "fk_basket_line_item_basket_line_item_equivalent")
-  @@index([competitor_id], name: "fk_basket_line_item_competitor")
+  @@index([basket_line_item_id], map: "fk_basket_line_item_basket_line_item_equivalent")
+  @@index([competitor_id], map: "fk_basket_line_item_competitor")
 }
 
 model basket_line_item_recommended_prices {
@@ -37,10 +37,10 @@ model basket_line_item_recommended_prices {
   recommended_price       Float
   basket_line_item_id     Int
   price_recommendation_id Int?
-  basket_line_items       basket_line_items @relation(fields: [basket_line_item_id], references: [id])
+  basket_line_items       basket_line_items @relation(fields: [basket_line_item_id], references: [id], onDelete: Cascade, map: "basket_line_item_recommended_prices_ibfk_1")
 
-  @@index([basket_line_item_id], name: "fk_blirp_bli")
-  @@index([price_recommendation_id], name: "fk_blirp_rp")
+  @@index([basket_line_item_id], map: "fk_blirp_bli")
+  @@index([price_recommendation_id], map: "fk_blirp_rp")
 }
 
 model basket_line_items {
@@ -56,7 +56,7 @@ model basket_line_items {
   basket_line_item_competitor_equivalents basket_line_item_competitor_equivalents[]
   basket_line_item_recommended_prices     basket_line_item_recommended_prices[]
 
-  @@index([product_sku], name: "fk_basket_line_item_product")
+  @@index([product_sku], map: "fk_basket_line_item_product")
 }
 
 model baskets {
@@ -69,25 +69,25 @@ model baskets {
   updated_at            DateTime?           @default(now()) @db.DateTime(0)
   region_id             Int
   basket_daily_total_id Int
-  basket_daily_totals   basket_daily_totals @relation(fields: [basket_daily_total_id], references: [id])
-  regions               regions             @relation(fields: [region_id], references: [id])
+  basket_daily_totals   basket_daily_totals @relation(fields: [basket_daily_total_id], references: [id], onDelete: Cascade, map: "baskets_ibfk_1")
+  regions               regions             @relation(fields: [region_id], references: [id], onDelete: Cascade, map: "baskets_ibfk_2")
 
-  @@index([basket_daily_total_id], name: "fk_basket_basket_daily_total")
-  @@index([region_id], name: "fk_basket_region")
+  @@index([basket_daily_total_id], map: "fk_basket_basket_daily_total")
+  @@index([region_id], map: "fk_basket_region")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model competitor_region_data {
+  id                                           Int         @id @default(autoincrement())
   competitor_id                                Int
   region_id                                    Int
   should_scrape                                Boolean     @default(true)
   should_include_in_recommendation_calculation Int?        @db.TinyInt
-  competitors                                  competitors @relation(fields: [competitor_id], references: [id])
-  regions                                      regions     @relation(fields: [region_id], references: [id])
+  competitors                                  competitors @relation(fields: [competitor_id], references: [id], onDelete: Cascade, map: "competitor_region_data_ibfk_1")
+  regions                                      regions     @relation(fields: [region_id], references: [id], onDelete: Cascade, map: "competitor_region_data_ibfk_2")
 
-  @@index([competitor_id], name: "fk_crd_competitor")
-  @@index([region_id], name: "fk_crd_region")
-  @@ignore
+  @@index([competitor_id], map: "fk_crd_competitor")
+  @@index([region_id], map: "fk_crd_region")
 }
 
 model competitors {
@@ -95,7 +95,7 @@ model competitors {
   slug                                    String                                    @db.VarChar(25)
   display_text                            String                                    @db.VarChar(50)
   basket_line_item_competitor_equivalents basket_line_item_competitor_equivalents[]
-  competitor_region_data                  competitor_region_data[]                  @ignore
+  competitor_region_data                  competitor_region_data[]
   product_region_competitor_urls          product_region_competitor_urls[]
   scaled_prices                           scaled_prices[]
 }
@@ -114,11 +114,11 @@ model price_recommendations {
   list_price Float
   created_at DateTime  @default(now()) @db.Timestamp(0)
   updated_at DateTime? @default(now()) @db.DateTime(0)
-  products   products  @relation(fields: [product_id], references: [id])
-  regions    regions   @relation(fields: [region_id], references: [id])
+  products   products  @relation(fields: [product_id], references: [id], onDelete: Cascade, map: "price_recommendations_ibfk_1")
+  regions    regions   @relation(fields: [region_id], references: [id], onDelete: Cascade, map: "price_recommendations_ibfk_2")
 
-  @@index([product_id], name: "fk_pr_product")
-  @@index([region_id], name: "fk_pr_region")
+  @@index([product_id], map: "fk_pr_product")
+  @@index([region_id], map: "fk_pr_region")
 }
 
 model product_region_competitor_urls {
@@ -130,15 +130,15 @@ model product_region_competitor_urls {
   created_at                                  DateTime                                      @default(now()) @db.Timestamp(0)
   updated_at                                  DateTime?                                     @default(now()) @db.DateTime(0)
   deleted_at                                  DateTime?                                     @db.DateTime(0)
-  competitors                                 competitors                                   @relation(fields: [competitor_id], references: [id])
-  products                                    products                                      @relation(fields: [product_id], references: [id])
-  regions                                     regions                                       @relation(fields: [region_id], references: [id])
+  competitors                                 competitors                                   @relation(fields: [competitor_id], references: [id], onDelete: Cascade, map: "product_region_competitor_urls_ibfk_1")
+  products                                    products                                      @relation(fields: [product_id], references: [id], onDelete: Cascade, map: "product_region_competitor_urls_ibfk_2")
+  regions                                     regions                                       @relation(fields: [region_id], references: [id], onDelete: Cascade, map: "product_region_competitor_urls_ibfk_3")
   product_region_competitor_urls_former_urls  product_region_competitor_urls_former_urls[]
-  scrape_result_product_region_competitor_url scrape_result_product_region_competitor_url[] @ignore
+  scrape_result_product_region_competitor_url scrape_result_product_region_competitor_url[]
 
-  @@unique([product_id, competitor_id, region_id], name: "competitor_product_region_unique")
-  @@index([competitor_id], name: "fk_prcu_competitor")
-  @@index([region_id], name: "fk_prcu_region")
+  @@unique([product_id, competitor_id, region_id], map: "competitor_product_region_unique")
+  @@index([competitor_id], map: "fk_prcu_competitor")
+  @@index([region_id], map: "fk_prcu_region")
 }
 
 model product_region_competitor_urls_former_urls {
@@ -147,9 +147,9 @@ model product_region_competitor_urls_former_urls {
   created_at                       DateTime                       @default(now()) @db.Timestamp(0)
   updated_at                       DateTime?                      @default(now()) @db.DateTime(0)
   id                               Int                            @id @default(autoincrement())
-  product_region_competitor_urls   product_region_competitor_urls @relation(fields: [product_region_competitor_url_id], references: [id])
+  product_region_competitor_urls   product_region_competitor_urls @relation(fields: [product_region_competitor_url_id], references: [id], onDelete: Cascade, map: "product_region_competitor_urls_former_urls_ibfk_1")
 
-  @@index([product_region_competitor_url_id], name: "fk_old_url_url")
+  @@index([product_region_competitor_url_id], map: "fk_old_url_url")
 }
 
 model product_region_price_data {
@@ -162,16 +162,16 @@ model product_region_price_data {
   created_at      DateTime  @default(now()) @db.Timestamp(0)
   updated_at      DateTime? @default(now()) @db.DateTime(0)
   deleted_at      DateTime? @db.DateTime(0)
-  products        products  @relation(fields: [product_id], references: [id])
-  regions         regions   @relation(fields: [region_id], references: [id])
+  products        products  @relation(fields: [product_id], references: [id], onDelete: Cascade, map: "product_region_price_data_ibfk_1")
+  regions         regions   @relation(fields: [region_id], references: [id], onDelete: Cascade, map: "product_region_price_data_ibfk_2")
 
-  @@unique([product_id, region_id], name: "price_date_product_region_unique")
-  @@index([region_id], name: "fk_prpd_region")
+  @@unique([product_id, region_id], map: "price_date_product_region_unique")
+  @@index([region_id], map: "fk_prpd_region")
 }
 
 model products {
   id                             Int                              @id @default(autoincrement())
-  sku                            String?                          @unique @db.VarChar(50)
+  sku                            String?                          @unique(map: "products.sku_unique") @db.VarChar(50)
   name                           String?                          @db.Text
   package_quantity               Int?
   package_units                  String?                          @db.Text
@@ -180,14 +180,14 @@ model products {
   created_at                     DateTime                         @default(now()) @db.Timestamp(0)
   updated_at                     DateTime?                        @default(now()) @db.DateTime(0)
   deleted_at                     DateTime?                        @db.DateTime(0)
-  units                          units                            @relation(fields: [weight_unit_id], references: [id])
+  units                          units                            @relation(fields: [weight_unit_id], references: [id], onDelete: Cascade, map: "products_ibfk_1")
   price_recommendations          price_recommendations[]
   product_region_competitor_urls product_region_competitor_urls[]
   product_region_price_data      product_region_price_data[]
   scaled_prices                  scaled_prices[]
 
-  @@index([weight_unit_id], name: "fk_p_weight_unit")
-  @@index([sku], name: "product_sku_idx")
+  @@index([weight_unit_id], map: "fk_p_weight_unit")
+  @@index([sku], map: "product_sku_idx")
 }
 
 model regions {
@@ -202,7 +202,7 @@ model regions {
   updated_at                     DateTime?                        @default(now()) @db.DateTime(0)
   deleted_at                     DateTime?                        @db.DateTime(0)
   baskets                        baskets[]
-  competitor_region_data         competitor_region_data[]         @ignore
+  competitor_region_data         competitor_region_data[]
   price_recommendations          price_recommendations[]
   product_region_competitor_urls product_region_competitor_urls[]
   product_region_price_data      product_region_price_data[]
@@ -219,27 +219,27 @@ model scaled_prices {
   created_at              DateTime       @default(now()) @db.Timestamp(0)
   updated_at              DateTime?      @default(now()) @db.Timestamp(0)
   deleted_at              DateTime?      @db.DateTime(0)
-  competitors             competitors    @relation(fields: [competitor_id], references: [id])
-  products                products       @relation(fields: [product_id], references: [id])
-  regions                 regions        @relation(fields: [region_id], references: [id])
-  scrape_results          scrape_results @relation(fields: [scrape_result_id], references: [id])
+  competitors             competitors    @relation(fields: [competitor_id], references: [id], onDelete: Cascade, map: "scaled_prices_ibfk_1")
+  products                products       @relation(fields: [product_id], references: [id], onDelete: Cascade, map: "scaled_prices_ibfk_2")
+  regions                 regions        @relation(fields: [region_id], references: [id], onDelete: Cascade, map: "scaled_prices_ibfk_3")
+  scrape_results          scrape_results @relation(fields: [scrape_result_id], references: [id], onDelete: Cascade, map: "scaled_prices_ibfk_4")
 
-  @@index([competitor_id], name: "fk_sp_competitor")
-  @@index([product_id], name: "fk_sp_product")
-  @@index([region_id], name: "fk_sp_region")
-  @@index([scrape_result_id], name: "fk_sp_scrape_result")
+  @@index([competitor_id], map: "fk_sp_competitor")
+  @@index([product_id], map: "fk_sp_product")
+  @@index([region_id], map: "fk_sp_region")
+  @@index([scrape_result_id], map: "fk_sp_scrape_result")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model scrape_result_product_region_competitor_url {
+  id                               Int                            @id @default(autoincrement())
   scrape_result_id                 Int
   product_region_competitor_url_id Int
-  product_region_competitor_urls   product_region_competitor_urls @relation(fields: [product_region_competitor_url_id], references: [id])
-  scrape_results                   scrape_results                 @relation(fields: [scrape_result_id], references: [id])
+  product_region_competitor_urls   product_region_competitor_urls @relation(fields: [product_region_competitor_url_id], references: [id], onDelete: Cascade, map: "scrape_result_product_region_competitor_url_ibfk_1")
+  scrape_results                   scrape_results                 @relation(fields: [scrape_result_id], references: [id], onDelete: Cascade, map: "scrape_result_product_region_competitor_url_ibfk_2")
 
-  @@index([scrape_result_id], name: "fk_srpcu_scrape_result")
-  @@index([product_region_competitor_url_id], name: "fk_srpcu_url")
-  @@ignore
+  @@index([scrape_result_id], map: "fk_srpcu_scrape_result")
+  @@index([product_region_competitor_url_id], map: "fk_srpcu_url")
 }
 
 model scrape_results {
@@ -254,11 +254,11 @@ model scrape_results {
   created_at                                  DateTime                                      @default(now()) @db.Timestamp(0)
   updated_at                                  DateTime?                                     @default(now()) @db.DateTime(0)
   deleted_at                                  DateTime?                                     @db.DateTime(0)
-  units                                       units                                         @relation(fields: [competitor_sold_by_unit_id], references: [id])
+  units                                       units                                         @relation(fields: [competitor_sold_by_unit_id], references: [id], onDelete: Cascade, map: "scrape_results_ibfk_1")
   scaled_prices                               scaled_prices[]
-  scrape_result_product_region_competitor_url scrape_result_product_region_competitor_url[] @ignore
+  scrape_result_product_region_competitor_url scrape_result_product_region_competitor_url[]
 
-  @@index([competitor_sold_by_unit_id], name: "fk_sr_competitor_sold_by_unit")
+  @@index([competitor_sold_by_unit_id], map: "fk_sr_competitor_sold_by_unit")
 }
 
 model units {
@@ -267,10 +267,10 @@ model units {
   display_text       String           @db.VarChar(50)
   base_unit_id       Int
   scale_of_base_unit Float
-  units              units            @relation("unitsTounits_base_unit_id", fields: [base_unit_id], references: [id])
+  units              units            @relation("unitsTounits_base_unit_id", fields: [base_unit_id], references: [id], onDelete: Cascade, map: "units_ibfk_1")
   products           products[]
   scrape_results     scrape_results[]
   other_units        units[]          @relation("unitsTounits_base_unit_id")
 
-  @@index([base_unit_id], name: "fk_u_base_unit")
+  @@index([base_unit_id], map: "fk_u_base_unit")
 }
