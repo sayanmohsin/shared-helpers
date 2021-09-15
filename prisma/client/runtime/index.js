@@ -31553,7 +31553,7 @@ var require_utils5 = __commonJS2((exports2) => {
 var require_package2 = __commonJS2((exports2, module2) => {
   module2.exports = {
     name: "@prisma/client",
-    version: "3.0.1",
+    version: "3.0.2",
     description: "Prisma Client is an auto-generated, type-safe and modern JavaScript/TypeScript ORM for Node.js that's tailored to your data. Supports MySQL, PostgreSQL, MariaDB, SQLite databases.",
     keywords: [
       "orm",

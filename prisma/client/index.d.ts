@@ -610,7 +610,7 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 3.0.1
+   * Prisma Client JS version: 3.0.2
    * Query Engine version: 2452cc6313d52b8b9a96999ac0e974d0aedf88db
    */
   export type PrismaVersion = {
