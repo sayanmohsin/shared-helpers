@@ -1310,12 +1310,12 @@ export namespace Prisma {
 
   export type Product_region_competitor_urlsCountOutputType = {
     product_region_competitor_urls_former_urls: number
-    scrape_result_product_region_competitor_url: number
+    scrape_result_product_region_competitor_urls: number
   }
 
   export type Product_region_competitor_urlsCountOutputTypeSelect = {
     product_region_competitor_urls_former_urls?: boolean
-    scrape_result_product_region_competitor_url?: boolean
+    scrape_result_product_region_competitor_urls?: boolean
   }
 
   export type Product_region_competitor_urlsCountOutputTypeGetPayload<
@@ -1478,12 +1478,12 @@ export namespace Prisma {
 
   export type Scrape_resultsCountOutputType = {
     scaled_prices: number
-    scrape_result_product_region_competitor_url: number
+    scrape_result_product_region_competitor_urls: number
   }
 
   export type Scrape_resultsCountOutputTypeSelect = {
     scaled_prices?: boolean
-    scrape_result_product_region_competitor_url?: boolean
+    scrape_result_product_region_competitor_urls?: boolean
   }
 
   export type Scrape_resultsCountOutputTypeGetPayload<
@@ -1531,13 +1531,13 @@ export namespace Prisma {
   export type UnitsCountOutputType = {
     products: number
     scrape_results: number
-    other_units: number
+    units: number
   }
 
   export type UnitsCountOutputTypeSelect = {
     products?: boolean
     scrape_results?: boolean
-    other_units?: boolean
+    units?: boolean
   }
 
   export type UnitsCountOutputTypeGetPayload<
@@ -2697,13 +2697,13 @@ export namespace Prisma {
     competitor_id?: boolean
     created_at?: boolean
     updated_at?: boolean
-    basket_line_items?: boolean | basket_line_itemsArgs
-    competitors?: boolean | competitorsArgs
+    basket_line_item?: boolean | basket_line_itemsArgs
+    competitor?: boolean | competitorsArgs
   }
 
   export type basket_line_item_competitor_equivalentsInclude = {
-    basket_line_items?: boolean | basket_line_itemsArgs
-    competitors?: boolean | competitorsArgs
+    basket_line_item?: boolean | basket_line_itemsArgs
+    competitor?: boolean | competitorsArgs
   }
 
   export type basket_line_item_competitor_equivalentsGetPayload<
@@ -2717,18 +2717,18 @@ export namespace Prisma {
     ?'include' extends U
     ? basket_line_item_competitor_equivalents  & {
     [P in TrueKeys<S['include']>]: 
-          P extends 'basket_line_items'
+          P extends 'basket_line_item'
         ? basket_line_itemsGetPayload<S['include'][P]> :
-        P extends 'competitors'
+        P extends 'competitor'
         ? competitorsGetPayload<S['include'][P]> : never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]: P extends keyof basket_line_item_competitor_equivalents ?basket_line_item_competitor_equivalents [P]
   : 
-          P extends 'basket_line_items'
+          P extends 'basket_line_item'
         ? basket_line_itemsGetPayload<S['select'][P]> :
-        P extends 'competitors'
+        P extends 'competitor'
         ? competitorsGetPayload<S['select'][P]> : never
   } 
     : basket_line_item_competitor_equivalents
@@ -3069,9 +3069,9 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    basket_line_items<T extends basket_line_itemsArgs = {}>(args?: Subset<T, basket_line_itemsArgs>): CheckSelect<T, Prisma__basket_line_itemsClient<basket_line_items | null >, Prisma__basket_line_itemsClient<basket_line_itemsGetPayload<T> | null >>;
+    basket_line_item<T extends basket_line_itemsArgs = {}>(args?: Subset<T, basket_line_itemsArgs>): CheckSelect<T, Prisma__basket_line_itemsClient<basket_line_items | null >, Prisma__basket_line_itemsClient<basket_line_itemsGetPayload<T> | null >>;
 
-    competitors<T extends competitorsArgs = {}>(args?: Subset<T, competitorsArgs>): CheckSelect<T, Prisma__competitorsClient<competitors | null >, Prisma__competitorsClient<competitorsGetPayload<T> | null >>;
+    competitor<T extends competitorsArgs = {}>(args?: Subset<T, competitorsArgs>): CheckSelect<T, Prisma__competitorsClient<competitors | null >, Prisma__competitorsClient<competitorsGetPayload<T> | null >>;
 
     private get _document();
     /**
@@ -3594,11 +3594,11 @@ export namespace Prisma {
     recommended_price?: boolean
     basket_line_item_id?: boolean
     price_recommendation_id?: boolean
-    basket_line_items?: boolean | basket_line_itemsArgs
+    basket_line_item?: boolean | basket_line_itemsArgs
   }
 
   export type basket_line_item_recommended_pricesInclude = {
-    basket_line_items?: boolean | basket_line_itemsArgs
+    basket_line_item?: boolean | basket_line_itemsArgs
   }
 
   export type basket_line_item_recommended_pricesGetPayload<
@@ -3612,14 +3612,14 @@ export namespace Prisma {
     ?'include' extends U
     ? basket_line_item_recommended_prices  & {
     [P in TrueKeys<S['include']>]: 
-          P extends 'basket_line_items'
+          P extends 'basket_line_item'
         ? basket_line_itemsGetPayload<S['include'][P]> : never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]: P extends keyof basket_line_item_recommended_prices ?basket_line_item_recommended_prices [P]
   : 
-          P extends 'basket_line_items'
+          P extends 'basket_line_item'
         ? basket_line_itemsGetPayload<S['select'][P]> : never
   } 
     : basket_line_item_recommended_prices
@@ -3960,7 +3960,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    basket_line_items<T extends basket_line_itemsArgs = {}>(args?: Subset<T, basket_line_itemsArgs>): CheckSelect<T, Prisma__basket_line_itemsClient<basket_line_items | null >, Prisma__basket_line_itemsClient<basket_line_itemsGetPayload<T> | null >>;
+    basket_line_item<T extends basket_line_itemsArgs = {}>(args?: Subset<T, basket_line_itemsArgs>): CheckSelect<T, Prisma__basket_line_itemsClient<basket_line_items | null >, Prisma__basket_line_itemsClient<basket_line_itemsGetPayload<T> | null >>;
 
     private get _document();
     /**
@@ -5450,13 +5450,13 @@ export namespace Prisma {
     updated_at?: boolean
     region_id?: boolean
     basket_daily_total_id?: boolean
-    basket_daily_totals?: boolean | basket_daily_totalsArgs
-    regions?: boolean | regionsArgs
+    basket_daily_total?: boolean | basket_daily_totalsArgs
+    region?: boolean | regionsArgs
   }
 
   export type basketsInclude = {
-    basket_daily_totals?: boolean | basket_daily_totalsArgs
-    regions?: boolean | regionsArgs
+    basket_daily_total?: boolean | basket_daily_totalsArgs
+    region?: boolean | regionsArgs
   }
 
   export type basketsGetPayload<
@@ -5470,18 +5470,18 @@ export namespace Prisma {
     ?'include' extends U
     ? baskets  & {
     [P in TrueKeys<S['include']>]: 
-          P extends 'basket_daily_totals'
+          P extends 'basket_daily_total'
         ? basket_daily_totalsGetPayload<S['include'][P]> :
-        P extends 'regions'
+        P extends 'region'
         ? regionsGetPayload<S['include'][P]> : never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]: P extends keyof baskets ?baskets [P]
   : 
-          P extends 'basket_daily_totals'
+          P extends 'basket_daily_total'
         ? basket_daily_totalsGetPayload<S['select'][P]> :
-        P extends 'regions'
+        P extends 'region'
         ? regionsGetPayload<S['select'][P]> : never
   } 
     : baskets
@@ -5822,9 +5822,9 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    basket_daily_totals<T extends basket_daily_totalsArgs = {}>(args?: Subset<T, basket_daily_totalsArgs>): CheckSelect<T, Prisma__basket_daily_totalsClient<basket_daily_totals | null >, Prisma__basket_daily_totalsClient<basket_daily_totalsGetPayload<T> | null >>;
+    basket_daily_total<T extends basket_daily_totalsArgs = {}>(args?: Subset<T, basket_daily_totalsArgs>): CheckSelect<T, Prisma__basket_daily_totalsClient<basket_daily_totals | null >, Prisma__basket_daily_totalsClient<basket_daily_totalsGetPayload<T> | null >>;
 
-    regions<T extends regionsArgs = {}>(args?: Subset<T, regionsArgs>): CheckSelect<T, Prisma__regionsClient<regions | null >, Prisma__regionsClient<regionsGetPayload<T> | null >>;
+    region<T extends regionsArgs = {}>(args?: Subset<T, regionsArgs>): CheckSelect<T, Prisma__regionsClient<regions | null >, Prisma__regionsClient<regionsGetPayload<T> | null >>;
 
     private get _document();
     /**
@@ -6355,13 +6355,13 @@ export namespace Prisma {
     region_id?: boolean
     should_scrape?: boolean
     should_include_in_recommendation_calculation?: boolean
-    competitors?: boolean | competitorsArgs
-    regions?: boolean | regionsArgs
+    competitor?: boolean | competitorsArgs
+    region?: boolean | regionsArgs
   }
 
   export type competitor_region_dataInclude = {
-    competitors?: boolean | competitorsArgs
-    regions?: boolean | regionsArgs
+    competitor?: boolean | competitorsArgs
+    region?: boolean | regionsArgs
   }
 
   export type competitor_region_dataGetPayload<
@@ -6375,18 +6375,18 @@ export namespace Prisma {
     ?'include' extends U
     ? competitor_region_data  & {
     [P in TrueKeys<S['include']>]: 
-          P extends 'competitors'
+          P extends 'competitor'
         ? competitorsGetPayload<S['include'][P]> :
-        P extends 'regions'
+        P extends 'region'
         ? regionsGetPayload<S['include'][P]> : never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]: P extends keyof competitor_region_data ?competitor_region_data [P]
   : 
-          P extends 'competitors'
+          P extends 'competitor'
         ? competitorsGetPayload<S['select'][P]> :
-        P extends 'regions'
+        P extends 'region'
         ? regionsGetPayload<S['select'][P]> : never
   } 
     : competitor_region_data
@@ -6727,9 +6727,9 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    competitors<T extends competitorsArgs = {}>(args?: Subset<T, competitorsArgs>): CheckSelect<T, Prisma__competitorsClient<competitors | null >, Prisma__competitorsClient<competitorsGetPayload<T> | null >>;
+    competitor<T extends competitorsArgs = {}>(args?: Subset<T, competitorsArgs>): CheckSelect<T, Prisma__competitorsClient<competitors | null >, Prisma__competitorsClient<competitorsGetPayload<T> | null >>;
 
-    regions<T extends regionsArgs = {}>(args?: Subset<T, regionsArgs>): CheckSelect<T, Prisma__regionsClient<regions | null >, Prisma__regionsClient<regionsGetPayload<T> | null >>;
+    region<T extends regionsArgs = {}>(args?: Subset<T, regionsArgs>): CheckSelect<T, Prisma__regionsClient<regions | null >, Prisma__regionsClient<regionsGetPayload<T> | null >>;
 
     private get _document();
     /**
@@ -9001,13 +9001,13 @@ export namespace Prisma {
     list_price?: boolean
     created_at?: boolean
     updated_at?: boolean
-    products?: boolean | productsArgs
-    regions?: boolean | regionsArgs
+    product?: boolean | productsArgs
+    region?: boolean | regionsArgs
   }
 
   export type price_recommendationsInclude = {
-    products?: boolean | productsArgs
-    regions?: boolean | regionsArgs
+    product?: boolean | productsArgs
+    region?: boolean | regionsArgs
   }
 
   export type price_recommendationsGetPayload<
@@ -9021,18 +9021,18 @@ export namespace Prisma {
     ?'include' extends U
     ? price_recommendations  & {
     [P in TrueKeys<S['include']>]: 
-          P extends 'products'
+          P extends 'product'
         ? productsGetPayload<S['include'][P]> :
-        P extends 'regions'
+        P extends 'region'
         ? regionsGetPayload<S['include'][P]> : never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]: P extends keyof price_recommendations ?price_recommendations [P]
   : 
-          P extends 'products'
+          P extends 'product'
         ? productsGetPayload<S['select'][P]> :
-        P extends 'regions'
+        P extends 'region'
         ? regionsGetPayload<S['select'][P]> : never
   } 
     : price_recommendations
@@ -9373,9 +9373,9 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    products<T extends productsArgs = {}>(args?: Subset<T, productsArgs>): CheckSelect<T, Prisma__productsClient<products | null >, Prisma__productsClient<productsGetPayload<T> | null >>;
+    product<T extends productsArgs = {}>(args?: Subset<T, productsArgs>): CheckSelect<T, Prisma__productsClient<products | null >, Prisma__productsClient<productsGetPayload<T> | null >>;
 
-    regions<T extends regionsArgs = {}>(args?: Subset<T, regionsArgs>): CheckSelect<T, Prisma__regionsClient<regions | null >, Prisma__regionsClient<regionsGetPayload<T> | null >>;
+    region<T extends regionsArgs = {}>(args?: Subset<T, regionsArgs>): CheckSelect<T, Prisma__regionsClient<regions | null >, Prisma__regionsClient<regionsGetPayload<T> | null >>;
 
     private get _document();
     /**
@@ -9930,20 +9930,20 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     deleted_at?: boolean
-    competitors?: boolean | competitorsArgs
-    products?: boolean | productsArgs
-    regions?: boolean | regionsArgs
+    competitor?: boolean | competitorsArgs
+    product?: boolean | productsArgs
+    region?: boolean | regionsArgs
     product_region_competitor_urls_former_urls?: boolean | product_region_competitor_urls_former_urlsFindManyArgs
-    scrape_result_product_region_competitor_url?: boolean | scrape_result_product_region_competitor_urlFindManyArgs
+    scrape_result_product_region_competitor_urls?: boolean | scrape_result_product_region_competitor_urlFindManyArgs
     _count?: boolean | Product_region_competitor_urlsCountOutputTypeArgs
   }
 
   export type product_region_competitor_urlsInclude = {
-    competitors?: boolean | competitorsArgs
-    products?: boolean | productsArgs
-    regions?: boolean | regionsArgs
+    competitor?: boolean | competitorsArgs
+    product?: boolean | productsArgs
+    region?: boolean | regionsArgs
     product_region_competitor_urls_former_urls?: boolean | product_region_competitor_urls_former_urlsFindManyArgs
-    scrape_result_product_region_competitor_url?: boolean | scrape_result_product_region_competitor_urlFindManyArgs
+    scrape_result_product_region_competitor_urls?: boolean | scrape_result_product_region_competitor_urlFindManyArgs
     _count?: boolean | Product_region_competitor_urlsCountOutputTypeArgs
   }
 
@@ -9958,15 +9958,15 @@ export namespace Prisma {
     ?'include' extends U
     ? product_region_competitor_urls  & {
     [P in TrueKeys<S['include']>]: 
-          P extends 'competitors'
+          P extends 'competitor'
         ? competitorsGetPayload<S['include'][P]> :
-        P extends 'products'
+        P extends 'product'
         ? productsGetPayload<S['include'][P]> :
-        P extends 'regions'
+        P extends 'region'
         ? regionsGetPayload<S['include'][P]> :
         P extends 'product_region_competitor_urls_former_urls'
         ? Array < product_region_competitor_urls_former_urlsGetPayload<S['include'][P]>>  :
-        P extends 'scrape_result_product_region_competitor_url'
+        P extends 'scrape_result_product_region_competitor_urls'
         ? Array < scrape_result_product_region_competitor_urlGetPayload<S['include'][P]>>  :
         P extends '_count'
         ? Product_region_competitor_urlsCountOutputTypeGetPayload<S['include'][P]> | null : never
@@ -9975,15 +9975,15 @@ export namespace Prisma {
     ? {
     [P in TrueKeys<S['select']>]: P extends keyof product_region_competitor_urls ?product_region_competitor_urls [P]
   : 
-          P extends 'competitors'
+          P extends 'competitor'
         ? competitorsGetPayload<S['select'][P]> :
-        P extends 'products'
+        P extends 'product'
         ? productsGetPayload<S['select'][P]> :
-        P extends 'regions'
+        P extends 'region'
         ? regionsGetPayload<S['select'][P]> :
         P extends 'product_region_competitor_urls_former_urls'
         ? Array < product_region_competitor_urls_former_urlsGetPayload<S['select'][P]>>  :
-        P extends 'scrape_result_product_region_competitor_url'
+        P extends 'scrape_result_product_region_competitor_urls'
         ? Array < scrape_result_product_region_competitor_urlGetPayload<S['select'][P]>>  :
         P extends '_count'
         ? Product_region_competitor_urlsCountOutputTypeGetPayload<S['select'][P]> | null : never
@@ -10326,15 +10326,15 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    competitors<T extends competitorsArgs = {}>(args?: Subset<T, competitorsArgs>): CheckSelect<T, Prisma__competitorsClient<competitors | null >, Prisma__competitorsClient<competitorsGetPayload<T> | null >>;
+    competitor<T extends competitorsArgs = {}>(args?: Subset<T, competitorsArgs>): CheckSelect<T, Prisma__competitorsClient<competitors | null >, Prisma__competitorsClient<competitorsGetPayload<T> | null >>;
 
-    products<T extends productsArgs = {}>(args?: Subset<T, productsArgs>): CheckSelect<T, Prisma__productsClient<products | null >, Prisma__productsClient<productsGetPayload<T> | null >>;
+    product<T extends productsArgs = {}>(args?: Subset<T, productsArgs>): CheckSelect<T, Prisma__productsClient<products | null >, Prisma__productsClient<productsGetPayload<T> | null >>;
 
-    regions<T extends regionsArgs = {}>(args?: Subset<T, regionsArgs>): CheckSelect<T, Prisma__regionsClient<regions | null >, Prisma__regionsClient<regionsGetPayload<T> | null >>;
+    region<T extends regionsArgs = {}>(args?: Subset<T, regionsArgs>): CheckSelect<T, Prisma__regionsClient<regions | null >, Prisma__regionsClient<regionsGetPayload<T> | null >>;
 
     product_region_competitor_urls_former_urls<T extends product_region_competitor_urls_former_urlsFindManyArgs = {}>(args?: Subset<T, product_region_competitor_urls_former_urlsFindManyArgs>): CheckSelect<T, PrismaPromise<Array<product_region_competitor_urls_former_urls>>, PrismaPromise<Array<product_region_competitor_urls_former_urlsGetPayload<T>>>>;
 
-    scrape_result_product_region_competitor_url<T extends scrape_result_product_region_competitor_urlFindManyArgs = {}>(args?: Subset<T, scrape_result_product_region_competitor_urlFindManyArgs>): CheckSelect<T, PrismaPromise<Array<scrape_result_product_region_competitor_url>>, PrismaPromise<Array<scrape_result_product_region_competitor_urlGetPayload<T>>>>;
+    scrape_result_product_region_competitor_urls<T extends scrape_result_product_region_competitor_urlFindManyArgs = {}>(args?: Subset<T, scrape_result_product_region_competitor_urlFindManyArgs>): CheckSelect<T, PrismaPromise<Array<scrape_result_product_region_competitor_url>>, PrismaPromise<Array<scrape_result_product_region_competitor_urlGetPayload<T>>>>;
 
     private get _document();
     /**
@@ -11794,13 +11794,13 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     deleted_at?: boolean
-    products?: boolean | productsArgs
-    regions?: boolean | regionsArgs
+    product?: boolean | productsArgs
+    region?: boolean | regionsArgs
   }
 
   export type product_region_price_dataInclude = {
-    products?: boolean | productsArgs
-    regions?: boolean | regionsArgs
+    product?: boolean | productsArgs
+    region?: boolean | regionsArgs
   }
 
   export type product_region_price_dataGetPayload<
@@ -11814,18 +11814,18 @@ export namespace Prisma {
     ?'include' extends U
     ? product_region_price_data  & {
     [P in TrueKeys<S['include']>]: 
-          P extends 'products'
+          P extends 'product'
         ? productsGetPayload<S['include'][P]> :
-        P extends 'regions'
+        P extends 'region'
         ? regionsGetPayload<S['include'][P]> : never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]: P extends keyof product_region_price_data ?product_region_price_data [P]
   : 
-          P extends 'products'
+          P extends 'product'
         ? productsGetPayload<S['select'][P]> :
-        P extends 'regions'
+        P extends 'region'
         ? regionsGetPayload<S['select'][P]> : never
   } 
     : product_region_price_data
@@ -12166,9 +12166,9 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    products<T extends productsArgs = {}>(args?: Subset<T, productsArgs>): CheckSelect<T, Prisma__productsClient<products | null >, Prisma__productsClient<productsGetPayload<T> | null >>;
+    product<T extends productsArgs = {}>(args?: Subset<T, productsArgs>): CheckSelect<T, Prisma__productsClient<products | null >, Prisma__productsClient<productsGetPayload<T> | null >>;
 
-    regions<T extends regionsArgs = {}>(args?: Subset<T, regionsArgs>): CheckSelect<T, Prisma__regionsClient<regions | null >, Prisma__regionsClient<regionsGetPayload<T> | null >>;
+    region<T extends regionsArgs = {}>(args?: Subset<T, regionsArgs>): CheckSelect<T, Prisma__regionsClient<regions | null >, Prisma__regionsClient<regionsGetPayload<T> | null >>;
 
     private get _document();
     /**
@@ -12739,7 +12739,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     deleted_at?: boolean
-    units?: boolean | unitsArgs
+    unit?: boolean | unitsArgs
     price_recommendations?: boolean | price_recommendationsFindManyArgs
     product_region_competitor_urls?: boolean | product_region_competitor_urlsFindManyArgs
     product_region_price_data?: boolean | product_region_price_dataFindManyArgs
@@ -12748,7 +12748,7 @@ export namespace Prisma {
   }
 
   export type productsInclude = {
-    units?: boolean | unitsArgs
+    unit?: boolean | unitsArgs
     price_recommendations?: boolean | price_recommendationsFindManyArgs
     product_region_competitor_urls?: boolean | product_region_competitor_urlsFindManyArgs
     product_region_price_data?: boolean | product_region_price_dataFindManyArgs
@@ -12767,7 +12767,7 @@ export namespace Prisma {
     ?'include' extends U
     ? products  & {
     [P in TrueKeys<S['include']>]: 
-          P extends 'units'
+          P extends 'unit'
         ? unitsGetPayload<S['include'][P]> :
         P extends 'price_recommendations'
         ? Array < price_recommendationsGetPayload<S['include'][P]>>  :
@@ -12784,7 +12784,7 @@ export namespace Prisma {
     ? {
     [P in TrueKeys<S['select']>]: P extends keyof products ?products [P]
   : 
-          P extends 'units'
+          P extends 'unit'
         ? unitsGetPayload<S['select'][P]> :
         P extends 'price_recommendations'
         ? Array < price_recommendationsGetPayload<S['select'][P]>>  :
@@ -13135,7 +13135,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    units<T extends unitsArgs = {}>(args?: Subset<T, unitsArgs>): CheckSelect<T, Prisma__unitsClient<units | null >, Prisma__unitsClient<unitsGetPayload<T> | null >>;
+    unit<T extends unitsArgs = {}>(args?: Subset<T, unitsArgs>): CheckSelect<T, Prisma__unitsClient<units | null >, Prisma__unitsClient<unitsGetPayload<T> | null >>;
 
     price_recommendations<T extends price_recommendationsFindManyArgs = {}>(args?: Subset<T, price_recommendationsFindManyArgs>): CheckSelect<T, PrismaPromise<Array<price_recommendations>>, PrismaPromise<Array<price_recommendationsGetPayload<T>>>>;
 
@@ -14685,17 +14685,17 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     deleted_at?: boolean
-    competitors?: boolean | competitorsArgs
-    products?: boolean | productsArgs
-    regions?: boolean | regionsArgs
-    scrape_results?: boolean | scrape_resultsArgs
+    competitor?: boolean | competitorsArgs
+    product?: boolean | productsArgs
+    region?: boolean | regionsArgs
+    scrape_result?: boolean | scrape_resultsArgs
   }
 
   export type scaled_pricesInclude = {
-    competitors?: boolean | competitorsArgs
-    products?: boolean | productsArgs
-    regions?: boolean | regionsArgs
-    scrape_results?: boolean | scrape_resultsArgs
+    competitor?: boolean | competitorsArgs
+    product?: boolean | productsArgs
+    region?: boolean | regionsArgs
+    scrape_result?: boolean | scrape_resultsArgs
   }
 
   export type scaled_pricesGetPayload<
@@ -14709,26 +14709,26 @@ export namespace Prisma {
     ?'include' extends U
     ? scaled_prices  & {
     [P in TrueKeys<S['include']>]: 
-          P extends 'competitors'
+          P extends 'competitor'
         ? competitorsGetPayload<S['include'][P]> :
-        P extends 'products'
+        P extends 'product'
         ? productsGetPayload<S['include'][P]> :
-        P extends 'regions'
+        P extends 'region'
         ? regionsGetPayload<S['include'][P]> :
-        P extends 'scrape_results'
+        P extends 'scrape_result'
         ? scrape_resultsGetPayload<S['include'][P]> : never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]: P extends keyof scaled_prices ?scaled_prices [P]
   : 
-          P extends 'competitors'
+          P extends 'competitor'
         ? competitorsGetPayload<S['select'][P]> :
-        P extends 'products'
+        P extends 'product'
         ? productsGetPayload<S['select'][P]> :
-        P extends 'regions'
+        P extends 'region'
         ? regionsGetPayload<S['select'][P]> :
-        P extends 'scrape_results'
+        P extends 'scrape_result'
         ? scrape_resultsGetPayload<S['select'][P]> : never
   } 
     : scaled_prices
@@ -15069,13 +15069,13 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    competitors<T extends competitorsArgs = {}>(args?: Subset<T, competitorsArgs>): CheckSelect<T, Prisma__competitorsClient<competitors | null >, Prisma__competitorsClient<competitorsGetPayload<T> | null >>;
+    competitor<T extends competitorsArgs = {}>(args?: Subset<T, competitorsArgs>): CheckSelect<T, Prisma__competitorsClient<competitors | null >, Prisma__competitorsClient<competitorsGetPayload<T> | null >>;
 
-    products<T extends productsArgs = {}>(args?: Subset<T, productsArgs>): CheckSelect<T, Prisma__productsClient<products | null >, Prisma__productsClient<productsGetPayload<T> | null >>;
+    product<T extends productsArgs = {}>(args?: Subset<T, productsArgs>): CheckSelect<T, Prisma__productsClient<products | null >, Prisma__productsClient<productsGetPayload<T> | null >>;
 
-    regions<T extends regionsArgs = {}>(args?: Subset<T, regionsArgs>): CheckSelect<T, Prisma__regionsClient<regions | null >, Prisma__regionsClient<regionsGetPayload<T> | null >>;
+    region<T extends regionsArgs = {}>(args?: Subset<T, regionsArgs>): CheckSelect<T, Prisma__regionsClient<regions | null >, Prisma__regionsClient<regionsGetPayload<T> | null >>;
 
-    scrape_results<T extends scrape_resultsArgs = {}>(args?: Subset<T, scrape_resultsArgs>): CheckSelect<T, Prisma__scrape_resultsClient<scrape_results | null >, Prisma__scrape_resultsClient<scrape_resultsGetPayload<T> | null >>;
+    scrape_result<T extends scrape_resultsArgs = {}>(args?: Subset<T, scrape_resultsArgs>): CheckSelect<T, Prisma__scrape_resultsClient<scrape_results | null >, Prisma__scrape_resultsClient<scrape_resultsGetPayload<T> | null >>;
 
     private get _document();
     /**
@@ -15586,13 +15586,13 @@ export namespace Prisma {
     id?: boolean
     scrape_result_id?: boolean
     product_region_competitor_url_id?: boolean
-    product_region_competitor_urls?: boolean | product_region_competitor_urlsArgs
-    scrape_results?: boolean | scrape_resultsArgs
+    product_region_competitor_url?: boolean | product_region_competitor_urlsArgs
+    scrape_result?: boolean | scrape_resultsArgs
   }
 
   export type scrape_result_product_region_competitor_urlInclude = {
-    product_region_competitor_urls?: boolean | product_region_competitor_urlsArgs
-    scrape_results?: boolean | scrape_resultsArgs
+    product_region_competitor_url?: boolean | product_region_competitor_urlsArgs
+    scrape_result?: boolean | scrape_resultsArgs
   }
 
   export type scrape_result_product_region_competitor_urlGetPayload<
@@ -15606,18 +15606,18 @@ export namespace Prisma {
     ?'include' extends U
     ? scrape_result_product_region_competitor_url  & {
     [P in TrueKeys<S['include']>]: 
-          P extends 'product_region_competitor_urls'
+          P extends 'product_region_competitor_url'
         ? product_region_competitor_urlsGetPayload<S['include'][P]> :
-        P extends 'scrape_results'
+        P extends 'scrape_result'
         ? scrape_resultsGetPayload<S['include'][P]> : never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]: P extends keyof scrape_result_product_region_competitor_url ?scrape_result_product_region_competitor_url [P]
   : 
-          P extends 'product_region_competitor_urls'
+          P extends 'product_region_competitor_url'
         ? product_region_competitor_urlsGetPayload<S['select'][P]> :
-        P extends 'scrape_results'
+        P extends 'scrape_result'
         ? scrape_resultsGetPayload<S['select'][P]> : never
   } 
     : scrape_result_product_region_competitor_url
@@ -15958,9 +15958,9 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    product_region_competitor_urls<T extends product_region_competitor_urlsArgs = {}>(args?: Subset<T, product_region_competitor_urlsArgs>): CheckSelect<T, Prisma__product_region_competitor_urlsClient<product_region_competitor_urls | null >, Prisma__product_region_competitor_urlsClient<product_region_competitor_urlsGetPayload<T> | null >>;
+    product_region_competitor_url<T extends product_region_competitor_urlsArgs = {}>(args?: Subset<T, product_region_competitor_urlsArgs>): CheckSelect<T, Prisma__product_region_competitor_urlsClient<product_region_competitor_urls | null >, Prisma__product_region_competitor_urlsClient<product_region_competitor_urlsGetPayload<T> | null >>;
 
-    scrape_results<T extends scrape_resultsArgs = {}>(args?: Subset<T, scrape_resultsArgs>): CheckSelect<T, Prisma__scrape_resultsClient<scrape_results | null >, Prisma__scrape_resultsClient<scrape_resultsGetPayload<T> | null >>;
+    scrape_result<T extends scrape_resultsArgs = {}>(args?: Subset<T, scrape_resultsArgs>): CheckSelect<T, Prisma__scrape_resultsClient<scrape_results | null >, Prisma__scrape_resultsClient<scrape_resultsGetPayload<T> | null >>;
 
     private get _document();
     /**
@@ -16543,16 +16543,16 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     deleted_at?: boolean
-    units?: boolean | unitsArgs
+    unit?: boolean | unitsArgs
     scaled_prices?: boolean | scaled_pricesFindManyArgs
-    scrape_result_product_region_competitor_url?: boolean | scrape_result_product_region_competitor_urlFindManyArgs
+    scrape_result_product_region_competitor_urls?: boolean | scrape_result_product_region_competitor_urlFindManyArgs
     _count?: boolean | Scrape_resultsCountOutputTypeArgs
   }
 
   export type scrape_resultsInclude = {
-    units?: boolean | unitsArgs
+    unit?: boolean | unitsArgs
     scaled_prices?: boolean | scaled_pricesFindManyArgs
-    scrape_result_product_region_competitor_url?: boolean | scrape_result_product_region_competitor_urlFindManyArgs
+    scrape_result_product_region_competitor_urls?: boolean | scrape_result_product_region_competitor_urlFindManyArgs
     _count?: boolean | Scrape_resultsCountOutputTypeArgs
   }
 
@@ -16567,11 +16567,11 @@ export namespace Prisma {
     ?'include' extends U
     ? scrape_results  & {
     [P in TrueKeys<S['include']>]: 
-          P extends 'units'
+          P extends 'unit'
         ? unitsGetPayload<S['include'][P]> :
         P extends 'scaled_prices'
         ? Array < scaled_pricesGetPayload<S['include'][P]>>  :
-        P extends 'scrape_result_product_region_competitor_url'
+        P extends 'scrape_result_product_region_competitor_urls'
         ? Array < scrape_result_product_region_competitor_urlGetPayload<S['include'][P]>>  :
         P extends '_count'
         ? Scrape_resultsCountOutputTypeGetPayload<S['include'][P]> | null : never
@@ -16580,11 +16580,11 @@ export namespace Prisma {
     ? {
     [P in TrueKeys<S['select']>]: P extends keyof scrape_results ?scrape_results [P]
   : 
-          P extends 'units'
+          P extends 'unit'
         ? unitsGetPayload<S['select'][P]> :
         P extends 'scaled_prices'
         ? Array < scaled_pricesGetPayload<S['select'][P]>>  :
-        P extends 'scrape_result_product_region_competitor_url'
+        P extends 'scrape_result_product_region_competitor_urls'
         ? Array < scrape_result_product_region_competitor_urlGetPayload<S['select'][P]>>  :
         P extends '_count'
         ? Scrape_resultsCountOutputTypeGetPayload<S['select'][P]> | null : never
@@ -16927,11 +16927,11 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    units<T extends unitsArgs = {}>(args?: Subset<T, unitsArgs>): CheckSelect<T, Prisma__unitsClient<units | null >, Prisma__unitsClient<unitsGetPayload<T> | null >>;
+    unit<T extends unitsArgs = {}>(args?: Subset<T, unitsArgs>): CheckSelect<T, Prisma__unitsClient<units | null >, Prisma__unitsClient<unitsGetPayload<T> | null >>;
 
     scaled_prices<T extends scaled_pricesFindManyArgs = {}>(args?: Subset<T, scaled_pricesFindManyArgs>): CheckSelect<T, PrismaPromise<Array<scaled_prices>>, PrismaPromise<Array<scaled_pricesGetPayload<T>>>>;
 
-    scrape_result_product_region_competitor_url<T extends scrape_result_product_region_competitor_urlFindManyArgs = {}>(args?: Subset<T, scrape_result_product_region_competitor_urlFindManyArgs>): CheckSelect<T, PrismaPromise<Array<scrape_result_product_region_competitor_url>>, PrismaPromise<Array<scrape_result_product_region_competitor_urlGetPayload<T>>>>;
+    scrape_result_product_region_competitor_urls<T extends scrape_result_product_region_competitor_urlFindManyArgs = {}>(args?: Subset<T, scrape_result_product_region_competitor_urlFindManyArgs>): CheckSelect<T, PrismaPromise<Array<scrape_result_product_region_competitor_url>>, PrismaPromise<Array<scrape_result_product_region_competitor_urlGetPayload<T>>>>;
 
     private get _document();
     /**
@@ -17458,18 +17458,18 @@ export namespace Prisma {
     display_text?: boolean
     base_unit_id?: boolean
     scale_of_base_unit?: boolean
-    units?: boolean | unitsArgs
+    base_unit?: boolean | unitsArgs
     products?: boolean | productsFindManyArgs
     scrape_results?: boolean | scrape_resultsFindManyArgs
-    other_units?: boolean | unitsFindManyArgs
+    units?: boolean | unitsFindManyArgs
     _count?: boolean | UnitsCountOutputTypeArgs
   }
 
   export type unitsInclude = {
-    units?: boolean | unitsArgs
+    base_unit?: boolean | unitsArgs
     products?: boolean | productsFindManyArgs
     scrape_results?: boolean | scrape_resultsFindManyArgs
-    other_units?: boolean | unitsFindManyArgs
+    units?: boolean | unitsFindManyArgs
     _count?: boolean | UnitsCountOutputTypeArgs
   }
 
@@ -17484,13 +17484,13 @@ export namespace Prisma {
     ?'include' extends U
     ? units  & {
     [P in TrueKeys<S['include']>]: 
-          P extends 'units'
+          P extends 'base_unit'
         ? unitsGetPayload<S['include'][P]> :
         P extends 'products'
         ? Array < productsGetPayload<S['include'][P]>>  :
         P extends 'scrape_results'
         ? Array < scrape_resultsGetPayload<S['include'][P]>>  :
-        P extends 'other_units'
+        P extends 'units'
         ? Array < unitsGetPayload<S['include'][P]>>  :
         P extends '_count'
         ? UnitsCountOutputTypeGetPayload<S['include'][P]> | null : never
@@ -17499,13 +17499,13 @@ export namespace Prisma {
     ? {
     [P in TrueKeys<S['select']>]: P extends keyof units ?units [P]
   : 
-          P extends 'units'
+          P extends 'base_unit'
         ? unitsGetPayload<S['select'][P]> :
         P extends 'products'
         ? Array < productsGetPayload<S['select'][P]>>  :
         P extends 'scrape_results'
         ? Array < scrape_resultsGetPayload<S['select'][P]>>  :
-        P extends 'other_units'
+        P extends 'units'
         ? Array < unitsGetPayload<S['select'][P]>>  :
         P extends '_count'
         ? UnitsCountOutputTypeGetPayload<S['select'][P]> | null : never
@@ -17848,13 +17848,13 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    units<T extends unitsArgs = {}>(args?: Subset<T, unitsArgs>): CheckSelect<T, Prisma__unitsClient<units | null >, Prisma__unitsClient<unitsGetPayload<T> | null >>;
+    base_unit<T extends unitsArgs = {}>(args?: Subset<T, unitsArgs>): CheckSelect<T, Prisma__unitsClient<units | null >, Prisma__unitsClient<unitsGetPayload<T> | null >>;
 
     products<T extends productsFindManyArgs = {}>(args?: Subset<T, productsFindManyArgs>): CheckSelect<T, PrismaPromise<Array<products>>, PrismaPromise<Array<productsGetPayload<T>>>>;
 
     scrape_results<T extends scrape_resultsFindManyArgs = {}>(args?: Subset<T, scrape_resultsFindManyArgs>): CheckSelect<T, PrismaPromise<Array<scrape_results>>, PrismaPromise<Array<scrape_resultsGetPayload<T>>>>;
 
-    other_units<T extends unitsFindManyArgs = {}>(args?: Subset<T, unitsFindManyArgs>): CheckSelect<T, PrismaPromise<Array<units>>, PrismaPromise<Array<unitsGetPayload<T>>>>;
+    units<T extends unitsFindManyArgs = {}>(args?: Subset<T, unitsFindManyArgs>): CheckSelect<T, PrismaPromise<Array<units>>, PrismaPromise<Array<unitsGetPayload<T>>>>;
 
     private get _document();
     /**
@@ -18505,8 +18505,8 @@ export namespace Prisma {
     competitor_id?: IntFilter | number
     created_at?: DateTimeFilter | Date | string
     updated_at?: DateTimeNullableFilter | Date | string | null
-    basket_line_items?: XOR<Basket_line_itemsRelationFilter, basket_line_itemsWhereInput>
-    competitors?: XOR<CompetitorsRelationFilter, competitorsWhereInput>
+    basket_line_item?: XOR<Basket_line_itemsRelationFilter, basket_line_itemsWhereInput>
+    competitor?: XOR<CompetitorsRelationFilter, competitorsWhereInput>
   }
 
   export type basket_line_item_competitor_equivalentsOrderByWithRelationInput = {
@@ -18516,8 +18516,8 @@ export namespace Prisma {
     competitor_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    basket_line_items?: basket_line_itemsOrderByWithRelationInput
-    competitors?: competitorsOrderByWithRelationInput
+    basket_line_item?: basket_line_itemsOrderByWithRelationInput
+    competitor?: competitorsOrderByWithRelationInput
   }
 
   export type basket_line_item_competitor_equivalentsWhereUniqueInput = {
@@ -18558,7 +18558,7 @@ export namespace Prisma {
     recommended_price?: FloatFilter | number
     basket_line_item_id?: IntFilter | number
     price_recommendation_id?: IntNullableFilter | number | null
-    basket_line_items?: XOR<Basket_line_itemsRelationFilter, basket_line_itemsWhereInput>
+    basket_line_item?: XOR<Basket_line_itemsRelationFilter, basket_line_itemsWhereInput>
   }
 
   export type basket_line_item_recommended_pricesOrderByWithRelationInput = {
@@ -18566,7 +18566,7 @@ export namespace Prisma {
     recommended_price?: SortOrder
     basket_line_item_id?: SortOrder
     price_recommendation_id?: SortOrder
-    basket_line_items?: basket_line_itemsOrderByWithRelationInput
+    basket_line_item?: basket_line_itemsOrderByWithRelationInput
   }
 
   export type basket_line_item_recommended_pricesWhereUniqueInput = {
@@ -18675,8 +18675,8 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter | Date | string | null
     region_id?: IntFilter | number
     basket_daily_total_id?: IntFilter | number
-    basket_daily_totals?: XOR<Basket_daily_totalsRelationFilter, basket_daily_totalsWhereInput>
-    regions?: XOR<RegionsRelationFilter, regionsWhereInput>
+    basket_daily_total?: XOR<Basket_daily_totalsRelationFilter, basket_daily_totalsWhereInput>
+    region?: XOR<RegionsRelationFilter, regionsWhereInput>
   }
 
   export type basketsOrderByWithRelationInput = {
@@ -18689,8 +18689,8 @@ export namespace Prisma {
     updated_at?: SortOrder
     region_id?: SortOrder
     basket_daily_total_id?: SortOrder
-    basket_daily_totals?: basket_daily_totalsOrderByWithRelationInput
-    regions?: regionsOrderByWithRelationInput
+    basket_daily_total?: basket_daily_totalsOrderByWithRelationInput
+    region?: regionsOrderByWithRelationInput
   }
 
   export type basketsWhereUniqueInput = {
@@ -18738,8 +18738,8 @@ export namespace Prisma {
     region_id?: IntFilter | number
     should_scrape?: BoolFilter | boolean
     should_include_in_recommendation_calculation?: IntNullableFilter | number | null
-    competitors?: XOR<CompetitorsRelationFilter, competitorsWhereInput>
-    regions?: XOR<RegionsRelationFilter, regionsWhereInput>
+    competitor?: XOR<CompetitorsRelationFilter, competitorsWhereInput>
+    region?: XOR<RegionsRelationFilter, regionsWhereInput>
   }
 
   export type competitor_region_dataOrderByWithRelationInput = {
@@ -18748,8 +18748,8 @@ export namespace Prisma {
     region_id?: SortOrder
     should_scrape?: SortOrder
     should_include_in_recommendation_calculation?: SortOrder
-    competitors?: competitorsOrderByWithRelationInput
-    regions?: regionsOrderByWithRelationInput
+    competitor?: competitorsOrderByWithRelationInput
+    region?: regionsOrderByWithRelationInput
   }
 
   export type competitor_region_dataWhereUniqueInput = {
@@ -18877,8 +18877,8 @@ export namespace Prisma {
     list_price?: FloatFilter | number
     created_at?: DateTimeFilter | Date | string
     updated_at?: DateTimeNullableFilter | Date | string | null
-    products?: XOR<ProductsRelationFilter, productsWhereInput>
-    regions?: XOR<RegionsRelationFilter, regionsWhereInput>
+    product?: XOR<ProductsRelationFilter, productsWhereInput>
+    region?: XOR<RegionsRelationFilter, regionsWhereInput>
   }
 
   export type price_recommendationsOrderByWithRelationInput = {
@@ -18889,8 +18889,8 @@ export namespace Prisma {
     list_price?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    products?: productsOrderByWithRelationInput
-    regions?: regionsOrderByWithRelationInput
+    product?: productsOrderByWithRelationInput
+    region?: regionsOrderByWithRelationInput
   }
 
   export type price_recommendationsWhereUniqueInput = {
@@ -18937,11 +18937,11 @@ export namespace Prisma {
     created_at?: DateTimeFilter | Date | string
     updated_at?: DateTimeNullableFilter | Date | string | null
     deleted_at?: DateTimeNullableFilter | Date | string | null
-    competitors?: XOR<CompetitorsRelationFilter, competitorsWhereInput>
-    products?: XOR<ProductsRelationFilter, productsWhereInput>
-    regions?: XOR<RegionsRelationFilter, regionsWhereInput>
+    competitor?: XOR<CompetitorsRelationFilter, competitorsWhereInput>
+    product?: XOR<ProductsRelationFilter, productsWhereInput>
+    region?: XOR<RegionsRelationFilter, regionsWhereInput>
     product_region_competitor_urls_former_urls?: Product_region_competitor_urls_former_urlsListRelationFilter
-    scrape_result_product_region_competitor_url?: Scrape_result_product_region_competitor_urlListRelationFilter
+    scrape_result_product_region_competitor_urls?: Scrape_result_product_region_competitor_urlListRelationFilter
   }
 
   export type product_region_competitor_urlsOrderByWithRelationInput = {
@@ -18953,11 +18953,11 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     deleted_at?: SortOrder
-    competitors?: competitorsOrderByWithRelationInput
-    products?: productsOrderByWithRelationInput
-    regions?: regionsOrderByWithRelationInput
+    competitor?: competitorsOrderByWithRelationInput
+    product?: productsOrderByWithRelationInput
+    region?: regionsOrderByWithRelationInput
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsOrderByRelationAggregateInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlOrderByRelationAggregateInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlOrderByRelationAggregateInput
   }
 
   export type product_region_competitor_urlsWhereUniqueInput = {
@@ -19057,8 +19057,8 @@ export namespace Prisma {
     created_at?: DateTimeFilter | Date | string
     updated_at?: DateTimeNullableFilter | Date | string | null
     deleted_at?: DateTimeNullableFilter | Date | string | null
-    products?: XOR<ProductsRelationFilter, productsWhereInput>
-    regions?: XOR<RegionsRelationFilter, regionsWhereInput>
+    product?: XOR<ProductsRelationFilter, productsWhereInput>
+    region?: XOR<RegionsRelationFilter, regionsWhereInput>
   }
 
   export type product_region_price_dataOrderByWithRelationInput = {
@@ -19071,8 +19071,8 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     deleted_at?: SortOrder
-    products?: productsOrderByWithRelationInput
-    regions?: regionsOrderByWithRelationInput
+    product?: productsOrderByWithRelationInput
+    region?: regionsOrderByWithRelationInput
   }
 
   export type product_region_price_dataWhereUniqueInput = {
@@ -19126,7 +19126,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter | Date | string
     updated_at?: DateTimeNullableFilter | Date | string | null
     deleted_at?: DateTimeNullableFilter | Date | string | null
-    units?: XOR<UnitsRelationFilter, unitsWhereInput>
+    unit?: XOR<UnitsRelationFilter, unitsWhereInput>
     price_recommendations?: Price_recommendationsListRelationFilter
     product_region_competitor_urls?: Product_region_competitor_urlsListRelationFilter
     product_region_price_data?: Product_region_price_dataListRelationFilter
@@ -19144,7 +19144,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     deleted_at?: SortOrder
-    units?: unitsOrderByWithRelationInput
+    unit?: unitsOrderByWithRelationInput
     price_recommendations?: price_recommendationsOrderByRelationAggregateInput
     product_region_competitor_urls?: product_region_competitor_urlsOrderByRelationAggregateInput
     product_region_price_data?: product_region_price_dataOrderByRelationAggregateInput
@@ -19282,10 +19282,10 @@ export namespace Prisma {
     created_at?: DateTimeFilter | Date | string
     updated_at?: DateTimeNullableFilter | Date | string | null
     deleted_at?: DateTimeNullableFilter | Date | string | null
-    competitors?: XOR<CompetitorsRelationFilter, competitorsWhereInput>
-    products?: XOR<ProductsRelationFilter, productsWhereInput>
-    regions?: XOR<RegionsRelationFilter, regionsWhereInput>
-    scrape_results?: XOR<Scrape_resultsRelationFilter, scrape_resultsWhereInput>
+    competitor?: XOR<CompetitorsRelationFilter, competitorsWhereInput>
+    product?: XOR<ProductsRelationFilter, productsWhereInput>
+    region?: XOR<RegionsRelationFilter, regionsWhereInput>
+    scrape_result?: XOR<Scrape_resultsRelationFilter, scrape_resultsWhereInput>
   }
 
   export type scaled_pricesOrderByWithRelationInput = {
@@ -19298,10 +19298,10 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     deleted_at?: SortOrder
-    competitors?: competitorsOrderByWithRelationInput
-    products?: productsOrderByWithRelationInput
-    regions?: regionsOrderByWithRelationInput
-    scrape_results?: scrape_resultsOrderByWithRelationInput
+    competitor?: competitorsOrderByWithRelationInput
+    product?: productsOrderByWithRelationInput
+    region?: regionsOrderByWithRelationInput
+    scrape_result?: scrape_resultsOrderByWithRelationInput
   }
 
   export type scaled_pricesWhereUniqueInput = {
@@ -19347,16 +19347,16 @@ export namespace Prisma {
     id?: IntFilter | number
     scrape_result_id?: IntFilter | number
     product_region_competitor_url_id?: IntFilter | number
-    product_region_competitor_urls?: XOR<Product_region_competitor_urlsRelationFilter, product_region_competitor_urlsWhereInput>
-    scrape_results?: XOR<Scrape_resultsRelationFilter, scrape_resultsWhereInput>
+    product_region_competitor_url?: XOR<Product_region_competitor_urlsRelationFilter, product_region_competitor_urlsWhereInput>
+    scrape_result?: XOR<Scrape_resultsRelationFilter, scrape_resultsWhereInput>
   }
 
   export type scrape_result_product_region_competitor_urlOrderByWithRelationInput = {
     id?: SortOrder
     scrape_result_id?: SortOrder
     product_region_competitor_url_id?: SortOrder
-    product_region_competitor_urls?: product_region_competitor_urlsOrderByWithRelationInput
-    scrape_results?: scrape_resultsOrderByWithRelationInput
+    product_region_competitor_url?: product_region_competitor_urlsOrderByWithRelationInput
+    scrape_result?: scrape_resultsOrderByWithRelationInput
   }
 
   export type scrape_result_product_region_competitor_urlWhereUniqueInput = {
@@ -19398,9 +19398,9 @@ export namespace Prisma {
     created_at?: DateTimeFilter | Date | string
     updated_at?: DateTimeNullableFilter | Date | string | null
     deleted_at?: DateTimeNullableFilter | Date | string | null
-    units?: XOR<UnitsRelationFilter, unitsWhereInput>
+    unit?: XOR<UnitsRelationFilter, unitsWhereInput>
     scaled_prices?: Scaled_pricesListRelationFilter
-    scrape_result_product_region_competitor_url?: Scrape_result_product_region_competitor_urlListRelationFilter
+    scrape_result_product_region_competitor_urls?: Scrape_result_product_region_competitor_urlListRelationFilter
   }
 
   export type scrape_resultsOrderByWithRelationInput = {
@@ -19415,9 +19415,9 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     deleted_at?: SortOrder
-    units?: unitsOrderByWithRelationInput
+    unit?: unitsOrderByWithRelationInput
     scaled_prices?: scaled_pricesOrderByRelationAggregateInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlOrderByRelationAggregateInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlOrderByRelationAggregateInput
   }
 
   export type scrape_resultsWhereUniqueInput = {
@@ -19469,10 +19469,10 @@ export namespace Prisma {
     display_text?: StringFilter | string
     base_unit_id?: IntFilter | number
     scale_of_base_unit?: FloatFilter | number
-    units?: XOR<UnitsRelationFilter, unitsWhereInput>
+    base_unit?: XOR<UnitsRelationFilter, unitsWhereInput>
     products?: ProductsListRelationFilter
     scrape_results?: Scrape_resultsListRelationFilter
-    other_units?: UnitsListRelationFilter
+    units?: UnitsListRelationFilter
   }
 
   export type unitsOrderByWithRelationInput = {
@@ -19481,10 +19481,10 @@ export namespace Prisma {
     display_text?: SortOrder
     base_unit_id?: SortOrder
     scale_of_base_unit?: SortOrder
-    units?: unitsOrderByWithRelationInput
+    base_unit?: unitsOrderByWithRelationInput
     products?: productsOrderByRelationAggregateInput
     scrape_results?: scrape_resultsOrderByRelationAggregateInput
-    other_units?: unitsOrderByRelationAggregateInput
+    units?: unitsOrderByRelationAggregateInput
   }
 
   export type unitsWhereUniqueInput = {
@@ -19521,7 +19521,7 @@ export namespace Prisma {
     daily_indexes: JsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
-    baskets?: basketsCreateNestedManyWithoutBasket_daily_totalsInput
+    baskets?: basketsCreateNestedManyWithoutBasket_daily_totalInput
   }
 
   export type basket_daily_totalsUncheckedCreateInput = {
@@ -19531,7 +19531,7 @@ export namespace Prisma {
     daily_indexes: JsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
-    baskets?: basketsUncheckedCreateNestedManyWithoutBasket_daily_totalsInput
+    baskets?: basketsUncheckedCreateNestedManyWithoutBasket_daily_totalInput
   }
 
   export type basket_daily_totalsUpdateInput = {
@@ -19540,7 +19540,7 @@ export namespace Prisma {
     daily_indexes?: JsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    baskets?: basketsUpdateManyWithoutBasket_daily_totalsInput
+    baskets?: basketsUpdateManyWithoutBasket_daily_totalInput
   }
 
   export type basket_daily_totalsUncheckedUpdateInput = {
@@ -19550,7 +19550,7 @@ export namespace Prisma {
     daily_indexes?: JsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    baskets?: basketsUncheckedUpdateManyWithoutBasket_daily_totalsInput
+    baskets?: basketsUncheckedUpdateManyWithoutBasket_daily_totalInput
   }
 
   export type basket_daily_totalsCreateManyInput = {
@@ -19583,8 +19583,8 @@ export namespace Prisma {
     competitor_price?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
-    basket_line_items: basket_line_itemsCreateNestedOneWithoutBasket_line_item_competitor_equivalentsInput
-    competitors: competitorsCreateNestedOneWithoutBasket_line_item_competitor_equivalentsInput
+    basket_line_item: basket_line_itemsCreateNestedOneWithoutBasket_line_item_competitor_equivalentsInput
+    competitor: competitorsCreateNestedOneWithoutBasket_line_item_competitor_equivalentsInput
   }
 
   export type basket_line_item_competitor_equivalentsUncheckedCreateInput = {
@@ -19600,8 +19600,8 @@ export namespace Prisma {
     competitor_price?: NullableFloatFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    basket_line_items?: basket_line_itemsUpdateOneRequiredWithoutBasket_line_item_competitor_equivalentsInput
-    competitors?: competitorsUpdateOneRequiredWithoutBasket_line_item_competitor_equivalentsInput
+    basket_line_item?: basket_line_itemsUpdateOneRequiredWithoutBasket_line_item_competitor_equivalentsInput
+    competitor?: competitorsUpdateOneRequiredWithoutBasket_line_item_competitor_equivalentsInput
   }
 
   export type basket_line_item_competitor_equivalentsUncheckedUpdateInput = {
@@ -19640,7 +19640,7 @@ export namespace Prisma {
   export type basket_line_item_recommended_pricesCreateInput = {
     recommended_price: number
     price_recommendation_id?: number | null
-    basket_line_items: basket_line_itemsCreateNestedOneWithoutBasket_line_item_recommended_pricesInput
+    basket_line_item: basket_line_itemsCreateNestedOneWithoutBasket_line_item_recommended_pricesInput
   }
 
   export type basket_line_item_recommended_pricesUncheckedCreateInput = {
@@ -19653,7 +19653,7 @@ export namespace Prisma {
   export type basket_line_item_recommended_pricesUpdateInput = {
     recommended_price?: FloatFieldUpdateOperationsInput | number
     price_recommendation_id?: NullableIntFieldUpdateOperationsInput | number | null
-    basket_line_items?: basket_line_itemsUpdateOneRequiredWithoutBasket_line_item_recommended_pricesInput
+    basket_line_item?: basket_line_itemsUpdateOneRequiredWithoutBasket_line_item_recommended_pricesInput
   }
 
   export type basket_line_item_recommended_pricesUncheckedUpdateInput = {
@@ -19691,8 +19691,8 @@ export namespace Prisma {
     competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
     competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price: number
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsCreateNestedManyWithoutBasket_line_itemsInput
-    basket_line_item_recommended_prices?: basket_line_item_recommended_pricesCreateNestedManyWithoutBasket_line_itemsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsCreateNestedManyWithoutBasket_line_itemInput
+    basket_line_item_recommended_prices?: basket_line_item_recommended_pricesCreateNestedManyWithoutBasket_line_itemInput
   }
 
   export type basket_line_itemsUncheckedCreateInput = {
@@ -19705,8 +19705,8 @@ export namespace Prisma {
     competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
     competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price: number
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedCreateNestedManyWithoutBasket_line_itemsInput
-    basket_line_item_recommended_prices?: basket_line_item_recommended_pricesUncheckedCreateNestedManyWithoutBasket_line_itemsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedCreateNestedManyWithoutBasket_line_itemInput
+    basket_line_item_recommended_prices?: basket_line_item_recommended_pricesUncheckedCreateNestedManyWithoutBasket_line_itemInput
   }
 
   export type basket_line_itemsUpdateInput = {
@@ -19718,8 +19718,8 @@ export namespace Prisma {
     competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
     competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price?: FloatFieldUpdateOperationsInput | number
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUpdateManyWithoutBasket_line_itemsInput
-    basket_line_item_recommended_prices?: basket_line_item_recommended_pricesUpdateManyWithoutBasket_line_itemsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUpdateManyWithoutBasket_line_itemInput
+    basket_line_item_recommended_prices?: basket_line_item_recommended_pricesUpdateManyWithoutBasket_line_itemInput
   }
 
   export type basket_line_itemsUncheckedUpdateInput = {
@@ -19732,8 +19732,8 @@ export namespace Prisma {
     competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
     competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price?: FloatFieldUpdateOperationsInput | number
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutBasket_line_itemsInput
-    basket_line_item_recommended_prices?: basket_line_item_recommended_pricesUncheckedUpdateManyWithoutBasket_line_itemsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutBasket_line_itemInput
+    basket_line_item_recommended_prices?: basket_line_item_recommended_pricesUncheckedUpdateManyWithoutBasket_line_itemInput
   }
 
   export type basket_line_itemsCreateManyInput = {
@@ -19778,8 +19778,8 @@ export namespace Prisma {
     basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
-    basket_daily_totals: basket_daily_totalsCreateNestedOneWithoutBasketsInput
-    regions: regionsCreateNestedOneWithoutBasketsInput
+    basket_daily_total: basket_daily_totalsCreateNestedOneWithoutBasketsInput
+    region: regionsCreateNestedOneWithoutBasketsInput
   }
 
   export type basketsUncheckedCreateInput = {
@@ -19801,8 +19801,8 @@ export namespace Prisma {
     basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    basket_daily_totals?: basket_daily_totalsUpdateOneRequiredWithoutBasketsInput
-    regions?: regionsUpdateOneRequiredWithoutBasketsInput
+    basket_daily_total?: basket_daily_totalsUpdateOneRequiredWithoutBasketsInput
+    region?: regionsUpdateOneRequiredWithoutBasketsInput
   }
 
   export type basketsUncheckedUpdateInput = {
@@ -19853,8 +19853,8 @@ export namespace Prisma {
   export type competitor_region_dataCreateInput = {
     should_scrape?: boolean
     should_include_in_recommendation_calculation?: number | null
-    competitors: competitorsCreateNestedOneWithoutCompetitor_region_dataInput
-    regions: regionsCreateNestedOneWithoutCompetitor_region_dataInput
+    competitor: competitorsCreateNestedOneWithoutCompetitor_region_dataInput
+    region: regionsCreateNestedOneWithoutCompetitor_region_dataInput
   }
 
   export type competitor_region_dataUncheckedCreateInput = {
@@ -19868,8 +19868,8 @@ export namespace Prisma {
   export type competitor_region_dataUpdateInput = {
     should_scrape?: BoolFieldUpdateOperationsInput | boolean
     should_include_in_recommendation_calculation?: NullableIntFieldUpdateOperationsInput | number | null
-    competitors?: competitorsUpdateOneRequiredWithoutCompetitor_region_dataInput
-    regions?: regionsUpdateOneRequiredWithoutCompetitor_region_dataInput
+    competitor?: competitorsUpdateOneRequiredWithoutCompetitor_region_dataInput
+    region?: regionsUpdateOneRequiredWithoutCompetitor_region_dataInput
   }
 
   export type competitor_region_dataUncheckedUpdateInput = {
@@ -19904,39 +19904,39 @@ export namespace Prisma {
   export type competitorsCreateInput = {
     slug: string
     display_text: string
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsCreateNestedManyWithoutCompetitorsInput
-    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutCompetitorsInput
-    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutCompetitorsInput
-    scaled_prices?: scaled_pricesCreateNestedManyWithoutCompetitorsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsCreateNestedManyWithoutCompetitorInput
+    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutCompetitorInput
+    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutCompetitorInput
+    scaled_prices?: scaled_pricesCreateNestedManyWithoutCompetitorInput
   }
 
   export type competitorsUncheckedCreateInput = {
     id?: number
     slug: string
     display_text: string
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedCreateNestedManyWithoutCompetitorsInput
-    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutCompetitorsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutCompetitorsInput
-    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutCompetitorsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedCreateNestedManyWithoutCompetitorInput
+    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutCompetitorInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutCompetitorInput
+    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutCompetitorInput
   }
 
   export type competitorsUpdateInput = {
     slug?: StringFieldUpdateOperationsInput | string
     display_text?: StringFieldUpdateOperationsInput | string
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUpdateManyWithoutCompetitorsInput
-    competitor_region_data?: competitor_region_dataUpdateManyWithoutCompetitorsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutCompetitorsInput
-    scaled_prices?: scaled_pricesUpdateManyWithoutCompetitorsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUpdateManyWithoutCompetitorInput
+    competitor_region_data?: competitor_region_dataUpdateManyWithoutCompetitorInput
+    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutCompetitorInput
+    scaled_prices?: scaled_pricesUpdateManyWithoutCompetitorInput
   }
 
   export type competitorsUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     display_text?: StringFieldUpdateOperationsInput | string
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutCompetitorsInput
-    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutCompetitorsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutCompetitorsInput
-    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutCompetitorsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutCompetitorInput
+    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutCompetitorInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutCompetitorInput
+    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutCompetitorInput
   }
 
   export type competitorsCreateManyInput = {
@@ -20000,8 +20000,8 @@ export namespace Prisma {
     list_price: number
     created_at?: Date | string
     updated_at?: Date | string | null
-    products: productsCreateNestedOneWithoutPrice_recommendationsInput
-    regions: regionsCreateNestedOneWithoutPrice_recommendationsInput
+    product: productsCreateNestedOneWithoutPrice_recommendationsInput
+    region: regionsCreateNestedOneWithoutPrice_recommendationsInput
   }
 
   export type price_recommendationsUncheckedCreateInput = {
@@ -20019,8 +20019,8 @@ export namespace Prisma {
     list_price?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    products?: productsUpdateOneRequiredWithoutPrice_recommendationsInput
-    regions?: regionsUpdateOneRequiredWithoutPrice_recommendationsInput
+    product?: productsUpdateOneRequiredWithoutPrice_recommendationsInput
+    region?: regionsUpdateOneRequiredWithoutPrice_recommendationsInput
   }
 
   export type price_recommendationsUncheckedUpdateInput = {
@@ -20065,11 +20065,11 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    competitors: competitorsCreateNestedOneWithoutProduct_region_competitor_urlsInput
-    products: productsCreateNestedOneWithoutProduct_region_competitor_urlsInput
-    regions: regionsCreateNestedOneWithoutProduct_region_competitor_urlsInput
+    competitor: competitorsCreateNestedOneWithoutProduct_region_competitor_urlsInput
+    product: productsCreateNestedOneWithoutProduct_region_competitor_urlsInput
+    region: regionsCreateNestedOneWithoutProduct_region_competitor_urlsInput
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsCreateNestedManyWithoutProduct_region_competitor_urlsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlCreateNestedManyWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlCreateNestedManyWithoutProduct_region_competitor_urlInput
   }
 
   export type product_region_competitor_urlsUncheckedCreateInput = {
@@ -20082,7 +20082,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsUncheckedCreateNestedManyWithoutProduct_region_competitor_urlsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutProduct_region_competitor_urlInput
   }
 
   export type product_region_competitor_urlsUpdateInput = {
@@ -20090,11 +20090,11 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitors?: competitorsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
-    products?: productsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
-    regions?: regionsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
+    competitor?: competitorsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
+    product?: productsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
+    region?: regionsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsUpdateManyWithoutProduct_region_competitor_urlsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUpdateManyWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUpdateManyWithoutProduct_region_competitor_urlInput
   }
 
   export type product_region_competitor_urlsUncheckedUpdateInput = {
@@ -20107,7 +20107,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsUncheckedUpdateManyWithoutProduct_region_competitor_urlsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutProduct_region_competitor_urlInput
   }
 
   export type product_region_competitor_urlsCreateManyInput = {
@@ -20198,8 +20198,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    products: productsCreateNestedOneWithoutProduct_region_price_dataInput
-    regions: regionsCreateNestedOneWithoutProduct_region_price_dataInput
+    product: productsCreateNestedOneWithoutProduct_region_price_dataInput
+    region: regionsCreateNestedOneWithoutProduct_region_price_dataInput
   }
 
   export type product_region_price_dataUncheckedCreateInput = {
@@ -20221,8 +20221,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    products?: productsUpdateOneRequiredWithoutProduct_region_price_dataInput
-    regions?: regionsUpdateOneRequiredWithoutProduct_region_price_dataInput
+    product?: productsUpdateOneRequiredWithoutProduct_region_price_dataInput
+    region?: regionsUpdateOneRequiredWithoutProduct_region_price_dataInput
   }
 
   export type product_region_price_dataUncheckedUpdateInput = {
@@ -20279,11 +20279,11 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    units: unitsCreateNestedOneWithoutProductsInput
-    price_recommendations?: price_recommendationsCreateNestedManyWithoutProductsInput
-    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutProductsInput
-    scaled_prices?: scaled_pricesCreateNestedManyWithoutProductsInput
+    unit: unitsCreateNestedOneWithoutProductsInput
+    price_recommendations?: price_recommendationsCreateNestedManyWithoutProductInput
+    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutProductInput
+    scaled_prices?: scaled_pricesCreateNestedManyWithoutProductInput
   }
 
   export type productsUncheckedCreateInput = {
@@ -20297,10 +20297,10 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutProductsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutProductsInput
-    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutProductsInput
+    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutProductInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutProductInput
+    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type productsUpdateInput = {
@@ -20312,11 +20312,11 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    units?: unitsUpdateOneRequiredWithoutProductsInput
-    price_recommendations?: price_recommendationsUpdateManyWithoutProductsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataUpdateManyWithoutProductsInput
-    scaled_prices?: scaled_pricesUpdateManyWithoutProductsInput
+    unit?: unitsUpdateOneRequiredWithoutProductsInput
+    price_recommendations?: price_recommendationsUpdateManyWithoutProductInput
+    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataUpdateManyWithoutProductInput
+    scaled_prices?: scaled_pricesUpdateManyWithoutProductInput
   }
 
   export type productsUncheckedUpdateInput = {
@@ -20330,10 +20330,10 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutProductsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutProductsInput
-    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutProductsInput
+    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutProductInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutProductInput
+    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutProductInput
   }
 
   export type productsCreateManyInput = {
@@ -20383,12 +20383,12 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    baskets?: basketsCreateNestedManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsCreateNestedManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesCreateNestedManyWithoutRegionsInput
+    baskets?: basketsCreateNestedManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutRegionInput
+    price_recommendations?: price_recommendationsCreateNestedManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutRegionInput
+    scaled_prices?: scaled_pricesCreateNestedManyWithoutRegionInput
   }
 
   export type regionsUncheckedCreateInput = {
@@ -20402,12 +20402,12 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    baskets?: basketsUncheckedCreateNestedManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutRegionsInput
+    baskets?: basketsUncheckedCreateNestedManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutRegionInput
+    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutRegionInput
+    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutRegionInput
   }
 
   export type regionsUpdateInput = {
@@ -20420,12 +20420,12 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    baskets?: basketsUpdateManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataUpdateManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsUpdateManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataUpdateManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesUpdateManyWithoutRegionsInput
+    baskets?: basketsUpdateManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataUpdateManyWithoutRegionInput
+    price_recommendations?: price_recommendationsUpdateManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataUpdateManyWithoutRegionInput
+    scaled_prices?: scaled_pricesUpdateManyWithoutRegionInput
   }
 
   export type regionsUncheckedUpdateInput = {
@@ -20439,12 +20439,12 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    baskets?: basketsUncheckedUpdateManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutRegionsInput
+    baskets?: basketsUncheckedUpdateManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutRegionInput
+    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutRegionInput
+    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutRegionInput
   }
 
   export type regionsCreateManyInput = {
@@ -20490,10 +20490,10 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    competitors: competitorsCreateNestedOneWithoutScaled_pricesInput
-    products: productsCreateNestedOneWithoutScaled_pricesInput
-    regions: regionsCreateNestedOneWithoutScaled_pricesInput
-    scrape_results: scrape_resultsCreateNestedOneWithoutScaled_pricesInput
+    competitor: competitorsCreateNestedOneWithoutScaled_pricesInput
+    product: productsCreateNestedOneWithoutScaled_pricesInput
+    region: regionsCreateNestedOneWithoutScaled_pricesInput
+    scrape_result: scrape_resultsCreateNestedOneWithoutScaled_pricesInput
   }
 
   export type scaled_pricesUncheckedCreateInput = {
@@ -20513,10 +20513,10 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitors?: competitorsUpdateOneRequiredWithoutScaled_pricesInput
-    products?: productsUpdateOneRequiredWithoutScaled_pricesInput
-    regions?: regionsUpdateOneRequiredWithoutScaled_pricesInput
-    scrape_results?: scrape_resultsUpdateOneRequiredWithoutScaled_pricesInput
+    competitor?: competitorsUpdateOneRequiredWithoutScaled_pricesInput
+    product?: productsUpdateOneRequiredWithoutScaled_pricesInput
+    region?: regionsUpdateOneRequiredWithoutScaled_pricesInput
+    scrape_result?: scrape_resultsUpdateOneRequiredWithoutScaled_pricesInput
   }
 
   export type scaled_pricesUncheckedUpdateInput = {
@@ -20563,8 +20563,8 @@ export namespace Prisma {
   }
 
   export type scrape_result_product_region_competitor_urlCreateInput = {
-    product_region_competitor_urls: product_region_competitor_urlsCreateNestedOneWithoutScrape_result_product_region_competitor_urlInput
-    scrape_results: scrape_resultsCreateNestedOneWithoutScrape_result_product_region_competitor_urlInput
+    product_region_competitor_url: product_region_competitor_urlsCreateNestedOneWithoutScrape_result_product_region_competitor_urlsInput
+    scrape_result: scrape_resultsCreateNestedOneWithoutScrape_result_product_region_competitor_urlsInput
   }
 
   export type scrape_result_product_region_competitor_urlUncheckedCreateInput = {
@@ -20574,8 +20574,8 @@ export namespace Prisma {
   }
 
   export type scrape_result_product_region_competitor_urlUpdateInput = {
-    product_region_competitor_urls?: product_region_competitor_urlsUpdateOneRequiredWithoutScrape_result_product_region_competitor_urlInput
-    scrape_results?: scrape_resultsUpdateOneRequiredWithoutScrape_result_product_region_competitor_urlInput
+    product_region_competitor_url?: product_region_competitor_urlsUpdateOneRequiredWithoutScrape_result_product_region_competitor_urlsInput
+    scrape_result?: scrape_resultsUpdateOneRequiredWithoutScrape_result_product_region_competitor_urlsInput
   }
 
   export type scrape_result_product_region_competitor_urlUncheckedUpdateInput = {
@@ -20610,9 +20610,9 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    units: unitsCreateNestedOneWithoutScrape_resultsInput
-    scaled_prices?: scaled_pricesCreateNestedManyWithoutScrape_resultsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlCreateNestedManyWithoutScrape_resultsInput
+    unit: unitsCreateNestedOneWithoutScrape_resultsInput
+    scaled_prices?: scaled_pricesCreateNestedManyWithoutScrape_resultInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlCreateNestedManyWithoutScrape_resultInput
   }
 
   export type scrape_resultsUncheckedCreateInput = {
@@ -20627,8 +20627,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutScrape_resultsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutScrape_resultsInput
+    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutScrape_resultInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutScrape_resultInput
   }
 
   export type scrape_resultsUpdateInput = {
@@ -20641,9 +20641,9 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    units?: unitsUpdateOneRequiredWithoutScrape_resultsInput
-    scaled_prices?: scaled_pricesUpdateManyWithoutScrape_resultsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUpdateManyWithoutScrape_resultsInput
+    unit?: unitsUpdateOneRequiredWithoutScrape_resultsInput
+    scaled_prices?: scaled_pricesUpdateManyWithoutScrape_resultInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUpdateManyWithoutScrape_resultInput
   }
 
   export type scrape_resultsUncheckedUpdateInput = {
@@ -20658,8 +20658,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutScrape_resultsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutScrape_resultsInput
+    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutScrape_resultInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutScrape_resultInput
   }
 
   export type scrape_resultsCreateManyInput = {
@@ -20706,10 +20706,10 @@ export namespace Prisma {
     slug: string
     display_text: string
     scale_of_base_unit: number
-    units: unitsCreateNestedOneWithoutOther_unitsInput
-    products?: productsCreateNestedManyWithoutUnitsInput
-    scrape_results?: scrape_resultsCreateNestedManyWithoutUnitsInput
-    other_units?: unitsCreateNestedManyWithoutUnitsInput
+    base_unit: unitsCreateNestedOneWithoutUnitsInput
+    products?: productsCreateNestedManyWithoutUnitInput
+    scrape_results?: scrape_resultsCreateNestedManyWithoutUnitInput
+    units?: unitsCreateNestedManyWithoutBase_unitInput
   }
 
   export type unitsUncheckedCreateInput = {
@@ -20718,19 +20718,19 @@ export namespace Prisma {
     display_text: string
     base_unit_id: number
     scale_of_base_unit: number
-    products?: productsUncheckedCreateNestedManyWithoutUnitsInput
-    scrape_results?: scrape_resultsUncheckedCreateNestedManyWithoutUnitsInput
-    other_units?: unitsUncheckedCreateNestedManyWithoutUnitsInput
+    products?: productsUncheckedCreateNestedManyWithoutUnitInput
+    scrape_results?: scrape_resultsUncheckedCreateNestedManyWithoutUnitInput
+    units?: unitsUncheckedCreateNestedManyWithoutBase_unitInput
   }
 
   export type unitsUpdateInput = {
     slug?: StringFieldUpdateOperationsInput | string
     display_text?: StringFieldUpdateOperationsInput | string
     scale_of_base_unit?: FloatFieldUpdateOperationsInput | number
-    units?: unitsUpdateOneRequiredWithoutOther_unitsInput
-    products?: productsUpdateManyWithoutUnitsInput
-    scrape_results?: scrape_resultsUpdateManyWithoutUnitsInput
-    other_units?: unitsUpdateManyWithoutUnitsInput
+    base_unit?: unitsUpdateOneRequiredWithoutUnitsInput
+    products?: productsUpdateManyWithoutUnitInput
+    scrape_results?: scrape_resultsUpdateManyWithoutUnitInput
+    units?: unitsUpdateManyWithoutBase_unitInput
   }
 
   export type unitsUncheckedUpdateInput = {
@@ -20739,9 +20739,9 @@ export namespace Prisma {
     display_text?: StringFieldUpdateOperationsInput | string
     base_unit_id?: IntFieldUpdateOperationsInput | number
     scale_of_base_unit?: FloatFieldUpdateOperationsInput | number
-    products?: productsUncheckedUpdateManyWithoutUnitsInput
-    scrape_results?: scrape_resultsUncheckedUpdateManyWithoutUnitsInput
-    other_units?: unitsUncheckedUpdateManyWithoutUnitsInput
+    products?: productsUncheckedUpdateManyWithoutUnitInput
+    scrape_results?: scrape_resultsUncheckedUpdateManyWithoutUnitInput
+    units?: unitsUncheckedUpdateManyWithoutBase_unitInput
   }
 
   export type unitsCreateManyInput = {
@@ -22020,17 +22020,17 @@ export namespace Prisma {
     scale_of_base_unit?: SortOrder
   }
 
-  export type basketsCreateNestedManyWithoutBasket_daily_totalsInput = {
-    create?: XOR<Enumerable<basketsCreateWithoutBasket_daily_totalsInput>, Enumerable<basketsUncheckedCreateWithoutBasket_daily_totalsInput>>
-    connectOrCreate?: Enumerable<basketsCreateOrConnectWithoutBasket_daily_totalsInput>
-    createMany?: basketsCreateManyBasket_daily_totalsInputEnvelope
+  export type basketsCreateNestedManyWithoutBasket_daily_totalInput = {
+    create?: XOR<Enumerable<basketsCreateWithoutBasket_daily_totalInput>, Enumerable<basketsUncheckedCreateWithoutBasket_daily_totalInput>>
+    connectOrCreate?: Enumerable<basketsCreateOrConnectWithoutBasket_daily_totalInput>
+    createMany?: basketsCreateManyBasket_daily_totalInputEnvelope
     connect?: Enumerable<basketsWhereUniqueInput>
   }
 
-  export type basketsUncheckedCreateNestedManyWithoutBasket_daily_totalsInput = {
-    create?: XOR<Enumerable<basketsCreateWithoutBasket_daily_totalsInput>, Enumerable<basketsUncheckedCreateWithoutBasket_daily_totalsInput>>
-    connectOrCreate?: Enumerable<basketsCreateOrConnectWithoutBasket_daily_totalsInput>
-    createMany?: basketsCreateManyBasket_daily_totalsInputEnvelope
+  export type basketsUncheckedCreateNestedManyWithoutBasket_daily_totalInput = {
+    create?: XOR<Enumerable<basketsCreateWithoutBasket_daily_totalInput>, Enumerable<basketsUncheckedCreateWithoutBasket_daily_totalInput>>
+    connectOrCreate?: Enumerable<basketsCreateOrConnectWithoutBasket_daily_totalInput>
+    createMany?: basketsCreateManyBasket_daily_totalInputEnvelope
     connect?: Enumerable<basketsWhereUniqueInput>
   }
 
@@ -22042,17 +22042,17 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
-  export type basketsUpdateManyWithoutBasket_daily_totalsInput = {
-    create?: XOR<Enumerable<basketsCreateWithoutBasket_daily_totalsInput>, Enumerable<basketsUncheckedCreateWithoutBasket_daily_totalsInput>>
-    connectOrCreate?: Enumerable<basketsCreateOrConnectWithoutBasket_daily_totalsInput>
-    upsert?: Enumerable<basketsUpsertWithWhereUniqueWithoutBasket_daily_totalsInput>
-    createMany?: basketsCreateManyBasket_daily_totalsInputEnvelope
+  export type basketsUpdateManyWithoutBasket_daily_totalInput = {
+    create?: XOR<Enumerable<basketsCreateWithoutBasket_daily_totalInput>, Enumerable<basketsUncheckedCreateWithoutBasket_daily_totalInput>>
+    connectOrCreate?: Enumerable<basketsCreateOrConnectWithoutBasket_daily_totalInput>
+    upsert?: Enumerable<basketsUpsertWithWhereUniqueWithoutBasket_daily_totalInput>
+    createMany?: basketsCreateManyBasket_daily_totalInputEnvelope
     connect?: Enumerable<basketsWhereUniqueInput>
     set?: Enumerable<basketsWhereUniqueInput>
     disconnect?: Enumerable<basketsWhereUniqueInput>
     delete?: Enumerable<basketsWhereUniqueInput>
-    update?: Enumerable<basketsUpdateWithWhereUniqueWithoutBasket_daily_totalsInput>
-    updateMany?: Enumerable<basketsUpdateManyWithWhereWithoutBasket_daily_totalsInput>
+    update?: Enumerable<basketsUpdateWithWhereUniqueWithoutBasket_daily_totalInput>
+    updateMany?: Enumerable<basketsUpdateManyWithWhereWithoutBasket_daily_totalInput>
     deleteMany?: Enumerable<basketsScalarWhereInput>
   }
 
@@ -22064,17 +22064,17 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type basketsUncheckedUpdateManyWithoutBasket_daily_totalsInput = {
-    create?: XOR<Enumerable<basketsCreateWithoutBasket_daily_totalsInput>, Enumerable<basketsUncheckedCreateWithoutBasket_daily_totalsInput>>
-    connectOrCreate?: Enumerable<basketsCreateOrConnectWithoutBasket_daily_totalsInput>
-    upsert?: Enumerable<basketsUpsertWithWhereUniqueWithoutBasket_daily_totalsInput>
-    createMany?: basketsCreateManyBasket_daily_totalsInputEnvelope
+  export type basketsUncheckedUpdateManyWithoutBasket_daily_totalInput = {
+    create?: XOR<Enumerable<basketsCreateWithoutBasket_daily_totalInput>, Enumerable<basketsUncheckedCreateWithoutBasket_daily_totalInput>>
+    connectOrCreate?: Enumerable<basketsCreateOrConnectWithoutBasket_daily_totalInput>
+    upsert?: Enumerable<basketsUpsertWithWhereUniqueWithoutBasket_daily_totalInput>
+    createMany?: basketsCreateManyBasket_daily_totalInputEnvelope
     connect?: Enumerable<basketsWhereUniqueInput>
     set?: Enumerable<basketsWhereUniqueInput>
     disconnect?: Enumerable<basketsWhereUniqueInput>
     delete?: Enumerable<basketsWhereUniqueInput>
-    update?: Enumerable<basketsUpdateWithWhereUniqueWithoutBasket_daily_totalsInput>
-    updateMany?: Enumerable<basketsUpdateManyWithWhereWithoutBasket_daily_totalsInput>
+    update?: Enumerable<basketsUpdateWithWhereUniqueWithoutBasket_daily_totalInput>
+    updateMany?: Enumerable<basketsUpdateManyWithWhereWithoutBasket_daily_totalInput>
     deleteMany?: Enumerable<basketsScalarWhereInput>
   }
 
@@ -22144,31 +22144,31 @@ export namespace Prisma {
     update?: XOR<basket_line_itemsUpdateWithoutBasket_line_item_recommended_pricesInput, basket_line_itemsUncheckedUpdateWithoutBasket_line_item_recommended_pricesInput>
   }
 
-  export type basket_line_item_competitor_equivalentsCreateNestedManyWithoutBasket_line_itemsInput = {
-    create?: XOR<Enumerable<basket_line_item_competitor_equivalentsCreateWithoutBasket_line_itemsInput>, Enumerable<basket_line_item_competitor_equivalentsUncheckedCreateWithoutBasket_line_itemsInput>>
-    connectOrCreate?: Enumerable<basket_line_item_competitor_equivalentsCreateOrConnectWithoutBasket_line_itemsInput>
-    createMany?: basket_line_item_competitor_equivalentsCreateManyBasket_line_itemsInputEnvelope
+  export type basket_line_item_competitor_equivalentsCreateNestedManyWithoutBasket_line_itemInput = {
+    create?: XOR<Enumerable<basket_line_item_competitor_equivalentsCreateWithoutBasket_line_itemInput>, Enumerable<basket_line_item_competitor_equivalentsUncheckedCreateWithoutBasket_line_itemInput>>
+    connectOrCreate?: Enumerable<basket_line_item_competitor_equivalentsCreateOrConnectWithoutBasket_line_itemInput>
+    createMany?: basket_line_item_competitor_equivalentsCreateManyBasket_line_itemInputEnvelope
     connect?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
   }
 
-  export type basket_line_item_recommended_pricesCreateNestedManyWithoutBasket_line_itemsInput = {
-    create?: XOR<Enumerable<basket_line_item_recommended_pricesCreateWithoutBasket_line_itemsInput>, Enumerable<basket_line_item_recommended_pricesUncheckedCreateWithoutBasket_line_itemsInput>>
-    connectOrCreate?: Enumerable<basket_line_item_recommended_pricesCreateOrConnectWithoutBasket_line_itemsInput>
-    createMany?: basket_line_item_recommended_pricesCreateManyBasket_line_itemsInputEnvelope
+  export type basket_line_item_recommended_pricesCreateNestedManyWithoutBasket_line_itemInput = {
+    create?: XOR<Enumerable<basket_line_item_recommended_pricesCreateWithoutBasket_line_itemInput>, Enumerable<basket_line_item_recommended_pricesUncheckedCreateWithoutBasket_line_itemInput>>
+    connectOrCreate?: Enumerable<basket_line_item_recommended_pricesCreateOrConnectWithoutBasket_line_itemInput>
+    createMany?: basket_line_item_recommended_pricesCreateManyBasket_line_itemInputEnvelope
     connect?: Enumerable<basket_line_item_recommended_pricesWhereUniqueInput>
   }
 
-  export type basket_line_item_competitor_equivalentsUncheckedCreateNestedManyWithoutBasket_line_itemsInput = {
-    create?: XOR<Enumerable<basket_line_item_competitor_equivalentsCreateWithoutBasket_line_itemsInput>, Enumerable<basket_line_item_competitor_equivalentsUncheckedCreateWithoutBasket_line_itemsInput>>
-    connectOrCreate?: Enumerable<basket_line_item_competitor_equivalentsCreateOrConnectWithoutBasket_line_itemsInput>
-    createMany?: basket_line_item_competitor_equivalentsCreateManyBasket_line_itemsInputEnvelope
+  export type basket_line_item_competitor_equivalentsUncheckedCreateNestedManyWithoutBasket_line_itemInput = {
+    create?: XOR<Enumerable<basket_line_item_competitor_equivalentsCreateWithoutBasket_line_itemInput>, Enumerable<basket_line_item_competitor_equivalentsUncheckedCreateWithoutBasket_line_itemInput>>
+    connectOrCreate?: Enumerable<basket_line_item_competitor_equivalentsCreateOrConnectWithoutBasket_line_itemInput>
+    createMany?: basket_line_item_competitor_equivalentsCreateManyBasket_line_itemInputEnvelope
     connect?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
   }
 
-  export type basket_line_item_recommended_pricesUncheckedCreateNestedManyWithoutBasket_line_itemsInput = {
-    create?: XOR<Enumerable<basket_line_item_recommended_pricesCreateWithoutBasket_line_itemsInput>, Enumerable<basket_line_item_recommended_pricesUncheckedCreateWithoutBasket_line_itemsInput>>
-    connectOrCreate?: Enumerable<basket_line_item_recommended_pricesCreateOrConnectWithoutBasket_line_itemsInput>
-    createMany?: basket_line_item_recommended_pricesCreateManyBasket_line_itemsInputEnvelope
+  export type basket_line_item_recommended_pricesUncheckedCreateNestedManyWithoutBasket_line_itemInput = {
+    create?: XOR<Enumerable<basket_line_item_recommended_pricesCreateWithoutBasket_line_itemInput>, Enumerable<basket_line_item_recommended_pricesUncheckedCreateWithoutBasket_line_itemInput>>
+    connectOrCreate?: Enumerable<basket_line_item_recommended_pricesCreateOrConnectWithoutBasket_line_itemInput>
+    createMany?: basket_line_item_recommended_pricesCreateManyBasket_line_itemInputEnvelope
     connect?: Enumerable<basket_line_item_recommended_pricesWhereUniqueInput>
   }
 
@@ -22176,59 +22176,59 @@ export namespace Prisma {
     set?: string
   }
 
-  export type basket_line_item_competitor_equivalentsUpdateManyWithoutBasket_line_itemsInput = {
-    create?: XOR<Enumerable<basket_line_item_competitor_equivalentsCreateWithoutBasket_line_itemsInput>, Enumerable<basket_line_item_competitor_equivalentsUncheckedCreateWithoutBasket_line_itemsInput>>
-    connectOrCreate?: Enumerable<basket_line_item_competitor_equivalentsCreateOrConnectWithoutBasket_line_itemsInput>
-    upsert?: Enumerable<basket_line_item_competitor_equivalentsUpsertWithWhereUniqueWithoutBasket_line_itemsInput>
-    createMany?: basket_line_item_competitor_equivalentsCreateManyBasket_line_itemsInputEnvelope
+  export type basket_line_item_competitor_equivalentsUpdateManyWithoutBasket_line_itemInput = {
+    create?: XOR<Enumerable<basket_line_item_competitor_equivalentsCreateWithoutBasket_line_itemInput>, Enumerable<basket_line_item_competitor_equivalentsUncheckedCreateWithoutBasket_line_itemInput>>
+    connectOrCreate?: Enumerable<basket_line_item_competitor_equivalentsCreateOrConnectWithoutBasket_line_itemInput>
+    upsert?: Enumerable<basket_line_item_competitor_equivalentsUpsertWithWhereUniqueWithoutBasket_line_itemInput>
+    createMany?: basket_line_item_competitor_equivalentsCreateManyBasket_line_itemInputEnvelope
     connect?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
     set?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
     disconnect?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
     delete?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
-    update?: Enumerable<basket_line_item_competitor_equivalentsUpdateWithWhereUniqueWithoutBasket_line_itemsInput>
-    updateMany?: Enumerable<basket_line_item_competitor_equivalentsUpdateManyWithWhereWithoutBasket_line_itemsInput>
+    update?: Enumerable<basket_line_item_competitor_equivalentsUpdateWithWhereUniqueWithoutBasket_line_itemInput>
+    updateMany?: Enumerable<basket_line_item_competitor_equivalentsUpdateManyWithWhereWithoutBasket_line_itemInput>
     deleteMany?: Enumerable<basket_line_item_competitor_equivalentsScalarWhereInput>
   }
 
-  export type basket_line_item_recommended_pricesUpdateManyWithoutBasket_line_itemsInput = {
-    create?: XOR<Enumerable<basket_line_item_recommended_pricesCreateWithoutBasket_line_itemsInput>, Enumerable<basket_line_item_recommended_pricesUncheckedCreateWithoutBasket_line_itemsInput>>
-    connectOrCreate?: Enumerable<basket_line_item_recommended_pricesCreateOrConnectWithoutBasket_line_itemsInput>
-    upsert?: Enumerable<basket_line_item_recommended_pricesUpsertWithWhereUniqueWithoutBasket_line_itemsInput>
-    createMany?: basket_line_item_recommended_pricesCreateManyBasket_line_itemsInputEnvelope
+  export type basket_line_item_recommended_pricesUpdateManyWithoutBasket_line_itemInput = {
+    create?: XOR<Enumerable<basket_line_item_recommended_pricesCreateWithoutBasket_line_itemInput>, Enumerable<basket_line_item_recommended_pricesUncheckedCreateWithoutBasket_line_itemInput>>
+    connectOrCreate?: Enumerable<basket_line_item_recommended_pricesCreateOrConnectWithoutBasket_line_itemInput>
+    upsert?: Enumerable<basket_line_item_recommended_pricesUpsertWithWhereUniqueWithoutBasket_line_itemInput>
+    createMany?: basket_line_item_recommended_pricesCreateManyBasket_line_itemInputEnvelope
     connect?: Enumerable<basket_line_item_recommended_pricesWhereUniqueInput>
     set?: Enumerable<basket_line_item_recommended_pricesWhereUniqueInput>
     disconnect?: Enumerable<basket_line_item_recommended_pricesWhereUniqueInput>
     delete?: Enumerable<basket_line_item_recommended_pricesWhereUniqueInput>
-    update?: Enumerable<basket_line_item_recommended_pricesUpdateWithWhereUniqueWithoutBasket_line_itemsInput>
-    updateMany?: Enumerable<basket_line_item_recommended_pricesUpdateManyWithWhereWithoutBasket_line_itemsInput>
+    update?: Enumerable<basket_line_item_recommended_pricesUpdateWithWhereUniqueWithoutBasket_line_itemInput>
+    updateMany?: Enumerable<basket_line_item_recommended_pricesUpdateManyWithWhereWithoutBasket_line_itemInput>
     deleteMany?: Enumerable<basket_line_item_recommended_pricesScalarWhereInput>
   }
 
-  export type basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutBasket_line_itemsInput = {
-    create?: XOR<Enumerable<basket_line_item_competitor_equivalentsCreateWithoutBasket_line_itemsInput>, Enumerable<basket_line_item_competitor_equivalentsUncheckedCreateWithoutBasket_line_itemsInput>>
-    connectOrCreate?: Enumerable<basket_line_item_competitor_equivalentsCreateOrConnectWithoutBasket_line_itemsInput>
-    upsert?: Enumerable<basket_line_item_competitor_equivalentsUpsertWithWhereUniqueWithoutBasket_line_itemsInput>
-    createMany?: basket_line_item_competitor_equivalentsCreateManyBasket_line_itemsInputEnvelope
+  export type basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutBasket_line_itemInput = {
+    create?: XOR<Enumerable<basket_line_item_competitor_equivalentsCreateWithoutBasket_line_itemInput>, Enumerable<basket_line_item_competitor_equivalentsUncheckedCreateWithoutBasket_line_itemInput>>
+    connectOrCreate?: Enumerable<basket_line_item_competitor_equivalentsCreateOrConnectWithoutBasket_line_itemInput>
+    upsert?: Enumerable<basket_line_item_competitor_equivalentsUpsertWithWhereUniqueWithoutBasket_line_itemInput>
+    createMany?: basket_line_item_competitor_equivalentsCreateManyBasket_line_itemInputEnvelope
     connect?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
     set?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
     disconnect?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
     delete?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
-    update?: Enumerable<basket_line_item_competitor_equivalentsUpdateWithWhereUniqueWithoutBasket_line_itemsInput>
-    updateMany?: Enumerable<basket_line_item_competitor_equivalentsUpdateManyWithWhereWithoutBasket_line_itemsInput>
+    update?: Enumerable<basket_line_item_competitor_equivalentsUpdateWithWhereUniqueWithoutBasket_line_itemInput>
+    updateMany?: Enumerable<basket_line_item_competitor_equivalentsUpdateManyWithWhereWithoutBasket_line_itemInput>
     deleteMany?: Enumerable<basket_line_item_competitor_equivalentsScalarWhereInput>
   }
 
-  export type basket_line_item_recommended_pricesUncheckedUpdateManyWithoutBasket_line_itemsInput = {
-    create?: XOR<Enumerable<basket_line_item_recommended_pricesCreateWithoutBasket_line_itemsInput>, Enumerable<basket_line_item_recommended_pricesUncheckedCreateWithoutBasket_line_itemsInput>>
-    connectOrCreate?: Enumerable<basket_line_item_recommended_pricesCreateOrConnectWithoutBasket_line_itemsInput>
-    upsert?: Enumerable<basket_line_item_recommended_pricesUpsertWithWhereUniqueWithoutBasket_line_itemsInput>
-    createMany?: basket_line_item_recommended_pricesCreateManyBasket_line_itemsInputEnvelope
+  export type basket_line_item_recommended_pricesUncheckedUpdateManyWithoutBasket_line_itemInput = {
+    create?: XOR<Enumerable<basket_line_item_recommended_pricesCreateWithoutBasket_line_itemInput>, Enumerable<basket_line_item_recommended_pricesUncheckedCreateWithoutBasket_line_itemInput>>
+    connectOrCreate?: Enumerable<basket_line_item_recommended_pricesCreateOrConnectWithoutBasket_line_itemInput>
+    upsert?: Enumerable<basket_line_item_recommended_pricesUpsertWithWhereUniqueWithoutBasket_line_itemInput>
+    createMany?: basket_line_item_recommended_pricesCreateManyBasket_line_itemInputEnvelope
     connect?: Enumerable<basket_line_item_recommended_pricesWhereUniqueInput>
     set?: Enumerable<basket_line_item_recommended_pricesWhereUniqueInput>
     disconnect?: Enumerable<basket_line_item_recommended_pricesWhereUniqueInput>
     delete?: Enumerable<basket_line_item_recommended_pricesWhereUniqueInput>
-    update?: Enumerable<basket_line_item_recommended_pricesUpdateWithWhereUniqueWithoutBasket_line_itemsInput>
-    updateMany?: Enumerable<basket_line_item_recommended_pricesUpdateManyWithWhereWithoutBasket_line_itemsInput>
+    update?: Enumerable<basket_line_item_recommended_pricesUpdateWithWhereUniqueWithoutBasket_line_itemInput>
+    updateMany?: Enumerable<basket_line_item_recommended_pricesUpdateManyWithWhereWithoutBasket_line_itemInput>
     deleteMany?: Enumerable<basket_line_item_recommended_pricesScalarWhereInput>
   }
 
@@ -22292,171 +22292,171 @@ export namespace Prisma {
     update?: XOR<regionsUpdateWithoutCompetitor_region_dataInput, regionsUncheckedUpdateWithoutCompetitor_region_dataInput>
   }
 
-  export type basket_line_item_competitor_equivalentsCreateNestedManyWithoutCompetitorsInput = {
-    create?: XOR<Enumerable<basket_line_item_competitor_equivalentsCreateWithoutCompetitorsInput>, Enumerable<basket_line_item_competitor_equivalentsUncheckedCreateWithoutCompetitorsInput>>
-    connectOrCreate?: Enumerable<basket_line_item_competitor_equivalentsCreateOrConnectWithoutCompetitorsInput>
-    createMany?: basket_line_item_competitor_equivalentsCreateManyCompetitorsInputEnvelope
+  export type basket_line_item_competitor_equivalentsCreateNestedManyWithoutCompetitorInput = {
+    create?: XOR<Enumerable<basket_line_item_competitor_equivalentsCreateWithoutCompetitorInput>, Enumerable<basket_line_item_competitor_equivalentsUncheckedCreateWithoutCompetitorInput>>
+    connectOrCreate?: Enumerable<basket_line_item_competitor_equivalentsCreateOrConnectWithoutCompetitorInput>
+    createMany?: basket_line_item_competitor_equivalentsCreateManyCompetitorInputEnvelope
     connect?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
   }
 
-  export type competitor_region_dataCreateNestedManyWithoutCompetitorsInput = {
-    create?: XOR<Enumerable<competitor_region_dataCreateWithoutCompetitorsInput>, Enumerable<competitor_region_dataUncheckedCreateWithoutCompetitorsInput>>
-    connectOrCreate?: Enumerable<competitor_region_dataCreateOrConnectWithoutCompetitorsInput>
-    createMany?: competitor_region_dataCreateManyCompetitorsInputEnvelope
+  export type competitor_region_dataCreateNestedManyWithoutCompetitorInput = {
+    create?: XOR<Enumerable<competitor_region_dataCreateWithoutCompetitorInput>, Enumerable<competitor_region_dataUncheckedCreateWithoutCompetitorInput>>
+    connectOrCreate?: Enumerable<competitor_region_dataCreateOrConnectWithoutCompetitorInput>
+    createMany?: competitor_region_dataCreateManyCompetitorInputEnvelope
     connect?: Enumerable<competitor_region_dataWhereUniqueInput>
   }
 
-  export type product_region_competitor_urlsCreateNestedManyWithoutCompetitorsInput = {
-    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutCompetitorsInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutCompetitorsInput>>
-    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutCompetitorsInput>
-    createMany?: product_region_competitor_urlsCreateManyCompetitorsInputEnvelope
+  export type product_region_competitor_urlsCreateNestedManyWithoutCompetitorInput = {
+    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutCompetitorInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutCompetitorInput>>
+    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutCompetitorInput>
+    createMany?: product_region_competitor_urlsCreateManyCompetitorInputEnvelope
     connect?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
   }
 
-  export type scaled_pricesCreateNestedManyWithoutCompetitorsInput = {
-    create?: XOR<Enumerable<scaled_pricesCreateWithoutCompetitorsInput>, Enumerable<scaled_pricesUncheckedCreateWithoutCompetitorsInput>>
-    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutCompetitorsInput>
-    createMany?: scaled_pricesCreateManyCompetitorsInputEnvelope
+  export type scaled_pricesCreateNestedManyWithoutCompetitorInput = {
+    create?: XOR<Enumerable<scaled_pricesCreateWithoutCompetitorInput>, Enumerable<scaled_pricesUncheckedCreateWithoutCompetitorInput>>
+    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutCompetitorInput>
+    createMany?: scaled_pricesCreateManyCompetitorInputEnvelope
     connect?: Enumerable<scaled_pricesWhereUniqueInput>
   }
 
-  export type basket_line_item_competitor_equivalentsUncheckedCreateNestedManyWithoutCompetitorsInput = {
-    create?: XOR<Enumerable<basket_line_item_competitor_equivalentsCreateWithoutCompetitorsInput>, Enumerable<basket_line_item_competitor_equivalentsUncheckedCreateWithoutCompetitorsInput>>
-    connectOrCreate?: Enumerable<basket_line_item_competitor_equivalentsCreateOrConnectWithoutCompetitorsInput>
-    createMany?: basket_line_item_competitor_equivalentsCreateManyCompetitorsInputEnvelope
+  export type basket_line_item_competitor_equivalentsUncheckedCreateNestedManyWithoutCompetitorInput = {
+    create?: XOR<Enumerable<basket_line_item_competitor_equivalentsCreateWithoutCompetitorInput>, Enumerable<basket_line_item_competitor_equivalentsUncheckedCreateWithoutCompetitorInput>>
+    connectOrCreate?: Enumerable<basket_line_item_competitor_equivalentsCreateOrConnectWithoutCompetitorInput>
+    createMany?: basket_line_item_competitor_equivalentsCreateManyCompetitorInputEnvelope
     connect?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
   }
 
-  export type competitor_region_dataUncheckedCreateNestedManyWithoutCompetitorsInput = {
-    create?: XOR<Enumerable<competitor_region_dataCreateWithoutCompetitorsInput>, Enumerable<competitor_region_dataUncheckedCreateWithoutCompetitorsInput>>
-    connectOrCreate?: Enumerable<competitor_region_dataCreateOrConnectWithoutCompetitorsInput>
-    createMany?: competitor_region_dataCreateManyCompetitorsInputEnvelope
+  export type competitor_region_dataUncheckedCreateNestedManyWithoutCompetitorInput = {
+    create?: XOR<Enumerable<competitor_region_dataCreateWithoutCompetitorInput>, Enumerable<competitor_region_dataUncheckedCreateWithoutCompetitorInput>>
+    connectOrCreate?: Enumerable<competitor_region_dataCreateOrConnectWithoutCompetitorInput>
+    createMany?: competitor_region_dataCreateManyCompetitorInputEnvelope
     connect?: Enumerable<competitor_region_dataWhereUniqueInput>
   }
 
-  export type product_region_competitor_urlsUncheckedCreateNestedManyWithoutCompetitorsInput = {
-    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutCompetitorsInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutCompetitorsInput>>
-    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutCompetitorsInput>
-    createMany?: product_region_competitor_urlsCreateManyCompetitorsInputEnvelope
+  export type product_region_competitor_urlsUncheckedCreateNestedManyWithoutCompetitorInput = {
+    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutCompetitorInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutCompetitorInput>>
+    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutCompetitorInput>
+    createMany?: product_region_competitor_urlsCreateManyCompetitorInputEnvelope
     connect?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
   }
 
-  export type scaled_pricesUncheckedCreateNestedManyWithoutCompetitorsInput = {
-    create?: XOR<Enumerable<scaled_pricesCreateWithoutCompetitorsInput>, Enumerable<scaled_pricesUncheckedCreateWithoutCompetitorsInput>>
-    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutCompetitorsInput>
-    createMany?: scaled_pricesCreateManyCompetitorsInputEnvelope
+  export type scaled_pricesUncheckedCreateNestedManyWithoutCompetitorInput = {
+    create?: XOR<Enumerable<scaled_pricesCreateWithoutCompetitorInput>, Enumerable<scaled_pricesUncheckedCreateWithoutCompetitorInput>>
+    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutCompetitorInput>
+    createMany?: scaled_pricesCreateManyCompetitorInputEnvelope
     connect?: Enumerable<scaled_pricesWhereUniqueInput>
   }
 
-  export type basket_line_item_competitor_equivalentsUpdateManyWithoutCompetitorsInput = {
-    create?: XOR<Enumerable<basket_line_item_competitor_equivalentsCreateWithoutCompetitorsInput>, Enumerable<basket_line_item_competitor_equivalentsUncheckedCreateWithoutCompetitorsInput>>
-    connectOrCreate?: Enumerable<basket_line_item_competitor_equivalentsCreateOrConnectWithoutCompetitorsInput>
-    upsert?: Enumerable<basket_line_item_competitor_equivalentsUpsertWithWhereUniqueWithoutCompetitorsInput>
-    createMany?: basket_line_item_competitor_equivalentsCreateManyCompetitorsInputEnvelope
+  export type basket_line_item_competitor_equivalentsUpdateManyWithoutCompetitorInput = {
+    create?: XOR<Enumerable<basket_line_item_competitor_equivalentsCreateWithoutCompetitorInput>, Enumerable<basket_line_item_competitor_equivalentsUncheckedCreateWithoutCompetitorInput>>
+    connectOrCreate?: Enumerable<basket_line_item_competitor_equivalentsCreateOrConnectWithoutCompetitorInput>
+    upsert?: Enumerable<basket_line_item_competitor_equivalentsUpsertWithWhereUniqueWithoutCompetitorInput>
+    createMany?: basket_line_item_competitor_equivalentsCreateManyCompetitorInputEnvelope
     connect?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
     set?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
     disconnect?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
     delete?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
-    update?: Enumerable<basket_line_item_competitor_equivalentsUpdateWithWhereUniqueWithoutCompetitorsInput>
-    updateMany?: Enumerable<basket_line_item_competitor_equivalentsUpdateManyWithWhereWithoutCompetitorsInput>
+    update?: Enumerable<basket_line_item_competitor_equivalentsUpdateWithWhereUniqueWithoutCompetitorInput>
+    updateMany?: Enumerable<basket_line_item_competitor_equivalentsUpdateManyWithWhereWithoutCompetitorInput>
     deleteMany?: Enumerable<basket_line_item_competitor_equivalentsScalarWhereInput>
   }
 
-  export type competitor_region_dataUpdateManyWithoutCompetitorsInput = {
-    create?: XOR<Enumerable<competitor_region_dataCreateWithoutCompetitorsInput>, Enumerable<competitor_region_dataUncheckedCreateWithoutCompetitorsInput>>
-    connectOrCreate?: Enumerable<competitor_region_dataCreateOrConnectWithoutCompetitorsInput>
-    upsert?: Enumerable<competitor_region_dataUpsertWithWhereUniqueWithoutCompetitorsInput>
-    createMany?: competitor_region_dataCreateManyCompetitorsInputEnvelope
+  export type competitor_region_dataUpdateManyWithoutCompetitorInput = {
+    create?: XOR<Enumerable<competitor_region_dataCreateWithoutCompetitorInput>, Enumerable<competitor_region_dataUncheckedCreateWithoutCompetitorInput>>
+    connectOrCreate?: Enumerable<competitor_region_dataCreateOrConnectWithoutCompetitorInput>
+    upsert?: Enumerable<competitor_region_dataUpsertWithWhereUniqueWithoutCompetitorInput>
+    createMany?: competitor_region_dataCreateManyCompetitorInputEnvelope
     connect?: Enumerable<competitor_region_dataWhereUniqueInput>
     set?: Enumerable<competitor_region_dataWhereUniqueInput>
     disconnect?: Enumerable<competitor_region_dataWhereUniqueInput>
     delete?: Enumerable<competitor_region_dataWhereUniqueInput>
-    update?: Enumerable<competitor_region_dataUpdateWithWhereUniqueWithoutCompetitorsInput>
-    updateMany?: Enumerable<competitor_region_dataUpdateManyWithWhereWithoutCompetitorsInput>
+    update?: Enumerable<competitor_region_dataUpdateWithWhereUniqueWithoutCompetitorInput>
+    updateMany?: Enumerable<competitor_region_dataUpdateManyWithWhereWithoutCompetitorInput>
     deleteMany?: Enumerable<competitor_region_dataScalarWhereInput>
   }
 
-  export type product_region_competitor_urlsUpdateManyWithoutCompetitorsInput = {
-    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutCompetitorsInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutCompetitorsInput>>
-    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutCompetitorsInput>
-    upsert?: Enumerable<product_region_competitor_urlsUpsertWithWhereUniqueWithoutCompetitorsInput>
-    createMany?: product_region_competitor_urlsCreateManyCompetitorsInputEnvelope
+  export type product_region_competitor_urlsUpdateManyWithoutCompetitorInput = {
+    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutCompetitorInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutCompetitorInput>>
+    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutCompetitorInput>
+    upsert?: Enumerable<product_region_competitor_urlsUpsertWithWhereUniqueWithoutCompetitorInput>
+    createMany?: product_region_competitor_urlsCreateManyCompetitorInputEnvelope
     connect?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
     set?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
     disconnect?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
     delete?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
-    update?: Enumerable<product_region_competitor_urlsUpdateWithWhereUniqueWithoutCompetitorsInput>
-    updateMany?: Enumerable<product_region_competitor_urlsUpdateManyWithWhereWithoutCompetitorsInput>
+    update?: Enumerable<product_region_competitor_urlsUpdateWithWhereUniqueWithoutCompetitorInput>
+    updateMany?: Enumerable<product_region_competitor_urlsUpdateManyWithWhereWithoutCompetitorInput>
     deleteMany?: Enumerable<product_region_competitor_urlsScalarWhereInput>
   }
 
-  export type scaled_pricesUpdateManyWithoutCompetitorsInput = {
-    create?: XOR<Enumerable<scaled_pricesCreateWithoutCompetitorsInput>, Enumerable<scaled_pricesUncheckedCreateWithoutCompetitorsInput>>
-    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutCompetitorsInput>
-    upsert?: Enumerable<scaled_pricesUpsertWithWhereUniqueWithoutCompetitorsInput>
-    createMany?: scaled_pricesCreateManyCompetitorsInputEnvelope
+  export type scaled_pricesUpdateManyWithoutCompetitorInput = {
+    create?: XOR<Enumerable<scaled_pricesCreateWithoutCompetitorInput>, Enumerable<scaled_pricesUncheckedCreateWithoutCompetitorInput>>
+    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutCompetitorInput>
+    upsert?: Enumerable<scaled_pricesUpsertWithWhereUniqueWithoutCompetitorInput>
+    createMany?: scaled_pricesCreateManyCompetitorInputEnvelope
     connect?: Enumerable<scaled_pricesWhereUniqueInput>
     set?: Enumerable<scaled_pricesWhereUniqueInput>
     disconnect?: Enumerable<scaled_pricesWhereUniqueInput>
     delete?: Enumerable<scaled_pricesWhereUniqueInput>
-    update?: Enumerable<scaled_pricesUpdateWithWhereUniqueWithoutCompetitorsInput>
-    updateMany?: Enumerable<scaled_pricesUpdateManyWithWhereWithoutCompetitorsInput>
+    update?: Enumerable<scaled_pricesUpdateWithWhereUniqueWithoutCompetitorInput>
+    updateMany?: Enumerable<scaled_pricesUpdateManyWithWhereWithoutCompetitorInput>
     deleteMany?: Enumerable<scaled_pricesScalarWhereInput>
   }
 
-  export type basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutCompetitorsInput = {
-    create?: XOR<Enumerable<basket_line_item_competitor_equivalentsCreateWithoutCompetitorsInput>, Enumerable<basket_line_item_competitor_equivalentsUncheckedCreateWithoutCompetitorsInput>>
-    connectOrCreate?: Enumerable<basket_line_item_competitor_equivalentsCreateOrConnectWithoutCompetitorsInput>
-    upsert?: Enumerable<basket_line_item_competitor_equivalentsUpsertWithWhereUniqueWithoutCompetitorsInput>
-    createMany?: basket_line_item_competitor_equivalentsCreateManyCompetitorsInputEnvelope
+  export type basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutCompetitorInput = {
+    create?: XOR<Enumerable<basket_line_item_competitor_equivalentsCreateWithoutCompetitorInput>, Enumerable<basket_line_item_competitor_equivalentsUncheckedCreateWithoutCompetitorInput>>
+    connectOrCreate?: Enumerable<basket_line_item_competitor_equivalentsCreateOrConnectWithoutCompetitorInput>
+    upsert?: Enumerable<basket_line_item_competitor_equivalentsUpsertWithWhereUniqueWithoutCompetitorInput>
+    createMany?: basket_line_item_competitor_equivalentsCreateManyCompetitorInputEnvelope
     connect?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
     set?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
     disconnect?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
     delete?: Enumerable<basket_line_item_competitor_equivalentsWhereUniqueInput>
-    update?: Enumerable<basket_line_item_competitor_equivalentsUpdateWithWhereUniqueWithoutCompetitorsInput>
-    updateMany?: Enumerable<basket_line_item_competitor_equivalentsUpdateManyWithWhereWithoutCompetitorsInput>
+    update?: Enumerable<basket_line_item_competitor_equivalentsUpdateWithWhereUniqueWithoutCompetitorInput>
+    updateMany?: Enumerable<basket_line_item_competitor_equivalentsUpdateManyWithWhereWithoutCompetitorInput>
     deleteMany?: Enumerable<basket_line_item_competitor_equivalentsScalarWhereInput>
   }
 
-  export type competitor_region_dataUncheckedUpdateManyWithoutCompetitorsInput = {
-    create?: XOR<Enumerable<competitor_region_dataCreateWithoutCompetitorsInput>, Enumerable<competitor_region_dataUncheckedCreateWithoutCompetitorsInput>>
-    connectOrCreate?: Enumerable<competitor_region_dataCreateOrConnectWithoutCompetitorsInput>
-    upsert?: Enumerable<competitor_region_dataUpsertWithWhereUniqueWithoutCompetitorsInput>
-    createMany?: competitor_region_dataCreateManyCompetitorsInputEnvelope
+  export type competitor_region_dataUncheckedUpdateManyWithoutCompetitorInput = {
+    create?: XOR<Enumerable<competitor_region_dataCreateWithoutCompetitorInput>, Enumerable<competitor_region_dataUncheckedCreateWithoutCompetitorInput>>
+    connectOrCreate?: Enumerable<competitor_region_dataCreateOrConnectWithoutCompetitorInput>
+    upsert?: Enumerable<competitor_region_dataUpsertWithWhereUniqueWithoutCompetitorInput>
+    createMany?: competitor_region_dataCreateManyCompetitorInputEnvelope
     connect?: Enumerable<competitor_region_dataWhereUniqueInput>
     set?: Enumerable<competitor_region_dataWhereUniqueInput>
     disconnect?: Enumerable<competitor_region_dataWhereUniqueInput>
     delete?: Enumerable<competitor_region_dataWhereUniqueInput>
-    update?: Enumerable<competitor_region_dataUpdateWithWhereUniqueWithoutCompetitorsInput>
-    updateMany?: Enumerable<competitor_region_dataUpdateManyWithWhereWithoutCompetitorsInput>
+    update?: Enumerable<competitor_region_dataUpdateWithWhereUniqueWithoutCompetitorInput>
+    updateMany?: Enumerable<competitor_region_dataUpdateManyWithWhereWithoutCompetitorInput>
     deleteMany?: Enumerable<competitor_region_dataScalarWhereInput>
   }
 
-  export type product_region_competitor_urlsUncheckedUpdateManyWithoutCompetitorsInput = {
-    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutCompetitorsInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutCompetitorsInput>>
-    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutCompetitorsInput>
-    upsert?: Enumerable<product_region_competitor_urlsUpsertWithWhereUniqueWithoutCompetitorsInput>
-    createMany?: product_region_competitor_urlsCreateManyCompetitorsInputEnvelope
+  export type product_region_competitor_urlsUncheckedUpdateManyWithoutCompetitorInput = {
+    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutCompetitorInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutCompetitorInput>>
+    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutCompetitorInput>
+    upsert?: Enumerable<product_region_competitor_urlsUpsertWithWhereUniqueWithoutCompetitorInput>
+    createMany?: product_region_competitor_urlsCreateManyCompetitorInputEnvelope
     connect?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
     set?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
     disconnect?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
     delete?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
-    update?: Enumerable<product_region_competitor_urlsUpdateWithWhereUniqueWithoutCompetitorsInput>
-    updateMany?: Enumerable<product_region_competitor_urlsUpdateManyWithWhereWithoutCompetitorsInput>
+    update?: Enumerable<product_region_competitor_urlsUpdateWithWhereUniqueWithoutCompetitorInput>
+    updateMany?: Enumerable<product_region_competitor_urlsUpdateManyWithWhereWithoutCompetitorInput>
     deleteMany?: Enumerable<product_region_competitor_urlsScalarWhereInput>
   }
 
-  export type scaled_pricesUncheckedUpdateManyWithoutCompetitorsInput = {
-    create?: XOR<Enumerable<scaled_pricesCreateWithoutCompetitorsInput>, Enumerable<scaled_pricesUncheckedCreateWithoutCompetitorsInput>>
-    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutCompetitorsInput>
-    upsert?: Enumerable<scaled_pricesUpsertWithWhereUniqueWithoutCompetitorsInput>
-    createMany?: scaled_pricesCreateManyCompetitorsInputEnvelope
+  export type scaled_pricesUncheckedUpdateManyWithoutCompetitorInput = {
+    create?: XOR<Enumerable<scaled_pricesCreateWithoutCompetitorInput>, Enumerable<scaled_pricesUncheckedCreateWithoutCompetitorInput>>
+    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutCompetitorInput>
+    upsert?: Enumerable<scaled_pricesUpsertWithWhereUniqueWithoutCompetitorInput>
+    createMany?: scaled_pricesCreateManyCompetitorInputEnvelope
     connect?: Enumerable<scaled_pricesWhereUniqueInput>
     set?: Enumerable<scaled_pricesWhereUniqueInput>
     disconnect?: Enumerable<scaled_pricesWhereUniqueInput>
     delete?: Enumerable<scaled_pricesWhereUniqueInput>
-    update?: Enumerable<scaled_pricesUpdateWithWhereUniqueWithoutCompetitorsInput>
-    updateMany?: Enumerable<scaled_pricesUpdateManyWithWhereWithoutCompetitorsInput>
+    update?: Enumerable<scaled_pricesUpdateWithWhereUniqueWithoutCompetitorInput>
+    updateMany?: Enumerable<scaled_pricesUpdateManyWithWhereWithoutCompetitorInput>
     deleteMany?: Enumerable<scaled_pricesScalarWhereInput>
   }
 
@@ -22521,10 +22521,10 @@ export namespace Prisma {
     connect?: Enumerable<product_region_competitor_urls_former_urlsWhereUniqueInput>
   }
 
-  export type scrape_result_product_region_competitor_urlCreateNestedManyWithoutProduct_region_competitor_urlsInput = {
-    create?: XOR<Enumerable<scrape_result_product_region_competitor_urlCreateWithoutProduct_region_competitor_urlsInput>, Enumerable<scrape_result_product_region_competitor_urlUncheckedCreateWithoutProduct_region_competitor_urlsInput>>
-    connectOrCreate?: Enumerable<scrape_result_product_region_competitor_urlCreateOrConnectWithoutProduct_region_competitor_urlsInput>
-    createMany?: scrape_result_product_region_competitor_urlCreateManyProduct_region_competitor_urlsInputEnvelope
+  export type scrape_result_product_region_competitor_urlCreateNestedManyWithoutProduct_region_competitor_urlInput = {
+    create?: XOR<Enumerable<scrape_result_product_region_competitor_urlCreateWithoutProduct_region_competitor_urlInput>, Enumerable<scrape_result_product_region_competitor_urlUncheckedCreateWithoutProduct_region_competitor_urlInput>>
+    connectOrCreate?: Enumerable<scrape_result_product_region_competitor_urlCreateOrConnectWithoutProduct_region_competitor_urlInput>
+    createMany?: scrape_result_product_region_competitor_urlCreateManyProduct_region_competitor_urlInputEnvelope
     connect?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
   }
 
@@ -22535,10 +22535,10 @@ export namespace Prisma {
     connect?: Enumerable<product_region_competitor_urls_former_urlsWhereUniqueInput>
   }
 
-  export type scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutProduct_region_competitor_urlsInput = {
-    create?: XOR<Enumerable<scrape_result_product_region_competitor_urlCreateWithoutProduct_region_competitor_urlsInput>, Enumerable<scrape_result_product_region_competitor_urlUncheckedCreateWithoutProduct_region_competitor_urlsInput>>
-    connectOrCreate?: Enumerable<scrape_result_product_region_competitor_urlCreateOrConnectWithoutProduct_region_competitor_urlsInput>
-    createMany?: scrape_result_product_region_competitor_urlCreateManyProduct_region_competitor_urlsInputEnvelope
+  export type scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutProduct_region_competitor_urlInput = {
+    create?: XOR<Enumerable<scrape_result_product_region_competitor_urlCreateWithoutProduct_region_competitor_urlInput>, Enumerable<scrape_result_product_region_competitor_urlUncheckedCreateWithoutProduct_region_competitor_urlInput>>
+    connectOrCreate?: Enumerable<scrape_result_product_region_competitor_urlCreateOrConnectWithoutProduct_region_competitor_urlInput>
+    createMany?: scrape_result_product_region_competitor_urlCreateManyProduct_region_competitor_urlInputEnvelope
     connect?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
   }
 
@@ -22580,17 +22580,17 @@ export namespace Prisma {
     deleteMany?: Enumerable<product_region_competitor_urls_former_urlsScalarWhereInput>
   }
 
-  export type scrape_result_product_region_competitor_urlUpdateManyWithoutProduct_region_competitor_urlsInput = {
-    create?: XOR<Enumerable<scrape_result_product_region_competitor_urlCreateWithoutProduct_region_competitor_urlsInput>, Enumerable<scrape_result_product_region_competitor_urlUncheckedCreateWithoutProduct_region_competitor_urlsInput>>
-    connectOrCreate?: Enumerable<scrape_result_product_region_competitor_urlCreateOrConnectWithoutProduct_region_competitor_urlsInput>
-    upsert?: Enumerable<scrape_result_product_region_competitor_urlUpsertWithWhereUniqueWithoutProduct_region_competitor_urlsInput>
-    createMany?: scrape_result_product_region_competitor_urlCreateManyProduct_region_competitor_urlsInputEnvelope
+  export type scrape_result_product_region_competitor_urlUpdateManyWithoutProduct_region_competitor_urlInput = {
+    create?: XOR<Enumerable<scrape_result_product_region_competitor_urlCreateWithoutProduct_region_competitor_urlInput>, Enumerable<scrape_result_product_region_competitor_urlUncheckedCreateWithoutProduct_region_competitor_urlInput>>
+    connectOrCreate?: Enumerable<scrape_result_product_region_competitor_urlCreateOrConnectWithoutProduct_region_competitor_urlInput>
+    upsert?: Enumerable<scrape_result_product_region_competitor_urlUpsertWithWhereUniqueWithoutProduct_region_competitor_urlInput>
+    createMany?: scrape_result_product_region_competitor_urlCreateManyProduct_region_competitor_urlInputEnvelope
     connect?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
     set?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
     disconnect?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
     delete?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
-    update?: Enumerable<scrape_result_product_region_competitor_urlUpdateWithWhereUniqueWithoutProduct_region_competitor_urlsInput>
-    updateMany?: Enumerable<scrape_result_product_region_competitor_urlUpdateManyWithWhereWithoutProduct_region_competitor_urlsInput>
+    update?: Enumerable<scrape_result_product_region_competitor_urlUpdateWithWhereUniqueWithoutProduct_region_competitor_urlInput>
+    updateMany?: Enumerable<scrape_result_product_region_competitor_urlUpdateManyWithWhereWithoutProduct_region_competitor_urlInput>
     deleteMany?: Enumerable<scrape_result_product_region_competitor_urlScalarWhereInput>
   }
 
@@ -22608,17 +22608,17 @@ export namespace Prisma {
     deleteMany?: Enumerable<product_region_competitor_urls_former_urlsScalarWhereInput>
   }
 
-  export type scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutProduct_region_competitor_urlsInput = {
-    create?: XOR<Enumerable<scrape_result_product_region_competitor_urlCreateWithoutProduct_region_competitor_urlsInput>, Enumerable<scrape_result_product_region_competitor_urlUncheckedCreateWithoutProduct_region_competitor_urlsInput>>
-    connectOrCreate?: Enumerable<scrape_result_product_region_competitor_urlCreateOrConnectWithoutProduct_region_competitor_urlsInput>
-    upsert?: Enumerable<scrape_result_product_region_competitor_urlUpsertWithWhereUniqueWithoutProduct_region_competitor_urlsInput>
-    createMany?: scrape_result_product_region_competitor_urlCreateManyProduct_region_competitor_urlsInputEnvelope
+  export type scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutProduct_region_competitor_urlInput = {
+    create?: XOR<Enumerable<scrape_result_product_region_competitor_urlCreateWithoutProduct_region_competitor_urlInput>, Enumerable<scrape_result_product_region_competitor_urlUncheckedCreateWithoutProduct_region_competitor_urlInput>>
+    connectOrCreate?: Enumerable<scrape_result_product_region_competitor_urlCreateOrConnectWithoutProduct_region_competitor_urlInput>
+    upsert?: Enumerable<scrape_result_product_region_competitor_urlUpsertWithWhereUniqueWithoutProduct_region_competitor_urlInput>
+    createMany?: scrape_result_product_region_competitor_urlCreateManyProduct_region_competitor_urlInputEnvelope
     connect?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
     set?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
     disconnect?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
     delete?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
-    update?: Enumerable<scrape_result_product_region_competitor_urlUpdateWithWhereUniqueWithoutProduct_region_competitor_urlsInput>
-    updateMany?: Enumerable<scrape_result_product_region_competitor_urlUpdateManyWithWhereWithoutProduct_region_competitor_urlsInput>
+    update?: Enumerable<scrape_result_product_region_competitor_urlUpdateWithWhereUniqueWithoutProduct_region_competitor_urlInput>
+    updateMany?: Enumerable<scrape_result_product_region_competitor_urlUpdateManyWithWhereWithoutProduct_region_competitor_urlInput>
     deleteMany?: Enumerable<scrape_result_product_region_competitor_urlScalarWhereInput>
   }
 
@@ -22670,59 +22670,59 @@ export namespace Prisma {
     connect?: unitsWhereUniqueInput
   }
 
-  export type price_recommendationsCreateNestedManyWithoutProductsInput = {
-    create?: XOR<Enumerable<price_recommendationsCreateWithoutProductsInput>, Enumerable<price_recommendationsUncheckedCreateWithoutProductsInput>>
-    connectOrCreate?: Enumerable<price_recommendationsCreateOrConnectWithoutProductsInput>
-    createMany?: price_recommendationsCreateManyProductsInputEnvelope
+  export type price_recommendationsCreateNestedManyWithoutProductInput = {
+    create?: XOR<Enumerable<price_recommendationsCreateWithoutProductInput>, Enumerable<price_recommendationsUncheckedCreateWithoutProductInput>>
+    connectOrCreate?: Enumerable<price_recommendationsCreateOrConnectWithoutProductInput>
+    createMany?: price_recommendationsCreateManyProductInputEnvelope
     connect?: Enumerable<price_recommendationsWhereUniqueInput>
   }
 
-  export type product_region_competitor_urlsCreateNestedManyWithoutProductsInput = {
-    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutProductsInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutProductsInput>>
-    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutProductsInput>
-    createMany?: product_region_competitor_urlsCreateManyProductsInputEnvelope
+  export type product_region_competitor_urlsCreateNestedManyWithoutProductInput = {
+    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutProductInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutProductInput>>
+    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutProductInput>
+    createMany?: product_region_competitor_urlsCreateManyProductInputEnvelope
     connect?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
   }
 
-  export type product_region_price_dataCreateNestedManyWithoutProductsInput = {
-    create?: XOR<Enumerable<product_region_price_dataCreateWithoutProductsInput>, Enumerable<product_region_price_dataUncheckedCreateWithoutProductsInput>>
-    connectOrCreate?: Enumerable<product_region_price_dataCreateOrConnectWithoutProductsInput>
-    createMany?: product_region_price_dataCreateManyProductsInputEnvelope
+  export type product_region_price_dataCreateNestedManyWithoutProductInput = {
+    create?: XOR<Enumerable<product_region_price_dataCreateWithoutProductInput>, Enumerable<product_region_price_dataUncheckedCreateWithoutProductInput>>
+    connectOrCreate?: Enumerable<product_region_price_dataCreateOrConnectWithoutProductInput>
+    createMany?: product_region_price_dataCreateManyProductInputEnvelope
     connect?: Enumerable<product_region_price_dataWhereUniqueInput>
   }
 
-  export type scaled_pricesCreateNestedManyWithoutProductsInput = {
-    create?: XOR<Enumerable<scaled_pricesCreateWithoutProductsInput>, Enumerable<scaled_pricesUncheckedCreateWithoutProductsInput>>
-    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutProductsInput>
-    createMany?: scaled_pricesCreateManyProductsInputEnvelope
+  export type scaled_pricesCreateNestedManyWithoutProductInput = {
+    create?: XOR<Enumerable<scaled_pricesCreateWithoutProductInput>, Enumerable<scaled_pricesUncheckedCreateWithoutProductInput>>
+    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutProductInput>
+    createMany?: scaled_pricesCreateManyProductInputEnvelope
     connect?: Enumerable<scaled_pricesWhereUniqueInput>
   }
 
-  export type price_recommendationsUncheckedCreateNestedManyWithoutProductsInput = {
-    create?: XOR<Enumerable<price_recommendationsCreateWithoutProductsInput>, Enumerable<price_recommendationsUncheckedCreateWithoutProductsInput>>
-    connectOrCreate?: Enumerable<price_recommendationsCreateOrConnectWithoutProductsInput>
-    createMany?: price_recommendationsCreateManyProductsInputEnvelope
+  export type price_recommendationsUncheckedCreateNestedManyWithoutProductInput = {
+    create?: XOR<Enumerable<price_recommendationsCreateWithoutProductInput>, Enumerable<price_recommendationsUncheckedCreateWithoutProductInput>>
+    connectOrCreate?: Enumerable<price_recommendationsCreateOrConnectWithoutProductInput>
+    createMany?: price_recommendationsCreateManyProductInputEnvelope
     connect?: Enumerable<price_recommendationsWhereUniqueInput>
   }
 
-  export type product_region_competitor_urlsUncheckedCreateNestedManyWithoutProductsInput = {
-    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutProductsInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutProductsInput>>
-    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutProductsInput>
-    createMany?: product_region_competitor_urlsCreateManyProductsInputEnvelope
+  export type product_region_competitor_urlsUncheckedCreateNestedManyWithoutProductInput = {
+    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutProductInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutProductInput>>
+    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutProductInput>
+    createMany?: product_region_competitor_urlsCreateManyProductInputEnvelope
     connect?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
   }
 
-  export type product_region_price_dataUncheckedCreateNestedManyWithoutProductsInput = {
-    create?: XOR<Enumerable<product_region_price_dataCreateWithoutProductsInput>, Enumerable<product_region_price_dataUncheckedCreateWithoutProductsInput>>
-    connectOrCreate?: Enumerable<product_region_price_dataCreateOrConnectWithoutProductsInput>
-    createMany?: product_region_price_dataCreateManyProductsInputEnvelope
+  export type product_region_price_dataUncheckedCreateNestedManyWithoutProductInput = {
+    create?: XOR<Enumerable<product_region_price_dataCreateWithoutProductInput>, Enumerable<product_region_price_dataUncheckedCreateWithoutProductInput>>
+    connectOrCreate?: Enumerable<product_region_price_dataCreateOrConnectWithoutProductInput>
+    createMany?: product_region_price_dataCreateManyProductInputEnvelope
     connect?: Enumerable<product_region_price_dataWhereUniqueInput>
   }
 
-  export type scaled_pricesUncheckedCreateNestedManyWithoutProductsInput = {
-    create?: XOR<Enumerable<scaled_pricesCreateWithoutProductsInput>, Enumerable<scaled_pricesUncheckedCreateWithoutProductsInput>>
-    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutProductsInput>
-    createMany?: scaled_pricesCreateManyProductsInputEnvelope
+  export type scaled_pricesUncheckedCreateNestedManyWithoutProductInput = {
+    create?: XOR<Enumerable<scaled_pricesCreateWithoutProductInput>, Enumerable<scaled_pricesUncheckedCreateWithoutProductInput>>
+    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutProductInput>
+    createMany?: scaled_pricesCreateManyProductInputEnvelope
     connect?: Enumerable<scaled_pricesWhereUniqueInput>
   }
 
@@ -22738,199 +22738,199 @@ export namespace Prisma {
     update?: XOR<unitsUpdateWithoutProductsInput, unitsUncheckedUpdateWithoutProductsInput>
   }
 
-  export type price_recommendationsUpdateManyWithoutProductsInput = {
-    create?: XOR<Enumerable<price_recommendationsCreateWithoutProductsInput>, Enumerable<price_recommendationsUncheckedCreateWithoutProductsInput>>
-    connectOrCreate?: Enumerable<price_recommendationsCreateOrConnectWithoutProductsInput>
-    upsert?: Enumerable<price_recommendationsUpsertWithWhereUniqueWithoutProductsInput>
-    createMany?: price_recommendationsCreateManyProductsInputEnvelope
+  export type price_recommendationsUpdateManyWithoutProductInput = {
+    create?: XOR<Enumerable<price_recommendationsCreateWithoutProductInput>, Enumerable<price_recommendationsUncheckedCreateWithoutProductInput>>
+    connectOrCreate?: Enumerable<price_recommendationsCreateOrConnectWithoutProductInput>
+    upsert?: Enumerable<price_recommendationsUpsertWithWhereUniqueWithoutProductInput>
+    createMany?: price_recommendationsCreateManyProductInputEnvelope
     connect?: Enumerable<price_recommendationsWhereUniqueInput>
     set?: Enumerable<price_recommendationsWhereUniqueInput>
     disconnect?: Enumerable<price_recommendationsWhereUniqueInput>
     delete?: Enumerable<price_recommendationsWhereUniqueInput>
-    update?: Enumerable<price_recommendationsUpdateWithWhereUniqueWithoutProductsInput>
-    updateMany?: Enumerable<price_recommendationsUpdateManyWithWhereWithoutProductsInput>
+    update?: Enumerable<price_recommendationsUpdateWithWhereUniqueWithoutProductInput>
+    updateMany?: Enumerable<price_recommendationsUpdateManyWithWhereWithoutProductInput>
     deleteMany?: Enumerable<price_recommendationsScalarWhereInput>
   }
 
-  export type product_region_competitor_urlsUpdateManyWithoutProductsInput = {
-    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutProductsInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutProductsInput>>
-    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutProductsInput>
-    upsert?: Enumerable<product_region_competitor_urlsUpsertWithWhereUniqueWithoutProductsInput>
-    createMany?: product_region_competitor_urlsCreateManyProductsInputEnvelope
+  export type product_region_competitor_urlsUpdateManyWithoutProductInput = {
+    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutProductInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutProductInput>>
+    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutProductInput>
+    upsert?: Enumerable<product_region_competitor_urlsUpsertWithWhereUniqueWithoutProductInput>
+    createMany?: product_region_competitor_urlsCreateManyProductInputEnvelope
     connect?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
     set?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
     disconnect?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
     delete?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
-    update?: Enumerable<product_region_competitor_urlsUpdateWithWhereUniqueWithoutProductsInput>
-    updateMany?: Enumerable<product_region_competitor_urlsUpdateManyWithWhereWithoutProductsInput>
+    update?: Enumerable<product_region_competitor_urlsUpdateWithWhereUniqueWithoutProductInput>
+    updateMany?: Enumerable<product_region_competitor_urlsUpdateManyWithWhereWithoutProductInput>
     deleteMany?: Enumerable<product_region_competitor_urlsScalarWhereInput>
   }
 
-  export type product_region_price_dataUpdateManyWithoutProductsInput = {
-    create?: XOR<Enumerable<product_region_price_dataCreateWithoutProductsInput>, Enumerable<product_region_price_dataUncheckedCreateWithoutProductsInput>>
-    connectOrCreate?: Enumerable<product_region_price_dataCreateOrConnectWithoutProductsInput>
-    upsert?: Enumerable<product_region_price_dataUpsertWithWhereUniqueWithoutProductsInput>
-    createMany?: product_region_price_dataCreateManyProductsInputEnvelope
+  export type product_region_price_dataUpdateManyWithoutProductInput = {
+    create?: XOR<Enumerable<product_region_price_dataCreateWithoutProductInput>, Enumerable<product_region_price_dataUncheckedCreateWithoutProductInput>>
+    connectOrCreate?: Enumerable<product_region_price_dataCreateOrConnectWithoutProductInput>
+    upsert?: Enumerable<product_region_price_dataUpsertWithWhereUniqueWithoutProductInput>
+    createMany?: product_region_price_dataCreateManyProductInputEnvelope
     connect?: Enumerable<product_region_price_dataWhereUniqueInput>
     set?: Enumerable<product_region_price_dataWhereUniqueInput>
     disconnect?: Enumerable<product_region_price_dataWhereUniqueInput>
     delete?: Enumerable<product_region_price_dataWhereUniqueInput>
-    update?: Enumerable<product_region_price_dataUpdateWithWhereUniqueWithoutProductsInput>
-    updateMany?: Enumerable<product_region_price_dataUpdateManyWithWhereWithoutProductsInput>
+    update?: Enumerable<product_region_price_dataUpdateWithWhereUniqueWithoutProductInput>
+    updateMany?: Enumerable<product_region_price_dataUpdateManyWithWhereWithoutProductInput>
     deleteMany?: Enumerable<product_region_price_dataScalarWhereInput>
   }
 
-  export type scaled_pricesUpdateManyWithoutProductsInput = {
-    create?: XOR<Enumerable<scaled_pricesCreateWithoutProductsInput>, Enumerable<scaled_pricesUncheckedCreateWithoutProductsInput>>
-    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutProductsInput>
-    upsert?: Enumerable<scaled_pricesUpsertWithWhereUniqueWithoutProductsInput>
-    createMany?: scaled_pricesCreateManyProductsInputEnvelope
+  export type scaled_pricesUpdateManyWithoutProductInput = {
+    create?: XOR<Enumerable<scaled_pricesCreateWithoutProductInput>, Enumerable<scaled_pricesUncheckedCreateWithoutProductInput>>
+    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutProductInput>
+    upsert?: Enumerable<scaled_pricesUpsertWithWhereUniqueWithoutProductInput>
+    createMany?: scaled_pricesCreateManyProductInputEnvelope
     connect?: Enumerable<scaled_pricesWhereUniqueInput>
     set?: Enumerable<scaled_pricesWhereUniqueInput>
     disconnect?: Enumerable<scaled_pricesWhereUniqueInput>
     delete?: Enumerable<scaled_pricesWhereUniqueInput>
-    update?: Enumerable<scaled_pricesUpdateWithWhereUniqueWithoutProductsInput>
-    updateMany?: Enumerable<scaled_pricesUpdateManyWithWhereWithoutProductsInput>
+    update?: Enumerable<scaled_pricesUpdateWithWhereUniqueWithoutProductInput>
+    updateMany?: Enumerable<scaled_pricesUpdateManyWithWhereWithoutProductInput>
     deleteMany?: Enumerable<scaled_pricesScalarWhereInput>
   }
 
-  export type price_recommendationsUncheckedUpdateManyWithoutProductsInput = {
-    create?: XOR<Enumerable<price_recommendationsCreateWithoutProductsInput>, Enumerable<price_recommendationsUncheckedCreateWithoutProductsInput>>
-    connectOrCreate?: Enumerable<price_recommendationsCreateOrConnectWithoutProductsInput>
-    upsert?: Enumerable<price_recommendationsUpsertWithWhereUniqueWithoutProductsInput>
-    createMany?: price_recommendationsCreateManyProductsInputEnvelope
+  export type price_recommendationsUncheckedUpdateManyWithoutProductInput = {
+    create?: XOR<Enumerable<price_recommendationsCreateWithoutProductInput>, Enumerable<price_recommendationsUncheckedCreateWithoutProductInput>>
+    connectOrCreate?: Enumerable<price_recommendationsCreateOrConnectWithoutProductInput>
+    upsert?: Enumerable<price_recommendationsUpsertWithWhereUniqueWithoutProductInput>
+    createMany?: price_recommendationsCreateManyProductInputEnvelope
     connect?: Enumerable<price_recommendationsWhereUniqueInput>
     set?: Enumerable<price_recommendationsWhereUniqueInput>
     disconnect?: Enumerable<price_recommendationsWhereUniqueInput>
     delete?: Enumerable<price_recommendationsWhereUniqueInput>
-    update?: Enumerable<price_recommendationsUpdateWithWhereUniqueWithoutProductsInput>
-    updateMany?: Enumerable<price_recommendationsUpdateManyWithWhereWithoutProductsInput>
+    update?: Enumerable<price_recommendationsUpdateWithWhereUniqueWithoutProductInput>
+    updateMany?: Enumerable<price_recommendationsUpdateManyWithWhereWithoutProductInput>
     deleteMany?: Enumerable<price_recommendationsScalarWhereInput>
   }
 
-  export type product_region_competitor_urlsUncheckedUpdateManyWithoutProductsInput = {
-    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutProductsInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutProductsInput>>
-    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutProductsInput>
-    upsert?: Enumerable<product_region_competitor_urlsUpsertWithWhereUniqueWithoutProductsInput>
-    createMany?: product_region_competitor_urlsCreateManyProductsInputEnvelope
+  export type product_region_competitor_urlsUncheckedUpdateManyWithoutProductInput = {
+    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutProductInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutProductInput>>
+    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutProductInput>
+    upsert?: Enumerable<product_region_competitor_urlsUpsertWithWhereUniqueWithoutProductInput>
+    createMany?: product_region_competitor_urlsCreateManyProductInputEnvelope
     connect?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
     set?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
     disconnect?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
     delete?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
-    update?: Enumerable<product_region_competitor_urlsUpdateWithWhereUniqueWithoutProductsInput>
-    updateMany?: Enumerable<product_region_competitor_urlsUpdateManyWithWhereWithoutProductsInput>
+    update?: Enumerable<product_region_competitor_urlsUpdateWithWhereUniqueWithoutProductInput>
+    updateMany?: Enumerable<product_region_competitor_urlsUpdateManyWithWhereWithoutProductInput>
     deleteMany?: Enumerable<product_region_competitor_urlsScalarWhereInput>
   }
 
-  export type product_region_price_dataUncheckedUpdateManyWithoutProductsInput = {
-    create?: XOR<Enumerable<product_region_price_dataCreateWithoutProductsInput>, Enumerable<product_region_price_dataUncheckedCreateWithoutProductsInput>>
-    connectOrCreate?: Enumerable<product_region_price_dataCreateOrConnectWithoutProductsInput>
-    upsert?: Enumerable<product_region_price_dataUpsertWithWhereUniqueWithoutProductsInput>
-    createMany?: product_region_price_dataCreateManyProductsInputEnvelope
+  export type product_region_price_dataUncheckedUpdateManyWithoutProductInput = {
+    create?: XOR<Enumerable<product_region_price_dataCreateWithoutProductInput>, Enumerable<product_region_price_dataUncheckedCreateWithoutProductInput>>
+    connectOrCreate?: Enumerable<product_region_price_dataCreateOrConnectWithoutProductInput>
+    upsert?: Enumerable<product_region_price_dataUpsertWithWhereUniqueWithoutProductInput>
+    createMany?: product_region_price_dataCreateManyProductInputEnvelope
     connect?: Enumerable<product_region_price_dataWhereUniqueInput>
     set?: Enumerable<product_region_price_dataWhereUniqueInput>
     disconnect?: Enumerable<product_region_price_dataWhereUniqueInput>
     delete?: Enumerable<product_region_price_dataWhereUniqueInput>
-    update?: Enumerable<product_region_price_dataUpdateWithWhereUniqueWithoutProductsInput>
-    updateMany?: Enumerable<product_region_price_dataUpdateManyWithWhereWithoutProductsInput>
+    update?: Enumerable<product_region_price_dataUpdateWithWhereUniqueWithoutProductInput>
+    updateMany?: Enumerable<product_region_price_dataUpdateManyWithWhereWithoutProductInput>
     deleteMany?: Enumerable<product_region_price_dataScalarWhereInput>
   }
 
-  export type scaled_pricesUncheckedUpdateManyWithoutProductsInput = {
-    create?: XOR<Enumerable<scaled_pricesCreateWithoutProductsInput>, Enumerable<scaled_pricesUncheckedCreateWithoutProductsInput>>
-    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutProductsInput>
-    upsert?: Enumerable<scaled_pricesUpsertWithWhereUniqueWithoutProductsInput>
-    createMany?: scaled_pricesCreateManyProductsInputEnvelope
+  export type scaled_pricesUncheckedUpdateManyWithoutProductInput = {
+    create?: XOR<Enumerable<scaled_pricesCreateWithoutProductInput>, Enumerable<scaled_pricesUncheckedCreateWithoutProductInput>>
+    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutProductInput>
+    upsert?: Enumerable<scaled_pricesUpsertWithWhereUniqueWithoutProductInput>
+    createMany?: scaled_pricesCreateManyProductInputEnvelope
     connect?: Enumerable<scaled_pricesWhereUniqueInput>
     set?: Enumerable<scaled_pricesWhereUniqueInput>
     disconnect?: Enumerable<scaled_pricesWhereUniqueInput>
     delete?: Enumerable<scaled_pricesWhereUniqueInput>
-    update?: Enumerable<scaled_pricesUpdateWithWhereUniqueWithoutProductsInput>
-    updateMany?: Enumerable<scaled_pricesUpdateManyWithWhereWithoutProductsInput>
+    update?: Enumerable<scaled_pricesUpdateWithWhereUniqueWithoutProductInput>
+    updateMany?: Enumerable<scaled_pricesUpdateManyWithWhereWithoutProductInput>
     deleteMany?: Enumerable<scaled_pricesScalarWhereInput>
   }
 
-  export type basketsCreateNestedManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<basketsCreateWithoutRegionsInput>, Enumerable<basketsUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<basketsCreateOrConnectWithoutRegionsInput>
-    createMany?: basketsCreateManyRegionsInputEnvelope
+  export type basketsCreateNestedManyWithoutRegionInput = {
+    create?: XOR<Enumerable<basketsCreateWithoutRegionInput>, Enumerable<basketsUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<basketsCreateOrConnectWithoutRegionInput>
+    createMany?: basketsCreateManyRegionInputEnvelope
     connect?: Enumerable<basketsWhereUniqueInput>
   }
 
-  export type competitor_region_dataCreateNestedManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<competitor_region_dataCreateWithoutRegionsInput>, Enumerable<competitor_region_dataUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<competitor_region_dataCreateOrConnectWithoutRegionsInput>
-    createMany?: competitor_region_dataCreateManyRegionsInputEnvelope
+  export type competitor_region_dataCreateNestedManyWithoutRegionInput = {
+    create?: XOR<Enumerable<competitor_region_dataCreateWithoutRegionInput>, Enumerable<competitor_region_dataUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<competitor_region_dataCreateOrConnectWithoutRegionInput>
+    createMany?: competitor_region_dataCreateManyRegionInputEnvelope
     connect?: Enumerable<competitor_region_dataWhereUniqueInput>
   }
 
-  export type price_recommendationsCreateNestedManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<price_recommendationsCreateWithoutRegionsInput>, Enumerable<price_recommendationsUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<price_recommendationsCreateOrConnectWithoutRegionsInput>
-    createMany?: price_recommendationsCreateManyRegionsInputEnvelope
+  export type price_recommendationsCreateNestedManyWithoutRegionInput = {
+    create?: XOR<Enumerable<price_recommendationsCreateWithoutRegionInput>, Enumerable<price_recommendationsUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<price_recommendationsCreateOrConnectWithoutRegionInput>
+    createMany?: price_recommendationsCreateManyRegionInputEnvelope
     connect?: Enumerable<price_recommendationsWhereUniqueInput>
   }
 
-  export type product_region_competitor_urlsCreateNestedManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutRegionsInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutRegionsInput>
-    createMany?: product_region_competitor_urlsCreateManyRegionsInputEnvelope
+  export type product_region_competitor_urlsCreateNestedManyWithoutRegionInput = {
+    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutRegionInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutRegionInput>
+    createMany?: product_region_competitor_urlsCreateManyRegionInputEnvelope
     connect?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
   }
 
-  export type product_region_price_dataCreateNestedManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<product_region_price_dataCreateWithoutRegionsInput>, Enumerable<product_region_price_dataUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<product_region_price_dataCreateOrConnectWithoutRegionsInput>
-    createMany?: product_region_price_dataCreateManyRegionsInputEnvelope
+  export type product_region_price_dataCreateNestedManyWithoutRegionInput = {
+    create?: XOR<Enumerable<product_region_price_dataCreateWithoutRegionInput>, Enumerable<product_region_price_dataUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<product_region_price_dataCreateOrConnectWithoutRegionInput>
+    createMany?: product_region_price_dataCreateManyRegionInputEnvelope
     connect?: Enumerable<product_region_price_dataWhereUniqueInput>
   }
 
-  export type scaled_pricesCreateNestedManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<scaled_pricesCreateWithoutRegionsInput>, Enumerable<scaled_pricesUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutRegionsInput>
-    createMany?: scaled_pricesCreateManyRegionsInputEnvelope
+  export type scaled_pricesCreateNestedManyWithoutRegionInput = {
+    create?: XOR<Enumerable<scaled_pricesCreateWithoutRegionInput>, Enumerable<scaled_pricesUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutRegionInput>
+    createMany?: scaled_pricesCreateManyRegionInputEnvelope
     connect?: Enumerable<scaled_pricesWhereUniqueInput>
   }
 
-  export type basketsUncheckedCreateNestedManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<basketsCreateWithoutRegionsInput>, Enumerable<basketsUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<basketsCreateOrConnectWithoutRegionsInput>
-    createMany?: basketsCreateManyRegionsInputEnvelope
+  export type basketsUncheckedCreateNestedManyWithoutRegionInput = {
+    create?: XOR<Enumerable<basketsCreateWithoutRegionInput>, Enumerable<basketsUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<basketsCreateOrConnectWithoutRegionInput>
+    createMany?: basketsCreateManyRegionInputEnvelope
     connect?: Enumerable<basketsWhereUniqueInput>
   }
 
-  export type competitor_region_dataUncheckedCreateNestedManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<competitor_region_dataCreateWithoutRegionsInput>, Enumerable<competitor_region_dataUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<competitor_region_dataCreateOrConnectWithoutRegionsInput>
-    createMany?: competitor_region_dataCreateManyRegionsInputEnvelope
+  export type competitor_region_dataUncheckedCreateNestedManyWithoutRegionInput = {
+    create?: XOR<Enumerable<competitor_region_dataCreateWithoutRegionInput>, Enumerable<competitor_region_dataUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<competitor_region_dataCreateOrConnectWithoutRegionInput>
+    createMany?: competitor_region_dataCreateManyRegionInputEnvelope
     connect?: Enumerable<competitor_region_dataWhereUniqueInput>
   }
 
-  export type price_recommendationsUncheckedCreateNestedManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<price_recommendationsCreateWithoutRegionsInput>, Enumerable<price_recommendationsUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<price_recommendationsCreateOrConnectWithoutRegionsInput>
-    createMany?: price_recommendationsCreateManyRegionsInputEnvelope
+  export type price_recommendationsUncheckedCreateNestedManyWithoutRegionInput = {
+    create?: XOR<Enumerable<price_recommendationsCreateWithoutRegionInput>, Enumerable<price_recommendationsUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<price_recommendationsCreateOrConnectWithoutRegionInput>
+    createMany?: price_recommendationsCreateManyRegionInputEnvelope
     connect?: Enumerable<price_recommendationsWhereUniqueInput>
   }
 
-  export type product_region_competitor_urlsUncheckedCreateNestedManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutRegionsInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutRegionsInput>
-    createMany?: product_region_competitor_urlsCreateManyRegionsInputEnvelope
+  export type product_region_competitor_urlsUncheckedCreateNestedManyWithoutRegionInput = {
+    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutRegionInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutRegionInput>
+    createMany?: product_region_competitor_urlsCreateManyRegionInputEnvelope
     connect?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
   }
 
-  export type product_region_price_dataUncheckedCreateNestedManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<product_region_price_dataCreateWithoutRegionsInput>, Enumerable<product_region_price_dataUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<product_region_price_dataCreateOrConnectWithoutRegionsInput>
-    createMany?: product_region_price_dataCreateManyRegionsInputEnvelope
+  export type product_region_price_dataUncheckedCreateNestedManyWithoutRegionInput = {
+    create?: XOR<Enumerable<product_region_price_dataCreateWithoutRegionInput>, Enumerable<product_region_price_dataUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<product_region_price_dataCreateOrConnectWithoutRegionInput>
+    createMany?: product_region_price_dataCreateManyRegionInputEnvelope
     connect?: Enumerable<product_region_price_dataWhereUniqueInput>
   }
 
-  export type scaled_pricesUncheckedCreateNestedManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<scaled_pricesCreateWithoutRegionsInput>, Enumerable<scaled_pricesUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutRegionsInput>
-    createMany?: scaled_pricesCreateManyRegionsInputEnvelope
+  export type scaled_pricesUncheckedCreateNestedManyWithoutRegionInput = {
+    create?: XOR<Enumerable<scaled_pricesCreateWithoutRegionInput>, Enumerable<scaled_pricesUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutRegionInput>
+    createMany?: scaled_pricesCreateManyRegionInputEnvelope
     connect?: Enumerable<scaled_pricesWhereUniqueInput>
   }
 
@@ -22938,171 +22938,171 @@ export namespace Prisma {
     set?: boolean | null
   }
 
-  export type basketsUpdateManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<basketsCreateWithoutRegionsInput>, Enumerable<basketsUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<basketsCreateOrConnectWithoutRegionsInput>
-    upsert?: Enumerable<basketsUpsertWithWhereUniqueWithoutRegionsInput>
-    createMany?: basketsCreateManyRegionsInputEnvelope
+  export type basketsUpdateManyWithoutRegionInput = {
+    create?: XOR<Enumerable<basketsCreateWithoutRegionInput>, Enumerable<basketsUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<basketsCreateOrConnectWithoutRegionInput>
+    upsert?: Enumerable<basketsUpsertWithWhereUniqueWithoutRegionInput>
+    createMany?: basketsCreateManyRegionInputEnvelope
     connect?: Enumerable<basketsWhereUniqueInput>
     set?: Enumerable<basketsWhereUniqueInput>
     disconnect?: Enumerable<basketsWhereUniqueInput>
     delete?: Enumerable<basketsWhereUniqueInput>
-    update?: Enumerable<basketsUpdateWithWhereUniqueWithoutRegionsInput>
-    updateMany?: Enumerable<basketsUpdateManyWithWhereWithoutRegionsInput>
+    update?: Enumerable<basketsUpdateWithWhereUniqueWithoutRegionInput>
+    updateMany?: Enumerable<basketsUpdateManyWithWhereWithoutRegionInput>
     deleteMany?: Enumerable<basketsScalarWhereInput>
   }
 
-  export type competitor_region_dataUpdateManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<competitor_region_dataCreateWithoutRegionsInput>, Enumerable<competitor_region_dataUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<competitor_region_dataCreateOrConnectWithoutRegionsInput>
-    upsert?: Enumerable<competitor_region_dataUpsertWithWhereUniqueWithoutRegionsInput>
-    createMany?: competitor_region_dataCreateManyRegionsInputEnvelope
+  export type competitor_region_dataUpdateManyWithoutRegionInput = {
+    create?: XOR<Enumerable<competitor_region_dataCreateWithoutRegionInput>, Enumerable<competitor_region_dataUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<competitor_region_dataCreateOrConnectWithoutRegionInput>
+    upsert?: Enumerable<competitor_region_dataUpsertWithWhereUniqueWithoutRegionInput>
+    createMany?: competitor_region_dataCreateManyRegionInputEnvelope
     connect?: Enumerable<competitor_region_dataWhereUniqueInput>
     set?: Enumerable<competitor_region_dataWhereUniqueInput>
     disconnect?: Enumerable<competitor_region_dataWhereUniqueInput>
     delete?: Enumerable<competitor_region_dataWhereUniqueInput>
-    update?: Enumerable<competitor_region_dataUpdateWithWhereUniqueWithoutRegionsInput>
-    updateMany?: Enumerable<competitor_region_dataUpdateManyWithWhereWithoutRegionsInput>
+    update?: Enumerable<competitor_region_dataUpdateWithWhereUniqueWithoutRegionInput>
+    updateMany?: Enumerable<competitor_region_dataUpdateManyWithWhereWithoutRegionInput>
     deleteMany?: Enumerable<competitor_region_dataScalarWhereInput>
   }
 
-  export type price_recommendationsUpdateManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<price_recommendationsCreateWithoutRegionsInput>, Enumerable<price_recommendationsUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<price_recommendationsCreateOrConnectWithoutRegionsInput>
-    upsert?: Enumerable<price_recommendationsUpsertWithWhereUniqueWithoutRegionsInput>
-    createMany?: price_recommendationsCreateManyRegionsInputEnvelope
+  export type price_recommendationsUpdateManyWithoutRegionInput = {
+    create?: XOR<Enumerable<price_recommendationsCreateWithoutRegionInput>, Enumerable<price_recommendationsUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<price_recommendationsCreateOrConnectWithoutRegionInput>
+    upsert?: Enumerable<price_recommendationsUpsertWithWhereUniqueWithoutRegionInput>
+    createMany?: price_recommendationsCreateManyRegionInputEnvelope
     connect?: Enumerable<price_recommendationsWhereUniqueInput>
     set?: Enumerable<price_recommendationsWhereUniqueInput>
     disconnect?: Enumerable<price_recommendationsWhereUniqueInput>
     delete?: Enumerable<price_recommendationsWhereUniqueInput>
-    update?: Enumerable<price_recommendationsUpdateWithWhereUniqueWithoutRegionsInput>
-    updateMany?: Enumerable<price_recommendationsUpdateManyWithWhereWithoutRegionsInput>
+    update?: Enumerable<price_recommendationsUpdateWithWhereUniqueWithoutRegionInput>
+    updateMany?: Enumerable<price_recommendationsUpdateManyWithWhereWithoutRegionInput>
     deleteMany?: Enumerable<price_recommendationsScalarWhereInput>
   }
 
-  export type product_region_competitor_urlsUpdateManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutRegionsInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutRegionsInput>
-    upsert?: Enumerable<product_region_competitor_urlsUpsertWithWhereUniqueWithoutRegionsInput>
-    createMany?: product_region_competitor_urlsCreateManyRegionsInputEnvelope
+  export type product_region_competitor_urlsUpdateManyWithoutRegionInput = {
+    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutRegionInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutRegionInput>
+    upsert?: Enumerable<product_region_competitor_urlsUpsertWithWhereUniqueWithoutRegionInput>
+    createMany?: product_region_competitor_urlsCreateManyRegionInputEnvelope
     connect?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
     set?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
     disconnect?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
     delete?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
-    update?: Enumerable<product_region_competitor_urlsUpdateWithWhereUniqueWithoutRegionsInput>
-    updateMany?: Enumerable<product_region_competitor_urlsUpdateManyWithWhereWithoutRegionsInput>
+    update?: Enumerable<product_region_competitor_urlsUpdateWithWhereUniqueWithoutRegionInput>
+    updateMany?: Enumerable<product_region_competitor_urlsUpdateManyWithWhereWithoutRegionInput>
     deleteMany?: Enumerable<product_region_competitor_urlsScalarWhereInput>
   }
 
-  export type product_region_price_dataUpdateManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<product_region_price_dataCreateWithoutRegionsInput>, Enumerable<product_region_price_dataUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<product_region_price_dataCreateOrConnectWithoutRegionsInput>
-    upsert?: Enumerable<product_region_price_dataUpsertWithWhereUniqueWithoutRegionsInput>
-    createMany?: product_region_price_dataCreateManyRegionsInputEnvelope
+  export type product_region_price_dataUpdateManyWithoutRegionInput = {
+    create?: XOR<Enumerable<product_region_price_dataCreateWithoutRegionInput>, Enumerable<product_region_price_dataUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<product_region_price_dataCreateOrConnectWithoutRegionInput>
+    upsert?: Enumerable<product_region_price_dataUpsertWithWhereUniqueWithoutRegionInput>
+    createMany?: product_region_price_dataCreateManyRegionInputEnvelope
     connect?: Enumerable<product_region_price_dataWhereUniqueInput>
     set?: Enumerable<product_region_price_dataWhereUniqueInput>
     disconnect?: Enumerable<product_region_price_dataWhereUniqueInput>
     delete?: Enumerable<product_region_price_dataWhereUniqueInput>
-    update?: Enumerable<product_region_price_dataUpdateWithWhereUniqueWithoutRegionsInput>
-    updateMany?: Enumerable<product_region_price_dataUpdateManyWithWhereWithoutRegionsInput>
+    update?: Enumerable<product_region_price_dataUpdateWithWhereUniqueWithoutRegionInput>
+    updateMany?: Enumerable<product_region_price_dataUpdateManyWithWhereWithoutRegionInput>
     deleteMany?: Enumerable<product_region_price_dataScalarWhereInput>
   }
 
-  export type scaled_pricesUpdateManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<scaled_pricesCreateWithoutRegionsInput>, Enumerable<scaled_pricesUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutRegionsInput>
-    upsert?: Enumerable<scaled_pricesUpsertWithWhereUniqueWithoutRegionsInput>
-    createMany?: scaled_pricesCreateManyRegionsInputEnvelope
+  export type scaled_pricesUpdateManyWithoutRegionInput = {
+    create?: XOR<Enumerable<scaled_pricesCreateWithoutRegionInput>, Enumerable<scaled_pricesUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutRegionInput>
+    upsert?: Enumerable<scaled_pricesUpsertWithWhereUniqueWithoutRegionInput>
+    createMany?: scaled_pricesCreateManyRegionInputEnvelope
     connect?: Enumerable<scaled_pricesWhereUniqueInput>
     set?: Enumerable<scaled_pricesWhereUniqueInput>
     disconnect?: Enumerable<scaled_pricesWhereUniqueInput>
     delete?: Enumerable<scaled_pricesWhereUniqueInput>
-    update?: Enumerable<scaled_pricesUpdateWithWhereUniqueWithoutRegionsInput>
-    updateMany?: Enumerable<scaled_pricesUpdateManyWithWhereWithoutRegionsInput>
+    update?: Enumerable<scaled_pricesUpdateWithWhereUniqueWithoutRegionInput>
+    updateMany?: Enumerable<scaled_pricesUpdateManyWithWhereWithoutRegionInput>
     deleteMany?: Enumerable<scaled_pricesScalarWhereInput>
   }
 
-  export type basketsUncheckedUpdateManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<basketsCreateWithoutRegionsInput>, Enumerable<basketsUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<basketsCreateOrConnectWithoutRegionsInput>
-    upsert?: Enumerable<basketsUpsertWithWhereUniqueWithoutRegionsInput>
-    createMany?: basketsCreateManyRegionsInputEnvelope
+  export type basketsUncheckedUpdateManyWithoutRegionInput = {
+    create?: XOR<Enumerable<basketsCreateWithoutRegionInput>, Enumerable<basketsUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<basketsCreateOrConnectWithoutRegionInput>
+    upsert?: Enumerable<basketsUpsertWithWhereUniqueWithoutRegionInput>
+    createMany?: basketsCreateManyRegionInputEnvelope
     connect?: Enumerable<basketsWhereUniqueInput>
     set?: Enumerable<basketsWhereUniqueInput>
     disconnect?: Enumerable<basketsWhereUniqueInput>
     delete?: Enumerable<basketsWhereUniqueInput>
-    update?: Enumerable<basketsUpdateWithWhereUniqueWithoutRegionsInput>
-    updateMany?: Enumerable<basketsUpdateManyWithWhereWithoutRegionsInput>
+    update?: Enumerable<basketsUpdateWithWhereUniqueWithoutRegionInput>
+    updateMany?: Enumerable<basketsUpdateManyWithWhereWithoutRegionInput>
     deleteMany?: Enumerable<basketsScalarWhereInput>
   }
 
-  export type competitor_region_dataUncheckedUpdateManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<competitor_region_dataCreateWithoutRegionsInput>, Enumerable<competitor_region_dataUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<competitor_region_dataCreateOrConnectWithoutRegionsInput>
-    upsert?: Enumerable<competitor_region_dataUpsertWithWhereUniqueWithoutRegionsInput>
-    createMany?: competitor_region_dataCreateManyRegionsInputEnvelope
+  export type competitor_region_dataUncheckedUpdateManyWithoutRegionInput = {
+    create?: XOR<Enumerable<competitor_region_dataCreateWithoutRegionInput>, Enumerable<competitor_region_dataUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<competitor_region_dataCreateOrConnectWithoutRegionInput>
+    upsert?: Enumerable<competitor_region_dataUpsertWithWhereUniqueWithoutRegionInput>
+    createMany?: competitor_region_dataCreateManyRegionInputEnvelope
     connect?: Enumerable<competitor_region_dataWhereUniqueInput>
     set?: Enumerable<competitor_region_dataWhereUniqueInput>
     disconnect?: Enumerable<competitor_region_dataWhereUniqueInput>
     delete?: Enumerable<competitor_region_dataWhereUniqueInput>
-    update?: Enumerable<competitor_region_dataUpdateWithWhereUniqueWithoutRegionsInput>
-    updateMany?: Enumerable<competitor_region_dataUpdateManyWithWhereWithoutRegionsInput>
+    update?: Enumerable<competitor_region_dataUpdateWithWhereUniqueWithoutRegionInput>
+    updateMany?: Enumerable<competitor_region_dataUpdateManyWithWhereWithoutRegionInput>
     deleteMany?: Enumerable<competitor_region_dataScalarWhereInput>
   }
 
-  export type price_recommendationsUncheckedUpdateManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<price_recommendationsCreateWithoutRegionsInput>, Enumerable<price_recommendationsUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<price_recommendationsCreateOrConnectWithoutRegionsInput>
-    upsert?: Enumerable<price_recommendationsUpsertWithWhereUniqueWithoutRegionsInput>
-    createMany?: price_recommendationsCreateManyRegionsInputEnvelope
+  export type price_recommendationsUncheckedUpdateManyWithoutRegionInput = {
+    create?: XOR<Enumerable<price_recommendationsCreateWithoutRegionInput>, Enumerable<price_recommendationsUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<price_recommendationsCreateOrConnectWithoutRegionInput>
+    upsert?: Enumerable<price_recommendationsUpsertWithWhereUniqueWithoutRegionInput>
+    createMany?: price_recommendationsCreateManyRegionInputEnvelope
     connect?: Enumerable<price_recommendationsWhereUniqueInput>
     set?: Enumerable<price_recommendationsWhereUniqueInput>
     disconnect?: Enumerable<price_recommendationsWhereUniqueInput>
     delete?: Enumerable<price_recommendationsWhereUniqueInput>
-    update?: Enumerable<price_recommendationsUpdateWithWhereUniqueWithoutRegionsInput>
-    updateMany?: Enumerable<price_recommendationsUpdateManyWithWhereWithoutRegionsInput>
+    update?: Enumerable<price_recommendationsUpdateWithWhereUniqueWithoutRegionInput>
+    updateMany?: Enumerable<price_recommendationsUpdateManyWithWhereWithoutRegionInput>
     deleteMany?: Enumerable<price_recommendationsScalarWhereInput>
   }
 
-  export type product_region_competitor_urlsUncheckedUpdateManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutRegionsInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutRegionsInput>
-    upsert?: Enumerable<product_region_competitor_urlsUpsertWithWhereUniqueWithoutRegionsInput>
-    createMany?: product_region_competitor_urlsCreateManyRegionsInputEnvelope
+  export type product_region_competitor_urlsUncheckedUpdateManyWithoutRegionInput = {
+    create?: XOR<Enumerable<product_region_competitor_urlsCreateWithoutRegionInput>, Enumerable<product_region_competitor_urlsUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<product_region_competitor_urlsCreateOrConnectWithoutRegionInput>
+    upsert?: Enumerable<product_region_competitor_urlsUpsertWithWhereUniqueWithoutRegionInput>
+    createMany?: product_region_competitor_urlsCreateManyRegionInputEnvelope
     connect?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
     set?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
     disconnect?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
     delete?: Enumerable<product_region_competitor_urlsWhereUniqueInput>
-    update?: Enumerable<product_region_competitor_urlsUpdateWithWhereUniqueWithoutRegionsInput>
-    updateMany?: Enumerable<product_region_competitor_urlsUpdateManyWithWhereWithoutRegionsInput>
+    update?: Enumerable<product_region_competitor_urlsUpdateWithWhereUniqueWithoutRegionInput>
+    updateMany?: Enumerable<product_region_competitor_urlsUpdateManyWithWhereWithoutRegionInput>
     deleteMany?: Enumerable<product_region_competitor_urlsScalarWhereInput>
   }
 
-  export type product_region_price_dataUncheckedUpdateManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<product_region_price_dataCreateWithoutRegionsInput>, Enumerable<product_region_price_dataUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<product_region_price_dataCreateOrConnectWithoutRegionsInput>
-    upsert?: Enumerable<product_region_price_dataUpsertWithWhereUniqueWithoutRegionsInput>
-    createMany?: product_region_price_dataCreateManyRegionsInputEnvelope
+  export type product_region_price_dataUncheckedUpdateManyWithoutRegionInput = {
+    create?: XOR<Enumerable<product_region_price_dataCreateWithoutRegionInput>, Enumerable<product_region_price_dataUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<product_region_price_dataCreateOrConnectWithoutRegionInput>
+    upsert?: Enumerable<product_region_price_dataUpsertWithWhereUniqueWithoutRegionInput>
+    createMany?: product_region_price_dataCreateManyRegionInputEnvelope
     connect?: Enumerable<product_region_price_dataWhereUniqueInput>
     set?: Enumerable<product_region_price_dataWhereUniqueInput>
     disconnect?: Enumerable<product_region_price_dataWhereUniqueInput>
     delete?: Enumerable<product_region_price_dataWhereUniqueInput>
-    update?: Enumerable<product_region_price_dataUpdateWithWhereUniqueWithoutRegionsInput>
-    updateMany?: Enumerable<product_region_price_dataUpdateManyWithWhereWithoutRegionsInput>
+    update?: Enumerable<product_region_price_dataUpdateWithWhereUniqueWithoutRegionInput>
+    updateMany?: Enumerable<product_region_price_dataUpdateManyWithWhereWithoutRegionInput>
     deleteMany?: Enumerable<product_region_price_dataScalarWhereInput>
   }
 
-  export type scaled_pricesUncheckedUpdateManyWithoutRegionsInput = {
-    create?: XOR<Enumerable<scaled_pricesCreateWithoutRegionsInput>, Enumerable<scaled_pricesUncheckedCreateWithoutRegionsInput>>
-    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutRegionsInput>
-    upsert?: Enumerable<scaled_pricesUpsertWithWhereUniqueWithoutRegionsInput>
-    createMany?: scaled_pricesCreateManyRegionsInputEnvelope
+  export type scaled_pricesUncheckedUpdateManyWithoutRegionInput = {
+    create?: XOR<Enumerable<scaled_pricesCreateWithoutRegionInput>, Enumerable<scaled_pricesUncheckedCreateWithoutRegionInput>>
+    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutRegionInput>
+    upsert?: Enumerable<scaled_pricesUpsertWithWhereUniqueWithoutRegionInput>
+    createMany?: scaled_pricesCreateManyRegionInputEnvelope
     connect?: Enumerable<scaled_pricesWhereUniqueInput>
     set?: Enumerable<scaled_pricesWhereUniqueInput>
     disconnect?: Enumerable<scaled_pricesWhereUniqueInput>
     delete?: Enumerable<scaled_pricesWhereUniqueInput>
-    update?: Enumerable<scaled_pricesUpdateWithWhereUniqueWithoutRegionsInput>
-    updateMany?: Enumerable<scaled_pricesUpdateManyWithWhereWithoutRegionsInput>
+    update?: Enumerable<scaled_pricesUpdateWithWhereUniqueWithoutRegionInput>
+    updateMany?: Enumerable<scaled_pricesUpdateManyWithWhereWithoutRegionInput>
     deleteMany?: Enumerable<scaled_pricesScalarWhereInput>
   }
 
@@ -23162,32 +23162,32 @@ export namespace Prisma {
     update?: XOR<scrape_resultsUpdateWithoutScaled_pricesInput, scrape_resultsUncheckedUpdateWithoutScaled_pricesInput>
   }
 
-  export type product_region_competitor_urlsCreateNestedOneWithoutScrape_result_product_region_competitor_urlInput = {
-    create?: XOR<product_region_competitor_urlsCreateWithoutScrape_result_product_region_competitor_urlInput, product_region_competitor_urlsUncheckedCreateWithoutScrape_result_product_region_competitor_urlInput>
-    connectOrCreate?: product_region_competitor_urlsCreateOrConnectWithoutScrape_result_product_region_competitor_urlInput
+  export type product_region_competitor_urlsCreateNestedOneWithoutScrape_result_product_region_competitor_urlsInput = {
+    create?: XOR<product_region_competitor_urlsCreateWithoutScrape_result_product_region_competitor_urlsInput, product_region_competitor_urlsUncheckedCreateWithoutScrape_result_product_region_competitor_urlsInput>
+    connectOrCreate?: product_region_competitor_urlsCreateOrConnectWithoutScrape_result_product_region_competitor_urlsInput
     connect?: product_region_competitor_urlsWhereUniqueInput
   }
 
-  export type scrape_resultsCreateNestedOneWithoutScrape_result_product_region_competitor_urlInput = {
-    create?: XOR<scrape_resultsCreateWithoutScrape_result_product_region_competitor_urlInput, scrape_resultsUncheckedCreateWithoutScrape_result_product_region_competitor_urlInput>
-    connectOrCreate?: scrape_resultsCreateOrConnectWithoutScrape_result_product_region_competitor_urlInput
+  export type scrape_resultsCreateNestedOneWithoutScrape_result_product_region_competitor_urlsInput = {
+    create?: XOR<scrape_resultsCreateWithoutScrape_result_product_region_competitor_urlsInput, scrape_resultsUncheckedCreateWithoutScrape_result_product_region_competitor_urlsInput>
+    connectOrCreate?: scrape_resultsCreateOrConnectWithoutScrape_result_product_region_competitor_urlsInput
     connect?: scrape_resultsWhereUniqueInput
   }
 
-  export type product_region_competitor_urlsUpdateOneRequiredWithoutScrape_result_product_region_competitor_urlInput = {
-    create?: XOR<product_region_competitor_urlsCreateWithoutScrape_result_product_region_competitor_urlInput, product_region_competitor_urlsUncheckedCreateWithoutScrape_result_product_region_competitor_urlInput>
-    connectOrCreate?: product_region_competitor_urlsCreateOrConnectWithoutScrape_result_product_region_competitor_urlInput
-    upsert?: product_region_competitor_urlsUpsertWithoutScrape_result_product_region_competitor_urlInput
+  export type product_region_competitor_urlsUpdateOneRequiredWithoutScrape_result_product_region_competitor_urlsInput = {
+    create?: XOR<product_region_competitor_urlsCreateWithoutScrape_result_product_region_competitor_urlsInput, product_region_competitor_urlsUncheckedCreateWithoutScrape_result_product_region_competitor_urlsInput>
+    connectOrCreate?: product_region_competitor_urlsCreateOrConnectWithoutScrape_result_product_region_competitor_urlsInput
+    upsert?: product_region_competitor_urlsUpsertWithoutScrape_result_product_region_competitor_urlsInput
     connect?: product_region_competitor_urlsWhereUniqueInput
-    update?: XOR<product_region_competitor_urlsUpdateWithoutScrape_result_product_region_competitor_urlInput, product_region_competitor_urlsUncheckedUpdateWithoutScrape_result_product_region_competitor_urlInput>
+    update?: XOR<product_region_competitor_urlsUpdateWithoutScrape_result_product_region_competitor_urlsInput, product_region_competitor_urlsUncheckedUpdateWithoutScrape_result_product_region_competitor_urlsInput>
   }
 
-  export type scrape_resultsUpdateOneRequiredWithoutScrape_result_product_region_competitor_urlInput = {
-    create?: XOR<scrape_resultsCreateWithoutScrape_result_product_region_competitor_urlInput, scrape_resultsUncheckedCreateWithoutScrape_result_product_region_competitor_urlInput>
-    connectOrCreate?: scrape_resultsCreateOrConnectWithoutScrape_result_product_region_competitor_urlInput
-    upsert?: scrape_resultsUpsertWithoutScrape_result_product_region_competitor_urlInput
+  export type scrape_resultsUpdateOneRequiredWithoutScrape_result_product_region_competitor_urlsInput = {
+    create?: XOR<scrape_resultsCreateWithoutScrape_result_product_region_competitor_urlsInput, scrape_resultsUncheckedCreateWithoutScrape_result_product_region_competitor_urlsInput>
+    connectOrCreate?: scrape_resultsCreateOrConnectWithoutScrape_result_product_region_competitor_urlsInput
+    upsert?: scrape_resultsUpsertWithoutScrape_result_product_region_competitor_urlsInput
     connect?: scrape_resultsWhereUniqueInput
-    update?: XOR<scrape_resultsUpdateWithoutScrape_result_product_region_competitor_urlInput, scrape_resultsUncheckedUpdateWithoutScrape_result_product_region_competitor_urlInput>
+    update?: XOR<scrape_resultsUpdateWithoutScrape_result_product_region_competitor_urlsInput, scrape_resultsUncheckedUpdateWithoutScrape_result_product_region_competitor_urlsInput>
   }
 
   export type unitsCreateNestedOneWithoutScrape_resultsInput = {
@@ -23196,31 +23196,31 @@ export namespace Prisma {
     connect?: unitsWhereUniqueInput
   }
 
-  export type scaled_pricesCreateNestedManyWithoutScrape_resultsInput = {
-    create?: XOR<Enumerable<scaled_pricesCreateWithoutScrape_resultsInput>, Enumerable<scaled_pricesUncheckedCreateWithoutScrape_resultsInput>>
-    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutScrape_resultsInput>
-    createMany?: scaled_pricesCreateManyScrape_resultsInputEnvelope
+  export type scaled_pricesCreateNestedManyWithoutScrape_resultInput = {
+    create?: XOR<Enumerable<scaled_pricesCreateWithoutScrape_resultInput>, Enumerable<scaled_pricesUncheckedCreateWithoutScrape_resultInput>>
+    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutScrape_resultInput>
+    createMany?: scaled_pricesCreateManyScrape_resultInputEnvelope
     connect?: Enumerable<scaled_pricesWhereUniqueInput>
   }
 
-  export type scrape_result_product_region_competitor_urlCreateNestedManyWithoutScrape_resultsInput = {
-    create?: XOR<Enumerable<scrape_result_product_region_competitor_urlCreateWithoutScrape_resultsInput>, Enumerable<scrape_result_product_region_competitor_urlUncheckedCreateWithoutScrape_resultsInput>>
-    connectOrCreate?: Enumerable<scrape_result_product_region_competitor_urlCreateOrConnectWithoutScrape_resultsInput>
-    createMany?: scrape_result_product_region_competitor_urlCreateManyScrape_resultsInputEnvelope
+  export type scrape_result_product_region_competitor_urlCreateNestedManyWithoutScrape_resultInput = {
+    create?: XOR<Enumerable<scrape_result_product_region_competitor_urlCreateWithoutScrape_resultInput>, Enumerable<scrape_result_product_region_competitor_urlUncheckedCreateWithoutScrape_resultInput>>
+    connectOrCreate?: Enumerable<scrape_result_product_region_competitor_urlCreateOrConnectWithoutScrape_resultInput>
+    createMany?: scrape_result_product_region_competitor_urlCreateManyScrape_resultInputEnvelope
     connect?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
   }
 
-  export type scaled_pricesUncheckedCreateNestedManyWithoutScrape_resultsInput = {
-    create?: XOR<Enumerable<scaled_pricesCreateWithoutScrape_resultsInput>, Enumerable<scaled_pricesUncheckedCreateWithoutScrape_resultsInput>>
-    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutScrape_resultsInput>
-    createMany?: scaled_pricesCreateManyScrape_resultsInputEnvelope
+  export type scaled_pricesUncheckedCreateNestedManyWithoutScrape_resultInput = {
+    create?: XOR<Enumerable<scaled_pricesCreateWithoutScrape_resultInput>, Enumerable<scaled_pricesUncheckedCreateWithoutScrape_resultInput>>
+    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutScrape_resultInput>
+    createMany?: scaled_pricesCreateManyScrape_resultInputEnvelope
     connect?: Enumerable<scaled_pricesWhereUniqueInput>
   }
 
-  export type scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutScrape_resultsInput = {
-    create?: XOR<Enumerable<scrape_result_product_region_competitor_urlCreateWithoutScrape_resultsInput>, Enumerable<scrape_result_product_region_competitor_urlUncheckedCreateWithoutScrape_resultsInput>>
-    connectOrCreate?: Enumerable<scrape_result_product_region_competitor_urlCreateOrConnectWithoutScrape_resultsInput>
-    createMany?: scrape_result_product_region_competitor_urlCreateManyScrape_resultsInputEnvelope
+  export type scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutScrape_resultInput = {
+    create?: XOR<Enumerable<scrape_result_product_region_competitor_urlCreateWithoutScrape_resultInput>, Enumerable<scrape_result_product_region_competitor_urlUncheckedCreateWithoutScrape_resultInput>>
+    connectOrCreate?: Enumerable<scrape_result_product_region_competitor_urlCreateOrConnectWithoutScrape_resultInput>
+    createMany?: scrape_result_product_region_competitor_urlCreateManyScrape_resultInputEnvelope
     connect?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
   }
 
@@ -23232,199 +23232,199 @@ export namespace Prisma {
     update?: XOR<unitsUpdateWithoutScrape_resultsInput, unitsUncheckedUpdateWithoutScrape_resultsInput>
   }
 
-  export type scaled_pricesUpdateManyWithoutScrape_resultsInput = {
-    create?: XOR<Enumerable<scaled_pricesCreateWithoutScrape_resultsInput>, Enumerable<scaled_pricesUncheckedCreateWithoutScrape_resultsInput>>
-    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutScrape_resultsInput>
-    upsert?: Enumerable<scaled_pricesUpsertWithWhereUniqueWithoutScrape_resultsInput>
-    createMany?: scaled_pricesCreateManyScrape_resultsInputEnvelope
+  export type scaled_pricesUpdateManyWithoutScrape_resultInput = {
+    create?: XOR<Enumerable<scaled_pricesCreateWithoutScrape_resultInput>, Enumerable<scaled_pricesUncheckedCreateWithoutScrape_resultInput>>
+    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutScrape_resultInput>
+    upsert?: Enumerable<scaled_pricesUpsertWithWhereUniqueWithoutScrape_resultInput>
+    createMany?: scaled_pricesCreateManyScrape_resultInputEnvelope
     connect?: Enumerable<scaled_pricesWhereUniqueInput>
     set?: Enumerable<scaled_pricesWhereUniqueInput>
     disconnect?: Enumerable<scaled_pricesWhereUniqueInput>
     delete?: Enumerable<scaled_pricesWhereUniqueInput>
-    update?: Enumerable<scaled_pricesUpdateWithWhereUniqueWithoutScrape_resultsInput>
-    updateMany?: Enumerable<scaled_pricesUpdateManyWithWhereWithoutScrape_resultsInput>
+    update?: Enumerable<scaled_pricesUpdateWithWhereUniqueWithoutScrape_resultInput>
+    updateMany?: Enumerable<scaled_pricesUpdateManyWithWhereWithoutScrape_resultInput>
     deleteMany?: Enumerable<scaled_pricesScalarWhereInput>
   }
 
-  export type scrape_result_product_region_competitor_urlUpdateManyWithoutScrape_resultsInput = {
-    create?: XOR<Enumerable<scrape_result_product_region_competitor_urlCreateWithoutScrape_resultsInput>, Enumerable<scrape_result_product_region_competitor_urlUncheckedCreateWithoutScrape_resultsInput>>
-    connectOrCreate?: Enumerable<scrape_result_product_region_competitor_urlCreateOrConnectWithoutScrape_resultsInput>
-    upsert?: Enumerable<scrape_result_product_region_competitor_urlUpsertWithWhereUniqueWithoutScrape_resultsInput>
-    createMany?: scrape_result_product_region_competitor_urlCreateManyScrape_resultsInputEnvelope
+  export type scrape_result_product_region_competitor_urlUpdateManyWithoutScrape_resultInput = {
+    create?: XOR<Enumerable<scrape_result_product_region_competitor_urlCreateWithoutScrape_resultInput>, Enumerable<scrape_result_product_region_competitor_urlUncheckedCreateWithoutScrape_resultInput>>
+    connectOrCreate?: Enumerable<scrape_result_product_region_competitor_urlCreateOrConnectWithoutScrape_resultInput>
+    upsert?: Enumerable<scrape_result_product_region_competitor_urlUpsertWithWhereUniqueWithoutScrape_resultInput>
+    createMany?: scrape_result_product_region_competitor_urlCreateManyScrape_resultInputEnvelope
     connect?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
     set?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
     disconnect?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
     delete?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
-    update?: Enumerable<scrape_result_product_region_competitor_urlUpdateWithWhereUniqueWithoutScrape_resultsInput>
-    updateMany?: Enumerable<scrape_result_product_region_competitor_urlUpdateManyWithWhereWithoutScrape_resultsInput>
+    update?: Enumerable<scrape_result_product_region_competitor_urlUpdateWithWhereUniqueWithoutScrape_resultInput>
+    updateMany?: Enumerable<scrape_result_product_region_competitor_urlUpdateManyWithWhereWithoutScrape_resultInput>
     deleteMany?: Enumerable<scrape_result_product_region_competitor_urlScalarWhereInput>
   }
 
-  export type scaled_pricesUncheckedUpdateManyWithoutScrape_resultsInput = {
-    create?: XOR<Enumerable<scaled_pricesCreateWithoutScrape_resultsInput>, Enumerable<scaled_pricesUncheckedCreateWithoutScrape_resultsInput>>
-    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutScrape_resultsInput>
-    upsert?: Enumerable<scaled_pricesUpsertWithWhereUniqueWithoutScrape_resultsInput>
-    createMany?: scaled_pricesCreateManyScrape_resultsInputEnvelope
+  export type scaled_pricesUncheckedUpdateManyWithoutScrape_resultInput = {
+    create?: XOR<Enumerable<scaled_pricesCreateWithoutScrape_resultInput>, Enumerable<scaled_pricesUncheckedCreateWithoutScrape_resultInput>>
+    connectOrCreate?: Enumerable<scaled_pricesCreateOrConnectWithoutScrape_resultInput>
+    upsert?: Enumerable<scaled_pricesUpsertWithWhereUniqueWithoutScrape_resultInput>
+    createMany?: scaled_pricesCreateManyScrape_resultInputEnvelope
     connect?: Enumerable<scaled_pricesWhereUniqueInput>
     set?: Enumerable<scaled_pricesWhereUniqueInput>
     disconnect?: Enumerable<scaled_pricesWhereUniqueInput>
     delete?: Enumerable<scaled_pricesWhereUniqueInput>
-    update?: Enumerable<scaled_pricesUpdateWithWhereUniqueWithoutScrape_resultsInput>
-    updateMany?: Enumerable<scaled_pricesUpdateManyWithWhereWithoutScrape_resultsInput>
+    update?: Enumerable<scaled_pricesUpdateWithWhereUniqueWithoutScrape_resultInput>
+    updateMany?: Enumerable<scaled_pricesUpdateManyWithWhereWithoutScrape_resultInput>
     deleteMany?: Enumerable<scaled_pricesScalarWhereInput>
   }
 
-  export type scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutScrape_resultsInput = {
-    create?: XOR<Enumerable<scrape_result_product_region_competitor_urlCreateWithoutScrape_resultsInput>, Enumerable<scrape_result_product_region_competitor_urlUncheckedCreateWithoutScrape_resultsInput>>
-    connectOrCreate?: Enumerable<scrape_result_product_region_competitor_urlCreateOrConnectWithoutScrape_resultsInput>
-    upsert?: Enumerable<scrape_result_product_region_competitor_urlUpsertWithWhereUniqueWithoutScrape_resultsInput>
-    createMany?: scrape_result_product_region_competitor_urlCreateManyScrape_resultsInputEnvelope
+  export type scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutScrape_resultInput = {
+    create?: XOR<Enumerable<scrape_result_product_region_competitor_urlCreateWithoutScrape_resultInput>, Enumerable<scrape_result_product_region_competitor_urlUncheckedCreateWithoutScrape_resultInput>>
+    connectOrCreate?: Enumerable<scrape_result_product_region_competitor_urlCreateOrConnectWithoutScrape_resultInput>
+    upsert?: Enumerable<scrape_result_product_region_competitor_urlUpsertWithWhereUniqueWithoutScrape_resultInput>
+    createMany?: scrape_result_product_region_competitor_urlCreateManyScrape_resultInputEnvelope
     connect?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
     set?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
     disconnect?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
     delete?: Enumerable<scrape_result_product_region_competitor_urlWhereUniqueInput>
-    update?: Enumerable<scrape_result_product_region_competitor_urlUpdateWithWhereUniqueWithoutScrape_resultsInput>
-    updateMany?: Enumerable<scrape_result_product_region_competitor_urlUpdateManyWithWhereWithoutScrape_resultsInput>
+    update?: Enumerable<scrape_result_product_region_competitor_urlUpdateWithWhereUniqueWithoutScrape_resultInput>
+    updateMany?: Enumerable<scrape_result_product_region_competitor_urlUpdateManyWithWhereWithoutScrape_resultInput>
     deleteMany?: Enumerable<scrape_result_product_region_competitor_urlScalarWhereInput>
   }
 
-  export type unitsCreateNestedOneWithoutOther_unitsInput = {
-    create?: XOR<unitsCreateWithoutOther_unitsInput, unitsUncheckedCreateWithoutOther_unitsInput>
-    connectOrCreate?: unitsCreateOrConnectWithoutOther_unitsInput
+  export type unitsCreateNestedOneWithoutUnitsInput = {
+    create?: XOR<unitsCreateWithoutUnitsInput, unitsUncheckedCreateWithoutUnitsInput>
+    connectOrCreate?: unitsCreateOrConnectWithoutUnitsInput
     connect?: unitsWhereUniqueInput
   }
 
-  export type productsCreateNestedManyWithoutUnitsInput = {
-    create?: XOR<Enumerable<productsCreateWithoutUnitsInput>, Enumerable<productsUncheckedCreateWithoutUnitsInput>>
-    connectOrCreate?: Enumerable<productsCreateOrConnectWithoutUnitsInput>
-    createMany?: productsCreateManyUnitsInputEnvelope
+  export type productsCreateNestedManyWithoutUnitInput = {
+    create?: XOR<Enumerable<productsCreateWithoutUnitInput>, Enumerable<productsUncheckedCreateWithoutUnitInput>>
+    connectOrCreate?: Enumerable<productsCreateOrConnectWithoutUnitInput>
+    createMany?: productsCreateManyUnitInputEnvelope
     connect?: Enumerable<productsWhereUniqueInput>
   }
 
-  export type scrape_resultsCreateNestedManyWithoutUnitsInput = {
-    create?: XOR<Enumerable<scrape_resultsCreateWithoutUnitsInput>, Enumerable<scrape_resultsUncheckedCreateWithoutUnitsInput>>
-    connectOrCreate?: Enumerable<scrape_resultsCreateOrConnectWithoutUnitsInput>
-    createMany?: scrape_resultsCreateManyUnitsInputEnvelope
+  export type scrape_resultsCreateNestedManyWithoutUnitInput = {
+    create?: XOR<Enumerable<scrape_resultsCreateWithoutUnitInput>, Enumerable<scrape_resultsUncheckedCreateWithoutUnitInput>>
+    connectOrCreate?: Enumerable<scrape_resultsCreateOrConnectWithoutUnitInput>
+    createMany?: scrape_resultsCreateManyUnitInputEnvelope
     connect?: Enumerable<scrape_resultsWhereUniqueInput>
   }
 
-  export type unitsCreateNestedManyWithoutUnitsInput = {
-    create?: XOR<Enumerable<unitsCreateWithoutUnitsInput>, Enumerable<unitsUncheckedCreateWithoutUnitsInput>>
-    connectOrCreate?: Enumerable<unitsCreateOrConnectWithoutUnitsInput>
-    createMany?: unitsCreateManyUnitsInputEnvelope
+  export type unitsCreateNestedManyWithoutBase_unitInput = {
+    create?: XOR<Enumerable<unitsCreateWithoutBase_unitInput>, Enumerable<unitsUncheckedCreateWithoutBase_unitInput>>
+    connectOrCreate?: Enumerable<unitsCreateOrConnectWithoutBase_unitInput>
+    createMany?: unitsCreateManyBase_unitInputEnvelope
     connect?: Enumerable<unitsWhereUniqueInput>
   }
 
-  export type productsUncheckedCreateNestedManyWithoutUnitsInput = {
-    create?: XOR<Enumerable<productsCreateWithoutUnitsInput>, Enumerable<productsUncheckedCreateWithoutUnitsInput>>
-    connectOrCreate?: Enumerable<productsCreateOrConnectWithoutUnitsInput>
-    createMany?: productsCreateManyUnitsInputEnvelope
+  export type productsUncheckedCreateNestedManyWithoutUnitInput = {
+    create?: XOR<Enumerable<productsCreateWithoutUnitInput>, Enumerable<productsUncheckedCreateWithoutUnitInput>>
+    connectOrCreate?: Enumerable<productsCreateOrConnectWithoutUnitInput>
+    createMany?: productsCreateManyUnitInputEnvelope
     connect?: Enumerable<productsWhereUniqueInput>
   }
 
-  export type scrape_resultsUncheckedCreateNestedManyWithoutUnitsInput = {
-    create?: XOR<Enumerable<scrape_resultsCreateWithoutUnitsInput>, Enumerable<scrape_resultsUncheckedCreateWithoutUnitsInput>>
-    connectOrCreate?: Enumerable<scrape_resultsCreateOrConnectWithoutUnitsInput>
-    createMany?: scrape_resultsCreateManyUnitsInputEnvelope
+  export type scrape_resultsUncheckedCreateNestedManyWithoutUnitInput = {
+    create?: XOR<Enumerable<scrape_resultsCreateWithoutUnitInput>, Enumerable<scrape_resultsUncheckedCreateWithoutUnitInput>>
+    connectOrCreate?: Enumerable<scrape_resultsCreateOrConnectWithoutUnitInput>
+    createMany?: scrape_resultsCreateManyUnitInputEnvelope
     connect?: Enumerable<scrape_resultsWhereUniqueInput>
   }
 
-  export type unitsUncheckedCreateNestedManyWithoutUnitsInput = {
-    create?: XOR<Enumerable<unitsCreateWithoutUnitsInput>, Enumerable<unitsUncheckedCreateWithoutUnitsInput>>
-    connectOrCreate?: Enumerable<unitsCreateOrConnectWithoutUnitsInput>
-    createMany?: unitsCreateManyUnitsInputEnvelope
+  export type unitsUncheckedCreateNestedManyWithoutBase_unitInput = {
+    create?: XOR<Enumerable<unitsCreateWithoutBase_unitInput>, Enumerable<unitsUncheckedCreateWithoutBase_unitInput>>
+    connectOrCreate?: Enumerable<unitsCreateOrConnectWithoutBase_unitInput>
+    createMany?: unitsCreateManyBase_unitInputEnvelope
     connect?: Enumerable<unitsWhereUniqueInput>
   }
 
-  export type unitsUpdateOneRequiredWithoutOther_unitsInput = {
-    create?: XOR<unitsCreateWithoutOther_unitsInput, unitsUncheckedCreateWithoutOther_unitsInput>
-    connectOrCreate?: unitsCreateOrConnectWithoutOther_unitsInput
-    upsert?: unitsUpsertWithoutOther_unitsInput
+  export type unitsUpdateOneRequiredWithoutUnitsInput = {
+    create?: XOR<unitsCreateWithoutUnitsInput, unitsUncheckedCreateWithoutUnitsInput>
+    connectOrCreate?: unitsCreateOrConnectWithoutUnitsInput
+    upsert?: unitsUpsertWithoutUnitsInput
     connect?: unitsWhereUniqueInput
-    update?: XOR<unitsUpdateWithoutOther_unitsInput, unitsUncheckedUpdateWithoutOther_unitsInput>
+    update?: XOR<unitsUpdateWithoutUnitsInput, unitsUncheckedUpdateWithoutUnitsInput>
   }
 
-  export type productsUpdateManyWithoutUnitsInput = {
-    create?: XOR<Enumerable<productsCreateWithoutUnitsInput>, Enumerable<productsUncheckedCreateWithoutUnitsInput>>
-    connectOrCreate?: Enumerable<productsCreateOrConnectWithoutUnitsInput>
-    upsert?: Enumerable<productsUpsertWithWhereUniqueWithoutUnitsInput>
-    createMany?: productsCreateManyUnitsInputEnvelope
+  export type productsUpdateManyWithoutUnitInput = {
+    create?: XOR<Enumerable<productsCreateWithoutUnitInput>, Enumerable<productsUncheckedCreateWithoutUnitInput>>
+    connectOrCreate?: Enumerable<productsCreateOrConnectWithoutUnitInput>
+    upsert?: Enumerable<productsUpsertWithWhereUniqueWithoutUnitInput>
+    createMany?: productsCreateManyUnitInputEnvelope
     connect?: Enumerable<productsWhereUniqueInput>
     set?: Enumerable<productsWhereUniqueInput>
     disconnect?: Enumerable<productsWhereUniqueInput>
     delete?: Enumerable<productsWhereUniqueInput>
-    update?: Enumerable<productsUpdateWithWhereUniqueWithoutUnitsInput>
-    updateMany?: Enumerable<productsUpdateManyWithWhereWithoutUnitsInput>
+    update?: Enumerable<productsUpdateWithWhereUniqueWithoutUnitInput>
+    updateMany?: Enumerable<productsUpdateManyWithWhereWithoutUnitInput>
     deleteMany?: Enumerable<productsScalarWhereInput>
   }
 
-  export type scrape_resultsUpdateManyWithoutUnitsInput = {
-    create?: XOR<Enumerable<scrape_resultsCreateWithoutUnitsInput>, Enumerable<scrape_resultsUncheckedCreateWithoutUnitsInput>>
-    connectOrCreate?: Enumerable<scrape_resultsCreateOrConnectWithoutUnitsInput>
-    upsert?: Enumerable<scrape_resultsUpsertWithWhereUniqueWithoutUnitsInput>
-    createMany?: scrape_resultsCreateManyUnitsInputEnvelope
+  export type scrape_resultsUpdateManyWithoutUnitInput = {
+    create?: XOR<Enumerable<scrape_resultsCreateWithoutUnitInput>, Enumerable<scrape_resultsUncheckedCreateWithoutUnitInput>>
+    connectOrCreate?: Enumerable<scrape_resultsCreateOrConnectWithoutUnitInput>
+    upsert?: Enumerable<scrape_resultsUpsertWithWhereUniqueWithoutUnitInput>
+    createMany?: scrape_resultsCreateManyUnitInputEnvelope
     connect?: Enumerable<scrape_resultsWhereUniqueInput>
     set?: Enumerable<scrape_resultsWhereUniqueInput>
     disconnect?: Enumerable<scrape_resultsWhereUniqueInput>
     delete?: Enumerable<scrape_resultsWhereUniqueInput>
-    update?: Enumerable<scrape_resultsUpdateWithWhereUniqueWithoutUnitsInput>
-    updateMany?: Enumerable<scrape_resultsUpdateManyWithWhereWithoutUnitsInput>
+    update?: Enumerable<scrape_resultsUpdateWithWhereUniqueWithoutUnitInput>
+    updateMany?: Enumerable<scrape_resultsUpdateManyWithWhereWithoutUnitInput>
     deleteMany?: Enumerable<scrape_resultsScalarWhereInput>
   }
 
-  export type unitsUpdateManyWithoutUnitsInput = {
-    create?: XOR<Enumerable<unitsCreateWithoutUnitsInput>, Enumerable<unitsUncheckedCreateWithoutUnitsInput>>
-    connectOrCreate?: Enumerable<unitsCreateOrConnectWithoutUnitsInput>
-    upsert?: Enumerable<unitsUpsertWithWhereUniqueWithoutUnitsInput>
-    createMany?: unitsCreateManyUnitsInputEnvelope
+  export type unitsUpdateManyWithoutBase_unitInput = {
+    create?: XOR<Enumerable<unitsCreateWithoutBase_unitInput>, Enumerable<unitsUncheckedCreateWithoutBase_unitInput>>
+    connectOrCreate?: Enumerable<unitsCreateOrConnectWithoutBase_unitInput>
+    upsert?: Enumerable<unitsUpsertWithWhereUniqueWithoutBase_unitInput>
+    createMany?: unitsCreateManyBase_unitInputEnvelope
     connect?: Enumerable<unitsWhereUniqueInput>
     set?: Enumerable<unitsWhereUniqueInput>
     disconnect?: Enumerable<unitsWhereUniqueInput>
     delete?: Enumerable<unitsWhereUniqueInput>
-    update?: Enumerable<unitsUpdateWithWhereUniqueWithoutUnitsInput>
-    updateMany?: Enumerable<unitsUpdateManyWithWhereWithoutUnitsInput>
+    update?: Enumerable<unitsUpdateWithWhereUniqueWithoutBase_unitInput>
+    updateMany?: Enumerable<unitsUpdateManyWithWhereWithoutBase_unitInput>
     deleteMany?: Enumerable<unitsScalarWhereInput>
   }
 
-  export type productsUncheckedUpdateManyWithoutUnitsInput = {
-    create?: XOR<Enumerable<productsCreateWithoutUnitsInput>, Enumerable<productsUncheckedCreateWithoutUnitsInput>>
-    connectOrCreate?: Enumerable<productsCreateOrConnectWithoutUnitsInput>
-    upsert?: Enumerable<productsUpsertWithWhereUniqueWithoutUnitsInput>
-    createMany?: productsCreateManyUnitsInputEnvelope
+  export type productsUncheckedUpdateManyWithoutUnitInput = {
+    create?: XOR<Enumerable<productsCreateWithoutUnitInput>, Enumerable<productsUncheckedCreateWithoutUnitInput>>
+    connectOrCreate?: Enumerable<productsCreateOrConnectWithoutUnitInput>
+    upsert?: Enumerable<productsUpsertWithWhereUniqueWithoutUnitInput>
+    createMany?: productsCreateManyUnitInputEnvelope
     connect?: Enumerable<productsWhereUniqueInput>
     set?: Enumerable<productsWhereUniqueInput>
     disconnect?: Enumerable<productsWhereUniqueInput>
     delete?: Enumerable<productsWhereUniqueInput>
-    update?: Enumerable<productsUpdateWithWhereUniqueWithoutUnitsInput>
-    updateMany?: Enumerable<productsUpdateManyWithWhereWithoutUnitsInput>
+    update?: Enumerable<productsUpdateWithWhereUniqueWithoutUnitInput>
+    updateMany?: Enumerable<productsUpdateManyWithWhereWithoutUnitInput>
     deleteMany?: Enumerable<productsScalarWhereInput>
   }
 
-  export type scrape_resultsUncheckedUpdateManyWithoutUnitsInput = {
-    create?: XOR<Enumerable<scrape_resultsCreateWithoutUnitsInput>, Enumerable<scrape_resultsUncheckedCreateWithoutUnitsInput>>
-    connectOrCreate?: Enumerable<scrape_resultsCreateOrConnectWithoutUnitsInput>
-    upsert?: Enumerable<scrape_resultsUpsertWithWhereUniqueWithoutUnitsInput>
-    createMany?: scrape_resultsCreateManyUnitsInputEnvelope
+  export type scrape_resultsUncheckedUpdateManyWithoutUnitInput = {
+    create?: XOR<Enumerable<scrape_resultsCreateWithoutUnitInput>, Enumerable<scrape_resultsUncheckedCreateWithoutUnitInput>>
+    connectOrCreate?: Enumerable<scrape_resultsCreateOrConnectWithoutUnitInput>
+    upsert?: Enumerable<scrape_resultsUpsertWithWhereUniqueWithoutUnitInput>
+    createMany?: scrape_resultsCreateManyUnitInputEnvelope
     connect?: Enumerable<scrape_resultsWhereUniqueInput>
     set?: Enumerable<scrape_resultsWhereUniqueInput>
     disconnect?: Enumerable<scrape_resultsWhereUniqueInput>
     delete?: Enumerable<scrape_resultsWhereUniqueInput>
-    update?: Enumerable<scrape_resultsUpdateWithWhereUniqueWithoutUnitsInput>
-    updateMany?: Enumerable<scrape_resultsUpdateManyWithWhereWithoutUnitsInput>
+    update?: Enumerable<scrape_resultsUpdateWithWhereUniqueWithoutUnitInput>
+    updateMany?: Enumerable<scrape_resultsUpdateManyWithWhereWithoutUnitInput>
     deleteMany?: Enumerable<scrape_resultsScalarWhereInput>
   }
 
-  export type unitsUncheckedUpdateManyWithoutUnitsInput = {
-    create?: XOR<Enumerable<unitsCreateWithoutUnitsInput>, Enumerable<unitsUncheckedCreateWithoutUnitsInput>>
-    connectOrCreate?: Enumerable<unitsCreateOrConnectWithoutUnitsInput>
-    upsert?: Enumerable<unitsUpsertWithWhereUniqueWithoutUnitsInput>
-    createMany?: unitsCreateManyUnitsInputEnvelope
+  export type unitsUncheckedUpdateManyWithoutBase_unitInput = {
+    create?: XOR<Enumerable<unitsCreateWithoutBase_unitInput>, Enumerable<unitsUncheckedCreateWithoutBase_unitInput>>
+    connectOrCreate?: Enumerable<unitsCreateOrConnectWithoutBase_unitInput>
+    upsert?: Enumerable<unitsUpsertWithWhereUniqueWithoutBase_unitInput>
+    createMany?: unitsCreateManyBase_unitInputEnvelope
     connect?: Enumerable<unitsWhereUniqueInput>
     set?: Enumerable<unitsWhereUniqueInput>
     disconnect?: Enumerable<unitsWhereUniqueInput>
     delete?: Enumerable<unitsWhereUniqueInput>
-    update?: Enumerable<unitsUpdateWithWhereUniqueWithoutUnitsInput>
-    updateMany?: Enumerable<unitsUpdateManyWithWhereWithoutUnitsInput>
+    update?: Enumerable<unitsUpdateWithWhereUniqueWithoutBase_unitInput>
+    updateMany?: Enumerable<unitsUpdateManyWithWhereWithoutBase_unitInput>
     deleteMany?: Enumerable<unitsScalarWhereInput>
   }
 
@@ -23723,17 +23723,17 @@ export namespace Prisma {
     _max?: NestedBoolNullableFilter
   }
 
-  export type basketsCreateWithoutBasket_daily_totalsInput = {
+  export type basketsCreateWithoutBasket_daily_totalInput = {
     goodfood_id: number
     delivery_date: Date | string
     basket_totals?: NullableJsonNullValueInput | InputJsonValue
     basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
-    regions: regionsCreateNestedOneWithoutBasketsInput
+    region: regionsCreateNestedOneWithoutBasketsInput
   }
 
-  export type basketsUncheckedCreateWithoutBasket_daily_totalsInput = {
+  export type basketsUncheckedCreateWithoutBasket_daily_totalInput = {
     id?: number
     goodfood_id: number
     delivery_date: Date | string
@@ -23744,28 +23744,28 @@ export namespace Prisma {
     region_id: number
   }
 
-  export type basketsCreateOrConnectWithoutBasket_daily_totalsInput = {
+  export type basketsCreateOrConnectWithoutBasket_daily_totalInput = {
     where: basketsWhereUniqueInput
-    create: XOR<basketsCreateWithoutBasket_daily_totalsInput, basketsUncheckedCreateWithoutBasket_daily_totalsInput>
+    create: XOR<basketsCreateWithoutBasket_daily_totalInput, basketsUncheckedCreateWithoutBasket_daily_totalInput>
   }
 
-  export type basketsCreateManyBasket_daily_totalsInputEnvelope = {
-    data: Enumerable<basketsCreateManyBasket_daily_totalsInput>
+  export type basketsCreateManyBasket_daily_totalInputEnvelope = {
+    data: Enumerable<basketsCreateManyBasket_daily_totalInput>
     skipDuplicates?: boolean
   }
 
-  export type basketsUpsertWithWhereUniqueWithoutBasket_daily_totalsInput = {
+  export type basketsUpsertWithWhereUniqueWithoutBasket_daily_totalInput = {
     where: basketsWhereUniqueInput
-    update: XOR<basketsUpdateWithoutBasket_daily_totalsInput, basketsUncheckedUpdateWithoutBasket_daily_totalsInput>
-    create: XOR<basketsCreateWithoutBasket_daily_totalsInput, basketsUncheckedCreateWithoutBasket_daily_totalsInput>
+    update: XOR<basketsUpdateWithoutBasket_daily_totalInput, basketsUncheckedUpdateWithoutBasket_daily_totalInput>
+    create: XOR<basketsCreateWithoutBasket_daily_totalInput, basketsUncheckedCreateWithoutBasket_daily_totalInput>
   }
 
-  export type basketsUpdateWithWhereUniqueWithoutBasket_daily_totalsInput = {
+  export type basketsUpdateWithWhereUniqueWithoutBasket_daily_totalInput = {
     where: basketsWhereUniqueInput
-    data: XOR<basketsUpdateWithoutBasket_daily_totalsInput, basketsUncheckedUpdateWithoutBasket_daily_totalsInput>
+    data: XOR<basketsUpdateWithoutBasket_daily_totalInput, basketsUncheckedUpdateWithoutBasket_daily_totalInput>
   }
 
-  export type basketsUpdateManyWithWhereWithoutBasket_daily_totalsInput = {
+  export type basketsUpdateManyWithWhereWithoutBasket_daily_totalInput = {
     where: basketsScalarWhereInput
     data: XOR<basketsUpdateManyMutationInput, basketsUncheckedUpdateManyWithoutBasketsInput>
   }
@@ -23794,7 +23794,7 @@ export namespace Prisma {
     competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
     competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price: number
-    basket_line_item_recommended_prices?: basket_line_item_recommended_pricesCreateNestedManyWithoutBasket_line_itemsInput
+    basket_line_item_recommended_prices?: basket_line_item_recommended_pricesCreateNestedManyWithoutBasket_line_itemInput
   }
 
   export type basket_line_itemsUncheckedCreateWithoutBasket_line_item_competitor_equivalentsInput = {
@@ -23807,7 +23807,7 @@ export namespace Prisma {
     competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
     competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price: number
-    basket_line_item_recommended_prices?: basket_line_item_recommended_pricesUncheckedCreateNestedManyWithoutBasket_line_itemsInput
+    basket_line_item_recommended_prices?: basket_line_item_recommended_pricesUncheckedCreateNestedManyWithoutBasket_line_itemInput
   }
 
   export type basket_line_itemsCreateOrConnectWithoutBasket_line_item_competitor_equivalentsInput = {
@@ -23818,18 +23818,18 @@ export namespace Prisma {
   export type competitorsCreateWithoutBasket_line_item_competitor_equivalentsInput = {
     slug: string
     display_text: string
-    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutCompetitorsInput
-    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutCompetitorsInput
-    scaled_prices?: scaled_pricesCreateNestedManyWithoutCompetitorsInput
+    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutCompetitorInput
+    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutCompetitorInput
+    scaled_prices?: scaled_pricesCreateNestedManyWithoutCompetitorInput
   }
 
   export type competitorsUncheckedCreateWithoutBasket_line_item_competitor_equivalentsInput = {
     id?: number
     slug: string
     display_text: string
-    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutCompetitorsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutCompetitorsInput
-    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutCompetitorsInput
+    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutCompetitorInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutCompetitorInput
+    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutCompetitorInput
   }
 
   export type competitorsCreateOrConnectWithoutBasket_line_item_competitor_equivalentsInput = {
@@ -23851,7 +23851,7 @@ export namespace Prisma {
     competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
     competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price?: FloatFieldUpdateOperationsInput | number
-    basket_line_item_recommended_prices?: basket_line_item_recommended_pricesUpdateManyWithoutBasket_line_itemsInput
+    basket_line_item_recommended_prices?: basket_line_item_recommended_pricesUpdateManyWithoutBasket_line_itemInput
   }
 
   export type basket_line_itemsUncheckedUpdateWithoutBasket_line_item_competitor_equivalentsInput = {
@@ -23864,7 +23864,7 @@ export namespace Prisma {
     competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
     competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price?: FloatFieldUpdateOperationsInput | number
-    basket_line_item_recommended_prices?: basket_line_item_recommended_pricesUncheckedUpdateManyWithoutBasket_line_itemsInput
+    basket_line_item_recommended_prices?: basket_line_item_recommended_pricesUncheckedUpdateManyWithoutBasket_line_itemInput
   }
 
   export type competitorsUpsertWithoutBasket_line_item_competitor_equivalentsInput = {
@@ -23875,18 +23875,18 @@ export namespace Prisma {
   export type competitorsUpdateWithoutBasket_line_item_competitor_equivalentsInput = {
     slug?: StringFieldUpdateOperationsInput | string
     display_text?: StringFieldUpdateOperationsInput | string
-    competitor_region_data?: competitor_region_dataUpdateManyWithoutCompetitorsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutCompetitorsInput
-    scaled_prices?: scaled_pricesUpdateManyWithoutCompetitorsInput
+    competitor_region_data?: competitor_region_dataUpdateManyWithoutCompetitorInput
+    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutCompetitorInput
+    scaled_prices?: scaled_pricesUpdateManyWithoutCompetitorInput
   }
 
   export type competitorsUncheckedUpdateWithoutBasket_line_item_competitor_equivalentsInput = {
     id?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     display_text?: StringFieldUpdateOperationsInput | string
-    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutCompetitorsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutCompetitorsInput
-    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutCompetitorsInput
+    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutCompetitorInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutCompetitorInput
+    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutCompetitorInput
   }
 
   export type basket_line_itemsCreateWithoutBasket_line_item_recommended_pricesInput = {
@@ -23898,7 +23898,7 @@ export namespace Prisma {
     competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
     competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price: number
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsCreateNestedManyWithoutBasket_line_itemsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsCreateNestedManyWithoutBasket_line_itemInput
   }
 
   export type basket_line_itemsUncheckedCreateWithoutBasket_line_item_recommended_pricesInput = {
@@ -23911,7 +23911,7 @@ export namespace Prisma {
     competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
     competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price: number
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedCreateNestedManyWithoutBasket_line_itemsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedCreateNestedManyWithoutBasket_line_itemInput
   }
 
   export type basket_line_itemsCreateOrConnectWithoutBasket_line_item_recommended_pricesInput = {
@@ -23933,7 +23933,7 @@ export namespace Prisma {
     competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
     competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price?: FloatFieldUpdateOperationsInput | number
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUpdateManyWithoutBasket_line_itemsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUpdateManyWithoutBasket_line_itemInput
   }
 
   export type basket_line_itemsUncheckedUpdateWithoutBasket_line_item_recommended_pricesInput = {
@@ -23946,17 +23946,17 @@ export namespace Prisma {
     competitor_indexes?: NullableJsonNullValueInput | InputJsonValue
     competitor_prices?: NullableJsonNullValueInput | InputJsonValue
     goodfood_price?: FloatFieldUpdateOperationsInput | number
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutBasket_line_itemsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutBasket_line_itemInput
   }
 
-  export type basket_line_item_competitor_equivalentsCreateWithoutBasket_line_itemsInput = {
+  export type basket_line_item_competitor_equivalentsCreateWithoutBasket_line_itemInput = {
     competitor_price?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
-    competitors: competitorsCreateNestedOneWithoutBasket_line_item_competitor_equivalentsInput
+    competitor: competitorsCreateNestedOneWithoutBasket_line_item_competitor_equivalentsInput
   }
 
-  export type basket_line_item_competitor_equivalentsUncheckedCreateWithoutBasket_line_itemsInput = {
+  export type basket_line_item_competitor_equivalentsUncheckedCreateWithoutBasket_line_itemInput = {
     id?: number
     competitor_price?: number | null
     competitor_id: number
@@ -23964,49 +23964,49 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type basket_line_item_competitor_equivalentsCreateOrConnectWithoutBasket_line_itemsInput = {
+  export type basket_line_item_competitor_equivalentsCreateOrConnectWithoutBasket_line_itemInput = {
     where: basket_line_item_competitor_equivalentsWhereUniqueInput
-    create: XOR<basket_line_item_competitor_equivalentsCreateWithoutBasket_line_itemsInput, basket_line_item_competitor_equivalentsUncheckedCreateWithoutBasket_line_itemsInput>
+    create: XOR<basket_line_item_competitor_equivalentsCreateWithoutBasket_line_itemInput, basket_line_item_competitor_equivalentsUncheckedCreateWithoutBasket_line_itemInput>
   }
 
-  export type basket_line_item_competitor_equivalentsCreateManyBasket_line_itemsInputEnvelope = {
-    data: Enumerable<basket_line_item_competitor_equivalentsCreateManyBasket_line_itemsInput>
+  export type basket_line_item_competitor_equivalentsCreateManyBasket_line_itemInputEnvelope = {
+    data: Enumerable<basket_line_item_competitor_equivalentsCreateManyBasket_line_itemInput>
     skipDuplicates?: boolean
   }
 
-  export type basket_line_item_recommended_pricesCreateWithoutBasket_line_itemsInput = {
+  export type basket_line_item_recommended_pricesCreateWithoutBasket_line_itemInput = {
     recommended_price: number
     price_recommendation_id?: number | null
   }
 
-  export type basket_line_item_recommended_pricesUncheckedCreateWithoutBasket_line_itemsInput = {
+  export type basket_line_item_recommended_pricesUncheckedCreateWithoutBasket_line_itemInput = {
     id?: number
     recommended_price: number
     price_recommendation_id?: number | null
   }
 
-  export type basket_line_item_recommended_pricesCreateOrConnectWithoutBasket_line_itemsInput = {
+  export type basket_line_item_recommended_pricesCreateOrConnectWithoutBasket_line_itemInput = {
     where: basket_line_item_recommended_pricesWhereUniqueInput
-    create: XOR<basket_line_item_recommended_pricesCreateWithoutBasket_line_itemsInput, basket_line_item_recommended_pricesUncheckedCreateWithoutBasket_line_itemsInput>
+    create: XOR<basket_line_item_recommended_pricesCreateWithoutBasket_line_itemInput, basket_line_item_recommended_pricesUncheckedCreateWithoutBasket_line_itemInput>
   }
 
-  export type basket_line_item_recommended_pricesCreateManyBasket_line_itemsInputEnvelope = {
-    data: Enumerable<basket_line_item_recommended_pricesCreateManyBasket_line_itemsInput>
+  export type basket_line_item_recommended_pricesCreateManyBasket_line_itemInputEnvelope = {
+    data: Enumerable<basket_line_item_recommended_pricesCreateManyBasket_line_itemInput>
     skipDuplicates?: boolean
   }
 
-  export type basket_line_item_competitor_equivalentsUpsertWithWhereUniqueWithoutBasket_line_itemsInput = {
+  export type basket_line_item_competitor_equivalentsUpsertWithWhereUniqueWithoutBasket_line_itemInput = {
     where: basket_line_item_competitor_equivalentsWhereUniqueInput
-    update: XOR<basket_line_item_competitor_equivalentsUpdateWithoutBasket_line_itemsInput, basket_line_item_competitor_equivalentsUncheckedUpdateWithoutBasket_line_itemsInput>
-    create: XOR<basket_line_item_competitor_equivalentsCreateWithoutBasket_line_itemsInput, basket_line_item_competitor_equivalentsUncheckedCreateWithoutBasket_line_itemsInput>
+    update: XOR<basket_line_item_competitor_equivalentsUpdateWithoutBasket_line_itemInput, basket_line_item_competitor_equivalentsUncheckedUpdateWithoutBasket_line_itemInput>
+    create: XOR<basket_line_item_competitor_equivalentsCreateWithoutBasket_line_itemInput, basket_line_item_competitor_equivalentsUncheckedCreateWithoutBasket_line_itemInput>
   }
 
-  export type basket_line_item_competitor_equivalentsUpdateWithWhereUniqueWithoutBasket_line_itemsInput = {
+  export type basket_line_item_competitor_equivalentsUpdateWithWhereUniqueWithoutBasket_line_itemInput = {
     where: basket_line_item_competitor_equivalentsWhereUniqueInput
-    data: XOR<basket_line_item_competitor_equivalentsUpdateWithoutBasket_line_itemsInput, basket_line_item_competitor_equivalentsUncheckedUpdateWithoutBasket_line_itemsInput>
+    data: XOR<basket_line_item_competitor_equivalentsUpdateWithoutBasket_line_itemInput, basket_line_item_competitor_equivalentsUncheckedUpdateWithoutBasket_line_itemInput>
   }
 
-  export type basket_line_item_competitor_equivalentsUpdateManyWithWhereWithoutBasket_line_itemsInput = {
+  export type basket_line_item_competitor_equivalentsUpdateManyWithWhereWithoutBasket_line_itemInput = {
     where: basket_line_item_competitor_equivalentsScalarWhereInput
     data: XOR<basket_line_item_competitor_equivalentsUpdateManyMutationInput, basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutBasket_line_item_competitor_equivalentsInput>
   }
@@ -24023,18 +24023,18 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter | Date | string | null
   }
 
-  export type basket_line_item_recommended_pricesUpsertWithWhereUniqueWithoutBasket_line_itemsInput = {
+  export type basket_line_item_recommended_pricesUpsertWithWhereUniqueWithoutBasket_line_itemInput = {
     where: basket_line_item_recommended_pricesWhereUniqueInput
-    update: XOR<basket_line_item_recommended_pricesUpdateWithoutBasket_line_itemsInput, basket_line_item_recommended_pricesUncheckedUpdateWithoutBasket_line_itemsInput>
-    create: XOR<basket_line_item_recommended_pricesCreateWithoutBasket_line_itemsInput, basket_line_item_recommended_pricesUncheckedCreateWithoutBasket_line_itemsInput>
+    update: XOR<basket_line_item_recommended_pricesUpdateWithoutBasket_line_itemInput, basket_line_item_recommended_pricesUncheckedUpdateWithoutBasket_line_itemInput>
+    create: XOR<basket_line_item_recommended_pricesCreateWithoutBasket_line_itemInput, basket_line_item_recommended_pricesUncheckedCreateWithoutBasket_line_itemInput>
   }
 
-  export type basket_line_item_recommended_pricesUpdateWithWhereUniqueWithoutBasket_line_itemsInput = {
+  export type basket_line_item_recommended_pricesUpdateWithWhereUniqueWithoutBasket_line_itemInput = {
     where: basket_line_item_recommended_pricesWhereUniqueInput
-    data: XOR<basket_line_item_recommended_pricesUpdateWithoutBasket_line_itemsInput, basket_line_item_recommended_pricesUncheckedUpdateWithoutBasket_line_itemsInput>
+    data: XOR<basket_line_item_recommended_pricesUpdateWithoutBasket_line_itemInput, basket_line_item_recommended_pricesUncheckedUpdateWithoutBasket_line_itemInput>
   }
 
-  export type basket_line_item_recommended_pricesUpdateManyWithWhereWithoutBasket_line_itemsInput = {
+  export type basket_line_item_recommended_pricesUpdateManyWithWhereWithoutBasket_line_itemInput = {
     where: basket_line_item_recommended_pricesScalarWhereInput
     data: XOR<basket_line_item_recommended_pricesUpdateManyMutationInput, basket_line_item_recommended_pricesUncheckedUpdateManyWithoutBasket_line_item_recommended_pricesInput>
   }
@@ -24081,11 +24081,11 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsCreateNestedManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesCreateNestedManyWithoutRegionsInput
+    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutRegionInput
+    price_recommendations?: price_recommendationsCreateNestedManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutRegionInput
+    scaled_prices?: scaled_pricesCreateNestedManyWithoutRegionInput
   }
 
   export type regionsUncheckedCreateWithoutBasketsInput = {
@@ -24099,11 +24099,11 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutRegionsInput
+    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutRegionInput
+    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutRegionInput
+    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutRegionInput
   }
 
   export type regionsCreateOrConnectWithoutBasketsInput = {
@@ -24148,11 +24148,11 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitor_region_data?: competitor_region_dataUpdateManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsUpdateManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataUpdateManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesUpdateManyWithoutRegionsInput
+    competitor_region_data?: competitor_region_dataUpdateManyWithoutRegionInput
+    price_recommendations?: price_recommendationsUpdateManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataUpdateManyWithoutRegionInput
+    scaled_prices?: scaled_pricesUpdateManyWithoutRegionInput
   }
 
   export type regionsUncheckedUpdateWithoutBasketsInput = {
@@ -24166,28 +24166,28 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutRegionsInput
+    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutRegionInput
+    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutRegionInput
+    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutRegionInput
   }
 
   export type competitorsCreateWithoutCompetitor_region_dataInput = {
     slug: string
     display_text: string
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsCreateNestedManyWithoutCompetitorsInput
-    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutCompetitorsInput
-    scaled_prices?: scaled_pricesCreateNestedManyWithoutCompetitorsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsCreateNestedManyWithoutCompetitorInput
+    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutCompetitorInput
+    scaled_prices?: scaled_pricesCreateNestedManyWithoutCompetitorInput
   }
 
   export type competitorsUncheckedCreateWithoutCompetitor_region_dataInput = {
     id?: number
     slug: string
     display_text: string
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedCreateNestedManyWithoutCompetitorsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutCompetitorsInput
-    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutCompetitorsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedCreateNestedManyWithoutCompetitorInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutCompetitorInput
+    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutCompetitorInput
   }
 
   export type competitorsCreateOrConnectWithoutCompetitor_region_dataInput = {
@@ -24205,11 +24205,11 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    baskets?: basketsCreateNestedManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsCreateNestedManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesCreateNestedManyWithoutRegionsInput
+    baskets?: basketsCreateNestedManyWithoutRegionInput
+    price_recommendations?: price_recommendationsCreateNestedManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutRegionInput
+    scaled_prices?: scaled_pricesCreateNestedManyWithoutRegionInput
   }
 
   export type regionsUncheckedCreateWithoutCompetitor_region_dataInput = {
@@ -24223,11 +24223,11 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    baskets?: basketsUncheckedCreateNestedManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutRegionsInput
+    baskets?: basketsUncheckedCreateNestedManyWithoutRegionInput
+    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutRegionInput
+    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutRegionInput
   }
 
   export type regionsCreateOrConnectWithoutCompetitor_region_dataInput = {
@@ -24243,18 +24243,18 @@ export namespace Prisma {
   export type competitorsUpdateWithoutCompetitor_region_dataInput = {
     slug?: StringFieldUpdateOperationsInput | string
     display_text?: StringFieldUpdateOperationsInput | string
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUpdateManyWithoutCompetitorsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutCompetitorsInput
-    scaled_prices?: scaled_pricesUpdateManyWithoutCompetitorsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUpdateManyWithoutCompetitorInput
+    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutCompetitorInput
+    scaled_prices?: scaled_pricesUpdateManyWithoutCompetitorInput
   }
 
   export type competitorsUncheckedUpdateWithoutCompetitor_region_dataInput = {
     id?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     display_text?: StringFieldUpdateOperationsInput | string
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutCompetitorsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutCompetitorsInput
-    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutCompetitorsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutCompetitorInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutCompetitorInput
+    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutCompetitorInput
   }
 
   export type regionsUpsertWithoutCompetitor_region_dataInput = {
@@ -24272,11 +24272,11 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    baskets?: basketsUpdateManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsUpdateManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataUpdateManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesUpdateManyWithoutRegionsInput
+    baskets?: basketsUpdateManyWithoutRegionInput
+    price_recommendations?: price_recommendationsUpdateManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataUpdateManyWithoutRegionInput
+    scaled_prices?: scaled_pricesUpdateManyWithoutRegionInput
   }
 
   export type regionsUncheckedUpdateWithoutCompetitor_region_dataInput = {
@@ -24290,21 +24290,21 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    baskets?: basketsUncheckedUpdateManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutRegionsInput
+    baskets?: basketsUncheckedUpdateManyWithoutRegionInput
+    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutRegionInput
+    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutRegionInput
   }
 
-  export type basket_line_item_competitor_equivalentsCreateWithoutCompetitorsInput = {
+  export type basket_line_item_competitor_equivalentsCreateWithoutCompetitorInput = {
     competitor_price?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
-    basket_line_items: basket_line_itemsCreateNestedOneWithoutBasket_line_item_competitor_equivalentsInput
+    basket_line_item: basket_line_itemsCreateNestedOneWithoutBasket_line_item_competitor_equivalentsInput
   }
 
-  export type basket_line_item_competitor_equivalentsUncheckedCreateWithoutCompetitorsInput = {
+  export type basket_line_item_competitor_equivalentsUncheckedCreateWithoutCompetitorInput = {
     id?: number
     competitor_price?: number | null
     basket_line_item_id: number
@@ -24312,51 +24312,51 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type basket_line_item_competitor_equivalentsCreateOrConnectWithoutCompetitorsInput = {
+  export type basket_line_item_competitor_equivalentsCreateOrConnectWithoutCompetitorInput = {
     where: basket_line_item_competitor_equivalentsWhereUniqueInput
-    create: XOR<basket_line_item_competitor_equivalentsCreateWithoutCompetitorsInput, basket_line_item_competitor_equivalentsUncheckedCreateWithoutCompetitorsInput>
+    create: XOR<basket_line_item_competitor_equivalentsCreateWithoutCompetitorInput, basket_line_item_competitor_equivalentsUncheckedCreateWithoutCompetitorInput>
   }
 
-  export type basket_line_item_competitor_equivalentsCreateManyCompetitorsInputEnvelope = {
-    data: Enumerable<basket_line_item_competitor_equivalentsCreateManyCompetitorsInput>
+  export type basket_line_item_competitor_equivalentsCreateManyCompetitorInputEnvelope = {
+    data: Enumerable<basket_line_item_competitor_equivalentsCreateManyCompetitorInput>
     skipDuplicates?: boolean
   }
 
-  export type competitor_region_dataCreateWithoutCompetitorsInput = {
+  export type competitor_region_dataCreateWithoutCompetitorInput = {
     should_scrape?: boolean
     should_include_in_recommendation_calculation?: number | null
-    regions: regionsCreateNestedOneWithoutCompetitor_region_dataInput
+    region: regionsCreateNestedOneWithoutCompetitor_region_dataInput
   }
 
-  export type competitor_region_dataUncheckedCreateWithoutCompetitorsInput = {
+  export type competitor_region_dataUncheckedCreateWithoutCompetitorInput = {
     id?: number
     region_id: number
     should_scrape?: boolean
     should_include_in_recommendation_calculation?: number | null
   }
 
-  export type competitor_region_dataCreateOrConnectWithoutCompetitorsInput = {
+  export type competitor_region_dataCreateOrConnectWithoutCompetitorInput = {
     where: competitor_region_dataWhereUniqueInput
-    create: XOR<competitor_region_dataCreateWithoutCompetitorsInput, competitor_region_dataUncheckedCreateWithoutCompetitorsInput>
+    create: XOR<competitor_region_dataCreateWithoutCompetitorInput, competitor_region_dataUncheckedCreateWithoutCompetitorInput>
   }
 
-  export type competitor_region_dataCreateManyCompetitorsInputEnvelope = {
-    data: Enumerable<competitor_region_dataCreateManyCompetitorsInput>
+  export type competitor_region_dataCreateManyCompetitorInputEnvelope = {
+    data: Enumerable<competitor_region_dataCreateManyCompetitorInput>
     skipDuplicates?: boolean
   }
 
-  export type product_region_competitor_urlsCreateWithoutCompetitorsInput = {
+  export type product_region_competitor_urlsCreateWithoutCompetitorInput = {
     url: string
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    products: productsCreateNestedOneWithoutProduct_region_competitor_urlsInput
-    regions: regionsCreateNestedOneWithoutProduct_region_competitor_urlsInput
+    product: productsCreateNestedOneWithoutProduct_region_competitor_urlsInput
+    region: regionsCreateNestedOneWithoutProduct_region_competitor_urlsInput
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsCreateNestedManyWithoutProduct_region_competitor_urlsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlCreateNestedManyWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlCreateNestedManyWithoutProduct_region_competitor_urlInput
   }
 
-  export type product_region_competitor_urlsUncheckedCreateWithoutCompetitorsInput = {
+  export type product_region_competitor_urlsUncheckedCreateWithoutCompetitorInput = {
     id?: number
     product_id: number
     region_id: number
@@ -24365,30 +24365,30 @@ export namespace Prisma {
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsUncheckedCreateNestedManyWithoutProduct_region_competitor_urlsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutProduct_region_competitor_urlInput
   }
 
-  export type product_region_competitor_urlsCreateOrConnectWithoutCompetitorsInput = {
+  export type product_region_competitor_urlsCreateOrConnectWithoutCompetitorInput = {
     where: product_region_competitor_urlsWhereUniqueInput
-    create: XOR<product_region_competitor_urlsCreateWithoutCompetitorsInput, product_region_competitor_urlsUncheckedCreateWithoutCompetitorsInput>
+    create: XOR<product_region_competitor_urlsCreateWithoutCompetitorInput, product_region_competitor_urlsUncheckedCreateWithoutCompetitorInput>
   }
 
-  export type product_region_competitor_urlsCreateManyCompetitorsInputEnvelope = {
-    data: Enumerable<product_region_competitor_urlsCreateManyCompetitorsInput>
+  export type product_region_competitor_urlsCreateManyCompetitorInputEnvelope = {
+    data: Enumerable<product_region_competitor_urlsCreateManyCompetitorInput>
     skipDuplicates?: boolean
   }
 
-  export type scaled_pricesCreateWithoutCompetitorsInput = {
+  export type scaled_pricesCreateWithoutCompetitorInput = {
     competitor_scaled_price?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    products: productsCreateNestedOneWithoutScaled_pricesInput
-    regions: regionsCreateNestedOneWithoutScaled_pricesInput
-    scrape_results: scrape_resultsCreateNestedOneWithoutScaled_pricesInput
+    product: productsCreateNestedOneWithoutScaled_pricesInput
+    region: regionsCreateNestedOneWithoutScaled_pricesInput
+    scrape_result: scrape_resultsCreateNestedOneWithoutScaled_pricesInput
   }
 
-  export type scaled_pricesUncheckedCreateWithoutCompetitorsInput = {
+  export type scaled_pricesUncheckedCreateWithoutCompetitorInput = {
     id?: number
     product_id: number
     region_id: number
@@ -24399,44 +24399,44 @@ export namespace Prisma {
     deleted_at?: Date | string | null
   }
 
-  export type scaled_pricesCreateOrConnectWithoutCompetitorsInput = {
+  export type scaled_pricesCreateOrConnectWithoutCompetitorInput = {
     where: scaled_pricesWhereUniqueInput
-    create: XOR<scaled_pricesCreateWithoutCompetitorsInput, scaled_pricesUncheckedCreateWithoutCompetitorsInput>
+    create: XOR<scaled_pricesCreateWithoutCompetitorInput, scaled_pricesUncheckedCreateWithoutCompetitorInput>
   }
 
-  export type scaled_pricesCreateManyCompetitorsInputEnvelope = {
-    data: Enumerable<scaled_pricesCreateManyCompetitorsInput>
+  export type scaled_pricesCreateManyCompetitorInputEnvelope = {
+    data: Enumerable<scaled_pricesCreateManyCompetitorInput>
     skipDuplicates?: boolean
   }
 
-  export type basket_line_item_competitor_equivalentsUpsertWithWhereUniqueWithoutCompetitorsInput = {
+  export type basket_line_item_competitor_equivalentsUpsertWithWhereUniqueWithoutCompetitorInput = {
     where: basket_line_item_competitor_equivalentsWhereUniqueInput
-    update: XOR<basket_line_item_competitor_equivalentsUpdateWithoutCompetitorsInput, basket_line_item_competitor_equivalentsUncheckedUpdateWithoutCompetitorsInput>
-    create: XOR<basket_line_item_competitor_equivalentsCreateWithoutCompetitorsInput, basket_line_item_competitor_equivalentsUncheckedCreateWithoutCompetitorsInput>
+    update: XOR<basket_line_item_competitor_equivalentsUpdateWithoutCompetitorInput, basket_line_item_competitor_equivalentsUncheckedUpdateWithoutCompetitorInput>
+    create: XOR<basket_line_item_competitor_equivalentsCreateWithoutCompetitorInput, basket_line_item_competitor_equivalentsUncheckedCreateWithoutCompetitorInput>
   }
 
-  export type basket_line_item_competitor_equivalentsUpdateWithWhereUniqueWithoutCompetitorsInput = {
+  export type basket_line_item_competitor_equivalentsUpdateWithWhereUniqueWithoutCompetitorInput = {
     where: basket_line_item_competitor_equivalentsWhereUniqueInput
-    data: XOR<basket_line_item_competitor_equivalentsUpdateWithoutCompetitorsInput, basket_line_item_competitor_equivalentsUncheckedUpdateWithoutCompetitorsInput>
+    data: XOR<basket_line_item_competitor_equivalentsUpdateWithoutCompetitorInput, basket_line_item_competitor_equivalentsUncheckedUpdateWithoutCompetitorInput>
   }
 
-  export type basket_line_item_competitor_equivalentsUpdateManyWithWhereWithoutCompetitorsInput = {
+  export type basket_line_item_competitor_equivalentsUpdateManyWithWhereWithoutCompetitorInput = {
     where: basket_line_item_competitor_equivalentsScalarWhereInput
     data: XOR<basket_line_item_competitor_equivalentsUpdateManyMutationInput, basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutBasket_line_item_competitor_equivalentsInput>
   }
 
-  export type competitor_region_dataUpsertWithWhereUniqueWithoutCompetitorsInput = {
+  export type competitor_region_dataUpsertWithWhereUniqueWithoutCompetitorInput = {
     where: competitor_region_dataWhereUniqueInput
-    update: XOR<competitor_region_dataUpdateWithoutCompetitorsInput, competitor_region_dataUncheckedUpdateWithoutCompetitorsInput>
-    create: XOR<competitor_region_dataCreateWithoutCompetitorsInput, competitor_region_dataUncheckedCreateWithoutCompetitorsInput>
+    update: XOR<competitor_region_dataUpdateWithoutCompetitorInput, competitor_region_dataUncheckedUpdateWithoutCompetitorInput>
+    create: XOR<competitor_region_dataCreateWithoutCompetitorInput, competitor_region_dataUncheckedCreateWithoutCompetitorInput>
   }
 
-  export type competitor_region_dataUpdateWithWhereUniqueWithoutCompetitorsInput = {
+  export type competitor_region_dataUpdateWithWhereUniqueWithoutCompetitorInput = {
     where: competitor_region_dataWhereUniqueInput
-    data: XOR<competitor_region_dataUpdateWithoutCompetitorsInput, competitor_region_dataUncheckedUpdateWithoutCompetitorsInput>
+    data: XOR<competitor_region_dataUpdateWithoutCompetitorInput, competitor_region_dataUncheckedUpdateWithoutCompetitorInput>
   }
 
-  export type competitor_region_dataUpdateManyWithWhereWithoutCompetitorsInput = {
+  export type competitor_region_dataUpdateManyWithWhereWithoutCompetitorInput = {
     where: competitor_region_dataScalarWhereInput
     data: XOR<competitor_region_dataUpdateManyMutationInput, competitor_region_dataUncheckedUpdateManyWithoutCompetitor_region_dataInput>
   }
@@ -24452,18 +24452,18 @@ export namespace Prisma {
     should_include_in_recommendation_calculation?: IntNullableFilter | number | null
   }
 
-  export type product_region_competitor_urlsUpsertWithWhereUniqueWithoutCompetitorsInput = {
+  export type product_region_competitor_urlsUpsertWithWhereUniqueWithoutCompetitorInput = {
     where: product_region_competitor_urlsWhereUniqueInput
-    update: XOR<product_region_competitor_urlsUpdateWithoutCompetitorsInput, product_region_competitor_urlsUncheckedUpdateWithoutCompetitorsInput>
-    create: XOR<product_region_competitor_urlsCreateWithoutCompetitorsInput, product_region_competitor_urlsUncheckedCreateWithoutCompetitorsInput>
+    update: XOR<product_region_competitor_urlsUpdateWithoutCompetitorInput, product_region_competitor_urlsUncheckedUpdateWithoutCompetitorInput>
+    create: XOR<product_region_competitor_urlsCreateWithoutCompetitorInput, product_region_competitor_urlsUncheckedCreateWithoutCompetitorInput>
   }
 
-  export type product_region_competitor_urlsUpdateWithWhereUniqueWithoutCompetitorsInput = {
+  export type product_region_competitor_urlsUpdateWithWhereUniqueWithoutCompetitorInput = {
     where: product_region_competitor_urlsWhereUniqueInput
-    data: XOR<product_region_competitor_urlsUpdateWithoutCompetitorsInput, product_region_competitor_urlsUncheckedUpdateWithoutCompetitorsInput>
+    data: XOR<product_region_competitor_urlsUpdateWithoutCompetitorInput, product_region_competitor_urlsUncheckedUpdateWithoutCompetitorInput>
   }
 
-  export type product_region_competitor_urlsUpdateManyWithWhereWithoutCompetitorsInput = {
+  export type product_region_competitor_urlsUpdateManyWithWhereWithoutCompetitorInput = {
     where: product_region_competitor_urlsScalarWhereInput
     data: XOR<product_region_competitor_urlsUpdateManyMutationInput, product_region_competitor_urlsUncheckedUpdateManyWithoutProduct_region_competitor_urlsInput>
   }
@@ -24482,18 +24482,18 @@ export namespace Prisma {
     deleted_at?: DateTimeNullableFilter | Date | string | null
   }
 
-  export type scaled_pricesUpsertWithWhereUniqueWithoutCompetitorsInput = {
+  export type scaled_pricesUpsertWithWhereUniqueWithoutCompetitorInput = {
     where: scaled_pricesWhereUniqueInput
-    update: XOR<scaled_pricesUpdateWithoutCompetitorsInput, scaled_pricesUncheckedUpdateWithoutCompetitorsInput>
-    create: XOR<scaled_pricesCreateWithoutCompetitorsInput, scaled_pricesUncheckedCreateWithoutCompetitorsInput>
+    update: XOR<scaled_pricesUpdateWithoutCompetitorInput, scaled_pricesUncheckedUpdateWithoutCompetitorInput>
+    create: XOR<scaled_pricesCreateWithoutCompetitorInput, scaled_pricesUncheckedCreateWithoutCompetitorInput>
   }
 
-  export type scaled_pricesUpdateWithWhereUniqueWithoutCompetitorsInput = {
+  export type scaled_pricesUpdateWithWhereUniqueWithoutCompetitorInput = {
     where: scaled_pricesWhereUniqueInput
-    data: XOR<scaled_pricesUpdateWithoutCompetitorsInput, scaled_pricesUncheckedUpdateWithoutCompetitorsInput>
+    data: XOR<scaled_pricesUpdateWithoutCompetitorInput, scaled_pricesUncheckedUpdateWithoutCompetitorInput>
   }
 
-  export type scaled_pricesUpdateManyWithWhereWithoutCompetitorsInput = {
+  export type scaled_pricesUpdateManyWithWhereWithoutCompetitorInput = {
     where: scaled_pricesScalarWhereInput
     data: XOR<scaled_pricesUpdateManyMutationInput, scaled_pricesUncheckedUpdateManyWithoutScaled_pricesInput>
   }
@@ -24522,10 +24522,10 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    units: unitsCreateNestedOneWithoutProductsInput
-    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutProductsInput
-    scaled_prices?: scaled_pricesCreateNestedManyWithoutProductsInput
+    unit: unitsCreateNestedOneWithoutProductsInput
+    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutProductInput
+    scaled_prices?: scaled_pricesCreateNestedManyWithoutProductInput
   }
 
   export type productsUncheckedCreateWithoutPrice_recommendationsInput = {
@@ -24539,9 +24539,9 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutProductsInput
-    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutProductsInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutProductInput
+    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type productsCreateOrConnectWithoutPrice_recommendationsInput = {
@@ -24559,11 +24559,11 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    baskets?: basketsCreateNestedManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesCreateNestedManyWithoutRegionsInput
+    baskets?: basketsCreateNestedManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutRegionInput
+    scaled_prices?: scaled_pricesCreateNestedManyWithoutRegionInput
   }
 
   export type regionsUncheckedCreateWithoutPrice_recommendationsInput = {
@@ -24577,11 +24577,11 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    baskets?: basketsUncheckedCreateNestedManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutRegionsInput
+    baskets?: basketsUncheckedCreateNestedManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutRegionInput
+    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutRegionInput
   }
 
   export type regionsCreateOrConnectWithoutPrice_recommendationsInput = {
@@ -24603,10 +24603,10 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    units?: unitsUpdateOneRequiredWithoutProductsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataUpdateManyWithoutProductsInput
-    scaled_prices?: scaled_pricesUpdateManyWithoutProductsInput
+    unit?: unitsUpdateOneRequiredWithoutProductsInput
+    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataUpdateManyWithoutProductInput
+    scaled_prices?: scaled_pricesUpdateManyWithoutProductInput
   }
 
   export type productsUncheckedUpdateWithoutPrice_recommendationsInput = {
@@ -24620,9 +24620,9 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutProductsInput
-    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutProductsInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutProductInput
+    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutProductInput
   }
 
   export type regionsUpsertWithoutPrice_recommendationsInput = {
@@ -24640,11 +24640,11 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    baskets?: basketsUpdateManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataUpdateManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataUpdateManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesUpdateManyWithoutRegionsInput
+    baskets?: basketsUpdateManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataUpdateManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataUpdateManyWithoutRegionInput
+    scaled_prices?: scaled_pricesUpdateManyWithoutRegionInput
   }
 
   export type regionsUncheckedUpdateWithoutPrice_recommendationsInput = {
@@ -24658,28 +24658,28 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    baskets?: basketsUncheckedUpdateManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutRegionsInput
+    baskets?: basketsUncheckedUpdateManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutRegionInput
+    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutRegionInput
   }
 
   export type competitorsCreateWithoutProduct_region_competitor_urlsInput = {
     slug: string
     display_text: string
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsCreateNestedManyWithoutCompetitorsInput
-    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutCompetitorsInput
-    scaled_prices?: scaled_pricesCreateNestedManyWithoutCompetitorsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsCreateNestedManyWithoutCompetitorInput
+    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutCompetitorInput
+    scaled_prices?: scaled_pricesCreateNestedManyWithoutCompetitorInput
   }
 
   export type competitorsUncheckedCreateWithoutProduct_region_competitor_urlsInput = {
     id?: number
     slug: string
     display_text: string
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedCreateNestedManyWithoutCompetitorsInput
-    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutCompetitorsInput
-    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutCompetitorsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedCreateNestedManyWithoutCompetitorInput
+    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutCompetitorInput
+    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutCompetitorInput
   }
 
   export type competitorsCreateOrConnectWithoutProduct_region_competitor_urlsInput = {
@@ -24696,10 +24696,10 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    units: unitsCreateNestedOneWithoutProductsInput
-    price_recommendations?: price_recommendationsCreateNestedManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutProductsInput
-    scaled_prices?: scaled_pricesCreateNestedManyWithoutProductsInput
+    unit: unitsCreateNestedOneWithoutProductsInput
+    price_recommendations?: price_recommendationsCreateNestedManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutProductInput
+    scaled_prices?: scaled_pricesCreateNestedManyWithoutProductInput
   }
 
   export type productsUncheckedCreateWithoutProduct_region_competitor_urlsInput = {
@@ -24713,9 +24713,9 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutProductsInput
-    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutProductsInput
+    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutProductInput
+    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type productsCreateOrConnectWithoutProduct_region_competitor_urlsInput = {
@@ -24733,11 +24733,11 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    baskets?: basketsCreateNestedManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsCreateNestedManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesCreateNestedManyWithoutRegionsInput
+    baskets?: basketsCreateNestedManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutRegionInput
+    price_recommendations?: price_recommendationsCreateNestedManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutRegionInput
+    scaled_prices?: scaled_pricesCreateNestedManyWithoutRegionInput
   }
 
   export type regionsUncheckedCreateWithoutProduct_region_competitor_urlsInput = {
@@ -24751,11 +24751,11 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    baskets?: basketsUncheckedCreateNestedManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutRegionsInput
+    baskets?: basketsUncheckedCreateNestedManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutRegionInput
+    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutRegionInput
+    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutRegionInput
   }
 
   export type regionsCreateOrConnectWithoutProduct_region_competitor_urlsInput = {
@@ -24786,22 +24786,22 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type scrape_result_product_region_competitor_urlCreateWithoutProduct_region_competitor_urlsInput = {
-    scrape_results: scrape_resultsCreateNestedOneWithoutScrape_result_product_region_competitor_urlInput
+  export type scrape_result_product_region_competitor_urlCreateWithoutProduct_region_competitor_urlInput = {
+    scrape_result: scrape_resultsCreateNestedOneWithoutScrape_result_product_region_competitor_urlsInput
   }
 
-  export type scrape_result_product_region_competitor_urlUncheckedCreateWithoutProduct_region_competitor_urlsInput = {
+  export type scrape_result_product_region_competitor_urlUncheckedCreateWithoutProduct_region_competitor_urlInput = {
     id?: number
     scrape_result_id: number
   }
 
-  export type scrape_result_product_region_competitor_urlCreateOrConnectWithoutProduct_region_competitor_urlsInput = {
+  export type scrape_result_product_region_competitor_urlCreateOrConnectWithoutProduct_region_competitor_urlInput = {
     where: scrape_result_product_region_competitor_urlWhereUniqueInput
-    create: XOR<scrape_result_product_region_competitor_urlCreateWithoutProduct_region_competitor_urlsInput, scrape_result_product_region_competitor_urlUncheckedCreateWithoutProduct_region_competitor_urlsInput>
+    create: XOR<scrape_result_product_region_competitor_urlCreateWithoutProduct_region_competitor_urlInput, scrape_result_product_region_competitor_urlUncheckedCreateWithoutProduct_region_competitor_urlInput>
   }
 
-  export type scrape_result_product_region_competitor_urlCreateManyProduct_region_competitor_urlsInputEnvelope = {
-    data: Enumerable<scrape_result_product_region_competitor_urlCreateManyProduct_region_competitor_urlsInput>
+  export type scrape_result_product_region_competitor_urlCreateManyProduct_region_competitor_urlInputEnvelope = {
+    data: Enumerable<scrape_result_product_region_competitor_urlCreateManyProduct_region_competitor_urlInput>
     skipDuplicates?: boolean
   }
 
@@ -24813,18 +24813,18 @@ export namespace Prisma {
   export type competitorsUpdateWithoutProduct_region_competitor_urlsInput = {
     slug?: StringFieldUpdateOperationsInput | string
     display_text?: StringFieldUpdateOperationsInput | string
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUpdateManyWithoutCompetitorsInput
-    competitor_region_data?: competitor_region_dataUpdateManyWithoutCompetitorsInput
-    scaled_prices?: scaled_pricesUpdateManyWithoutCompetitorsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUpdateManyWithoutCompetitorInput
+    competitor_region_data?: competitor_region_dataUpdateManyWithoutCompetitorInput
+    scaled_prices?: scaled_pricesUpdateManyWithoutCompetitorInput
   }
 
   export type competitorsUncheckedUpdateWithoutProduct_region_competitor_urlsInput = {
     id?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     display_text?: StringFieldUpdateOperationsInput | string
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutCompetitorsInput
-    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutCompetitorsInput
-    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutCompetitorsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutCompetitorInput
+    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutCompetitorInput
+    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutCompetitorInput
   }
 
   export type productsUpsertWithoutProduct_region_competitor_urlsInput = {
@@ -24841,10 +24841,10 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    units?: unitsUpdateOneRequiredWithoutProductsInput
-    price_recommendations?: price_recommendationsUpdateManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataUpdateManyWithoutProductsInput
-    scaled_prices?: scaled_pricesUpdateManyWithoutProductsInput
+    unit?: unitsUpdateOneRequiredWithoutProductsInput
+    price_recommendations?: price_recommendationsUpdateManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataUpdateManyWithoutProductInput
+    scaled_prices?: scaled_pricesUpdateManyWithoutProductInput
   }
 
   export type productsUncheckedUpdateWithoutProduct_region_competitor_urlsInput = {
@@ -24858,9 +24858,9 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutProductsInput
-    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutProductsInput
+    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutProductInput
+    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutProductInput
   }
 
   export type regionsUpsertWithoutProduct_region_competitor_urlsInput = {
@@ -24878,11 +24878,11 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    baskets?: basketsUpdateManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataUpdateManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsUpdateManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataUpdateManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesUpdateManyWithoutRegionsInput
+    baskets?: basketsUpdateManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataUpdateManyWithoutRegionInput
+    price_recommendations?: price_recommendationsUpdateManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataUpdateManyWithoutRegionInput
+    scaled_prices?: scaled_pricesUpdateManyWithoutRegionInput
   }
 
   export type regionsUncheckedUpdateWithoutProduct_region_competitor_urlsInput = {
@@ -24896,11 +24896,11 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    baskets?: basketsUncheckedUpdateManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutRegionsInput
+    baskets?: basketsUncheckedUpdateManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutRegionInput
+    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutRegionInput
+    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutRegionInput
   }
 
   export type product_region_competitor_urls_former_urlsUpsertWithWhereUniqueWithoutProduct_region_competitor_urlsInput = {
@@ -24930,20 +24930,20 @@ export namespace Prisma {
     id?: IntFilter | number
   }
 
-  export type scrape_result_product_region_competitor_urlUpsertWithWhereUniqueWithoutProduct_region_competitor_urlsInput = {
+  export type scrape_result_product_region_competitor_urlUpsertWithWhereUniqueWithoutProduct_region_competitor_urlInput = {
     where: scrape_result_product_region_competitor_urlWhereUniqueInput
-    update: XOR<scrape_result_product_region_competitor_urlUpdateWithoutProduct_region_competitor_urlsInput, scrape_result_product_region_competitor_urlUncheckedUpdateWithoutProduct_region_competitor_urlsInput>
-    create: XOR<scrape_result_product_region_competitor_urlCreateWithoutProduct_region_competitor_urlsInput, scrape_result_product_region_competitor_urlUncheckedCreateWithoutProduct_region_competitor_urlsInput>
+    update: XOR<scrape_result_product_region_competitor_urlUpdateWithoutProduct_region_competitor_urlInput, scrape_result_product_region_competitor_urlUncheckedUpdateWithoutProduct_region_competitor_urlInput>
+    create: XOR<scrape_result_product_region_competitor_urlCreateWithoutProduct_region_competitor_urlInput, scrape_result_product_region_competitor_urlUncheckedCreateWithoutProduct_region_competitor_urlInput>
   }
 
-  export type scrape_result_product_region_competitor_urlUpdateWithWhereUniqueWithoutProduct_region_competitor_urlsInput = {
+  export type scrape_result_product_region_competitor_urlUpdateWithWhereUniqueWithoutProduct_region_competitor_urlInput = {
     where: scrape_result_product_region_competitor_urlWhereUniqueInput
-    data: XOR<scrape_result_product_region_competitor_urlUpdateWithoutProduct_region_competitor_urlsInput, scrape_result_product_region_competitor_urlUncheckedUpdateWithoutProduct_region_competitor_urlsInput>
+    data: XOR<scrape_result_product_region_competitor_urlUpdateWithoutProduct_region_competitor_urlInput, scrape_result_product_region_competitor_urlUncheckedUpdateWithoutProduct_region_competitor_urlInput>
   }
 
-  export type scrape_result_product_region_competitor_urlUpdateManyWithWhereWithoutProduct_region_competitor_urlsInput = {
+  export type scrape_result_product_region_competitor_urlUpdateManyWithWhereWithoutProduct_region_competitor_urlInput = {
     where: scrape_result_product_region_competitor_urlScalarWhereInput
-    data: XOR<scrape_result_product_region_competitor_urlUpdateManyMutationInput, scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutScrape_result_product_region_competitor_urlInput>
+    data: XOR<scrape_result_product_region_competitor_urlUpdateManyMutationInput, scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutScrape_result_product_region_competitor_urlsInput>
   }
 
   export type scrape_result_product_region_competitor_urlScalarWhereInput = {
@@ -24960,10 +24960,10 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    competitors: competitorsCreateNestedOneWithoutProduct_region_competitor_urlsInput
-    products: productsCreateNestedOneWithoutProduct_region_competitor_urlsInput
-    regions: regionsCreateNestedOneWithoutProduct_region_competitor_urlsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlCreateNestedManyWithoutProduct_region_competitor_urlsInput
+    competitor: competitorsCreateNestedOneWithoutProduct_region_competitor_urlsInput
+    product: productsCreateNestedOneWithoutProduct_region_competitor_urlsInput
+    region: regionsCreateNestedOneWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlCreateNestedManyWithoutProduct_region_competitor_urlInput
   }
 
   export type product_region_competitor_urlsUncheckedCreateWithoutProduct_region_competitor_urls_former_urlsInput = {
@@ -24975,7 +24975,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutProduct_region_competitor_urlInput
   }
 
   export type product_region_competitor_urlsCreateOrConnectWithoutProduct_region_competitor_urls_former_urlsInput = {
@@ -24993,10 +24993,10 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitors?: competitorsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
-    products?: productsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
-    regions?: regionsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUpdateManyWithoutProduct_region_competitor_urlsInput
+    competitor?: competitorsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
+    product?: productsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
+    region?: regionsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUpdateManyWithoutProduct_region_competitor_urlInput
   }
 
   export type product_region_competitor_urlsUncheckedUpdateWithoutProduct_region_competitor_urls_former_urlsInput = {
@@ -25008,7 +25008,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutProduct_region_competitor_urlInput
   }
 
   export type productsCreateWithoutProduct_region_price_dataInput = {
@@ -25020,10 +25020,10 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    units: unitsCreateNestedOneWithoutProductsInput
-    price_recommendations?: price_recommendationsCreateNestedManyWithoutProductsInput
-    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutProductsInput
-    scaled_prices?: scaled_pricesCreateNestedManyWithoutProductsInput
+    unit: unitsCreateNestedOneWithoutProductsInput
+    price_recommendations?: price_recommendationsCreateNestedManyWithoutProductInput
+    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutProductInput
+    scaled_prices?: scaled_pricesCreateNestedManyWithoutProductInput
   }
 
   export type productsUncheckedCreateWithoutProduct_region_price_dataInput = {
@@ -25037,9 +25037,9 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutProductsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutProductsInput
-    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutProductsInput
+    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutProductInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutProductInput
+    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type productsCreateOrConnectWithoutProduct_region_price_dataInput = {
@@ -25057,11 +25057,11 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    baskets?: basketsCreateNestedManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsCreateNestedManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesCreateNestedManyWithoutRegionsInput
+    baskets?: basketsCreateNestedManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutRegionInput
+    price_recommendations?: price_recommendationsCreateNestedManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutRegionInput
+    scaled_prices?: scaled_pricesCreateNestedManyWithoutRegionInput
   }
 
   export type regionsUncheckedCreateWithoutProduct_region_price_dataInput = {
@@ -25075,11 +25075,11 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    baskets?: basketsUncheckedCreateNestedManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutRegionsInput
+    baskets?: basketsUncheckedCreateNestedManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutRegionInput
+    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutRegionInput
+    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutRegionInput
   }
 
   export type regionsCreateOrConnectWithoutProduct_region_price_dataInput = {
@@ -25101,10 +25101,10 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    units?: unitsUpdateOneRequiredWithoutProductsInput
-    price_recommendations?: price_recommendationsUpdateManyWithoutProductsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutProductsInput
-    scaled_prices?: scaled_pricesUpdateManyWithoutProductsInput
+    unit?: unitsUpdateOneRequiredWithoutProductsInput
+    price_recommendations?: price_recommendationsUpdateManyWithoutProductInput
+    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutProductInput
+    scaled_prices?: scaled_pricesUpdateManyWithoutProductInput
   }
 
   export type productsUncheckedUpdateWithoutProduct_region_price_dataInput = {
@@ -25118,9 +25118,9 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutProductsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutProductsInput
-    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutProductsInput
+    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutProductInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutProductInput
+    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutProductInput
   }
 
   export type regionsUpsertWithoutProduct_region_price_dataInput = {
@@ -25138,11 +25138,11 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    baskets?: basketsUpdateManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataUpdateManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsUpdateManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesUpdateManyWithoutRegionsInput
+    baskets?: basketsUpdateManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataUpdateManyWithoutRegionInput
+    price_recommendations?: price_recommendationsUpdateManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutRegionInput
+    scaled_prices?: scaled_pricesUpdateManyWithoutRegionInput
   }
 
   export type regionsUncheckedUpdateWithoutProduct_region_price_dataInput = {
@@ -25156,20 +25156,20 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    baskets?: basketsUncheckedUpdateManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutRegionsInput
-    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutRegionsInput
+    baskets?: basketsUncheckedUpdateManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutRegionInput
+    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutRegionInput
+    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutRegionInput
   }
 
   export type unitsCreateWithoutProductsInput = {
     slug: string
     display_text: string
     scale_of_base_unit: number
-    units: unitsCreateNestedOneWithoutOther_unitsInput
-    scrape_results?: scrape_resultsCreateNestedManyWithoutUnitsInput
-    other_units?: unitsCreateNestedManyWithoutUnitsInput
+    base_unit: unitsCreateNestedOneWithoutUnitsInput
+    scrape_results?: scrape_resultsCreateNestedManyWithoutUnitInput
+    units?: unitsCreateNestedManyWithoutBase_unitInput
   }
 
   export type unitsUncheckedCreateWithoutProductsInput = {
@@ -25178,8 +25178,8 @@ export namespace Prisma {
     display_text: string
     base_unit_id: number
     scale_of_base_unit: number
-    scrape_results?: scrape_resultsUncheckedCreateNestedManyWithoutUnitsInput
-    other_units?: unitsUncheckedCreateNestedManyWithoutUnitsInput
+    scrape_results?: scrape_resultsUncheckedCreateNestedManyWithoutUnitInput
+    units?: unitsUncheckedCreateNestedManyWithoutBase_unitInput
   }
 
   export type unitsCreateOrConnectWithoutProductsInput = {
@@ -25187,15 +25187,15 @@ export namespace Prisma {
     create: XOR<unitsCreateWithoutProductsInput, unitsUncheckedCreateWithoutProductsInput>
   }
 
-  export type price_recommendationsCreateWithoutProductsInput = {
+  export type price_recommendationsCreateWithoutProductInput = {
     sale_price: number
     list_price: number
     created_at?: Date | string
     updated_at?: Date | string | null
-    regions: regionsCreateNestedOneWithoutPrice_recommendationsInput
+    region: regionsCreateNestedOneWithoutPrice_recommendationsInput
   }
 
-  export type price_recommendationsUncheckedCreateWithoutProductsInput = {
+  export type price_recommendationsUncheckedCreateWithoutProductInput = {
     id?: number
     region_id: number
     sale_price: number
@@ -25204,28 +25204,28 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type price_recommendationsCreateOrConnectWithoutProductsInput = {
+  export type price_recommendationsCreateOrConnectWithoutProductInput = {
     where: price_recommendationsWhereUniqueInput
-    create: XOR<price_recommendationsCreateWithoutProductsInput, price_recommendationsUncheckedCreateWithoutProductsInput>
+    create: XOR<price_recommendationsCreateWithoutProductInput, price_recommendationsUncheckedCreateWithoutProductInput>
   }
 
-  export type price_recommendationsCreateManyProductsInputEnvelope = {
-    data: Enumerable<price_recommendationsCreateManyProductsInput>
+  export type price_recommendationsCreateManyProductInputEnvelope = {
+    data: Enumerable<price_recommendationsCreateManyProductInput>
     skipDuplicates?: boolean
   }
 
-  export type product_region_competitor_urlsCreateWithoutProductsInput = {
+  export type product_region_competitor_urlsCreateWithoutProductInput = {
     url: string
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    competitors: competitorsCreateNestedOneWithoutProduct_region_competitor_urlsInput
-    regions: regionsCreateNestedOneWithoutProduct_region_competitor_urlsInput
+    competitor: competitorsCreateNestedOneWithoutProduct_region_competitor_urlsInput
+    region: regionsCreateNestedOneWithoutProduct_region_competitor_urlsInput
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsCreateNestedManyWithoutProduct_region_competitor_urlsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlCreateNestedManyWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlCreateNestedManyWithoutProduct_region_competitor_urlInput
   }
 
-  export type product_region_competitor_urlsUncheckedCreateWithoutProductsInput = {
+  export type product_region_competitor_urlsUncheckedCreateWithoutProductInput = {
     id?: number
     region_id: number
     competitor_id: number
@@ -25234,30 +25234,30 @@ export namespace Prisma {
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsUncheckedCreateNestedManyWithoutProduct_region_competitor_urlsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutProduct_region_competitor_urlInput
   }
 
-  export type product_region_competitor_urlsCreateOrConnectWithoutProductsInput = {
+  export type product_region_competitor_urlsCreateOrConnectWithoutProductInput = {
     where: product_region_competitor_urlsWhereUniqueInput
-    create: XOR<product_region_competitor_urlsCreateWithoutProductsInput, product_region_competitor_urlsUncheckedCreateWithoutProductsInput>
+    create: XOR<product_region_competitor_urlsCreateWithoutProductInput, product_region_competitor_urlsUncheckedCreateWithoutProductInput>
   }
 
-  export type product_region_competitor_urlsCreateManyProductsInputEnvelope = {
-    data: Enumerable<product_region_competitor_urlsCreateManyProductsInput>
+  export type product_region_competitor_urlsCreateManyProductInputEnvelope = {
+    data: Enumerable<product_region_competitor_urlsCreateManyProductInput>
     skipDuplicates?: boolean
   }
 
-  export type product_region_price_dataCreateWithoutProductsInput = {
+  export type product_region_price_dataCreateWithoutProductInput = {
     price: number
     discount: number
     threshold_price?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    regions: regionsCreateNestedOneWithoutProduct_region_price_dataInput
+    region: regionsCreateNestedOneWithoutProduct_region_price_dataInput
   }
 
-  export type product_region_price_dataUncheckedCreateWithoutProductsInput = {
+  export type product_region_price_dataUncheckedCreateWithoutProductInput = {
     id?: number
     region_id: number
     price: number
@@ -25268,27 +25268,27 @@ export namespace Prisma {
     deleted_at?: Date | string | null
   }
 
-  export type product_region_price_dataCreateOrConnectWithoutProductsInput = {
+  export type product_region_price_dataCreateOrConnectWithoutProductInput = {
     where: product_region_price_dataWhereUniqueInput
-    create: XOR<product_region_price_dataCreateWithoutProductsInput, product_region_price_dataUncheckedCreateWithoutProductsInput>
+    create: XOR<product_region_price_dataCreateWithoutProductInput, product_region_price_dataUncheckedCreateWithoutProductInput>
   }
 
-  export type product_region_price_dataCreateManyProductsInputEnvelope = {
-    data: Enumerable<product_region_price_dataCreateManyProductsInput>
+  export type product_region_price_dataCreateManyProductInputEnvelope = {
+    data: Enumerable<product_region_price_dataCreateManyProductInput>
     skipDuplicates?: boolean
   }
 
-  export type scaled_pricesCreateWithoutProductsInput = {
+  export type scaled_pricesCreateWithoutProductInput = {
     competitor_scaled_price?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    competitors: competitorsCreateNestedOneWithoutScaled_pricesInput
-    regions: regionsCreateNestedOneWithoutScaled_pricesInput
-    scrape_results: scrape_resultsCreateNestedOneWithoutScaled_pricesInput
+    competitor: competitorsCreateNestedOneWithoutScaled_pricesInput
+    region: regionsCreateNestedOneWithoutScaled_pricesInput
+    scrape_result: scrape_resultsCreateNestedOneWithoutScaled_pricesInput
   }
 
-  export type scaled_pricesUncheckedCreateWithoutProductsInput = {
+  export type scaled_pricesUncheckedCreateWithoutProductInput = {
     id?: number
     competitor_id: number
     region_id: number
@@ -25299,13 +25299,13 @@ export namespace Prisma {
     deleted_at?: Date | string | null
   }
 
-  export type scaled_pricesCreateOrConnectWithoutProductsInput = {
+  export type scaled_pricesCreateOrConnectWithoutProductInput = {
     where: scaled_pricesWhereUniqueInput
-    create: XOR<scaled_pricesCreateWithoutProductsInput, scaled_pricesUncheckedCreateWithoutProductsInput>
+    create: XOR<scaled_pricesCreateWithoutProductInput, scaled_pricesUncheckedCreateWithoutProductInput>
   }
 
-  export type scaled_pricesCreateManyProductsInputEnvelope = {
-    data: Enumerable<scaled_pricesCreateManyProductsInput>
+  export type scaled_pricesCreateManyProductInputEnvelope = {
+    data: Enumerable<scaled_pricesCreateManyProductInput>
     skipDuplicates?: boolean
   }
 
@@ -25318,9 +25318,9 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     display_text?: StringFieldUpdateOperationsInput | string
     scale_of_base_unit?: FloatFieldUpdateOperationsInput | number
-    units?: unitsUpdateOneRequiredWithoutOther_unitsInput
-    scrape_results?: scrape_resultsUpdateManyWithoutUnitsInput
-    other_units?: unitsUpdateManyWithoutUnitsInput
+    base_unit?: unitsUpdateOneRequiredWithoutUnitsInput
+    scrape_results?: scrape_resultsUpdateManyWithoutUnitInput
+    units?: unitsUpdateManyWithoutBase_unitInput
   }
 
   export type unitsUncheckedUpdateWithoutProductsInput = {
@@ -25329,22 +25329,22 @@ export namespace Prisma {
     display_text?: StringFieldUpdateOperationsInput | string
     base_unit_id?: IntFieldUpdateOperationsInput | number
     scale_of_base_unit?: FloatFieldUpdateOperationsInput | number
-    scrape_results?: scrape_resultsUncheckedUpdateManyWithoutUnitsInput
-    other_units?: unitsUncheckedUpdateManyWithoutUnitsInput
+    scrape_results?: scrape_resultsUncheckedUpdateManyWithoutUnitInput
+    units?: unitsUncheckedUpdateManyWithoutBase_unitInput
   }
 
-  export type price_recommendationsUpsertWithWhereUniqueWithoutProductsInput = {
+  export type price_recommendationsUpsertWithWhereUniqueWithoutProductInput = {
     where: price_recommendationsWhereUniqueInput
-    update: XOR<price_recommendationsUpdateWithoutProductsInput, price_recommendationsUncheckedUpdateWithoutProductsInput>
-    create: XOR<price_recommendationsCreateWithoutProductsInput, price_recommendationsUncheckedCreateWithoutProductsInput>
+    update: XOR<price_recommendationsUpdateWithoutProductInput, price_recommendationsUncheckedUpdateWithoutProductInput>
+    create: XOR<price_recommendationsCreateWithoutProductInput, price_recommendationsUncheckedCreateWithoutProductInput>
   }
 
-  export type price_recommendationsUpdateWithWhereUniqueWithoutProductsInput = {
+  export type price_recommendationsUpdateWithWhereUniqueWithoutProductInput = {
     where: price_recommendationsWhereUniqueInput
-    data: XOR<price_recommendationsUpdateWithoutProductsInput, price_recommendationsUncheckedUpdateWithoutProductsInput>
+    data: XOR<price_recommendationsUpdateWithoutProductInput, price_recommendationsUncheckedUpdateWithoutProductInput>
   }
 
-  export type price_recommendationsUpdateManyWithWhereWithoutProductsInput = {
+  export type price_recommendationsUpdateManyWithWhereWithoutProductInput = {
     where: price_recommendationsScalarWhereInput
     data: XOR<price_recommendationsUpdateManyMutationInput, price_recommendationsUncheckedUpdateManyWithoutPrice_recommendationsInput>
   }
@@ -25362,34 +25362,34 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter | Date | string | null
   }
 
-  export type product_region_competitor_urlsUpsertWithWhereUniqueWithoutProductsInput = {
+  export type product_region_competitor_urlsUpsertWithWhereUniqueWithoutProductInput = {
     where: product_region_competitor_urlsWhereUniqueInput
-    update: XOR<product_region_competitor_urlsUpdateWithoutProductsInput, product_region_competitor_urlsUncheckedUpdateWithoutProductsInput>
-    create: XOR<product_region_competitor_urlsCreateWithoutProductsInput, product_region_competitor_urlsUncheckedCreateWithoutProductsInput>
+    update: XOR<product_region_competitor_urlsUpdateWithoutProductInput, product_region_competitor_urlsUncheckedUpdateWithoutProductInput>
+    create: XOR<product_region_competitor_urlsCreateWithoutProductInput, product_region_competitor_urlsUncheckedCreateWithoutProductInput>
   }
 
-  export type product_region_competitor_urlsUpdateWithWhereUniqueWithoutProductsInput = {
+  export type product_region_competitor_urlsUpdateWithWhereUniqueWithoutProductInput = {
     where: product_region_competitor_urlsWhereUniqueInput
-    data: XOR<product_region_competitor_urlsUpdateWithoutProductsInput, product_region_competitor_urlsUncheckedUpdateWithoutProductsInput>
+    data: XOR<product_region_competitor_urlsUpdateWithoutProductInput, product_region_competitor_urlsUncheckedUpdateWithoutProductInput>
   }
 
-  export type product_region_competitor_urlsUpdateManyWithWhereWithoutProductsInput = {
+  export type product_region_competitor_urlsUpdateManyWithWhereWithoutProductInput = {
     where: product_region_competitor_urlsScalarWhereInput
     data: XOR<product_region_competitor_urlsUpdateManyMutationInput, product_region_competitor_urlsUncheckedUpdateManyWithoutProduct_region_competitor_urlsInput>
   }
 
-  export type product_region_price_dataUpsertWithWhereUniqueWithoutProductsInput = {
+  export type product_region_price_dataUpsertWithWhereUniqueWithoutProductInput = {
     where: product_region_price_dataWhereUniqueInput
-    update: XOR<product_region_price_dataUpdateWithoutProductsInput, product_region_price_dataUncheckedUpdateWithoutProductsInput>
-    create: XOR<product_region_price_dataCreateWithoutProductsInput, product_region_price_dataUncheckedCreateWithoutProductsInput>
+    update: XOR<product_region_price_dataUpdateWithoutProductInput, product_region_price_dataUncheckedUpdateWithoutProductInput>
+    create: XOR<product_region_price_dataCreateWithoutProductInput, product_region_price_dataUncheckedCreateWithoutProductInput>
   }
 
-  export type product_region_price_dataUpdateWithWhereUniqueWithoutProductsInput = {
+  export type product_region_price_dataUpdateWithWhereUniqueWithoutProductInput = {
     where: product_region_price_dataWhereUniqueInput
-    data: XOR<product_region_price_dataUpdateWithoutProductsInput, product_region_price_dataUncheckedUpdateWithoutProductsInput>
+    data: XOR<product_region_price_dataUpdateWithoutProductInput, product_region_price_dataUncheckedUpdateWithoutProductInput>
   }
 
-  export type product_region_price_dataUpdateManyWithWhereWithoutProductsInput = {
+  export type product_region_price_dataUpdateManyWithWhereWithoutProductInput = {
     where: product_region_price_dataScalarWhereInput
     data: XOR<product_region_price_dataUpdateManyMutationInput, product_region_price_dataUncheckedUpdateManyWithoutProduct_region_price_dataInput>
   }
@@ -25409,33 +25409,33 @@ export namespace Prisma {
     deleted_at?: DateTimeNullableFilter | Date | string | null
   }
 
-  export type scaled_pricesUpsertWithWhereUniqueWithoutProductsInput = {
+  export type scaled_pricesUpsertWithWhereUniqueWithoutProductInput = {
     where: scaled_pricesWhereUniqueInput
-    update: XOR<scaled_pricesUpdateWithoutProductsInput, scaled_pricesUncheckedUpdateWithoutProductsInput>
-    create: XOR<scaled_pricesCreateWithoutProductsInput, scaled_pricesUncheckedCreateWithoutProductsInput>
+    update: XOR<scaled_pricesUpdateWithoutProductInput, scaled_pricesUncheckedUpdateWithoutProductInput>
+    create: XOR<scaled_pricesCreateWithoutProductInput, scaled_pricesUncheckedCreateWithoutProductInput>
   }
 
-  export type scaled_pricesUpdateWithWhereUniqueWithoutProductsInput = {
+  export type scaled_pricesUpdateWithWhereUniqueWithoutProductInput = {
     where: scaled_pricesWhereUniqueInput
-    data: XOR<scaled_pricesUpdateWithoutProductsInput, scaled_pricesUncheckedUpdateWithoutProductsInput>
+    data: XOR<scaled_pricesUpdateWithoutProductInput, scaled_pricesUncheckedUpdateWithoutProductInput>
   }
 
-  export type scaled_pricesUpdateManyWithWhereWithoutProductsInput = {
+  export type scaled_pricesUpdateManyWithWhereWithoutProductInput = {
     where: scaled_pricesScalarWhereInput
     data: XOR<scaled_pricesUpdateManyMutationInput, scaled_pricesUncheckedUpdateManyWithoutScaled_pricesInput>
   }
 
-  export type basketsCreateWithoutRegionsInput = {
+  export type basketsCreateWithoutRegionInput = {
     goodfood_id: number
     delivery_date: Date | string
     basket_totals?: NullableJsonNullValueInput | InputJsonValue
     basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
-    basket_daily_totals: basket_daily_totalsCreateNestedOneWithoutBasketsInput
+    basket_daily_total: basket_daily_totalsCreateNestedOneWithoutBasketsInput
   }
 
-  export type basketsUncheckedCreateWithoutRegionsInput = {
+  export type basketsUncheckedCreateWithoutRegionInput = {
     id?: number
     goodfood_id: number
     delivery_date: Date | string
@@ -25446,48 +25446,48 @@ export namespace Prisma {
     basket_daily_total_id: number
   }
 
-  export type basketsCreateOrConnectWithoutRegionsInput = {
+  export type basketsCreateOrConnectWithoutRegionInput = {
     where: basketsWhereUniqueInput
-    create: XOR<basketsCreateWithoutRegionsInput, basketsUncheckedCreateWithoutRegionsInput>
+    create: XOR<basketsCreateWithoutRegionInput, basketsUncheckedCreateWithoutRegionInput>
   }
 
-  export type basketsCreateManyRegionsInputEnvelope = {
-    data: Enumerable<basketsCreateManyRegionsInput>
+  export type basketsCreateManyRegionInputEnvelope = {
+    data: Enumerable<basketsCreateManyRegionInput>
     skipDuplicates?: boolean
   }
 
-  export type competitor_region_dataCreateWithoutRegionsInput = {
+  export type competitor_region_dataCreateWithoutRegionInput = {
     should_scrape?: boolean
     should_include_in_recommendation_calculation?: number | null
-    competitors: competitorsCreateNestedOneWithoutCompetitor_region_dataInput
+    competitor: competitorsCreateNestedOneWithoutCompetitor_region_dataInput
   }
 
-  export type competitor_region_dataUncheckedCreateWithoutRegionsInput = {
+  export type competitor_region_dataUncheckedCreateWithoutRegionInput = {
     id?: number
     competitor_id: number
     should_scrape?: boolean
     should_include_in_recommendation_calculation?: number | null
   }
 
-  export type competitor_region_dataCreateOrConnectWithoutRegionsInput = {
+  export type competitor_region_dataCreateOrConnectWithoutRegionInput = {
     where: competitor_region_dataWhereUniqueInput
-    create: XOR<competitor_region_dataCreateWithoutRegionsInput, competitor_region_dataUncheckedCreateWithoutRegionsInput>
+    create: XOR<competitor_region_dataCreateWithoutRegionInput, competitor_region_dataUncheckedCreateWithoutRegionInput>
   }
 
-  export type competitor_region_dataCreateManyRegionsInputEnvelope = {
-    data: Enumerable<competitor_region_dataCreateManyRegionsInput>
+  export type competitor_region_dataCreateManyRegionInputEnvelope = {
+    data: Enumerable<competitor_region_dataCreateManyRegionInput>
     skipDuplicates?: boolean
   }
 
-  export type price_recommendationsCreateWithoutRegionsInput = {
+  export type price_recommendationsCreateWithoutRegionInput = {
     sale_price: number
     list_price: number
     created_at?: Date | string
     updated_at?: Date | string | null
-    products: productsCreateNestedOneWithoutPrice_recommendationsInput
+    product: productsCreateNestedOneWithoutPrice_recommendationsInput
   }
 
-  export type price_recommendationsUncheckedCreateWithoutRegionsInput = {
+  export type price_recommendationsUncheckedCreateWithoutRegionInput = {
     id?: number
     product_id: number
     sale_price: number
@@ -25496,28 +25496,28 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type price_recommendationsCreateOrConnectWithoutRegionsInput = {
+  export type price_recommendationsCreateOrConnectWithoutRegionInput = {
     where: price_recommendationsWhereUniqueInput
-    create: XOR<price_recommendationsCreateWithoutRegionsInput, price_recommendationsUncheckedCreateWithoutRegionsInput>
+    create: XOR<price_recommendationsCreateWithoutRegionInput, price_recommendationsUncheckedCreateWithoutRegionInput>
   }
 
-  export type price_recommendationsCreateManyRegionsInputEnvelope = {
-    data: Enumerable<price_recommendationsCreateManyRegionsInput>
+  export type price_recommendationsCreateManyRegionInputEnvelope = {
+    data: Enumerable<price_recommendationsCreateManyRegionInput>
     skipDuplicates?: boolean
   }
 
-  export type product_region_competitor_urlsCreateWithoutRegionsInput = {
+  export type product_region_competitor_urlsCreateWithoutRegionInput = {
     url: string
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    competitors: competitorsCreateNestedOneWithoutProduct_region_competitor_urlsInput
-    products: productsCreateNestedOneWithoutProduct_region_competitor_urlsInput
+    competitor: competitorsCreateNestedOneWithoutProduct_region_competitor_urlsInput
+    product: productsCreateNestedOneWithoutProduct_region_competitor_urlsInput
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsCreateNestedManyWithoutProduct_region_competitor_urlsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlCreateNestedManyWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlCreateNestedManyWithoutProduct_region_competitor_urlInput
   }
 
-  export type product_region_competitor_urlsUncheckedCreateWithoutRegionsInput = {
+  export type product_region_competitor_urlsUncheckedCreateWithoutRegionInput = {
     id?: number
     product_id: number
     competitor_id: number
@@ -25526,30 +25526,30 @@ export namespace Prisma {
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsUncheckedCreateNestedManyWithoutProduct_region_competitor_urlsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutProduct_region_competitor_urlInput
   }
 
-  export type product_region_competitor_urlsCreateOrConnectWithoutRegionsInput = {
+  export type product_region_competitor_urlsCreateOrConnectWithoutRegionInput = {
     where: product_region_competitor_urlsWhereUniqueInput
-    create: XOR<product_region_competitor_urlsCreateWithoutRegionsInput, product_region_competitor_urlsUncheckedCreateWithoutRegionsInput>
+    create: XOR<product_region_competitor_urlsCreateWithoutRegionInput, product_region_competitor_urlsUncheckedCreateWithoutRegionInput>
   }
 
-  export type product_region_competitor_urlsCreateManyRegionsInputEnvelope = {
-    data: Enumerable<product_region_competitor_urlsCreateManyRegionsInput>
+  export type product_region_competitor_urlsCreateManyRegionInputEnvelope = {
+    data: Enumerable<product_region_competitor_urlsCreateManyRegionInput>
     skipDuplicates?: boolean
   }
 
-  export type product_region_price_dataCreateWithoutRegionsInput = {
+  export type product_region_price_dataCreateWithoutRegionInput = {
     price: number
     discount: number
     threshold_price?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    products: productsCreateNestedOneWithoutProduct_region_price_dataInput
+    product: productsCreateNestedOneWithoutProduct_region_price_dataInput
   }
 
-  export type product_region_price_dataUncheckedCreateWithoutRegionsInput = {
+  export type product_region_price_dataUncheckedCreateWithoutRegionInput = {
     id?: number
     product_id: number
     price: number
@@ -25560,27 +25560,27 @@ export namespace Prisma {
     deleted_at?: Date | string | null
   }
 
-  export type product_region_price_dataCreateOrConnectWithoutRegionsInput = {
+  export type product_region_price_dataCreateOrConnectWithoutRegionInput = {
     where: product_region_price_dataWhereUniqueInput
-    create: XOR<product_region_price_dataCreateWithoutRegionsInput, product_region_price_dataUncheckedCreateWithoutRegionsInput>
+    create: XOR<product_region_price_dataCreateWithoutRegionInput, product_region_price_dataUncheckedCreateWithoutRegionInput>
   }
 
-  export type product_region_price_dataCreateManyRegionsInputEnvelope = {
-    data: Enumerable<product_region_price_dataCreateManyRegionsInput>
+  export type product_region_price_dataCreateManyRegionInputEnvelope = {
+    data: Enumerable<product_region_price_dataCreateManyRegionInput>
     skipDuplicates?: boolean
   }
 
-  export type scaled_pricesCreateWithoutRegionsInput = {
+  export type scaled_pricesCreateWithoutRegionInput = {
     competitor_scaled_price?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    competitors: competitorsCreateNestedOneWithoutScaled_pricesInput
-    products: productsCreateNestedOneWithoutScaled_pricesInput
-    scrape_results: scrape_resultsCreateNestedOneWithoutScaled_pricesInput
+    competitor: competitorsCreateNestedOneWithoutScaled_pricesInput
+    product: productsCreateNestedOneWithoutScaled_pricesInput
+    scrape_result: scrape_resultsCreateNestedOneWithoutScaled_pricesInput
   }
 
-  export type scaled_pricesUncheckedCreateWithoutRegionsInput = {
+  export type scaled_pricesUncheckedCreateWithoutRegionInput = {
     id?: number
     product_id: number
     competitor_id: number
@@ -25591,108 +25591,108 @@ export namespace Prisma {
     deleted_at?: Date | string | null
   }
 
-  export type scaled_pricesCreateOrConnectWithoutRegionsInput = {
+  export type scaled_pricesCreateOrConnectWithoutRegionInput = {
     where: scaled_pricesWhereUniqueInput
-    create: XOR<scaled_pricesCreateWithoutRegionsInput, scaled_pricesUncheckedCreateWithoutRegionsInput>
+    create: XOR<scaled_pricesCreateWithoutRegionInput, scaled_pricesUncheckedCreateWithoutRegionInput>
   }
 
-  export type scaled_pricesCreateManyRegionsInputEnvelope = {
-    data: Enumerable<scaled_pricesCreateManyRegionsInput>
+  export type scaled_pricesCreateManyRegionInputEnvelope = {
+    data: Enumerable<scaled_pricesCreateManyRegionInput>
     skipDuplicates?: boolean
   }
 
-  export type basketsUpsertWithWhereUniqueWithoutRegionsInput = {
+  export type basketsUpsertWithWhereUniqueWithoutRegionInput = {
     where: basketsWhereUniqueInput
-    update: XOR<basketsUpdateWithoutRegionsInput, basketsUncheckedUpdateWithoutRegionsInput>
-    create: XOR<basketsCreateWithoutRegionsInput, basketsUncheckedCreateWithoutRegionsInput>
+    update: XOR<basketsUpdateWithoutRegionInput, basketsUncheckedUpdateWithoutRegionInput>
+    create: XOR<basketsCreateWithoutRegionInput, basketsUncheckedCreateWithoutRegionInput>
   }
 
-  export type basketsUpdateWithWhereUniqueWithoutRegionsInput = {
+  export type basketsUpdateWithWhereUniqueWithoutRegionInput = {
     where: basketsWhereUniqueInput
-    data: XOR<basketsUpdateWithoutRegionsInput, basketsUncheckedUpdateWithoutRegionsInput>
+    data: XOR<basketsUpdateWithoutRegionInput, basketsUncheckedUpdateWithoutRegionInput>
   }
 
-  export type basketsUpdateManyWithWhereWithoutRegionsInput = {
+  export type basketsUpdateManyWithWhereWithoutRegionInput = {
     where: basketsScalarWhereInput
     data: XOR<basketsUpdateManyMutationInput, basketsUncheckedUpdateManyWithoutBasketsInput>
   }
 
-  export type competitor_region_dataUpsertWithWhereUniqueWithoutRegionsInput = {
+  export type competitor_region_dataUpsertWithWhereUniqueWithoutRegionInput = {
     where: competitor_region_dataWhereUniqueInput
-    update: XOR<competitor_region_dataUpdateWithoutRegionsInput, competitor_region_dataUncheckedUpdateWithoutRegionsInput>
-    create: XOR<competitor_region_dataCreateWithoutRegionsInput, competitor_region_dataUncheckedCreateWithoutRegionsInput>
+    update: XOR<competitor_region_dataUpdateWithoutRegionInput, competitor_region_dataUncheckedUpdateWithoutRegionInput>
+    create: XOR<competitor_region_dataCreateWithoutRegionInput, competitor_region_dataUncheckedCreateWithoutRegionInput>
   }
 
-  export type competitor_region_dataUpdateWithWhereUniqueWithoutRegionsInput = {
+  export type competitor_region_dataUpdateWithWhereUniqueWithoutRegionInput = {
     where: competitor_region_dataWhereUniqueInput
-    data: XOR<competitor_region_dataUpdateWithoutRegionsInput, competitor_region_dataUncheckedUpdateWithoutRegionsInput>
+    data: XOR<competitor_region_dataUpdateWithoutRegionInput, competitor_region_dataUncheckedUpdateWithoutRegionInput>
   }
 
-  export type competitor_region_dataUpdateManyWithWhereWithoutRegionsInput = {
+  export type competitor_region_dataUpdateManyWithWhereWithoutRegionInput = {
     where: competitor_region_dataScalarWhereInput
     data: XOR<competitor_region_dataUpdateManyMutationInput, competitor_region_dataUncheckedUpdateManyWithoutCompetitor_region_dataInput>
   }
 
-  export type price_recommendationsUpsertWithWhereUniqueWithoutRegionsInput = {
+  export type price_recommendationsUpsertWithWhereUniqueWithoutRegionInput = {
     where: price_recommendationsWhereUniqueInput
-    update: XOR<price_recommendationsUpdateWithoutRegionsInput, price_recommendationsUncheckedUpdateWithoutRegionsInput>
-    create: XOR<price_recommendationsCreateWithoutRegionsInput, price_recommendationsUncheckedCreateWithoutRegionsInput>
+    update: XOR<price_recommendationsUpdateWithoutRegionInput, price_recommendationsUncheckedUpdateWithoutRegionInput>
+    create: XOR<price_recommendationsCreateWithoutRegionInput, price_recommendationsUncheckedCreateWithoutRegionInput>
   }
 
-  export type price_recommendationsUpdateWithWhereUniqueWithoutRegionsInput = {
+  export type price_recommendationsUpdateWithWhereUniqueWithoutRegionInput = {
     where: price_recommendationsWhereUniqueInput
-    data: XOR<price_recommendationsUpdateWithoutRegionsInput, price_recommendationsUncheckedUpdateWithoutRegionsInput>
+    data: XOR<price_recommendationsUpdateWithoutRegionInput, price_recommendationsUncheckedUpdateWithoutRegionInput>
   }
 
-  export type price_recommendationsUpdateManyWithWhereWithoutRegionsInput = {
+  export type price_recommendationsUpdateManyWithWhereWithoutRegionInput = {
     where: price_recommendationsScalarWhereInput
     data: XOR<price_recommendationsUpdateManyMutationInput, price_recommendationsUncheckedUpdateManyWithoutPrice_recommendationsInput>
   }
 
-  export type product_region_competitor_urlsUpsertWithWhereUniqueWithoutRegionsInput = {
+  export type product_region_competitor_urlsUpsertWithWhereUniqueWithoutRegionInput = {
     where: product_region_competitor_urlsWhereUniqueInput
-    update: XOR<product_region_competitor_urlsUpdateWithoutRegionsInput, product_region_competitor_urlsUncheckedUpdateWithoutRegionsInput>
-    create: XOR<product_region_competitor_urlsCreateWithoutRegionsInput, product_region_competitor_urlsUncheckedCreateWithoutRegionsInput>
+    update: XOR<product_region_competitor_urlsUpdateWithoutRegionInput, product_region_competitor_urlsUncheckedUpdateWithoutRegionInput>
+    create: XOR<product_region_competitor_urlsCreateWithoutRegionInput, product_region_competitor_urlsUncheckedCreateWithoutRegionInput>
   }
 
-  export type product_region_competitor_urlsUpdateWithWhereUniqueWithoutRegionsInput = {
+  export type product_region_competitor_urlsUpdateWithWhereUniqueWithoutRegionInput = {
     where: product_region_competitor_urlsWhereUniqueInput
-    data: XOR<product_region_competitor_urlsUpdateWithoutRegionsInput, product_region_competitor_urlsUncheckedUpdateWithoutRegionsInput>
+    data: XOR<product_region_competitor_urlsUpdateWithoutRegionInput, product_region_competitor_urlsUncheckedUpdateWithoutRegionInput>
   }
 
-  export type product_region_competitor_urlsUpdateManyWithWhereWithoutRegionsInput = {
+  export type product_region_competitor_urlsUpdateManyWithWhereWithoutRegionInput = {
     where: product_region_competitor_urlsScalarWhereInput
     data: XOR<product_region_competitor_urlsUpdateManyMutationInput, product_region_competitor_urlsUncheckedUpdateManyWithoutProduct_region_competitor_urlsInput>
   }
 
-  export type product_region_price_dataUpsertWithWhereUniqueWithoutRegionsInput = {
+  export type product_region_price_dataUpsertWithWhereUniqueWithoutRegionInput = {
     where: product_region_price_dataWhereUniqueInput
-    update: XOR<product_region_price_dataUpdateWithoutRegionsInput, product_region_price_dataUncheckedUpdateWithoutRegionsInput>
-    create: XOR<product_region_price_dataCreateWithoutRegionsInput, product_region_price_dataUncheckedCreateWithoutRegionsInput>
+    update: XOR<product_region_price_dataUpdateWithoutRegionInput, product_region_price_dataUncheckedUpdateWithoutRegionInput>
+    create: XOR<product_region_price_dataCreateWithoutRegionInput, product_region_price_dataUncheckedCreateWithoutRegionInput>
   }
 
-  export type product_region_price_dataUpdateWithWhereUniqueWithoutRegionsInput = {
+  export type product_region_price_dataUpdateWithWhereUniqueWithoutRegionInput = {
     where: product_region_price_dataWhereUniqueInput
-    data: XOR<product_region_price_dataUpdateWithoutRegionsInput, product_region_price_dataUncheckedUpdateWithoutRegionsInput>
+    data: XOR<product_region_price_dataUpdateWithoutRegionInput, product_region_price_dataUncheckedUpdateWithoutRegionInput>
   }
 
-  export type product_region_price_dataUpdateManyWithWhereWithoutRegionsInput = {
+  export type product_region_price_dataUpdateManyWithWhereWithoutRegionInput = {
     where: product_region_price_dataScalarWhereInput
     data: XOR<product_region_price_dataUpdateManyMutationInput, product_region_price_dataUncheckedUpdateManyWithoutProduct_region_price_dataInput>
   }
 
-  export type scaled_pricesUpsertWithWhereUniqueWithoutRegionsInput = {
+  export type scaled_pricesUpsertWithWhereUniqueWithoutRegionInput = {
     where: scaled_pricesWhereUniqueInput
-    update: XOR<scaled_pricesUpdateWithoutRegionsInput, scaled_pricesUncheckedUpdateWithoutRegionsInput>
-    create: XOR<scaled_pricesCreateWithoutRegionsInput, scaled_pricesUncheckedCreateWithoutRegionsInput>
+    update: XOR<scaled_pricesUpdateWithoutRegionInput, scaled_pricesUncheckedUpdateWithoutRegionInput>
+    create: XOR<scaled_pricesCreateWithoutRegionInput, scaled_pricesUncheckedCreateWithoutRegionInput>
   }
 
-  export type scaled_pricesUpdateWithWhereUniqueWithoutRegionsInput = {
+  export type scaled_pricesUpdateWithWhereUniqueWithoutRegionInput = {
     where: scaled_pricesWhereUniqueInput
-    data: XOR<scaled_pricesUpdateWithoutRegionsInput, scaled_pricesUncheckedUpdateWithoutRegionsInput>
+    data: XOR<scaled_pricesUpdateWithoutRegionInput, scaled_pricesUncheckedUpdateWithoutRegionInput>
   }
 
-  export type scaled_pricesUpdateManyWithWhereWithoutRegionsInput = {
+  export type scaled_pricesUpdateManyWithWhereWithoutRegionInput = {
     where: scaled_pricesScalarWhereInput
     data: XOR<scaled_pricesUpdateManyMutationInput, scaled_pricesUncheckedUpdateManyWithoutScaled_pricesInput>
   }
@@ -25700,18 +25700,18 @@ export namespace Prisma {
   export type competitorsCreateWithoutScaled_pricesInput = {
     slug: string
     display_text: string
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsCreateNestedManyWithoutCompetitorsInput
-    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutCompetitorsInput
-    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutCompetitorsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsCreateNestedManyWithoutCompetitorInput
+    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutCompetitorInput
+    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutCompetitorInput
   }
 
   export type competitorsUncheckedCreateWithoutScaled_pricesInput = {
     id?: number
     slug: string
     display_text: string
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedCreateNestedManyWithoutCompetitorsInput
-    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutCompetitorsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutCompetitorsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedCreateNestedManyWithoutCompetitorInput
+    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutCompetitorInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutCompetitorInput
   }
 
   export type competitorsCreateOrConnectWithoutScaled_pricesInput = {
@@ -25728,10 +25728,10 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    units: unitsCreateNestedOneWithoutProductsInput
-    price_recommendations?: price_recommendationsCreateNestedManyWithoutProductsInput
-    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutProductsInput
+    unit: unitsCreateNestedOneWithoutProductsInput
+    price_recommendations?: price_recommendationsCreateNestedManyWithoutProductInput
+    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutProductInput
   }
 
   export type productsUncheckedCreateWithoutScaled_pricesInput = {
@@ -25745,9 +25745,9 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutProductsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutProductsInput
+    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutProductInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type productsCreateOrConnectWithoutScaled_pricesInput = {
@@ -25765,11 +25765,11 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    baskets?: basketsCreateNestedManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsCreateNestedManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutRegionsInput
+    baskets?: basketsCreateNestedManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataCreateNestedManyWithoutRegionInput
+    price_recommendations?: price_recommendationsCreateNestedManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutRegionInput
   }
 
   export type regionsUncheckedCreateWithoutScaled_pricesInput = {
@@ -25783,11 +25783,11 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    baskets?: basketsUncheckedCreateNestedManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutRegionsInput
+    baskets?: basketsUncheckedCreateNestedManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataUncheckedCreateNestedManyWithoutRegionInput
+    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutRegionInput
   }
 
   export type regionsCreateOrConnectWithoutScaled_pricesInput = {
@@ -25805,8 +25805,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    units: unitsCreateNestedOneWithoutScrape_resultsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlCreateNestedManyWithoutScrape_resultsInput
+    unit: unitsCreateNestedOneWithoutScrape_resultsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlCreateNestedManyWithoutScrape_resultInput
   }
 
   export type scrape_resultsUncheckedCreateWithoutScaled_pricesInput = {
@@ -25821,7 +25821,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutScrape_resultsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutScrape_resultInput
   }
 
   export type scrape_resultsCreateOrConnectWithoutScaled_pricesInput = {
@@ -25837,18 +25837,18 @@ export namespace Prisma {
   export type competitorsUpdateWithoutScaled_pricesInput = {
     slug?: StringFieldUpdateOperationsInput | string
     display_text?: StringFieldUpdateOperationsInput | string
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUpdateManyWithoutCompetitorsInput
-    competitor_region_data?: competitor_region_dataUpdateManyWithoutCompetitorsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutCompetitorsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUpdateManyWithoutCompetitorInput
+    competitor_region_data?: competitor_region_dataUpdateManyWithoutCompetitorInput
+    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutCompetitorInput
   }
 
   export type competitorsUncheckedUpdateWithoutScaled_pricesInput = {
     id?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     display_text?: StringFieldUpdateOperationsInput | string
-    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutCompetitorsInput
-    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutCompetitorsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutCompetitorsInput
+    basket_line_item_competitor_equivalents?: basket_line_item_competitor_equivalentsUncheckedUpdateManyWithoutCompetitorInput
+    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutCompetitorInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutCompetitorInput
   }
 
   export type productsUpsertWithoutScaled_pricesInput = {
@@ -25865,10 +25865,10 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    units?: unitsUpdateOneRequiredWithoutProductsInput
-    price_recommendations?: price_recommendationsUpdateManyWithoutProductsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataUpdateManyWithoutProductsInput
+    unit?: unitsUpdateOneRequiredWithoutProductsInput
+    price_recommendations?: price_recommendationsUpdateManyWithoutProductInput
+    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataUpdateManyWithoutProductInput
   }
 
   export type productsUncheckedUpdateWithoutScaled_pricesInput = {
@@ -25882,9 +25882,9 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutProductsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutProductsInput
+    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutProductInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutProductInput
   }
 
   export type regionsUpsertWithoutScaled_pricesInput = {
@@ -25902,11 +25902,11 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    baskets?: basketsUpdateManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataUpdateManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsUpdateManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataUpdateManyWithoutRegionsInput
+    baskets?: basketsUpdateManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataUpdateManyWithoutRegionInput
+    price_recommendations?: price_recommendationsUpdateManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataUpdateManyWithoutRegionInput
   }
 
   export type regionsUncheckedUpdateWithoutScaled_pricesInput = {
@@ -25920,11 +25920,11 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    baskets?: basketsUncheckedUpdateManyWithoutRegionsInput
-    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutRegionsInput
-    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutRegionsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutRegionsInput
-    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutRegionsInput
+    baskets?: basketsUncheckedUpdateManyWithoutRegionInput
+    competitor_region_data?: competitor_region_dataUncheckedUpdateManyWithoutRegionInput
+    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutRegionInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutRegionInput
+    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutRegionInput
   }
 
   export type scrape_resultsUpsertWithoutScaled_pricesInput = {
@@ -25942,8 +25942,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    units?: unitsUpdateOneRequiredWithoutScrape_resultsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUpdateManyWithoutScrape_resultsInput
+    unit?: unitsUpdateOneRequiredWithoutScrape_resultsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUpdateManyWithoutScrape_resultInput
   }
 
   export type scrape_resultsUncheckedUpdateWithoutScaled_pricesInput = {
@@ -25958,21 +25958,21 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutScrape_resultsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutScrape_resultInput
   }
 
-  export type product_region_competitor_urlsCreateWithoutScrape_result_product_region_competitor_urlInput = {
+  export type product_region_competitor_urlsCreateWithoutScrape_result_product_region_competitor_urlsInput = {
     url: string
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    competitors: competitorsCreateNestedOneWithoutProduct_region_competitor_urlsInput
-    products: productsCreateNestedOneWithoutProduct_region_competitor_urlsInput
-    regions: regionsCreateNestedOneWithoutProduct_region_competitor_urlsInput
+    competitor: competitorsCreateNestedOneWithoutProduct_region_competitor_urlsInput
+    product: productsCreateNestedOneWithoutProduct_region_competitor_urlsInput
+    region: regionsCreateNestedOneWithoutProduct_region_competitor_urlsInput
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsCreateNestedManyWithoutProduct_region_competitor_urlsInput
   }
 
-  export type product_region_competitor_urlsUncheckedCreateWithoutScrape_result_product_region_competitor_urlInput = {
+  export type product_region_competitor_urlsUncheckedCreateWithoutScrape_result_product_region_competitor_urlsInput = {
     id?: number
     product_id: number
     region_id: number
@@ -25984,12 +25984,12 @@ export namespace Prisma {
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsUncheckedCreateNestedManyWithoutProduct_region_competitor_urlsInput
   }
 
-  export type product_region_competitor_urlsCreateOrConnectWithoutScrape_result_product_region_competitor_urlInput = {
+  export type product_region_competitor_urlsCreateOrConnectWithoutScrape_result_product_region_competitor_urlsInput = {
     where: product_region_competitor_urlsWhereUniqueInput
-    create: XOR<product_region_competitor_urlsCreateWithoutScrape_result_product_region_competitor_urlInput, product_region_competitor_urlsUncheckedCreateWithoutScrape_result_product_region_competitor_urlInput>
+    create: XOR<product_region_competitor_urlsCreateWithoutScrape_result_product_region_competitor_urlsInput, product_region_competitor_urlsUncheckedCreateWithoutScrape_result_product_region_competitor_urlsInput>
   }
 
-  export type scrape_resultsCreateWithoutScrape_result_product_region_competitor_urlInput = {
+  export type scrape_resultsCreateWithoutScrape_result_product_region_competitor_urlsInput = {
     competitor_sale_price?: number | null
     competitor_list_price?: number | null
     competitor_sold_by_volume?: number | null
@@ -25999,11 +25999,11 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    units: unitsCreateNestedOneWithoutScrape_resultsInput
-    scaled_prices?: scaled_pricesCreateNestedManyWithoutScrape_resultsInput
+    unit: unitsCreateNestedOneWithoutScrape_resultsInput
+    scaled_prices?: scaled_pricesCreateNestedManyWithoutScrape_resultInput
   }
 
-  export type scrape_resultsUncheckedCreateWithoutScrape_result_product_region_competitor_urlInput = {
+  export type scrape_resultsUncheckedCreateWithoutScrape_result_product_region_competitor_urlsInput = {
     id?: number
     competitor_sale_price?: number | null
     competitor_list_price?: number | null
@@ -26015,31 +26015,31 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutScrape_resultsInput
+    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutScrape_resultInput
   }
 
-  export type scrape_resultsCreateOrConnectWithoutScrape_result_product_region_competitor_urlInput = {
+  export type scrape_resultsCreateOrConnectWithoutScrape_result_product_region_competitor_urlsInput = {
     where: scrape_resultsWhereUniqueInput
-    create: XOR<scrape_resultsCreateWithoutScrape_result_product_region_competitor_urlInput, scrape_resultsUncheckedCreateWithoutScrape_result_product_region_competitor_urlInput>
+    create: XOR<scrape_resultsCreateWithoutScrape_result_product_region_competitor_urlsInput, scrape_resultsUncheckedCreateWithoutScrape_result_product_region_competitor_urlsInput>
   }
 
-  export type product_region_competitor_urlsUpsertWithoutScrape_result_product_region_competitor_urlInput = {
-    update: XOR<product_region_competitor_urlsUpdateWithoutScrape_result_product_region_competitor_urlInput, product_region_competitor_urlsUncheckedUpdateWithoutScrape_result_product_region_competitor_urlInput>
-    create: XOR<product_region_competitor_urlsCreateWithoutScrape_result_product_region_competitor_urlInput, product_region_competitor_urlsUncheckedCreateWithoutScrape_result_product_region_competitor_urlInput>
+  export type product_region_competitor_urlsUpsertWithoutScrape_result_product_region_competitor_urlsInput = {
+    update: XOR<product_region_competitor_urlsUpdateWithoutScrape_result_product_region_competitor_urlsInput, product_region_competitor_urlsUncheckedUpdateWithoutScrape_result_product_region_competitor_urlsInput>
+    create: XOR<product_region_competitor_urlsCreateWithoutScrape_result_product_region_competitor_urlsInput, product_region_competitor_urlsUncheckedCreateWithoutScrape_result_product_region_competitor_urlsInput>
   }
 
-  export type product_region_competitor_urlsUpdateWithoutScrape_result_product_region_competitor_urlInput = {
+  export type product_region_competitor_urlsUpdateWithoutScrape_result_product_region_competitor_urlsInput = {
     url?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitors?: competitorsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
-    products?: productsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
-    regions?: regionsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
+    competitor?: competitorsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
+    product?: productsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
+    region?: regionsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsUpdateManyWithoutProduct_region_competitor_urlsInput
   }
 
-  export type product_region_competitor_urlsUncheckedUpdateWithoutScrape_result_product_region_competitor_urlInput = {
+  export type product_region_competitor_urlsUncheckedUpdateWithoutScrape_result_product_region_competitor_urlsInput = {
     id?: IntFieldUpdateOperationsInput | number
     product_id?: IntFieldUpdateOperationsInput | number
     region_id?: IntFieldUpdateOperationsInput | number
@@ -26051,12 +26051,12 @@ export namespace Prisma {
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsUncheckedUpdateManyWithoutProduct_region_competitor_urlsInput
   }
 
-  export type scrape_resultsUpsertWithoutScrape_result_product_region_competitor_urlInput = {
-    update: XOR<scrape_resultsUpdateWithoutScrape_result_product_region_competitor_urlInput, scrape_resultsUncheckedUpdateWithoutScrape_result_product_region_competitor_urlInput>
-    create: XOR<scrape_resultsCreateWithoutScrape_result_product_region_competitor_urlInput, scrape_resultsUncheckedCreateWithoutScrape_result_product_region_competitor_urlInput>
+  export type scrape_resultsUpsertWithoutScrape_result_product_region_competitor_urlsInput = {
+    update: XOR<scrape_resultsUpdateWithoutScrape_result_product_region_competitor_urlsInput, scrape_resultsUncheckedUpdateWithoutScrape_result_product_region_competitor_urlsInput>
+    create: XOR<scrape_resultsCreateWithoutScrape_result_product_region_competitor_urlsInput, scrape_resultsUncheckedCreateWithoutScrape_result_product_region_competitor_urlsInput>
   }
 
-  export type scrape_resultsUpdateWithoutScrape_result_product_region_competitor_urlInput = {
+  export type scrape_resultsUpdateWithoutScrape_result_product_region_competitor_urlsInput = {
     competitor_sale_price?: NullableFloatFieldUpdateOperationsInput | number | null
     competitor_list_price?: NullableFloatFieldUpdateOperationsInput | number | null
     competitor_sold_by_volume?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -26066,11 +26066,11 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    units?: unitsUpdateOneRequiredWithoutScrape_resultsInput
-    scaled_prices?: scaled_pricesUpdateManyWithoutScrape_resultsInput
+    unit?: unitsUpdateOneRequiredWithoutScrape_resultsInput
+    scaled_prices?: scaled_pricesUpdateManyWithoutScrape_resultInput
   }
 
-  export type scrape_resultsUncheckedUpdateWithoutScrape_result_product_region_competitor_urlInput = {
+  export type scrape_resultsUncheckedUpdateWithoutScrape_result_product_region_competitor_urlsInput = {
     id?: IntFieldUpdateOperationsInput | number
     competitor_sale_price?: NullableFloatFieldUpdateOperationsInput | number | null
     competitor_list_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -26082,16 +26082,16 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutScrape_resultsInput
+    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutScrape_resultInput
   }
 
   export type unitsCreateWithoutScrape_resultsInput = {
     slug: string
     display_text: string
     scale_of_base_unit: number
-    units: unitsCreateNestedOneWithoutOther_unitsInput
-    products?: productsCreateNestedManyWithoutUnitsInput
-    other_units?: unitsCreateNestedManyWithoutUnitsInput
+    base_unit: unitsCreateNestedOneWithoutUnitsInput
+    products?: productsCreateNestedManyWithoutUnitInput
+    units?: unitsCreateNestedManyWithoutBase_unitInput
   }
 
   export type unitsUncheckedCreateWithoutScrape_resultsInput = {
@@ -26100,8 +26100,8 @@ export namespace Prisma {
     display_text: string
     base_unit_id: number
     scale_of_base_unit: number
-    products?: productsUncheckedCreateNestedManyWithoutUnitsInput
-    other_units?: unitsUncheckedCreateNestedManyWithoutUnitsInput
+    products?: productsUncheckedCreateNestedManyWithoutUnitInput
+    units?: unitsUncheckedCreateNestedManyWithoutBase_unitInput
   }
 
   export type unitsCreateOrConnectWithoutScrape_resultsInput = {
@@ -26109,17 +26109,17 @@ export namespace Prisma {
     create: XOR<unitsCreateWithoutScrape_resultsInput, unitsUncheckedCreateWithoutScrape_resultsInput>
   }
 
-  export type scaled_pricesCreateWithoutScrape_resultsInput = {
+  export type scaled_pricesCreateWithoutScrape_resultInput = {
     competitor_scaled_price?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    competitors: competitorsCreateNestedOneWithoutScaled_pricesInput
-    products: productsCreateNestedOneWithoutScaled_pricesInput
-    regions: regionsCreateNestedOneWithoutScaled_pricesInput
+    competitor: competitorsCreateNestedOneWithoutScaled_pricesInput
+    product: productsCreateNestedOneWithoutScaled_pricesInput
+    region: regionsCreateNestedOneWithoutScaled_pricesInput
   }
 
-  export type scaled_pricesUncheckedCreateWithoutScrape_resultsInput = {
+  export type scaled_pricesUncheckedCreateWithoutScrape_resultInput = {
     id?: number
     product_id: number
     competitor_id: number
@@ -26130,32 +26130,32 @@ export namespace Prisma {
     deleted_at?: Date | string | null
   }
 
-  export type scaled_pricesCreateOrConnectWithoutScrape_resultsInput = {
+  export type scaled_pricesCreateOrConnectWithoutScrape_resultInput = {
     where: scaled_pricesWhereUniqueInput
-    create: XOR<scaled_pricesCreateWithoutScrape_resultsInput, scaled_pricesUncheckedCreateWithoutScrape_resultsInput>
+    create: XOR<scaled_pricesCreateWithoutScrape_resultInput, scaled_pricesUncheckedCreateWithoutScrape_resultInput>
   }
 
-  export type scaled_pricesCreateManyScrape_resultsInputEnvelope = {
-    data: Enumerable<scaled_pricesCreateManyScrape_resultsInput>
+  export type scaled_pricesCreateManyScrape_resultInputEnvelope = {
+    data: Enumerable<scaled_pricesCreateManyScrape_resultInput>
     skipDuplicates?: boolean
   }
 
-  export type scrape_result_product_region_competitor_urlCreateWithoutScrape_resultsInput = {
-    product_region_competitor_urls: product_region_competitor_urlsCreateNestedOneWithoutScrape_result_product_region_competitor_urlInput
+  export type scrape_result_product_region_competitor_urlCreateWithoutScrape_resultInput = {
+    product_region_competitor_url: product_region_competitor_urlsCreateNestedOneWithoutScrape_result_product_region_competitor_urlsInput
   }
 
-  export type scrape_result_product_region_competitor_urlUncheckedCreateWithoutScrape_resultsInput = {
+  export type scrape_result_product_region_competitor_urlUncheckedCreateWithoutScrape_resultInput = {
     id?: number
     product_region_competitor_url_id: number
   }
 
-  export type scrape_result_product_region_competitor_urlCreateOrConnectWithoutScrape_resultsInput = {
+  export type scrape_result_product_region_competitor_urlCreateOrConnectWithoutScrape_resultInput = {
     where: scrape_result_product_region_competitor_urlWhereUniqueInput
-    create: XOR<scrape_result_product_region_competitor_urlCreateWithoutScrape_resultsInput, scrape_result_product_region_competitor_urlUncheckedCreateWithoutScrape_resultsInput>
+    create: XOR<scrape_result_product_region_competitor_urlCreateWithoutScrape_resultInput, scrape_result_product_region_competitor_urlUncheckedCreateWithoutScrape_resultInput>
   }
 
-  export type scrape_result_product_region_competitor_urlCreateManyScrape_resultsInputEnvelope = {
-    data: Enumerable<scrape_result_product_region_competitor_urlCreateManyScrape_resultsInput>
+  export type scrape_result_product_region_competitor_urlCreateManyScrape_resultInputEnvelope = {
+    data: Enumerable<scrape_result_product_region_competitor_urlCreateManyScrape_resultInput>
     skipDuplicates?: boolean
   }
 
@@ -26168,9 +26168,9 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     display_text?: StringFieldUpdateOperationsInput | string
     scale_of_base_unit?: FloatFieldUpdateOperationsInput | number
-    units?: unitsUpdateOneRequiredWithoutOther_unitsInput
-    products?: productsUpdateManyWithoutUnitsInput
-    other_units?: unitsUpdateManyWithoutUnitsInput
+    base_unit?: unitsUpdateOneRequiredWithoutUnitsInput
+    products?: productsUpdateManyWithoutUnitInput
+    units?: unitsUpdateManyWithoutBase_unitInput
   }
 
   export type unitsUncheckedUpdateWithoutScrape_resultsInput = {
@@ -26179,163 +26179,59 @@ export namespace Prisma {
     display_text?: StringFieldUpdateOperationsInput | string
     base_unit_id?: IntFieldUpdateOperationsInput | number
     scale_of_base_unit?: FloatFieldUpdateOperationsInput | number
-    products?: productsUncheckedUpdateManyWithoutUnitsInput
-    other_units?: unitsUncheckedUpdateManyWithoutUnitsInput
+    products?: productsUncheckedUpdateManyWithoutUnitInput
+    units?: unitsUncheckedUpdateManyWithoutBase_unitInput
   }
 
-  export type scaled_pricesUpsertWithWhereUniqueWithoutScrape_resultsInput = {
+  export type scaled_pricesUpsertWithWhereUniqueWithoutScrape_resultInput = {
     where: scaled_pricesWhereUniqueInput
-    update: XOR<scaled_pricesUpdateWithoutScrape_resultsInput, scaled_pricesUncheckedUpdateWithoutScrape_resultsInput>
-    create: XOR<scaled_pricesCreateWithoutScrape_resultsInput, scaled_pricesUncheckedCreateWithoutScrape_resultsInput>
+    update: XOR<scaled_pricesUpdateWithoutScrape_resultInput, scaled_pricesUncheckedUpdateWithoutScrape_resultInput>
+    create: XOR<scaled_pricesCreateWithoutScrape_resultInput, scaled_pricesUncheckedCreateWithoutScrape_resultInput>
   }
 
-  export type scaled_pricesUpdateWithWhereUniqueWithoutScrape_resultsInput = {
+  export type scaled_pricesUpdateWithWhereUniqueWithoutScrape_resultInput = {
     where: scaled_pricesWhereUniqueInput
-    data: XOR<scaled_pricesUpdateWithoutScrape_resultsInput, scaled_pricesUncheckedUpdateWithoutScrape_resultsInput>
+    data: XOR<scaled_pricesUpdateWithoutScrape_resultInput, scaled_pricesUncheckedUpdateWithoutScrape_resultInput>
   }
 
-  export type scaled_pricesUpdateManyWithWhereWithoutScrape_resultsInput = {
+  export type scaled_pricesUpdateManyWithWhereWithoutScrape_resultInput = {
     where: scaled_pricesScalarWhereInput
     data: XOR<scaled_pricesUpdateManyMutationInput, scaled_pricesUncheckedUpdateManyWithoutScaled_pricesInput>
   }
 
-  export type scrape_result_product_region_competitor_urlUpsertWithWhereUniqueWithoutScrape_resultsInput = {
+  export type scrape_result_product_region_competitor_urlUpsertWithWhereUniqueWithoutScrape_resultInput = {
     where: scrape_result_product_region_competitor_urlWhereUniqueInput
-    update: XOR<scrape_result_product_region_competitor_urlUpdateWithoutScrape_resultsInput, scrape_result_product_region_competitor_urlUncheckedUpdateWithoutScrape_resultsInput>
-    create: XOR<scrape_result_product_region_competitor_urlCreateWithoutScrape_resultsInput, scrape_result_product_region_competitor_urlUncheckedCreateWithoutScrape_resultsInput>
+    update: XOR<scrape_result_product_region_competitor_urlUpdateWithoutScrape_resultInput, scrape_result_product_region_competitor_urlUncheckedUpdateWithoutScrape_resultInput>
+    create: XOR<scrape_result_product_region_competitor_urlCreateWithoutScrape_resultInput, scrape_result_product_region_competitor_urlUncheckedCreateWithoutScrape_resultInput>
   }
 
-  export type scrape_result_product_region_competitor_urlUpdateWithWhereUniqueWithoutScrape_resultsInput = {
+  export type scrape_result_product_region_competitor_urlUpdateWithWhereUniqueWithoutScrape_resultInput = {
     where: scrape_result_product_region_competitor_urlWhereUniqueInput
-    data: XOR<scrape_result_product_region_competitor_urlUpdateWithoutScrape_resultsInput, scrape_result_product_region_competitor_urlUncheckedUpdateWithoutScrape_resultsInput>
+    data: XOR<scrape_result_product_region_competitor_urlUpdateWithoutScrape_resultInput, scrape_result_product_region_competitor_urlUncheckedUpdateWithoutScrape_resultInput>
   }
 
-  export type scrape_result_product_region_competitor_urlUpdateManyWithWhereWithoutScrape_resultsInput = {
+  export type scrape_result_product_region_competitor_urlUpdateManyWithWhereWithoutScrape_resultInput = {
     where: scrape_result_product_region_competitor_urlScalarWhereInput
-    data: XOR<scrape_result_product_region_competitor_urlUpdateManyMutationInput, scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutScrape_result_product_region_competitor_urlInput>
-  }
-
-  export type unitsCreateWithoutOther_unitsInput = {
-    slug: string
-    display_text: string
-    scale_of_base_unit: number
-    units: unitsCreateNestedOneWithoutOther_unitsInput
-    products?: productsCreateNestedManyWithoutUnitsInput
-    scrape_results?: scrape_resultsCreateNestedManyWithoutUnitsInput
-  }
-
-  export type unitsUncheckedCreateWithoutOther_unitsInput = {
-    id?: number
-    slug: string
-    display_text: string
-    base_unit_id: number
-    scale_of_base_unit: number
-    products?: productsUncheckedCreateNestedManyWithoutUnitsInput
-    scrape_results?: scrape_resultsUncheckedCreateNestedManyWithoutUnitsInput
-  }
-
-  export type unitsCreateOrConnectWithoutOther_unitsInput = {
-    where: unitsWhereUniqueInput
-    create: XOR<unitsCreateWithoutOther_unitsInput, unitsUncheckedCreateWithoutOther_unitsInput>
-  }
-
-  export type productsCreateWithoutUnitsInput = {
-    sku?: string | null
-    name?: string | null
-    package_quantity?: number | null
-    package_units?: string | null
-    package_weight?: number | null
-    created_at?: Date | string
-    updated_at?: Date | string | null
-    deleted_at?: Date | string | null
-    price_recommendations?: price_recommendationsCreateNestedManyWithoutProductsInput
-    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutProductsInput
-    scaled_prices?: scaled_pricesCreateNestedManyWithoutProductsInput
-  }
-
-  export type productsUncheckedCreateWithoutUnitsInput = {
-    id?: number
-    sku?: string | null
-    name?: string | null
-    package_quantity?: number | null
-    package_units?: string | null
-    package_weight?: number | null
-    created_at?: Date | string
-    updated_at?: Date | string | null
-    deleted_at?: Date | string | null
-    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutProductsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutProductsInput
-    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutProductsInput
-  }
-
-  export type productsCreateOrConnectWithoutUnitsInput = {
-    where: productsWhereUniqueInput
-    create: XOR<productsCreateWithoutUnitsInput, productsUncheckedCreateWithoutUnitsInput>
-  }
-
-  export type productsCreateManyUnitsInputEnvelope = {
-    data: Enumerable<productsCreateManyUnitsInput>
-    skipDuplicates?: boolean
-  }
-
-  export type scrape_resultsCreateWithoutUnitsInput = {
-    competitor_sale_price?: number | null
-    competitor_list_price?: number | null
-    competitor_sold_by_volume?: number | null
-    promotional_info?: string | null
-    data_source?: string | null
-    scrape_time?: Date | string | null
-    created_at?: Date | string
-    updated_at?: Date | string | null
-    deleted_at?: Date | string | null
-    scaled_prices?: scaled_pricesCreateNestedManyWithoutScrape_resultsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlCreateNestedManyWithoutScrape_resultsInput
-  }
-
-  export type scrape_resultsUncheckedCreateWithoutUnitsInput = {
-    id?: number
-    competitor_sale_price?: number | null
-    competitor_list_price?: number | null
-    competitor_sold_by_volume?: number | null
-    promotional_info?: string | null
-    data_source?: string | null
-    scrape_time?: Date | string | null
-    created_at?: Date | string
-    updated_at?: Date | string | null
-    deleted_at?: Date | string | null
-    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutScrape_resultsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutScrape_resultsInput
-  }
-
-  export type scrape_resultsCreateOrConnectWithoutUnitsInput = {
-    where: scrape_resultsWhereUniqueInput
-    create: XOR<scrape_resultsCreateWithoutUnitsInput, scrape_resultsUncheckedCreateWithoutUnitsInput>
-  }
-
-  export type scrape_resultsCreateManyUnitsInputEnvelope = {
-    data: Enumerable<scrape_resultsCreateManyUnitsInput>
-    skipDuplicates?: boolean
+    data: XOR<scrape_result_product_region_competitor_urlUpdateManyMutationInput, scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutScrape_result_product_region_competitor_urlsInput>
   }
 
   export type unitsCreateWithoutUnitsInput = {
     slug: string
     display_text: string
     scale_of_base_unit: number
-    products?: productsCreateNestedManyWithoutUnitsInput
-    scrape_results?: scrape_resultsCreateNestedManyWithoutUnitsInput
-    other_units?: unitsCreateNestedManyWithoutUnitsInput
+    base_unit: unitsCreateNestedOneWithoutUnitsInput
+    products?: productsCreateNestedManyWithoutUnitInput
+    scrape_results?: scrape_resultsCreateNestedManyWithoutUnitInput
   }
 
   export type unitsUncheckedCreateWithoutUnitsInput = {
     id?: number
     slug: string
     display_text: string
+    base_unit_id: number
     scale_of_base_unit: number
-    products?: productsUncheckedCreateNestedManyWithoutUnitsInput
-    scrape_results?: scrape_resultsUncheckedCreateNestedManyWithoutUnitsInput
-    other_units?: unitsUncheckedCreateNestedManyWithoutUnitsInput
+    products?: productsUncheckedCreateNestedManyWithoutUnitInput
+    scrape_results?: scrape_resultsUncheckedCreateNestedManyWithoutUnitInput
   }
 
   export type unitsCreateOrConnectWithoutUnitsInput = {
@@ -26343,47 +26239,151 @@ export namespace Prisma {
     create: XOR<unitsCreateWithoutUnitsInput, unitsUncheckedCreateWithoutUnitsInput>
   }
 
-  export type unitsCreateManyUnitsInputEnvelope = {
-    data: Enumerable<unitsCreateManyUnitsInput>
+  export type productsCreateWithoutUnitInput = {
+    sku?: string | null
+    name?: string | null
+    package_quantity?: number | null
+    package_units?: string | null
+    package_weight?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    deleted_at?: Date | string | null
+    price_recommendations?: price_recommendationsCreateNestedManyWithoutProductInput
+    product_region_competitor_urls?: product_region_competitor_urlsCreateNestedManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataCreateNestedManyWithoutProductInput
+    scaled_prices?: scaled_pricesCreateNestedManyWithoutProductInput
+  }
+
+  export type productsUncheckedCreateWithoutUnitInput = {
+    id?: number
+    sku?: string | null
+    name?: string | null
+    package_quantity?: number | null
+    package_units?: string | null
+    package_weight?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    deleted_at?: Date | string | null
+    price_recommendations?: price_recommendationsUncheckedCreateNestedManyWithoutProductInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedCreateNestedManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataUncheckedCreateNestedManyWithoutProductInput
+    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type productsCreateOrConnectWithoutUnitInput = {
+    where: productsWhereUniqueInput
+    create: XOR<productsCreateWithoutUnitInput, productsUncheckedCreateWithoutUnitInput>
+  }
+
+  export type productsCreateManyUnitInputEnvelope = {
+    data: Enumerable<productsCreateManyUnitInput>
     skipDuplicates?: boolean
   }
 
-  export type unitsUpsertWithoutOther_unitsInput = {
-    update: XOR<unitsUpdateWithoutOther_unitsInput, unitsUncheckedUpdateWithoutOther_unitsInput>
-    create: XOR<unitsCreateWithoutOther_unitsInput, unitsUncheckedCreateWithoutOther_unitsInput>
+  export type scrape_resultsCreateWithoutUnitInput = {
+    competitor_sale_price?: number | null
+    competitor_list_price?: number | null
+    competitor_sold_by_volume?: number | null
+    promotional_info?: string | null
+    data_source?: string | null
+    scrape_time?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    deleted_at?: Date | string | null
+    scaled_prices?: scaled_pricesCreateNestedManyWithoutScrape_resultInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlCreateNestedManyWithoutScrape_resultInput
   }
 
-  export type unitsUpdateWithoutOther_unitsInput = {
+  export type scrape_resultsUncheckedCreateWithoutUnitInput = {
+    id?: number
+    competitor_sale_price?: number | null
+    competitor_list_price?: number | null
+    competitor_sold_by_volume?: number | null
+    promotional_info?: string | null
+    data_source?: string | null
+    scrape_time?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    deleted_at?: Date | string | null
+    scaled_prices?: scaled_pricesUncheckedCreateNestedManyWithoutScrape_resultInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUncheckedCreateNestedManyWithoutScrape_resultInput
+  }
+
+  export type scrape_resultsCreateOrConnectWithoutUnitInput = {
+    where: scrape_resultsWhereUniqueInput
+    create: XOR<scrape_resultsCreateWithoutUnitInput, scrape_resultsUncheckedCreateWithoutUnitInput>
+  }
+
+  export type scrape_resultsCreateManyUnitInputEnvelope = {
+    data: Enumerable<scrape_resultsCreateManyUnitInput>
+    skipDuplicates?: boolean
+  }
+
+  export type unitsCreateWithoutBase_unitInput = {
+    slug: string
+    display_text: string
+    scale_of_base_unit: number
+    products?: productsCreateNestedManyWithoutUnitInput
+    scrape_results?: scrape_resultsCreateNestedManyWithoutUnitInput
+    units?: unitsCreateNestedManyWithoutBase_unitInput
+  }
+
+  export type unitsUncheckedCreateWithoutBase_unitInput = {
+    id?: number
+    slug: string
+    display_text: string
+    scale_of_base_unit: number
+    products?: productsUncheckedCreateNestedManyWithoutUnitInput
+    scrape_results?: scrape_resultsUncheckedCreateNestedManyWithoutUnitInput
+    units?: unitsUncheckedCreateNestedManyWithoutBase_unitInput
+  }
+
+  export type unitsCreateOrConnectWithoutBase_unitInput = {
+    where: unitsWhereUniqueInput
+    create: XOR<unitsCreateWithoutBase_unitInput, unitsUncheckedCreateWithoutBase_unitInput>
+  }
+
+  export type unitsCreateManyBase_unitInputEnvelope = {
+    data: Enumerable<unitsCreateManyBase_unitInput>
+    skipDuplicates?: boolean
+  }
+
+  export type unitsUpsertWithoutUnitsInput = {
+    update: XOR<unitsUpdateWithoutUnitsInput, unitsUncheckedUpdateWithoutUnitsInput>
+    create: XOR<unitsCreateWithoutUnitsInput, unitsUncheckedCreateWithoutUnitsInput>
+  }
+
+  export type unitsUpdateWithoutUnitsInput = {
     slug?: StringFieldUpdateOperationsInput | string
     display_text?: StringFieldUpdateOperationsInput | string
     scale_of_base_unit?: FloatFieldUpdateOperationsInput | number
-    units?: unitsUpdateOneRequiredWithoutOther_unitsInput
-    products?: productsUpdateManyWithoutUnitsInput
-    scrape_results?: scrape_resultsUpdateManyWithoutUnitsInput
+    base_unit?: unitsUpdateOneRequiredWithoutUnitsInput
+    products?: productsUpdateManyWithoutUnitInput
+    scrape_results?: scrape_resultsUpdateManyWithoutUnitInput
   }
 
-  export type unitsUncheckedUpdateWithoutOther_unitsInput = {
+  export type unitsUncheckedUpdateWithoutUnitsInput = {
     id?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     display_text?: StringFieldUpdateOperationsInput | string
     base_unit_id?: IntFieldUpdateOperationsInput | number
     scale_of_base_unit?: FloatFieldUpdateOperationsInput | number
-    products?: productsUncheckedUpdateManyWithoutUnitsInput
-    scrape_results?: scrape_resultsUncheckedUpdateManyWithoutUnitsInput
+    products?: productsUncheckedUpdateManyWithoutUnitInput
+    scrape_results?: scrape_resultsUncheckedUpdateManyWithoutUnitInput
   }
 
-  export type productsUpsertWithWhereUniqueWithoutUnitsInput = {
+  export type productsUpsertWithWhereUniqueWithoutUnitInput = {
     where: productsWhereUniqueInput
-    update: XOR<productsUpdateWithoutUnitsInput, productsUncheckedUpdateWithoutUnitsInput>
-    create: XOR<productsCreateWithoutUnitsInput, productsUncheckedCreateWithoutUnitsInput>
+    update: XOR<productsUpdateWithoutUnitInput, productsUncheckedUpdateWithoutUnitInput>
+    create: XOR<productsCreateWithoutUnitInput, productsUncheckedCreateWithoutUnitInput>
   }
 
-  export type productsUpdateWithWhereUniqueWithoutUnitsInput = {
+  export type productsUpdateWithWhereUniqueWithoutUnitInput = {
     where: productsWhereUniqueInput
-    data: XOR<productsUpdateWithoutUnitsInput, productsUncheckedUpdateWithoutUnitsInput>
+    data: XOR<productsUpdateWithoutUnitInput, productsUncheckedUpdateWithoutUnitInput>
   }
 
-  export type productsUpdateManyWithWhereWithoutUnitsInput = {
+  export type productsUpdateManyWithWhereWithoutUnitInput = {
     where: productsScalarWhereInput
     data: XOR<productsUpdateManyMutationInput, productsUncheckedUpdateManyWithoutProductsInput>
   }
@@ -26404,18 +26404,18 @@ export namespace Prisma {
     deleted_at?: DateTimeNullableFilter | Date | string | null
   }
 
-  export type scrape_resultsUpsertWithWhereUniqueWithoutUnitsInput = {
+  export type scrape_resultsUpsertWithWhereUniqueWithoutUnitInput = {
     where: scrape_resultsWhereUniqueInput
-    update: XOR<scrape_resultsUpdateWithoutUnitsInput, scrape_resultsUncheckedUpdateWithoutUnitsInput>
-    create: XOR<scrape_resultsCreateWithoutUnitsInput, scrape_resultsUncheckedCreateWithoutUnitsInput>
+    update: XOR<scrape_resultsUpdateWithoutUnitInput, scrape_resultsUncheckedUpdateWithoutUnitInput>
+    create: XOR<scrape_resultsCreateWithoutUnitInput, scrape_resultsUncheckedCreateWithoutUnitInput>
   }
 
-  export type scrape_resultsUpdateWithWhereUniqueWithoutUnitsInput = {
+  export type scrape_resultsUpdateWithWhereUniqueWithoutUnitInput = {
     where: scrape_resultsWhereUniqueInput
-    data: XOR<scrape_resultsUpdateWithoutUnitsInput, scrape_resultsUncheckedUpdateWithoutUnitsInput>
+    data: XOR<scrape_resultsUpdateWithoutUnitInput, scrape_resultsUncheckedUpdateWithoutUnitInput>
   }
 
-  export type scrape_resultsUpdateManyWithWhereWithoutUnitsInput = {
+  export type scrape_resultsUpdateManyWithWhereWithoutUnitInput = {
     where: scrape_resultsScalarWhereInput
     data: XOR<scrape_resultsUpdateManyMutationInput, scrape_resultsUncheckedUpdateManyWithoutScrape_resultsInput>
   }
@@ -26437,20 +26437,20 @@ export namespace Prisma {
     deleted_at?: DateTimeNullableFilter | Date | string | null
   }
 
-  export type unitsUpsertWithWhereUniqueWithoutUnitsInput = {
+  export type unitsUpsertWithWhereUniqueWithoutBase_unitInput = {
     where: unitsWhereUniqueInput
-    update: XOR<unitsUpdateWithoutUnitsInput, unitsUncheckedUpdateWithoutUnitsInput>
-    create: XOR<unitsCreateWithoutUnitsInput, unitsUncheckedCreateWithoutUnitsInput>
+    update: XOR<unitsUpdateWithoutBase_unitInput, unitsUncheckedUpdateWithoutBase_unitInput>
+    create: XOR<unitsCreateWithoutBase_unitInput, unitsUncheckedCreateWithoutBase_unitInput>
   }
 
-  export type unitsUpdateWithWhereUniqueWithoutUnitsInput = {
+  export type unitsUpdateWithWhereUniqueWithoutBase_unitInput = {
     where: unitsWhereUniqueInput
-    data: XOR<unitsUpdateWithoutUnitsInput, unitsUncheckedUpdateWithoutUnitsInput>
+    data: XOR<unitsUpdateWithoutBase_unitInput, unitsUncheckedUpdateWithoutBase_unitInput>
   }
 
-  export type unitsUpdateManyWithWhereWithoutUnitsInput = {
+  export type unitsUpdateManyWithWhereWithoutBase_unitInput = {
     where: unitsScalarWhereInput
-    data: XOR<unitsUpdateManyMutationInput, unitsUncheckedUpdateManyWithoutOther_unitsInput>
+    data: XOR<unitsUpdateManyMutationInput, unitsUncheckedUpdateManyWithoutUnitsInput>
   }
 
   export type unitsScalarWhereInput = {
@@ -26464,7 +26464,7 @@ export namespace Prisma {
     scale_of_base_unit?: FloatFilter | number
   }
 
-  export type basketsCreateManyBasket_daily_totalsInput = {
+  export type basketsCreateManyBasket_daily_totalInput = {
     id?: number
     goodfood_id: number
     delivery_date: Date | string
@@ -26475,17 +26475,17 @@ export namespace Prisma {
     region_id: number
   }
 
-  export type basketsUpdateWithoutBasket_daily_totalsInput = {
+  export type basketsUpdateWithoutBasket_daily_totalInput = {
     goodfood_id?: IntFieldUpdateOperationsInput | number
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
     basket_totals?: NullableJsonNullValueInput | InputJsonValue
     basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    regions?: regionsUpdateOneRequiredWithoutBasketsInput
+    region?: regionsUpdateOneRequiredWithoutBasketsInput
   }
 
-  export type basketsUncheckedUpdateWithoutBasket_daily_totalsInput = {
+  export type basketsUncheckedUpdateWithoutBasket_daily_totalInput = {
     id?: IntFieldUpdateOperationsInput | number
     goodfood_id?: IntFieldUpdateOperationsInput | number
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26507,7 +26507,7 @@ export namespace Prisma {
     region_id?: IntFieldUpdateOperationsInput | number
   }
 
-  export type basket_line_item_competitor_equivalentsCreateManyBasket_line_itemsInput = {
+  export type basket_line_item_competitor_equivalentsCreateManyBasket_line_itemInput = {
     id?: number
     competitor_price?: number | null
     competitor_id: number
@@ -26515,20 +26515,20 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type basket_line_item_recommended_pricesCreateManyBasket_line_itemsInput = {
+  export type basket_line_item_recommended_pricesCreateManyBasket_line_itemInput = {
     id?: number
     recommended_price: number
     price_recommendation_id?: number | null
   }
 
-  export type basket_line_item_competitor_equivalentsUpdateWithoutBasket_line_itemsInput = {
+  export type basket_line_item_competitor_equivalentsUpdateWithoutBasket_line_itemInput = {
     competitor_price?: NullableFloatFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitors?: competitorsUpdateOneRequiredWithoutBasket_line_item_competitor_equivalentsInput
+    competitor?: competitorsUpdateOneRequiredWithoutBasket_line_item_competitor_equivalentsInput
   }
 
-  export type basket_line_item_competitor_equivalentsUncheckedUpdateWithoutBasket_line_itemsInput = {
+  export type basket_line_item_competitor_equivalentsUncheckedUpdateWithoutBasket_line_itemInput = {
     id?: IntFieldUpdateOperationsInput | number
     competitor_price?: NullableFloatFieldUpdateOperationsInput | number | null
     competitor_id?: IntFieldUpdateOperationsInput | number
@@ -26544,12 +26544,12 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type basket_line_item_recommended_pricesUpdateWithoutBasket_line_itemsInput = {
+  export type basket_line_item_recommended_pricesUpdateWithoutBasket_line_itemInput = {
     recommended_price?: FloatFieldUpdateOperationsInput | number
     price_recommendation_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
-  export type basket_line_item_recommended_pricesUncheckedUpdateWithoutBasket_line_itemsInput = {
+  export type basket_line_item_recommended_pricesUncheckedUpdateWithoutBasket_line_itemInput = {
     id?: IntFieldUpdateOperationsInput | number
     recommended_price?: FloatFieldUpdateOperationsInput | number
     price_recommendation_id?: NullableIntFieldUpdateOperationsInput | number | null
@@ -26561,7 +26561,7 @@ export namespace Prisma {
     price_recommendation_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
-  export type basket_line_item_competitor_equivalentsCreateManyCompetitorsInput = {
+  export type basket_line_item_competitor_equivalentsCreateManyCompetitorInput = {
     id?: number
     competitor_price?: number | null
     basket_line_item_id: number
@@ -26569,14 +26569,14 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type competitor_region_dataCreateManyCompetitorsInput = {
+  export type competitor_region_dataCreateManyCompetitorInput = {
     id?: number
     region_id: number
     should_scrape?: boolean
     should_include_in_recommendation_calculation?: number | null
   }
 
-  export type product_region_competitor_urlsCreateManyCompetitorsInput = {
+  export type product_region_competitor_urlsCreateManyCompetitorInput = {
     id?: number
     product_id: number
     region_id: number
@@ -26586,7 +26586,7 @@ export namespace Prisma {
     deleted_at?: Date | string | null
   }
 
-  export type scaled_pricesCreateManyCompetitorsInput = {
+  export type scaled_pricesCreateManyCompetitorInput = {
     id?: number
     product_id: number
     region_id: number
@@ -26597,14 +26597,14 @@ export namespace Prisma {
     deleted_at?: Date | string | null
   }
 
-  export type basket_line_item_competitor_equivalentsUpdateWithoutCompetitorsInput = {
+  export type basket_line_item_competitor_equivalentsUpdateWithoutCompetitorInput = {
     competitor_price?: NullableFloatFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    basket_line_items?: basket_line_itemsUpdateOneRequiredWithoutBasket_line_item_competitor_equivalentsInput
+    basket_line_item?: basket_line_itemsUpdateOneRequiredWithoutBasket_line_item_competitor_equivalentsInput
   }
 
-  export type basket_line_item_competitor_equivalentsUncheckedUpdateWithoutCompetitorsInput = {
+  export type basket_line_item_competitor_equivalentsUncheckedUpdateWithoutCompetitorInput = {
     id?: IntFieldUpdateOperationsInput | number
     competitor_price?: NullableFloatFieldUpdateOperationsInput | number | null
     basket_line_item_id?: IntFieldUpdateOperationsInput | number
@@ -26612,13 +26612,13 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type competitor_region_dataUpdateWithoutCompetitorsInput = {
+  export type competitor_region_dataUpdateWithoutCompetitorInput = {
     should_scrape?: BoolFieldUpdateOperationsInput | boolean
     should_include_in_recommendation_calculation?: NullableIntFieldUpdateOperationsInput | number | null
-    regions?: regionsUpdateOneRequiredWithoutCompetitor_region_dataInput
+    region?: regionsUpdateOneRequiredWithoutCompetitor_region_dataInput
   }
 
-  export type competitor_region_dataUncheckedUpdateWithoutCompetitorsInput = {
+  export type competitor_region_dataUncheckedUpdateWithoutCompetitorInput = {
     id?: IntFieldUpdateOperationsInput | number
     region_id?: IntFieldUpdateOperationsInput | number
     should_scrape?: BoolFieldUpdateOperationsInput | boolean
@@ -26632,18 +26632,18 @@ export namespace Prisma {
     should_include_in_recommendation_calculation?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
-  export type product_region_competitor_urlsUpdateWithoutCompetitorsInput = {
+  export type product_region_competitor_urlsUpdateWithoutCompetitorInput = {
     url?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    products?: productsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
-    regions?: regionsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
+    product?: productsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
+    region?: regionsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsUpdateManyWithoutProduct_region_competitor_urlsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUpdateManyWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUpdateManyWithoutProduct_region_competitor_urlInput
   }
 
-  export type product_region_competitor_urlsUncheckedUpdateWithoutCompetitorsInput = {
+  export type product_region_competitor_urlsUncheckedUpdateWithoutCompetitorInput = {
     id?: IntFieldUpdateOperationsInput | number
     product_id?: IntFieldUpdateOperationsInput | number
     region_id?: IntFieldUpdateOperationsInput | number
@@ -26652,7 +26652,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsUncheckedUpdateManyWithoutProduct_region_competitor_urlsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutProduct_region_competitor_urlInput
   }
 
   export type product_region_competitor_urlsUncheckedUpdateManyWithoutProduct_region_competitor_urlsInput = {
@@ -26665,17 +26665,17 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type scaled_pricesUpdateWithoutCompetitorsInput = {
+  export type scaled_pricesUpdateWithoutCompetitorInput = {
     competitor_scaled_price?: NullableFloatFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    products?: productsUpdateOneRequiredWithoutScaled_pricesInput
-    regions?: regionsUpdateOneRequiredWithoutScaled_pricesInput
-    scrape_results?: scrape_resultsUpdateOneRequiredWithoutScaled_pricesInput
+    product?: productsUpdateOneRequiredWithoutScaled_pricesInput
+    region?: regionsUpdateOneRequiredWithoutScaled_pricesInput
+    scrape_result?: scrape_resultsUpdateOneRequiredWithoutScaled_pricesInput
   }
 
-  export type scaled_pricesUncheckedUpdateWithoutCompetitorsInput = {
+  export type scaled_pricesUncheckedUpdateWithoutCompetitorInput = {
     id?: IntFieldUpdateOperationsInput | number
     product_id?: IntFieldUpdateOperationsInput | number
     region_id?: IntFieldUpdateOperationsInput | number
@@ -26704,7 +26704,7 @@ export namespace Prisma {
     id?: number
   }
 
-  export type scrape_result_product_region_competitor_urlCreateManyProduct_region_competitor_urlsInput = {
+  export type scrape_result_product_region_competitor_urlCreateManyProduct_region_competitor_urlInput = {
     id?: number
     scrape_result_id: number
   }
@@ -26729,21 +26729,21 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
   }
 
-  export type scrape_result_product_region_competitor_urlUpdateWithoutProduct_region_competitor_urlsInput = {
-    scrape_results?: scrape_resultsUpdateOneRequiredWithoutScrape_result_product_region_competitor_urlInput
+  export type scrape_result_product_region_competitor_urlUpdateWithoutProduct_region_competitor_urlInput = {
+    scrape_result?: scrape_resultsUpdateOneRequiredWithoutScrape_result_product_region_competitor_urlsInput
   }
 
-  export type scrape_result_product_region_competitor_urlUncheckedUpdateWithoutProduct_region_competitor_urlsInput = {
+  export type scrape_result_product_region_competitor_urlUncheckedUpdateWithoutProduct_region_competitor_urlInput = {
     id?: IntFieldUpdateOperationsInput | number
     scrape_result_id?: IntFieldUpdateOperationsInput | number
   }
 
-  export type scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutScrape_result_product_region_competitor_urlInput = {
+  export type scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutScrape_result_product_region_competitor_urlsInput = {
     id?: IntFieldUpdateOperationsInput | number
     scrape_result_id?: IntFieldUpdateOperationsInput | number
   }
 
-  export type price_recommendationsCreateManyProductsInput = {
+  export type price_recommendationsCreateManyProductInput = {
     id?: number
     region_id: number
     sale_price: number
@@ -26752,7 +26752,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type product_region_competitor_urlsCreateManyProductsInput = {
+  export type product_region_competitor_urlsCreateManyProductInput = {
     id?: number
     region_id: number
     competitor_id: number
@@ -26762,7 +26762,7 @@ export namespace Prisma {
     deleted_at?: Date | string | null
   }
 
-  export type product_region_price_dataCreateManyProductsInput = {
+  export type product_region_price_dataCreateManyProductInput = {
     id?: number
     region_id: number
     price: number
@@ -26773,7 +26773,7 @@ export namespace Prisma {
     deleted_at?: Date | string | null
   }
 
-  export type scaled_pricesCreateManyProductsInput = {
+  export type scaled_pricesCreateManyProductInput = {
     id?: number
     competitor_id: number
     region_id: number
@@ -26784,15 +26784,15 @@ export namespace Prisma {
     deleted_at?: Date | string | null
   }
 
-  export type price_recommendationsUpdateWithoutProductsInput = {
+  export type price_recommendationsUpdateWithoutProductInput = {
     sale_price?: FloatFieldUpdateOperationsInput | number
     list_price?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    regions?: regionsUpdateOneRequiredWithoutPrice_recommendationsInput
+    region?: regionsUpdateOneRequiredWithoutPrice_recommendationsInput
   }
 
-  export type price_recommendationsUncheckedUpdateWithoutProductsInput = {
+  export type price_recommendationsUncheckedUpdateWithoutProductInput = {
     id?: IntFieldUpdateOperationsInput | number
     region_id?: IntFieldUpdateOperationsInput | number
     sale_price?: FloatFieldUpdateOperationsInput | number
@@ -26810,18 +26810,18 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type product_region_competitor_urlsUpdateWithoutProductsInput = {
+  export type product_region_competitor_urlsUpdateWithoutProductInput = {
     url?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitors?: competitorsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
-    regions?: regionsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
+    competitor?: competitorsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
+    region?: regionsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsUpdateManyWithoutProduct_region_competitor_urlsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUpdateManyWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUpdateManyWithoutProduct_region_competitor_urlInput
   }
 
-  export type product_region_competitor_urlsUncheckedUpdateWithoutProductsInput = {
+  export type product_region_competitor_urlsUncheckedUpdateWithoutProductInput = {
     id?: IntFieldUpdateOperationsInput | number
     region_id?: IntFieldUpdateOperationsInput | number
     competitor_id?: IntFieldUpdateOperationsInput | number
@@ -26830,20 +26830,20 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsUncheckedUpdateManyWithoutProduct_region_competitor_urlsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutProduct_region_competitor_urlInput
   }
 
-  export type product_region_price_dataUpdateWithoutProductsInput = {
+  export type product_region_price_dataUpdateWithoutProductInput = {
     price?: FloatFieldUpdateOperationsInput | number
     discount?: FloatFieldUpdateOperationsInput | number
     threshold_price?: NullableFloatFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    regions?: regionsUpdateOneRequiredWithoutProduct_region_price_dataInput
+    region?: regionsUpdateOneRequiredWithoutProduct_region_price_dataInput
   }
 
-  export type product_region_price_dataUncheckedUpdateWithoutProductsInput = {
+  export type product_region_price_dataUncheckedUpdateWithoutProductInput = {
     id?: IntFieldUpdateOperationsInput | number
     region_id?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
@@ -26865,17 +26865,17 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type scaled_pricesUpdateWithoutProductsInput = {
+  export type scaled_pricesUpdateWithoutProductInput = {
     competitor_scaled_price?: NullableFloatFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitors?: competitorsUpdateOneRequiredWithoutScaled_pricesInput
-    regions?: regionsUpdateOneRequiredWithoutScaled_pricesInput
-    scrape_results?: scrape_resultsUpdateOneRequiredWithoutScaled_pricesInput
+    competitor?: competitorsUpdateOneRequiredWithoutScaled_pricesInput
+    region?: regionsUpdateOneRequiredWithoutScaled_pricesInput
+    scrape_result?: scrape_resultsUpdateOneRequiredWithoutScaled_pricesInput
   }
 
-  export type scaled_pricesUncheckedUpdateWithoutProductsInput = {
+  export type scaled_pricesUncheckedUpdateWithoutProductInput = {
     id?: IntFieldUpdateOperationsInput | number
     competitor_id?: IntFieldUpdateOperationsInput | number
     region_id?: IntFieldUpdateOperationsInput | number
@@ -26886,7 +26886,7 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type basketsCreateManyRegionsInput = {
+  export type basketsCreateManyRegionInput = {
     id?: number
     goodfood_id: number
     delivery_date: Date | string
@@ -26897,14 +26897,14 @@ export namespace Prisma {
     basket_daily_total_id: number
   }
 
-  export type competitor_region_dataCreateManyRegionsInput = {
+  export type competitor_region_dataCreateManyRegionInput = {
     id?: number
     competitor_id: number
     should_scrape?: boolean
     should_include_in_recommendation_calculation?: number | null
   }
 
-  export type price_recommendationsCreateManyRegionsInput = {
+  export type price_recommendationsCreateManyRegionInput = {
     id?: number
     product_id: number
     sale_price: number
@@ -26913,7 +26913,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type product_region_competitor_urlsCreateManyRegionsInput = {
+  export type product_region_competitor_urlsCreateManyRegionInput = {
     id?: number
     product_id: number
     competitor_id: number
@@ -26923,7 +26923,7 @@ export namespace Prisma {
     deleted_at?: Date | string | null
   }
 
-  export type product_region_price_dataCreateManyRegionsInput = {
+  export type product_region_price_dataCreateManyRegionInput = {
     id?: number
     product_id: number
     price: number
@@ -26934,7 +26934,7 @@ export namespace Prisma {
     deleted_at?: Date | string | null
   }
 
-  export type scaled_pricesCreateManyRegionsInput = {
+  export type scaled_pricesCreateManyRegionInput = {
     id?: number
     product_id: number
     competitor_id: number
@@ -26945,17 +26945,17 @@ export namespace Prisma {
     deleted_at?: Date | string | null
   }
 
-  export type basketsUpdateWithoutRegionsInput = {
+  export type basketsUpdateWithoutRegionInput = {
     goodfood_id?: IntFieldUpdateOperationsInput | number
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
     basket_totals?: NullableJsonNullValueInput | InputJsonValue
     basket_indexes?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    basket_daily_totals?: basket_daily_totalsUpdateOneRequiredWithoutBasketsInput
+    basket_daily_total?: basket_daily_totalsUpdateOneRequiredWithoutBasketsInput
   }
 
-  export type basketsUncheckedUpdateWithoutRegionsInput = {
+  export type basketsUncheckedUpdateWithoutRegionInput = {
     id?: IntFieldUpdateOperationsInput | number
     goodfood_id?: IntFieldUpdateOperationsInput | number
     delivery_date?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26966,28 +26966,28 @@ export namespace Prisma {
     basket_daily_total_id?: IntFieldUpdateOperationsInput | number
   }
 
-  export type competitor_region_dataUpdateWithoutRegionsInput = {
+  export type competitor_region_dataUpdateWithoutRegionInput = {
     should_scrape?: BoolFieldUpdateOperationsInput | boolean
     should_include_in_recommendation_calculation?: NullableIntFieldUpdateOperationsInput | number | null
-    competitors?: competitorsUpdateOneRequiredWithoutCompetitor_region_dataInput
+    competitor?: competitorsUpdateOneRequiredWithoutCompetitor_region_dataInput
   }
 
-  export type competitor_region_dataUncheckedUpdateWithoutRegionsInput = {
+  export type competitor_region_dataUncheckedUpdateWithoutRegionInput = {
     id?: IntFieldUpdateOperationsInput | number
     competitor_id?: IntFieldUpdateOperationsInput | number
     should_scrape?: BoolFieldUpdateOperationsInput | boolean
     should_include_in_recommendation_calculation?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
-  export type price_recommendationsUpdateWithoutRegionsInput = {
+  export type price_recommendationsUpdateWithoutRegionInput = {
     sale_price?: FloatFieldUpdateOperationsInput | number
     list_price?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    products?: productsUpdateOneRequiredWithoutPrice_recommendationsInput
+    product?: productsUpdateOneRequiredWithoutPrice_recommendationsInput
   }
 
-  export type price_recommendationsUncheckedUpdateWithoutRegionsInput = {
+  export type price_recommendationsUncheckedUpdateWithoutRegionInput = {
     id?: IntFieldUpdateOperationsInput | number
     product_id?: IntFieldUpdateOperationsInput | number
     sale_price?: FloatFieldUpdateOperationsInput | number
@@ -26996,18 +26996,18 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type product_region_competitor_urlsUpdateWithoutRegionsInput = {
+  export type product_region_competitor_urlsUpdateWithoutRegionInput = {
     url?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitors?: competitorsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
-    products?: productsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
+    competitor?: competitorsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
+    product?: productsUpdateOneRequiredWithoutProduct_region_competitor_urlsInput
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsUpdateManyWithoutProduct_region_competitor_urlsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUpdateManyWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUpdateManyWithoutProduct_region_competitor_urlInput
   }
 
-  export type product_region_competitor_urlsUncheckedUpdateWithoutRegionsInput = {
+  export type product_region_competitor_urlsUncheckedUpdateWithoutRegionInput = {
     id?: IntFieldUpdateOperationsInput | number
     product_id?: IntFieldUpdateOperationsInput | number
     competitor_id?: IntFieldUpdateOperationsInput | number
@@ -27016,20 +27016,20 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     product_region_competitor_urls_former_urls?: product_region_competitor_urls_former_urlsUncheckedUpdateManyWithoutProduct_region_competitor_urlsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutProduct_region_competitor_urlsInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutProduct_region_competitor_urlInput
   }
 
-  export type product_region_price_dataUpdateWithoutRegionsInput = {
+  export type product_region_price_dataUpdateWithoutRegionInput = {
     price?: FloatFieldUpdateOperationsInput | number
     discount?: FloatFieldUpdateOperationsInput | number
     threshold_price?: NullableFloatFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    products?: productsUpdateOneRequiredWithoutProduct_region_price_dataInput
+    product?: productsUpdateOneRequiredWithoutProduct_region_price_dataInput
   }
 
-  export type product_region_price_dataUncheckedUpdateWithoutRegionsInput = {
+  export type product_region_price_dataUncheckedUpdateWithoutRegionInput = {
     id?: IntFieldUpdateOperationsInput | number
     product_id?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
@@ -27040,17 +27040,17 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type scaled_pricesUpdateWithoutRegionsInput = {
+  export type scaled_pricesUpdateWithoutRegionInput = {
     competitor_scaled_price?: NullableFloatFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitors?: competitorsUpdateOneRequiredWithoutScaled_pricesInput
-    products?: productsUpdateOneRequiredWithoutScaled_pricesInput
-    scrape_results?: scrape_resultsUpdateOneRequiredWithoutScaled_pricesInput
+    competitor?: competitorsUpdateOneRequiredWithoutScaled_pricesInput
+    product?: productsUpdateOneRequiredWithoutScaled_pricesInput
+    scrape_result?: scrape_resultsUpdateOneRequiredWithoutScaled_pricesInput
   }
 
-  export type scaled_pricesUncheckedUpdateWithoutRegionsInput = {
+  export type scaled_pricesUncheckedUpdateWithoutRegionInput = {
     id?: IntFieldUpdateOperationsInput | number
     product_id?: IntFieldUpdateOperationsInput | number
     competitor_id?: IntFieldUpdateOperationsInput | number
@@ -27061,7 +27061,7 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type scaled_pricesCreateManyScrape_resultsInput = {
+  export type scaled_pricesCreateManyScrape_resultInput = {
     id?: number
     product_id: number
     competitor_id: number
@@ -27072,22 +27072,22 @@ export namespace Prisma {
     deleted_at?: Date | string | null
   }
 
-  export type scrape_result_product_region_competitor_urlCreateManyScrape_resultsInput = {
+  export type scrape_result_product_region_competitor_urlCreateManyScrape_resultInput = {
     id?: number
     product_region_competitor_url_id: number
   }
 
-  export type scaled_pricesUpdateWithoutScrape_resultsInput = {
+  export type scaled_pricesUpdateWithoutScrape_resultInput = {
     competitor_scaled_price?: NullableFloatFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    competitors?: competitorsUpdateOneRequiredWithoutScaled_pricesInput
-    products?: productsUpdateOneRequiredWithoutScaled_pricesInput
-    regions?: regionsUpdateOneRequiredWithoutScaled_pricesInput
+    competitor?: competitorsUpdateOneRequiredWithoutScaled_pricesInput
+    product?: productsUpdateOneRequiredWithoutScaled_pricesInput
+    region?: regionsUpdateOneRequiredWithoutScaled_pricesInput
   }
 
-  export type scaled_pricesUncheckedUpdateWithoutScrape_resultsInput = {
+  export type scaled_pricesUncheckedUpdateWithoutScrape_resultInput = {
     id?: IntFieldUpdateOperationsInput | number
     product_id?: IntFieldUpdateOperationsInput | number
     competitor_id?: IntFieldUpdateOperationsInput | number
@@ -27098,16 +27098,16 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type scrape_result_product_region_competitor_urlUpdateWithoutScrape_resultsInput = {
-    product_region_competitor_urls?: product_region_competitor_urlsUpdateOneRequiredWithoutScrape_result_product_region_competitor_urlInput
+  export type scrape_result_product_region_competitor_urlUpdateWithoutScrape_resultInput = {
+    product_region_competitor_url?: product_region_competitor_urlsUpdateOneRequiredWithoutScrape_result_product_region_competitor_urlsInput
   }
 
-  export type scrape_result_product_region_competitor_urlUncheckedUpdateWithoutScrape_resultsInput = {
+  export type scrape_result_product_region_competitor_urlUncheckedUpdateWithoutScrape_resultInput = {
     id?: IntFieldUpdateOperationsInput | number
     product_region_competitor_url_id?: IntFieldUpdateOperationsInput | number
   }
 
-  export type productsCreateManyUnitsInput = {
+  export type productsCreateManyUnitInput = {
     id?: number
     sku?: string | null
     name?: string | null
@@ -27119,7 +27119,7 @@ export namespace Prisma {
     deleted_at?: Date | string | null
   }
 
-  export type scrape_resultsCreateManyUnitsInput = {
+  export type scrape_resultsCreateManyUnitInput = {
     id?: number
     competitor_sale_price?: number | null
     competitor_list_price?: number | null
@@ -27132,14 +27132,14 @@ export namespace Prisma {
     deleted_at?: Date | string | null
   }
 
-  export type unitsCreateManyUnitsInput = {
+  export type unitsCreateManyBase_unitInput = {
     id?: number
     slug: string
     display_text: string
     scale_of_base_unit: number
   }
 
-  export type productsUpdateWithoutUnitsInput = {
+  export type productsUpdateWithoutUnitInput = {
     sku?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     package_quantity?: NullableIntFieldUpdateOperationsInput | number | null
@@ -27148,13 +27148,13 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    price_recommendations?: price_recommendationsUpdateManyWithoutProductsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataUpdateManyWithoutProductsInput
-    scaled_prices?: scaled_pricesUpdateManyWithoutProductsInput
+    price_recommendations?: price_recommendationsUpdateManyWithoutProductInput
+    product_region_competitor_urls?: product_region_competitor_urlsUpdateManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataUpdateManyWithoutProductInput
+    scaled_prices?: scaled_pricesUpdateManyWithoutProductInput
   }
 
-  export type productsUncheckedUpdateWithoutUnitsInput = {
+  export type productsUncheckedUpdateWithoutUnitInput = {
     id?: IntFieldUpdateOperationsInput | number
     sku?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27164,10 +27164,10 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutProductsInput
-    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutProductsInput
-    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutProductsInput
-    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutProductsInput
+    price_recommendations?: price_recommendationsUncheckedUpdateManyWithoutProductInput
+    product_region_competitor_urls?: product_region_competitor_urlsUncheckedUpdateManyWithoutProductInput
+    product_region_price_data?: product_region_price_dataUncheckedUpdateManyWithoutProductInput
+    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutProductInput
   }
 
   export type productsUncheckedUpdateManyWithoutProductsInput = {
@@ -27182,7 +27182,7 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type scrape_resultsUpdateWithoutUnitsInput = {
+  export type scrape_resultsUpdateWithoutUnitInput = {
     competitor_sale_price?: NullableFloatFieldUpdateOperationsInput | number | null
     competitor_list_price?: NullableFloatFieldUpdateOperationsInput | number | null
     competitor_sold_by_volume?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -27192,11 +27192,11 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    scaled_prices?: scaled_pricesUpdateManyWithoutScrape_resultsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUpdateManyWithoutScrape_resultsInput
+    scaled_prices?: scaled_pricesUpdateManyWithoutScrape_resultInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUpdateManyWithoutScrape_resultInput
   }
 
-  export type scrape_resultsUncheckedUpdateWithoutUnitsInput = {
+  export type scrape_resultsUncheckedUpdateWithoutUnitInput = {
     id?: IntFieldUpdateOperationsInput | number
     competitor_sale_price?: NullableFloatFieldUpdateOperationsInput | number | null
     competitor_list_price?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -27207,8 +27207,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutScrape_resultsInput
-    scrape_result_product_region_competitor_url?: scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutScrape_resultsInput
+    scaled_prices?: scaled_pricesUncheckedUpdateManyWithoutScrape_resultInput
+    scrape_result_product_region_competitor_urls?: scrape_result_product_region_competitor_urlUncheckedUpdateManyWithoutScrape_resultInput
   }
 
   export type scrape_resultsUncheckedUpdateManyWithoutScrape_resultsInput = {
@@ -27224,26 +27224,26 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type unitsUpdateWithoutUnitsInput = {
+  export type unitsUpdateWithoutBase_unitInput = {
     slug?: StringFieldUpdateOperationsInput | string
     display_text?: StringFieldUpdateOperationsInput | string
     scale_of_base_unit?: FloatFieldUpdateOperationsInput | number
-    products?: productsUpdateManyWithoutUnitsInput
-    scrape_results?: scrape_resultsUpdateManyWithoutUnitsInput
-    other_units?: unitsUpdateManyWithoutUnitsInput
+    products?: productsUpdateManyWithoutUnitInput
+    scrape_results?: scrape_resultsUpdateManyWithoutUnitInput
+    units?: unitsUpdateManyWithoutBase_unitInput
   }
 
-  export type unitsUncheckedUpdateWithoutUnitsInput = {
+  export type unitsUncheckedUpdateWithoutBase_unitInput = {
     id?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     display_text?: StringFieldUpdateOperationsInput | string
     scale_of_base_unit?: FloatFieldUpdateOperationsInput | number
-    products?: productsUncheckedUpdateManyWithoutUnitsInput
-    scrape_results?: scrape_resultsUncheckedUpdateManyWithoutUnitsInput
-    other_units?: unitsUncheckedUpdateManyWithoutUnitsInput
+    products?: productsUncheckedUpdateManyWithoutUnitInput
+    scrape_results?: scrape_resultsUncheckedUpdateManyWithoutUnitInput
+    units?: unitsUncheckedUpdateManyWithoutBase_unitInput
   }
 
-  export type unitsUncheckedUpdateManyWithoutOther_unitsInput = {
+  export type unitsUncheckedUpdateManyWithoutUnitsInput = {
     id?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     display_text?: StringFieldUpdateOperationsInput | string
